@@ -18,6 +18,7 @@ class UsersFixture extends TestFixture
     // @codingStandardsIgnoreStart
     public $fields = [
         'id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'autoIncrement' => true, 'precision' => null],
+        'promotion' => ['type' => 'string', 'length' => 4, 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'username' => ['type' => 'string', 'length' => 60, 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'password' => ['type' => 'string', 'length' => 255, 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'email' => ['type' => 'string', 'length' => 255, 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
@@ -25,6 +26,8 @@ class UsersFixture extends TestFixture
         'zipcode' => ['type' => 'string', 'length' => 5, 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'city' => ['type' => 'string', 'length' => 60, 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'phone' => ['type' => 'string', 'length' => 15, 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
+        'cellphone' => ['type' => 'string', 'length' => 15, 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
+        'emergency_phone' => ['type' => 'string', 'length' => 15, 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'firstname' => ['type' => 'string', 'length' => 60, 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'lastname' => ['type' => 'string', 'length' => 100, 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'birthday' => ['type' => 'date', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
@@ -52,6 +55,7 @@ class UsersFixture extends TestFixture
     public $records = [
         [
             'id' => 1,
+            'promotion' => 'Lo',
             'username' => 'Lorem ipsum dolor sit amet',
             'password' => 'Lorem ipsum dolor sit amet',
             'email' => 'Lorem ipsum dolor sit amet',
@@ -59,12 +63,14 @@ class UsersFixture extends TestFixture
             'zipcode' => 'Lor',
             'city' => 'Lorem ipsum dolor sit amet',
             'phone' => 'Lorem ipsum d',
+            'cellphone' => 'Lorem ipsum d',
+            'emergency_phone' => 'Lorem ipsum d',
             'firstname' => 'Lorem ipsum dolor sit amet',
             'lastname' => 'Lorem ipsum dolor sit amet',
             'birthday' => '2016-10-04',
             'github_username' => 'Lorem ipsum dolor sit amet',
-            'created' => '2016-10-04 07:04:09',
-            'modified' => '2016-10-04 07:04:09',
+            'created' => '2016-10-04 13:12:21',
+            'modified' => '2016-10-04 13:12:21',
             'role_id' => 1,
             'picture_url' => 'Lorem ipsum dolor sit amet'
         ],

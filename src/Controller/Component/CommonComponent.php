@@ -83,4 +83,27 @@ class CommonComponent extends Component
 
         return $resources;
     }
+
+    public function getPermissions()
+    {
+        $roles = TableRegistry::get('Roles');
+        // know user's role
+        $rights = $roles->find()->select(['name'])->where(['id' => $this->request->session()->read('Auth.User.role_id')])->first();
+        $rights = $rights->name;
+
+        $connectors = $roles->find('all',[
+            'contain' => ['Permissions','Permissions.Connectors'],
+            'conditions' => [
+                'Roles.name' => $rights
+            ]
+        ]);
+        $actions = [];
+        foreach($connectors as $connector)
+        {
+            echo $connector;
+        }
+
+
+        return $connectors;
+    }
 }

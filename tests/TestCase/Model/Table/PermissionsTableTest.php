@@ -26,6 +26,7 @@ class PermissionsTableTest extends TestCase
     public $fixtures = [
         'app.permissions',
         'app.roles',
+        'app.users',
         'app.permissions_roles'
     ];
 

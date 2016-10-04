@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 04, 2016 at 11:07 AM
+-- Generation Time: Oct 04, 2016 at 03:18 PM
 -- Server version: 5.5.50-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.17
 
@@ -31,8 +31,17 @@ CREATE TABLE IF NOT EXISTS `connectors` (
   `controller` varchar(100) NOT NULL,
   `function` varchar(100) NOT NULL,
   `permission_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  PRIMARY KEY (`id`),
+  KEY `permission_id` (`permission_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `connectors`
+--
+
+INSERT INTO `connectors` (`id`, `controller`, `function`, `permission_id`) VALUES
+(1, 'UsersController', 'view', 1),
+(2, 'UsersController', 'add', 2);
 
 -- --------------------------------------------------------
 
@@ -46,7 +55,15 @@ CREATE TABLE IF NOT EXISTS `permissions` (
   `description` text NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `permissions`
+--
+
+INSERT INTO `permissions` (`id`, `name`, `description`) VALUES
+(1, 'Voir un user', 'Voir un user'),
+(2, 'Créer un user', 'Créer un user');
 
 -- --------------------------------------------------------
 
@@ -60,6 +77,15 @@ CREATE TABLE IF NOT EXISTS `permissions_roles` (
   PRIMARY KEY (`permission_id`,`role_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `permissions_roles`
+--
+
+INSERT INTO `permissions_roles` (`permission_id`, `role_id`) VALUES
+(1, 1),
+(1, 2),
+(2, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -72,7 +98,15 @@ CREATE TABLE IF NOT EXISTS `roles` (
   `description` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `roles`
+--
+
+INSERT INTO `roles` (`id`, `name`, `description`) VALUES
+(1, 'Administrateur', 'Il a le droit de tout faire frère, ch''ti jure'),
+(2, 'Apprenant', 'Il a pas beaucoup de droits :(');
 
 -- --------------------------------------------------------
 
@@ -82,6 +116,7 @@ CREATE TABLE IF NOT EXISTS `roles` (
 
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `promotion` varchar(4) NOT NULL,
   `username` varchar(60) NOT NULL,
   `password` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
@@ -89,6 +124,8 @@ CREATE TABLE IF NOT EXISTS `users` (
   `zipcode` varchar(5) NOT NULL,
   `city` varchar(60) NOT NULL,
   `phone` varchar(15) NOT NULL,
+  `cellphone` varchar(15) NOT NULL,
+  `emergency_phone` varchar(15) NOT NULL,
   `firstname` varchar(60) NOT NULL,
   `lastname` varchar(100) NOT NULL,
   `birthday` date NOT NULL,
@@ -99,7 +136,25 @@ CREATE TABLE IF NOT EXISTS `users` (
   `picture_url` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`,`email`,`phone`,`github_username`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `promotion`, `username`, `password`, `email`, `address`, `zipcode`, `city`, `phone`, `cellphone`, `emergency_phone`, `firstname`, `lastname`, `birthday`, `github_username`, `created`, `modified`, `role_id`, `picture_url`) VALUES
+(2, '', 'admin', '$2y$10$25VHRLGpQvs/QbLqPl/7Ue3wLFb1CQG5ISyDs4EUFRvdrl.j6/Gfi', 'admin@localhost.fr', 'hhh', '88888', 'Epinal', '99', '', '', 'Francis', 'Fonda', '2011-10-04', '', '2016-10-04 09:47:45', '2016-10-04 09:47:45', 1, ''),
+(3, '', 'test', '$2y$10$zvCIuNtQINVK5oHKOXIZUOTjWYkO6NE8w1lj9dYIfTCWN5Vo8tF4O', 'tester@hotmail.fr', 'hhh', '99999', 'IIII', '98798787', '', '', 'Mamoru', 'Dante', '2011-10-04', '', '2016-10-04 09:52:50', '2016-10-04 09:52:50', 2, '');
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `connectors`
+--
+ALTER TABLE `connectors`
+  ADD CONSTRAINT `fk_permission_id` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
