@@ -20,7 +20,13 @@ class FloController extends AppController
 
     public function get()
     {
-        $get = $this->Common->getFrontControllers();
+        $get = $this->Common->getControllers();
+        $table = [];
+        foreach($get as $controller)
+        {
+            array_push($table,$this->Common->getActions($controller));
+        }
         $this->set('get',$get);
+        $this->set('table',$table);
     }
 }
