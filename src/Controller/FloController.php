@@ -26,7 +26,10 @@ class FloController extends AppController
         {
             array_push($table,$this->Common->getActions($controller));
         }
+
+        $rights = $this->Common->getPermissions();
         $this->set('get',$get);
         $this->set('table',$table);
+        $this->set('rights',$rights);
     }
 }

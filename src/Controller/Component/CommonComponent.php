@@ -1,8 +1,10 @@
 <?php
 namespace App\Controller\Component;
 use Cake\Controller\Component;
+use Cake\Database\Schema\Table;
 use ReflectionClass;
 use ReflectionMethod;
+use Cake\ORM\TableRegistry;
 
 
 class CommonComponent extends Component
@@ -64,12 +66,5 @@ class CommonComponent extends Component
 
 
         return $resources;
-    }
-
-    public function getPermissions()
-    {
-        $this->loadModel('Connectors');
-        $this->loadModel('Roles');
-        $auth = $this->Roles->get($this->Auth->User('role_id'))->select(['name']);
     }
 }
