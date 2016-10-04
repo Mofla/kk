@@ -48,6 +48,22 @@ class CommonComponent extends Component
         return $results;
     }
 
+    public function getControllerActions($controllerName)
+    {
+        $className = 'App\\Controller\\'.$controllerName;
+        $class = new ReflectionClass($className);
+        $actions = $class->getMethods(ReflectionMethod::IS_PUBLIC);
+
+        $results = [];
+        $ignoreList = ['beforeFilter', 'afterFilter', 'initialize'];
+        foreach($actions as $action){
+            if($action->class == $className && !in_array($action->name, $ignoreList)){
+                array_push($results, $action->name);
+            }
+        }
+        return $results;
+    }
+
 
     //Return Front And Admin Controller => actions list
     public function getResources()

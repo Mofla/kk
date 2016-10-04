@@ -11,6 +11,13 @@ use App\Controller\AppController;
 class ConnectorsController extends AppController
 {
 
+
+
+    public function initialize()
+    {
+        parent::initialize();
+        $this->loadComponent('Common');
+    }
     /**
      * Index method
      *
@@ -63,8 +70,19 @@ class ConnectorsController extends AppController
             }
         }
         $permissions = $this->Connectors->Permissions->find('list', ['limit' => 200]);
-        $this->set(compact('connector', 'permissions'));
+
+        $getcontrol = $this->Common->getControllers();
+        $this->set(compact('connector', 'permissions','getcontrol'));
         $this->set('_serialize', ['connector']);
+    }
+
+    public function ajaxgetfunctionlist(){
+        if ($this->request->is('ajax')) {
+            $id = $this->request->data('id');
+            $list_actions_controller = $this->Common->getControllerActions($id);
+        }
+
+        $this->set(compact('list_actions_controller'));
     }
 
     /**

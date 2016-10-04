@@ -5,7 +5,7 @@ use Cake\Event\Event;
 use App\Controller\AppController;
 
 /**
- * Users Controller
+ * Users Controler
  *
  * @property \App\Model\Table\UsersTable $Users
  */
