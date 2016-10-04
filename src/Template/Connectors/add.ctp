@@ -10,10 +10,19 @@
     <?= $this->Form->create($connector) ?>
     <fieldset>
         <legend><?= __('Créer une permission') ?></legend>
-        <?php
-            echo $this->Form->input('controller', ['options' => $getcontrol]);
-            echo $this->Form->input('function',['type' => 'select']);
+
+
+    <select name="controller" required="required" id="controller">
+<?php foreach ($getcontrol as $controller) : ?>
+        <option value="<?= $controller ?>"><?= $controller ?></option>
+    <?php endforeach ?>
+    </select>
+
+    <?php
+            echo $this->Form->input('function',['type' => 'select', 'empty' => 'Aucun Contrôleur selectionné']);
             echo $this->Form->input('permission_id', ['options' => $permissions]);
+ ?>
+</div>
         ?>
     </fieldset>
     <?= $this->Form->button(__('VALIDER')) ?>
