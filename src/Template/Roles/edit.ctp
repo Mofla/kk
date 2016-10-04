@@ -21,7 +21,7 @@
         <?php
             echo $this->Form->input('name');
             echo $this->Form->input('description');
-            echo $this->Form->input('permissions._ids', ['options' => $permissions]);
+            echo $this->Form->input('permissions._ids', ['options' => $permissions , 'multiple' => 'checkbox' ]);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
