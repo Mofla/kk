@@ -18,6 +18,7 @@ class CommonComponent extends Component
             'Admin',
             'PagesController.php',
             'AppController.php',
+            'ErrorController.php',
         ];
         foreach($files as $file){
             if(!in_array($file, $ignoreList)) {
@@ -63,5 +64,12 @@ class CommonComponent extends Component
 
 
         return $resources;
+    }
+
+    public function getPermissions()
+    {
+        $this->loadModel('Connectors');
+        $this->loadModel('Roles');
+        $auth = $this->Roles->get($this->Auth->User('role_id'))->select(['name']);
     }
 }
