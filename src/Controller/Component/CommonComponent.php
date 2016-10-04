@@ -91,19 +91,21 @@ class CommonComponent extends Component
         $rights = $roles->find()->select(['name'])->where(['id' => $this->request->session()->read('Auth.User.role_id')])->first();
         $rights = $rights->name;
 
-        $connectors = $roles->find('all',[
-            'contain' => ['Permissions','Permissions.Connectors'],
-            'conditions' => [
-                'Roles.name' => $rights
-            ]
-        ]);
+        $connectors = $roles->find()->matching('Permissions.Connectors')->select(['Connectors.controller','Connectors.function'])->where(['Roles.name' => $rights]);
+        // let's list all authorized functions
         $actions = [];
         foreach($connectors as $connector)
         {
-            echo $connector;
+            // get Controller
+            $key = $connector['_matchingData']['Connectors']->controller;
+            // get Action
+            $value = $connector['_matchingData']['Connectors']->function;
+            // Push a table
+            $actions[$key][] = $value;
         }
-
-
-        return $connectors;
+        // Write allowed actions in actual session
+        return $this->request->session()->write([
+            'allowed' => $actions
+        ]);
     }
 }
