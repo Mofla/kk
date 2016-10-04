@@ -9,6 +9,7 @@ use Cake\Validation\Validator;
 /**
  * Permissions Model
  *
+ * @property \Cake\ORM\Association\HasMany $Connectors
  * @property \Cake\ORM\Association\BelongsToMany $Roles
  *
  * @method \App\Model\Entity\Permission get($primaryKey, $options = [])
@@ -36,6 +37,9 @@ class PermissionsTable extends Table
         $this->displayField('name');
         $this->primaryKey('id');
 
+        $this->hasMany('Connectors', [
+            'foreignKey' => 'permission_id'
+        ]);
         $this->belongsToMany('Roles', [
             'foreignKey' => 'permission_id',
             'targetForeignKey' => 'role_id',

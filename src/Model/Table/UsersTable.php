@@ -59,6 +59,10 @@ class UsersTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
+            ->requirePresence('promotion', 'create')
+            ->notEmpty('promotion');
+
+        $validator
             ->requirePresence('username', 'create')
             ->notEmpty('username');
 
@@ -86,6 +90,14 @@ class UsersTable extends Table
         $validator
             ->requirePresence('phone', 'create')
             ->notEmpty('phone');
+
+        $validator
+            ->requirePresence('cellphone', 'create')
+            ->notEmpty('cellphone');
+
+        $validator
+            ->requirePresence('emergency_phone', 'create')
+            ->notEmpty('emergency_phone');
 
         $validator
             ->requirePresence('firstname', 'create')
