@@ -32,4 +32,10 @@ class FloController extends AppController
         $this->set('table',$table);
         $this->set('rights',$rights);
     }
+
+    public function geta()
+    {
+        $geta = $this->Common->getAdminActions();
+        $this->set('geta',$geta);
+    }
 }
