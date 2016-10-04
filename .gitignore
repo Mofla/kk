@@ -4,3 +4,4 @@
 /logs/*
 /bin/*
 composer.json
+/.idea/
