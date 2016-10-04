@@ -34,13 +34,7 @@ class ConnectorsController extends AppController
         $this->set('_serialize', ['connectors']);
     }
 
-    /**
-     * View method
-     *
-     * @param string|null $id Connector id.
-     * @return \Cake\Network\Response|null
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
+
     public function view($id = null)
     {
         $connector = $this->Connectors->get($id, [
