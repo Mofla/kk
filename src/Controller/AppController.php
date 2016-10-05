@@ -45,15 +45,18 @@ class AppController extends Controller
         $this->loadComponent('Flash');
         $this->loadComponent('Auth', [
             'loginRedirect' => [
-                'controller' => 'Articles',
-                'action' => 'index'
+                'controller' => 'Pages',
+                'action' => 'display',
+                'home'
             ],
             'logoutRedirect' => [
                 'controller' => 'Pages',
                 'action' => 'display',
                 'home'
-            ]
+            ],
+            'authorize' => 'Controller'
         ]);
+        $this->loadComponent('Common');
     }
 
     /**
@@ -71,8 +74,14 @@ class AppController extends Controller
         }
     }
 
+    public function isAuthorized($user=null)
+    {
+        $this->Auth->deny();
+        $this->Auth->allow($this->Common->checkPermissions($this->params['controller']));
+    }
+
     public function beforeFilter(Event $event)
     {
-        $this->Auth->allow(['index', 'view', 'display']);
+        $this->Auth->allow(['display']);
     }
 }

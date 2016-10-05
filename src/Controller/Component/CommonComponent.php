@@ -5,10 +5,13 @@ use Cake\Database\Schema\Table;
 use ReflectionClass;
 use ReflectionMethod;
 use Cake\ORM\TableRegistry;
+use Cake\Controller\Component\AuthComponent;
 
 
 class CommonComponent extends Component
 {
+    public $components = ['Auth'];
+
     public function getControllers()
     {
         $files = scandir('./src/Controller');
@@ -107,5 +110,16 @@ class CommonComponent extends Component
         return $this->request->session()->write([
             'allowed' => $actions
         ]);
+    }
+
+    public function checkPermissions($controller)
+    {
+        $controller = $controller.'Controller';
+        $this->getPermissions();
+        $session = $this->request->session()->read('allowed');
+        if(array_key_exists($controller,$session))
+        {
+            return $session;
+        }
     }
 }
