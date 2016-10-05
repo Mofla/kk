@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\Core\App;
+use Cake\Event\Event;
 
 
 /**
@@ -26,11 +27,9 @@ class FloController extends AppController
         {
             array_push($table,$this->Common->getActions($controller));
         }
-
-        $rights = $this->Common->getPermissions();
         $this->set('get',$get);
         $this->set('table',$table);
-        $this->set('rights',$rights);
+
     }
 
     public function geta()
