@@ -21,7 +21,7 @@ class ForumsController extends AppController
         $forums = $this->paginate($this->Forums);
 
         $cat = $this->Forums->Categories->find('all')
-        ->contain('Forums');
+        ->contain('Forums.Threads.Posts');
         $this->set(compact('forums','cat'));
         $this->set('_serialize', ['forums']);
     }
