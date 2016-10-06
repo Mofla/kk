@@ -71,6 +71,10 @@ class ThreadsTable extends Table
             ->requirePresence('subject', 'create')
             ->notEmpty('subject');
 
+        $validator
+            ->requirePresence('text', 'create')
+            ->notEmpty('text');
+
         return $validator;
     }
 

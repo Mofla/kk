@@ -37,6 +37,10 @@
             <td><?= h($thread->created) ?></td>
         </tr>
     </table>
+    <div class="row">
+        <h4><?= __('Text') ?></h4>
+        <?= $this->Text->autoParagraph(h($thread->text)); ?>
+    </div>
     <div class="related">
         <h4><?= __('Related Posts') ?></h4>
         <?php if (!empty($thread->posts)): ?>

@@ -8,6 +8,7 @@ use Cake\ORM\Entity;
  *
  * @property int $id
  * @property string $subject
+ * @property string $text
  * @property \Cake\I18n\Time $created
  * @property int $user_id
  * @property int $forum_id

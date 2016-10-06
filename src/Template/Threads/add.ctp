@@ -16,6 +16,7 @@
         <legend><?= __('Add Thread') ?></legend>
         <?php
             echo $this->Form->input('subject');
+            echo $this->Form->input('text');
             echo $this->Form->input('user_id', ['options' => $users]);
             echo $this->Form->input('forum_id', ['options' => $forums]);
         ?>
