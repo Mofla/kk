@@ -19,9 +19,9 @@
         <tbody>
 
         <?php foreach ($forum->forums as $section): ?>
-            <tr class="sscategory">
+            <tr class="sscategory" >
                 <td width="80px">icone</td>
-                <td><?= $section->name ?>
+                <td> <?= $this->Html->link(__($section->name), ['action' => 'view', $section->id]) ?>
                     <br>
                     <?= $section->description ?></td>
         </tr>
@@ -38,3 +38,12 @@
     </table>
 
 </div>
+
+
+<script>
+$('tr').click( function() {
+    window.location = $(this).find('a').attr('href');
+}).hover( function() {
+    $(this).toggleClass('hover');
+});
+</script>
