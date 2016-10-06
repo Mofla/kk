@@ -22,8 +22,16 @@ class MenuCell extends Cell
      *
      * @return void
      */
-    public function display()
+    public function display($id)
     {
-        
+        $this->loadModel('Permission');
+
+        $permission = $this->Permissions->get($id, [
+            'contain' => ['Roles', 'Connectors']
+        ]);
+        debug($permission);
+
+        $this->set('permission', $permission);
+        $this->set('_serialize', ['permission']);
     }
 }

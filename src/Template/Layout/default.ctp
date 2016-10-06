@@ -61,7 +61,8 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 
 <body class="page-container-bg-solid">
 <div class="page-wrapper">
-    <?php echo $this->cell('Menu');?>
+    <?php $id = $this->Session->read('Auth.User.id')?>
+    <?php echo $this->cell('Menu::display', [$id]);?>
     <div class="page-wrapper-row full-height">
         <div class="page-wrapper-middle">
             <!-- BEGIN CONTAINER -->
