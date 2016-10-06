@@ -21,8 +21,8 @@
             <td><?= $this->Number->format($forum->id) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Parentid') ?></th>
-            <td><?= $this->Number->format($forum->parentid) ?></td>
+            <th scope="row"><?= __('Category Id') ?></th>
+            <td><?= $this->Number->format($forum->category_id) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Active') ?></th>

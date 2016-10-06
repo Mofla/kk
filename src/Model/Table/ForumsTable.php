@@ -9,6 +9,7 @@ use Cake\Validation\Validator;
 /**
  * Forums Model
  *
+ * @property \Cake\ORM\Association\BelongsTo $Categories
  * @property \Cake\ORM\Association\HasMany $Threads
  *
  * @method \App\Model\Entity\Forum get($primaryKey, $options = [])
@@ -36,6 +37,10 @@ class ForumsTable extends Table
         $this->displayField('name');
         $this->primaryKey('id');
 
+        $this->belongsTo('Categories', [
+            'foreignKey' => 'category_id',
+            'joinType' => 'INNER'
+        ]);
         $this->hasMany('Threads', [
             'foreignKey' => 'forum_id'
         ]);
@@ -62,15 +67,24 @@ class ForumsTable extends Table
             ->notEmpty('description');
 
         $validator
-            ->integer('parentid')
-            ->requirePresence('parentid', 'create')
-            ->notEmpty('parentid');
-
-        $validator
             ->boolean('active')
             ->requirePresence('active', 'create')
             ->notEmpty('active');
 
         return $validator;
+    }
+
+    /**
+     * Returns a rules checker object that will be used for validating
+     * application integrity.
+     *
+     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
+     * @return \Cake\ORM\RulesChecker
+     */
+    public function buildRules(RulesChecker $rules)
+    {
+        $rules->add($rules->existsIn(['category_id'], 'Categories'));
+
+        return $rules;
     }
 }
