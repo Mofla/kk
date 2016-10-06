@@ -30,4 +30,3 @@ logs/
 tests/TestCase/Controller/Admin/
 tmp/
 vendor/
-webroot/*
