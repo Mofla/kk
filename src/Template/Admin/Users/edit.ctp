@@ -100,7 +100,7 @@
                                             <div class="profile">
                                                 <div class="tab-pane" id="tab_1_3">
                                                     <div class="row profile-account">
-                                                        <div class="col-md-9">
+                                                        <div class="col-md-12">
                                                             <div class="tab-content">
                                                                 <div id="tab_1-1" class="tab-pane active">
                                                                     <?= $this->Form->create($user) ?>
