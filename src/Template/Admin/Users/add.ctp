@@ -1,84 +1,87 @@
 <div class="profile">
   <div class="tab-pane" id="tab_1_3">
     <div class="row profile-account">
-<!--      <div class="col-md-3">
+      <div class="col-md-3">
         <ul class="ver-inline-menu tabbable margin-bottom-10">
           <li class="active">
             <a data-toggle="tab" href="#tab_1-1">
-              <i class="fa fa-cog"></i> Personal info
+              <i class="fa fa-cog"></i> Ajouter un compte
             </a>
             <span class="after"> </span>
           </li>
-          <li>
-            <a data-toggle="tab" href="#tab_2-2">
-              <i class="fa fa-picture-o"></i> Change Avatar </a>
-          <li>
-          <li>
-            <a data-toggle="tab" href="#tab_3-3">
-              <i class="fa fa-lock"></i> Change Password </a>
-          </li>
-          <li>
-            <a data-toggle="tab" href="#tab_4-4">
-               <i class="fa fa-eye"></i> Privacity Settings </a>
-          </li>
         </ul>
-      </div>-->
-      <div class="col-md-8 col-md-offset-2">
+      </div>
+      <div class="col-md-9">
         <div class="tab-content">
           <div id="tab_1-1" class="tab-pane active">
+            
             <?= $this->Form->create($user) ?>
               <fieldset>
-                <legend><?= __('Add User') ?></legend>
+                <legend><?= __('Nouvel Utilisateur') ?></legend>
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label>Rôle :<?= $this->Form->input('role_id', ['options' => $roles, 'label'=>'']); ?></label>
+                      <label class="label-control">Rôle : </label>
+                      <?= $this->Form->input('role_id', ['options' => $roles, 'label'=>false, 'class'=>'form-control']); ?>
                     </div>
                     <div class="form-group">
-                     <label> Promotion : <?= $this->Form->input('promotion',['label'=>'']); ?> </label>
+                     <label class="label-control"> Promotion : </label>
+                      <?= $this->Form->input('promotion',['label'=>false, 'class'=>'form-control']); ?>
                     </div>
                     <div class="form-group">
-                      <label>Pseudo :<?= $this->Form->input('username',['label'=>'']); ?> </label>
+                      <label class="label-control">Pseudo : </label>
+                      <?= $this->Form->input('username',['label'=>false, 'class'=>'form-control']); ?>
                     </div>
                     <div class="form-group">
-                      <label>Mot de passe :<?= $this->Form->input('password',['label'=>'']); ?></label>
+                      <label class="label-control">Mot de passe : </label>
+                      <?= $this->Form->input('password',['label'=>false, 'class'=>'form-control']); ?>
                     </div>
                     <div class="form-group">
-                      <label>Email :<?= $this->Form->input('email',['label'=>'']); ?></label>
+                      <label class="label-control">Email : </label>
+                      <?= $this->Form->input('email',['label'=>false, 'class'=>'form-control']); ?>
                     </div>
                     <div class="form-group">
-                      <label>Compte Github :<?= $this->Form->input('github_username',['label'=>'']); ?></label>
+                      <label class="label-control">Compte Github : </label><?= $this->Form->input('github_username',['label'=>false, 'class'=>'form-control']); ?>
                     </div>
                     <div class="form-group">
-                      <label>Url avatar :<?= $this->Form->input('picture_url',['label'=>'']); ?></label>
+                      <label class="label-control">Url avatar : </label>
+                      <?= $this->Form->input('picture_url',['label'=>false, 'class'=>'form-control']); ?>
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label>Prénom :<?= $this->Form->input('firstname',['label'=>'']); ?></label>
+                      <label class="label-control">Prénom : </label><?= $this->Form->input('firstname',['label'=>false, 'class'=>'form-control']); ?>
                     </div>
                     <div class="form-group">
-                      <label>Nom :<?= $this->Form->input('lastname',['label'=>'']); ?></label>
+                      <label class="label-control">Nom : </label>
+                      <?= $this->Form->input('lastname',['label'=>false, 'class'=>'form-control']); ?>
                     </div>
                     <div class="form-group">
-                      <label>Adresse :<?= $this->Form->input('address',['label'=>'']); ?></label>
+                      <label class="label-control">Adresse : </label>
+                      <?= $this->Form->input('address',['label'=>false, 'class'=>'form-control']); ?>
                     </div>
                     <div class="form-group">
-                      <label>Code Postal :<?= $this->Form->input('zipcode',['label'=>'']); ?></label>
+                      <label class="label-control">Code Postal : </label>
+                      <?= $this->Form->input('zipcode',['label'=>false, 'class'=>'form-control']); ?>
                     </div>
                     <div class="form-group">
-                      <label>Ville :<?= $this->Form->input('city',['label'=>'']); ?></label>
+                      <label class="label-control">Ville : </label>
+                      <?= $this->Form->input('city',['label'=>false, 'class'=>'form-control']); ?>
                     </div>
                     <div class="form-group">
-                      <label>Téléphone :<?= $this->Form->input('phone',['label'=>'']); ?></label>
+                      <label class="label-control">Téléphone : </label>
+                      <?= $this->Form->input('phone',['label'=>false, 'class'=>'form-control']); ?>
                     </div>
                     <div class="form-group">
-                      <label>Portable :<?= $this->Form->input('cellphone',['label'=>'']); ?></label>
+                      <label class="label-control">Portable : </label>
+                      <?= $this->Form->input('cellphone',['label'=>false, 'class'=>'form-control']); ?>
                     </div>
                     <div class="form-group">
-                      <label>Numéro d'urgence :<?= $this->Form->input('emergency_phone',['label'=>'']); ?></label>
+                      <label class="label-control">Numéro d'urgence : </label>
+                      <?= $this->Form->input('emergency_phone',['label'=>false, 'class'=>'form-control']); ?>
                     </div>
                     <div class="form-group">
-                      <label>Date de naissance :<?= $this->Form->input('birthday',['label'=>'']); ?></label>
+                      <label class="label-control">Date de naissance : </label>
+                      <?= $this->Form->input('birthday', ['type' => 'text','label'=>false, 'class'=>'form-control', 'id' => 'datepicker']); ?>
                     </div>
                   </div>
                 </fieldset>
