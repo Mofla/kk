@@ -14,9 +14,11 @@
             echo $this->Form->input('name');
             echo $this->Form->input('description');
             echo $this->Form->input('active');
-            echo $this->Form->input('category_id');
+            echo $this->Form->input('category_id' , ['options' => $cat ]);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
     <?= $this->Form->end() ?>
 </div>
+
+
