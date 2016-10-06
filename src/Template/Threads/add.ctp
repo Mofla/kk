@@ -1,26 +1,30 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('List Threads'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Forums'), ['controller' => 'Forums', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Forum'), ['controller' => 'Forums', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Posts'), ['controller' => 'Posts', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Post'), ['controller' => 'Posts', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="threads form large-9 medium-8 columns content">
+
+<div class="col-md-12">
+    <div class="table-responsive">
+        <table class="table sscategory">
+            <thead class="category">
+            <tr>
+                <th colspan="2" scope="col"> Poster un nouveau Sujet </th>
+            </tr>
+            </thead>
+            <tbody>
     <?= $this->Form->create($thread) ?>
     <fieldset>
-        <legend><?= __('Add Thread') ?></legend>
-        <?php
-            echo $this->Form->input('subject');
-            echo $this->Form->input('text');
-            echo $this->Form->input('user_id', ['options' => $users]);
-            echo $this->Form->input('forum_id', ['options' => $forums]);
-        ?>
+        <tr>
+            <td width="20%"> Titre du sujet </td>
+            <td width="80%">   <?= $this->Form->input('subject' , ['label' => false , 'class' => 'inputwidth']); ?> </td>
+        </tr>
+        <tr>
+            <td> Votre message </td>
+            <td>  <?= $this->Form->input('text' , ['label' => false , 'class' => 'inputwidth' ]); ?> </td>
+        </tr>
     </fieldset>
+    <td>
+        <td>
     <?= $this->Form->button(__('Submit')) ?>
     <?= $this->Form->end() ?>
+    </td>
+    </tr>
+        </table>
+</div>
 </div>
