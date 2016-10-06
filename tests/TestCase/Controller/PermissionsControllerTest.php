@@ -17,7 +17,9 @@ class PermissionsControllerTest extends IntegrationTestCase
      */
     public $fixtures = [
         'app.permissions',
+        'app.connectors',
         'app.roles',
+        'app.users',
         'app.permissions_roles'
     ];
 

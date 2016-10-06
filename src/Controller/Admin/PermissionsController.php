@@ -34,7 +34,7 @@ class PermissionsController extends AppController
     public function view($id = null)
     {
         $permission = $this->Permissions->get($id, [
-            'contain' => ['Roles']
+            'contain' => ['Roles', 'Connectors']
         ]);
 
         $this->set('permission', $permission);

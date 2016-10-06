@@ -68,6 +68,11 @@ class PermissionsTable extends Table
             ->requirePresence('description', 'create')
             ->notEmpty('description');
 
+        $validator
+            ->boolean('menu')
+            ->requirePresence('menu', 'create')
+            ->notEmpty('menu');
+
         return $validator;
     }
 
