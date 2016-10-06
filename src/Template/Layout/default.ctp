@@ -55,6 +55,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->Html->css('../assets/layouts/layout3/css/custom.min.css') ?>
     <!-- END THEME LAYOUT STYLES -->
     <?= $this->Html->css('styles.css') ?>
+    <?= $this->html->script('../assets/global/plugins/jquery.min.js') ?>
 
     <link rel="shortcut icon" href="favicon.ico" />
 </head>
@@ -1670,7 +1671,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 <?= $this->html->script('../assets/global/plugins/ie8.fix.min.js') ?>
 <!--[endif]-->
 <!-- BEGIN CORE PLUGINS -->
-<?= $this->html->script('../assets/global/plugins/jquery.min.js') ?>
+
 <?= $this->html->script('../assets/global/plugins/bootstrap/js/bootstrap.min.js') ?>
 <?= $this->html->script('../assets/global/plugins/js.cookie.min.js') ?>
 <?= $this->html->script('../assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js') ?>
@@ -1685,7 +1686,6 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 <?= $this->html->script('../assets/layouts/layout3/scripts/demo.min.js') ?>
 <?= $this->html->script('../assets/layouts/global/scripts/quick-sidebar.min.js') ?>
 <?= $this->html->script('../assets/layouts/global/scripts/quick-nav.min.js') ?>
-<?= $this->Html->script('../js/jquery.js') ?>
 <?= $this->Html->script('../build/jquery.datetimepicker.full.min.js') ?>
 <?= $this->Html->css('../css/jquery.datetimepicker.css') ?>
 <script>
