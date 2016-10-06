@@ -80,7 +80,8 @@ class AppController extends Controller
         {
             return true;
         }
-        else{
+        else
+        {
             return false;
         }
     }
