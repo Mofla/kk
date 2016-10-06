@@ -89,3 +89,9 @@ Router::prefix('admin', function ($routes) {
     $routes->connect('/utilisateur/editer/*', ['controller' => 'Users', 'action' => 'edit']);
     $routes->fallbacks(DashedRoute::class);
 });
+
+Router::prefix('portfolios', function($routes) {
+    $routes->connect('/', ['controller' => 'Portfolios','action' => 'index'], ['routeClass' => 'InflectedRoute']);
+    $routes->connect('/voir/*', ['controller' => 'Portfolios','action' => 'view'], ['routeClass' => 'InflectedRoute']);
+    $routes->fallbacks(DashedRoute::class);
+});
