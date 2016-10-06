@@ -49,10 +49,14 @@ class ThreadsController extends AppController
      *
      * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
      */
-    public function add()
+    public function add($id = null)
     {
+        $user = $this->Auth->user('id');
+
         $thread = $this->Threads->newEntity();
         if ($this->request->is('post')) {
+            $this->request->data['user_id'] = $user;
+            $this->request->data['forum_id'] = $id;
             $thread = $this->Threads->patchEntity($thread, $this->request->data);
             if ($this->Threads->save($thread)) {
                 $this->Flash->success(__('The thread has been saved.'));
@@ -62,9 +66,9 @@ class ThreadsController extends AppController
                 $this->Flash->error(__('The thread could not be saved. Please, try again.'));
             }
         }
-        $users = $this->Threads->Users->find('list', ['limit' => 200]);
+
         $forums = $this->Threads->Forums->find('list', ['limit' => 200]);
-        $this->set(compact('thread', 'users', 'forums'));
+        $this->set(compact('thread', 'user', 'forums'));
         $this->set('_serialize', ['thread']);
     }
 

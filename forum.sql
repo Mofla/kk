@@ -3,7 +3,7 @@ CREATE TABLE forums (
 	`name` varchar(255) NOT NULL,
 	`description` TEXT(800) NOT NULL,
 	`active` BOOLEAN NOT NULL,
-	`category_id` INT NOT NULL
+	`category_id` INT NOT NULL,
 	PRIMARY KEY (`id`)
 );
 
