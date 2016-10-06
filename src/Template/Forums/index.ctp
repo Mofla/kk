@@ -13,8 +13,8 @@
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('name') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('parentid') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('active') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('category_id') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -23,8 +23,8 @@
             <tr>
                 <td><?= $this->Number->format($forum->id) ?></td>
                 <td><?= h($forum->name) ?></td>
-                <td><?= $this->Number->format($forum->parentid) ?></td>
                 <td><?= h($forum->active) ?></td>
+                <td><?= $this->Number->format($forum->category_id) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $forum->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $forum->id]) ?>

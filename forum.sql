@@ -2,8 +2,8 @@ CREATE TABLE forums (
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`name` varchar(255) NOT NULL,
 	`description` TEXT(800) NOT NULL,
-	`parentid` INT NOT NULL,
 	`active` BOOLEAN NOT NULL,
+	`category_id` INT NOT NULL
 	PRIMARY KEY (`id`)
 );
 
@@ -39,6 +39,15 @@ CREATE TABLE posts_files (
 	`post_id` INT NOT NULL,
 	`file_id` INT NOT NULL
 );
+
+CREATE TABLE categories (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`name` varchar(100) NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+
+ALTER TABLE `forums` ADD CONSTRAINT `forums_fk0` FOREIGN KEY (`category_id`) REFERENCES `categories`(`id`);
 
 ALTER TABLE `threads` ADD CONSTRAINT `threads_fk0` FOREIGN KEY (`user_id`) REFERENCES `users`(`id`);
 
