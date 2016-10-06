@@ -56,7 +56,6 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <!-- END THEME LAYOUT STYLES -->
     <link rel="shortcut icon" href="favicon.ico" />
 </head>
-<body>
 
 
 <body class="page-container-bg-solid">
