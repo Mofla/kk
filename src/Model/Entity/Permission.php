@@ -9,7 +9,9 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property string $name
  * @property string $description
+ * @property bool $menu
  *
+ * @property \App\Model\Entity\Connector[] $connectors
  * @property \App\Model\Entity\Role[] $roles
  */
 class Permission extends Entity
