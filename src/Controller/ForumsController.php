@@ -20,7 +20,9 @@ class ForumsController extends AppController
     {
         $forums = $this->paginate($this->Forums);
 
-        $this->set(compact('forums'));
+        $cat = $this->Forums->Categories->find('all')
+        ->contain('Forums');
+        $this->set(compact('forums','cat'));
         $this->set('_serialize', ['forums']);
     }
 
@@ -59,7 +61,9 @@ class ForumsController extends AppController
                 $this->Flash->error(__('The forum could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('forum'));
+
+        $cat = $this->Forums->Categories->find('list');
+        $this->set(compact('forum','cat'));
         $this->set('_serialize', ['forum']);
     }
 
