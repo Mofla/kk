@@ -123,4 +123,17 @@ class CommonComponent extends Component
             return false;
         }
     }
+
+    public function isAdmin()
+    {
+        $roles = TableRegistry::get('Roles');
+        $rights = $roles->find()->select(['id'])->where(['id' => $this->request->session()->read('Auth.User.role_id')])->first();
+        if($rights->id == 1){
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }

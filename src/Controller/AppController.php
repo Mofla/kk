@@ -76,7 +76,7 @@ class AppController extends Controller
 
     public function isAuthorized($user=null)
     {
-        if($this->Common->checkPermissions($this->request->params['controller'],$this->request->params['action']))
+        if($this->Common->checkPermissions($this->request->params['controller'],$this->request->params['action']) || $this->Common->isAdmin())
         {
             return true;
         }
