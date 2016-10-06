@@ -113,4 +113,23 @@ class UsersController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+    public function login()
+    {
+        if ($this->request->is('post')) {
+            $user = $this->Auth->identify();
+            if ($user) {
+                $this->Auth->setUser($user);
+                return $this->redirect(['controller' => 'Users', 'action' => 'view',$this->Auth->user('id')]);
+            }
+            $this->Flash->error(__('Invalid username or password, try again'));
+        }
+        $this->set('con',$this->request->params['action']);
+        $this->viewBuilder()->layout('login');
+    }
+
+    public function logout()
+    {
+        $this->request->session()->destroy();
+        return $this->redirect($this->Auth->logout());
+    }
 }
