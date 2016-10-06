@@ -941,8 +941,14 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                                             </ul>
                                         </li>
                                     </ul>
+                                <li class="menu-dropdown classic-menu-dropdown ">
+                                    <a href="<?= $this->Url->build([ 'controller' => 'Forums', 'action' => 'index' ]); ?>"> Forum
+                                        <span class="arrow"></span>
+                                    </a>
+                                </li>
                                 </li>
                             </ul>
+
                         </div>
                         <!-- END MEGA MENU -->
                     </div>
