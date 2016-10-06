@@ -54,7 +54,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->Html->css('../assets/layouts/layout3/css/themes/default.min.css') ?>
     <?= $this->Html->css('../assets/layouts/layout3/css/custom.min.css') ?>
     <!-- END THEME LAYOUT STYLES -->
-    <?= $this->Html->css('styles.css') ?>
+    <?= $this->Html->css('forum-styles.css') ?>
     <?= $this->html->script('../assets/global/plugins/jquery.min.js') ?>
 
     <link rel="shortcut icon" href="favicon.ico" />

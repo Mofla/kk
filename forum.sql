@@ -10,6 +10,7 @@ CREATE TABLE forums (
 CREATE TABLE threads (
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`subject` varchar(255) NOT NULL,
+	`text` TEXT NOT NULL,
 	`created` DATETIME NOT NULL,
 	`user_id` INT NOT NULL,
 	`forum_id` INT NOT NULL,

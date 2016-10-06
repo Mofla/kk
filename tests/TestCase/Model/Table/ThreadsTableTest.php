@@ -31,6 +31,7 @@ class ThreadsTableTest extends TestCase
         'app.connectors',
         'app.permissions_roles',
         'app.forums',
+        'app.categories',
         'app.posts',
         'app.files',
         'app.posts_files'
