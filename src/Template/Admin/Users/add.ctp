@@ -26,6 +26,7 @@
       <div class="col-md-8 col-md-offset-2">
         <div class="tab-content">
           <div id="tab_1-1" class="tab-pane active">
+            
             <?= $this->Form->create($user) ?>
               <fieldset>
                 <legend><?= __('Add User') ?></legend>
