@@ -76,8 +76,13 @@ class AppController extends Controller
 
     public function isAuthorized($user=null)
     {
-        $this->Auth->deny();
-        $this->Auth->allow($this->Common->checkPermissions($this->params['controller']));
+        if($this->Common->checkPermissions($this->request->params['controller'],$this->request->params['action']))
+        {
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     public function beforeFilter(Event $event)

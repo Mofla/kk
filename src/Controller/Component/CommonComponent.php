@@ -92,6 +92,7 @@ class CommonComponent extends Component
         $roles = TableRegistry::get('Roles');
         // know user's role
         $rights = $roles->find()->select(['name'])->where(['id' => $this->request->session()->read('Auth.User.role_id')])->first();
+        // to do : if no results found -> define as guest
         $rights = $rights->name;
 
         $connectors = $roles->find()->matching('Permissions.Connectors')->select(['Connectors.controller','Connectors.function'])->where(['Roles.name' => $rights]);
@@ -100,26 +101,26 @@ class CommonComponent extends Component
         foreach($connectors as $connector)
         {
             // get Controller
-            $key = $connector['_matchingData']['Connectors']->controller;
+            $key = str_replace('Controller','',$connector['_matchingData']['Connectors']->controller);
             // get Action
             $value = $connector['_matchingData']['Connectors']->function;
             // Push a table
             $actions[$key][] = $value;
         }
         // Write allowed actions in actual session
-        return $this->request->session()->write([
-            'allowed' => $actions
-        ]);
+        return $actions;
     }
 
-    public function checkPermissions($controller)
+    public function checkPermissions($controller,$action)
     {
-        $controller = $controller.'Controller';
-        $this->getPermissions();
-        $session = $this->request->session()->read('allowed');
-        if(array_key_exists($controller,$session))
+        $session = $this->getPermissions();
+        if(array_key_exists($controller,$session) && in_array($action,$session[$controller]))
         {
-            return $session;
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 }
