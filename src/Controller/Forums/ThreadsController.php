@@ -37,7 +37,7 @@ class ThreadsController extends AppController
     public function view($id = null)
     {
         $thread = $this->Threads->get($id, [
-            'contain' => ['Users', 'Forums', 'Posts']
+            'contain' => ['Users', 'Forums', 'Posts.Users']
         ]);
 
         $this->set('thread', $thread);
