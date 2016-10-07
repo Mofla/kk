@@ -76,14 +76,26 @@
     var timeline = new vis.Timeline(container, data, options);
 </script>
 
+<style type="text/css">
+    #mynetwork {
+        width: 600px;
+        height: 400px;
+        border: 1px solid lightgray;
+    }
+
+    p {
+        max-width:700px;
+    }
+</style>
+
 <div id="mynetwork"></div>
 
 <script type="text/javascript">
     // create an array with nodes
     var nodes = new vis.DataSet([
-        {id: 201, label: 'TODO'},
-        {id: 202, label: 'DOING'},
-        {id: 203, label: 'DONE'},
+        {id: 201, label: 'TODO', color: 'red'},
+        {id: 202, label: 'DOING', color: 'orange'},
+        {id: 203, label: 'DONE', color: 'green'},
         <?php foreach ($tasks as $task): ?>
         {id: <?= $task->id ?>, label: '<?= h($task->name) ?>'},
         <?php endforeach; ?>
