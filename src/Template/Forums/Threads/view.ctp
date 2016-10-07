@@ -1,41 +1,36 @@
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Thread'), ['action' => 'edit', $thread->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Thread'), ['action' => 'delete', $thread->id], ['confirm' => __('Are you sure you want to delete # {0}?', $thread->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Threads'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Thread'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Forums'), ['controller' => 'Forums', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Forum'), ['controller' => 'Forums', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Posts'), ['controller' => 'Posts', 'action' => 'index']) ?> </li>
+
         <li><?= $this->Html->link(__('New Post'), ['controller' => 'Posts', 'action' => 'add']) ?> </li>
     </ul>
 </nav>
-<div class="threads view large-9 medium-8 columns content">
-    <h3><?= h($thread->id) ?></h3>
-    <table class="vertical-table">
+        <?= $thread->has('forum') ? $this->Html->link($thread->forum->name, ['controller' => 'Forums', 'action' => 'view', $thread->forum->id]) : '' ?>
+<div class="table-responsive">
+    <table class="table">
+        <thead class="category">
         <tr>
-            <th scope="row"><?= __('Subject') ?></th>
-            <td><?= h($thread->subject) ?></td>
+            <th colspan="2" scope="row"><?= h($thread->subject) ?></th>
         </tr>
+        <tr class="ssthead">
+            <th scope="col" >Auteur</th>
+            <th scope="col" >Message</th>
+        </tr>
+        </thead>
+        <tbody>
         <tr>
-            <th scope="row"><?= __('User') ?></th>
+
             <td><?= $thread->has('user') ? $this->Html->link($thread->user->id, ['controller' => 'Users', 'action' => 'view', $thread->user->id]) : '' ?></td>
         </tr>
+
         <tr>
-            <th scope="row"><?= __('Forum') ?></th>
-            <td><?= $thread->has('forum') ? $this->Html->link($thread->forum->name, ['controller' => 'Forums', 'action' => 'view', $thread->forum->id]) : '' ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Id') ?></th>
+
             <td><?= $this->Number->format($thread->id) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Created') ?></th>
+
             <td><?= h($thread->created) ?></td>
         </tr>
+        </tbody>
     </table>
     <div class="row">
         <h4><?= __('Text') ?></h4>
