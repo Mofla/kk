@@ -96,6 +96,12 @@ Router::prefix('portfolios', function($routes) {
     $routes->fallbacks(DashedRoute::class);
 });
 
+Router::prefix('Tchat', function($routes) {
+    $routes->connect('/', ['controller' => 'Tchats','action' => 'index'], ['routeClass' => 'InflectedRoute']);
+    $routes->connect('/add', ['controller' => 'Tchats','action' => 'add'], ['routeClass' => 'InflectedRoute']);
+    $routes->fallbacks(DashedRoute::class);
+});
+
 Router::prefix('forums', function($routes) {
     $routes->connect('/', ['controller' => 'Forums','action' => 'index'], ['routeClass' => 'InflectedRoute']);
     $routes->fallbacks(DashedRoute::class);
