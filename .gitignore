@@ -19,7 +19,7 @@
 /logs/*
 !/logs/empty
 .idea/
-.idea/workspace.xml
+!.idea/workspace.xml
 
 
 composer.json
