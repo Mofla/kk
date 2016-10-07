@@ -139,6 +139,11 @@
                                         <span class="arrow"></span>
                                     </a>
                                 </li>
+                                <li class="menu-dropdown classic-menu-dropdown ">
+                                    <a href="<?= $this->Url->build([ 'controller' => 'Forums', 'action' => 'index' ]); ?>"> Forum
+                                        <span class="arrow"></span>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                         <!-- END MEGA MENU -->
