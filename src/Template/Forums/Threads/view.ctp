@@ -54,7 +54,7 @@
         <?php $messagecount = 1 ;?>
         <?php foreach ($thread->posts as $posts): ?>
         <?php $messagecount++ ;?>
-        <table class="table">
+        <table class="table mrgtbl">
 
 
             <tr class="sscategory">

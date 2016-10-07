@@ -13,7 +13,7 @@
             <th scope="col" class="category" colspan="5"><?= h($forum->name) ?></th>
         </tr>
         <tr class="ssthead">
-            <th scope="col" >Sujets / Auteur</th>
+            <th scope="col" >Sujets / Auteurs</th>
             <th scope="col" >Réponses</th>
             <th scope="col" >Vues</th>
             <th scope="col" >Derniers messages</th>

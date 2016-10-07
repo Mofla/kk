@@ -2,7 +2,7 @@
 namespace App\Controller\Forums;
 
 use App\Controller\AppController;
-
+use Cake\ORM\TableRegistry;
 /**
  * Posts Controller
  *
@@ -52,7 +52,10 @@ class PostsController extends AppController
     public function add($id = null)
     {
         $user = $this->Auth->user('id');
-
+        $forumid = $this->Posts->Threads->find()
+            ->select('forum_id')
+            ->where(['id' => $id])
+            ->first();
         $post = $this->Posts->newEntity();
         if ($this->request->is('post')) {
             $this->request->data['user_id'] = $user;
@@ -60,7 +63,11 @@ class PostsController extends AppController
             $post = $this->Posts->patchEntity($post, $this->request->data);
             if ($this->Posts->save($post)) {
                 $this->Flash->success(__('The post has been saved.'));
-
+                $query = $this->Posts->Threads->forums->query();
+                $query->update()
+                    ->set([$query->newExpr('countpost = countpost + 1'),'lastuser' => $user])
+                    ->where(['id' => $forumid->forum_id])
+                    ->execute();
                 return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__('The post could not be saved. Please, try again.'));
@@ -109,10 +116,19 @@ class PostsController extends AppController
      */
     public function delete($id = null)
     {
+        $forumid = $this->Posts->Threads->find()
+            ->select('forum_id')
+            ->where(['id' => $id])
+            ->first();
         $this->request->allowMethod(['post', 'delete']);
         $post = $this->Posts->get($id);
         if ($this->Posts->delete($post)) {
             $this->Flash->success(__('The post has been deleted.'));
+            $query = $this->Posts->Threads->forums->query();
+            $query->update()
+                ->set($query->newExpr('countpost = countpost - 1'))
+                ->where(['id' => $forumid->forum_id])
+                ->execute();
         } else {
             $this->Flash->error(__('The post could not be deleted. Please, try again.'));
         }
