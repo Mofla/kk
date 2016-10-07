@@ -108,6 +108,13 @@
                         <!-- DOC: Remove data-hover="dropdown" and data-close-others="true" attributes below to disable the dropdown opening on mouse hover -->
                         <div class="hor-menu  hor-menu-light">
                             <ul class="nav navbar-nav">
+                                <?php foreach($perm as $p): ?>
+                                  <li>
+                                      <?php foreach ($permission->connectors as $conn): ?>
+                                    <a href="<?= $this->Url->build([ 'controller' => $conn->controller, 'action' => $conn->function]) ?>"><?= $p->name ?></a>
+                                        <?php endforeach; ?>
+                                  </li>
+                                <?php endforeach; ?>
                                 <li class="menu-dropdown classic-menu-dropdown ">
                                     <a href="javascript:;"> Dashboard
                                         <span class="arrow"></span>
@@ -136,6 +143,11 @@
                                 <li class="menu-dropdown classic-menu-dropdown ">
                                     <a href="javascript:;">
                                         <i class="icon-briefcase"></i> Pages
+                                        <span class="arrow"></span>
+                                    </a>
+                                </li>
+                                <li class="menu-dropdown classic-menu-dropdown ">
+                                    <a href="<?= $this->Url->build([ 'controller' => 'Forums', 'action' => 'index' ]); ?>"> Forum
                                         <span class="arrow"></span>
                                     </a>
                                 </li>

@@ -25,13 +25,18 @@ class MenuCell extends Cell
     public function display($id)
     {
         $this->loadModel('Permissions');
+        $this->loadModel('Roles');
+        $this->loadModel('Connectors');
 
         $permission = $this->Permissions->get($id, [
             'contain' => ['Roles', 'Connectors']
         ]);
-      
+        
+        $perm = $this->Permissions->find();
+
 
         $this->set('permission', $permission);
         $this->set('_serialize', ['permission']);
+        $this->set(compact('perm'));
     }
 }
