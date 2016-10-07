@@ -10,6 +10,9 @@ use Cake\Validation\Validator;
  * Users Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Roles
+ * @property \Cake\ORM\Association\HasMany $Diaries
+ * @property \Cake\ORM\Association\BelongsToMany $Projects
+ * @property \Cake\ORM\Association\BelongsToMany $Tasks
  *
  * @method \App\Model\Entity\User get($primaryKey, $options = [])
  * @method \App\Model\Entity\User newEntity($data = null, array $options = [])
@@ -43,6 +46,19 @@ class UsersTable extends Table
         $this->belongsTo('Roles', [
             'foreignKey' => 'role_id',
             'joinType' => 'INNER'
+        ]);
+        $this->hasMany('Diaries', [
+            'foreignKey' => 'user_id'
+        ]);
+        $this->belongsToMany('Projects', [
+            'foreignKey' => 'user_id',
+            'targetForeignKey' => 'project_id',
+            'joinTable' => 'projects_users'
+        ]);
+        $this->belongsToMany('Tasks', [
+            'foreignKey' => 'user_id',
+            'targetForeignKey' => 'task_id',
+            'joinTable' => 'tasks_users'
         ]);
     }
 
