@@ -1,27 +1,36 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('List Posts'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Threads'), ['controller' => 'Threads', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Thread'), ['controller' => 'Threads', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Files'), ['controller' => 'Files', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New File'), ['controller' => 'Files', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="posts form large-9 medium-8 columns content">
-    <?= $this->Form->create($post) ?>
-    <fieldset>
-        <legend><?= __('Add Post') ?></legend>
-        <?php
-            echo $this->Form->input('title');
-            echo $this->Form->input('message');
-            echo $this->Form->input('user_id', ['options' => $users]);
-            echo $this->Form->input('thread_id', ['options' => $threads]);
-            echo $this->Form->input('files._ids', ['options' => $files]);
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
+
+            <!--echo $this->Form->input('title');-->
+            <!--echo $this->Form->input('message');-->
+            <!--echo $this->Form->input('user_id', ['options' => $users]);-->
+            <!--echo $this->Form->input('thread_id', ['options' => $threads]);-->
+            <!--echo $this->Form->input('files._ids', ['options' => $files]);-->
+
+<div class="col-md-12">
+<div class="table-responsive">
+    <table class="table sscategory">
+        <thead class="category">
+        <tr>
+            <th colspan="2" scope="col"> Poster une nouvelle réponse </th>
+        </tr>
+        </thead>
+        <tbody>
+        <?= $this->Form->create($post) ?>
+        <fieldset>
+            <tr>
+                <td width="20%"> Titre du sujet </td>
+                <td width="80%">   <?= $this->Form->input('title' , ['label' => false , 'class' => 'inputwidth']); ?> </td>
+            </tr>
+            <tr>
+                <td> Votre message </td>
+                <td>  <?= $this->Form->input('message' , ['label' => false , 'class' => 'inputwidth' ]); ?> </td>
+            </tr>
+        </fieldset>
+        <tr>
+            <td colspan="2" class="grey text-center">
+                <?= $this->Form->button(__('POSTER LA REPONSE')) ?>
+                <?= $this->Form->end() ?>
+            </td>
+        </tr>
+    </table>
+</div>
 </div>

@@ -1,14 +1,21 @@
 <div class="col-md-12">
         <?= $thread->has('forum') ? $this->Html->link($thread->forum->name, ['controller' => 'Forums', 'action' => 'view', $thread->forum->id]) : '' ?>
 </div>
-<div class="col-md-12 voffset4">
-<div class="table-responsive">
+<div class="col-md-12 voffset2">
+
+
+<div class="right">
+    <a href="<?= $this->Url->build([ 'controller' => 'Posts', 'action' => 'add' , $thread->id]); ?>" class="btn btn-success " role="button" aria-pressed="true">REPONDRE</a>
+</div>
+
+<div class="row"></div>
+<div class="table-responsive voffset2">
     <table class="table">
         <thead class="category">
         <tr>
             <th colspan="2" scope="row">
-                <div class="left"> <?= h($thread->subject) ?> </div>
-    <div class="right"> <?= $this->Html->link(__('REPONDRE'), ['controller' => 'Posts', 'action' => 'add']) ?></div>
+                <div><?= h($thread->subject) ?> </div>
+
             </th>
         </tr>
         <tr class="ssthead">
@@ -44,11 +51,12 @@
 
     <div class="table-responsive">
         <?php if (!empty($thread->posts)): ?>
+        <?php $messagecount = 1 ;?>
+        <?php foreach ($thread->posts as $posts): ?>
+        <?php $messagecount++ ;?>
         <table class="table">
 
-            <?php $messagecount = 1 ;?>
-            <?php foreach ($thread->posts as $posts): ?>
-            <?php $messagecount++ ;?>
+
             <tr class="sscategory">
 
                 <td width="25%"><?= $this->Html->link($posts->user->username, ['controller' => 'Users', 'action' => 'view', $posts->user_id])  ?>
@@ -85,8 +93,10 @@
             <!--</tr>-->
         </table>
             <?php endforeach; ?>
-
         <?php endif; ?>
+        <div class="right">
+            <a href="<?= $this->Url->build([ 'controller' => 'Posts', 'action' => 'add' , $thread->id]); ?>" class="btn btn-success " role="button" aria-pressed="true">REPONDRE</a>
+        </div>
     </div>
 </div>
 </div>
