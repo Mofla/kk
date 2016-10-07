@@ -1,5 +1,5 @@
 <?php
-namespace App\Controller;
+namespace App\Controller\forums;
 
 use App\Controller\AppController;
 
