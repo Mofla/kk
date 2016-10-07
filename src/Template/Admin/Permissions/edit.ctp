@@ -8,6 +8,8 @@
             )
         ?></li>
         <li><?= $this->Html->link(__('List Permissions'), ['action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('List Connectors'), ['controller' => 'Connectors', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Connector'), ['controller' => 'Connectors', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Roles'), ['controller' => 'Roles', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Role'), ['controller' => 'Roles', 'action' => 'add']) ?></li>
     </ul>
@@ -19,6 +21,7 @@
         <?php
             echo $this->Form->input('name');
             echo $this->Form->input('description');
+            echo $this->Form->input('menu');
             echo $this->Form->input('roles._ids', ['options' => $roles]);
         ?>
     </fieldset>

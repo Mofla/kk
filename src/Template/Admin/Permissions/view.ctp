@@ -5,6 +5,8 @@
         <li><?= $this->Form->postLink(__('Delete Permission'), ['action' => 'delete', $permission->id], ['confirm' => __('Are you sure you want to delete # {0}?', $permission->id)]) ?> </li>
         <li><?= $this->Html->link(__('List Permissions'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Permission'), ['action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('List Connectors'), ['controller' => 'Connectors', 'action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New Connector'), ['controller' => 'Connectors', 'action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Roles'), ['controller' => 'Roles', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Role'), ['controller' => 'Roles', 'action' => 'add']) ?> </li>
     </ul>
@@ -20,10 +22,41 @@
             <th scope="row"><?= __('Id') ?></th>
             <td><?= $this->Number->format($permission->id) ?></td>
         </tr>
+        <tr>
+            <th scope="row"><?= __('Menu') ?></th>
+            <td><?= $permission->menu ? __('Yes') : __('No'); ?></td>
+        </tr>
     </table>
     <div class="row">
         <h4><?= __('Description') ?></h4>
         <?= $this->Text->autoParagraph(h($permission->description)); ?>
+    </div>
+    <div class="related">
+        <h4><?= __('Related Connectors') ?></h4>
+        <?php if (!empty($permission->connectors)): ?>
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+                <th scope="col"><?= __('Id') ?></th>
+                <th scope="col"><?= __('Controller') ?></th>
+                <th scope="col"><?= __('Function') ?></th>
+                <th scope="col"><?= __('Permission Id') ?></th>
+                <th scope="col" class="actions"><?= __('Actions') ?></th>
+            </tr>
+            <?php foreach ($permission->connectors as $connectors): ?>
+            <tr>
+                <td><?= h($connectors->id) ?></td>
+                <td><?= h($connectors->controller) ?></td>
+                <td><?= h($connectors->function) ?></td>
+                <td><?= h($connectors->permission_id) ?></td>
+                <td class="actions">
+                    <?= $this->Html->link(__('View'), ['controller' => 'Connectors', 'action' => 'view', $connectors->id]) ?>
+                    <?= $this->Html->link(__('Edit'), ['controller' => 'Connectors', 'action' => 'edit', $connectors->id]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Connectors', 'action' => 'delete', $connectors->id], ['confirm' => __('Are you sure you want to delete # {0}?', $connectors->id)]) ?>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </table>
+        <?php endif; ?>
     </div>
     <div class="related">
         <h4><?= __('Related Roles') ?></h4>

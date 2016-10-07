@@ -2,6 +2,8 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('New Permission'), ['action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Connectors'), ['controller' => 'Connectors', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Connector'), ['controller' => 'Connectors', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Roles'), ['controller' => 'Roles', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Role'), ['controller' => 'Roles', 'action' => 'add']) ?></li>
     </ul>
@@ -13,6 +15,7 @@
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('name') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('menu') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -21,6 +24,7 @@
             <tr>
                 <td><?= $this->Number->format($permission->id) ?></td>
                 <td><?= h($permission->name) ?></td>
+                <td><?= h($permission->menu) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $permission->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $permission->id]) ?>
