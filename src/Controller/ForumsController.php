@@ -18,12 +18,12 @@ class ForumsController extends AppController
      */
     public function index()
     {
-        $forums = $this->paginate($this->Forums);
+
 
         $cat = $this->Forums->Categories->find('all')
-        ->contain('Forums.Threads.Posts');
-        $this->set(compact('forums','cat'));
-        $this->set('_serialize', ['forums']);
+        ->contain('Forums');
+        
+        $this->set(compact('cat'));
     }
 
     /**
