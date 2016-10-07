@@ -49,10 +49,14 @@ class PostsController extends AppController
      *
      * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
      */
-    public function add()
+    public function add($id = null)
     {
+        $user = $this->Auth->user('id');
+
         $post = $this->Posts->newEntity();
         if ($this->request->is('post')) {
+            $this->request->data['user_id'] = $user;
+            $this->request->data['thread_id'] = $id;
             $post = $this->Posts->patchEntity($post, $this->request->data);
             if ($this->Posts->save($post)) {
                 $this->Flash->success(__('The post has been saved.'));
@@ -62,10 +66,8 @@ class PostsController extends AppController
                 $this->Flash->error(__('The post could not be saved. Please, try again.'));
             }
         }
-        $users = $this->Posts->Users->find('list', ['limit' => 200]);
-        $threads = $this->Posts->Threads->find('list', ['limit' => 200]);
-        $files = $this->Posts->Files->find('list', ['limit' => 200]);
-        $this->set(compact('post', 'users', 'threads', 'files'));
+
+        $this->set(compact('post'));
         $this->set('_serialize', ['post']);
     }
 
