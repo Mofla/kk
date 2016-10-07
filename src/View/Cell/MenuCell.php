@@ -24,12 +24,12 @@ class MenuCell extends Cell
      */
     public function display($id)
     {
-        $this->loadModel('Permission');
+        $this->loadModel('Permissions');
 
         $permission = $this->Permissions->get($id, [
             'contain' => ['Roles', 'Connectors']
         ]);
-        debug($permission);
+      
 
         $this->set('permission', $permission);
         $this->set('_serialize', ['permission']);
