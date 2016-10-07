@@ -1,27 +1,60 @@
 <?= $this->Html->css('portfolio.css') ?>
-<div class="row">
+<div class="row no-gutter">
     <?php foreach($portfolios as $portfolio): ?>
-        <div class="col-sm-12 col-md-4">
-            <div class="panel panel-default panel-bordered">
-                <div class="panel-heading" style="background:#444 !important;color:#EEE;">
+        <div class="col-xs-12 col-sm-6 col-md-3 col-no-gutter">
+            <div class="img-portfolio collapse">
+                <?= $this->Html->image('portfolios/'.$portfolio->picture_url) ?>
+                <div class="img-portfolio-description collapse">
                     <h6 class="h4 text-center"><?= $portfolio->name ?></h6>
+                    <p>
+                        <?= $portfolio->description ?>
+                    </p>
+                    <p>
+                        Par :
+                        <?php foreach ($portfolio->users as $user): ?>
+                            <?= $user->firstname . ' ' . $user->lastname ?><br>
+                        <?php endforeach; ?>
+                    </p>
                 </div>
-                <div class="panel-body bg-portfolio">
-                    <div class="text-center">
-                        <?= $this->Html->image('portfolios/'.$portfolio->picture_url,['class' => 'img-thumbnail img-responsive']) ?>
-                    </div>
-
-                </div>
-                <div class="panel-footer" style="background:#444 !important;">
-                    <div class="text-right">
-                        <?= $this->Html->link('<span class="glyphicon glyphicon-eye-open"></span> Voir',[
-                            'action' => 'view', $portfolio->id],
-                            ['class' => 'btn btn-portfolio btn-xs img-rounded','escape' => false]
-                        ) ?>
-                    </div>
-                </div>
-
             </div>
         </div>
     <?php endforeach; ?>
 </div>
+
+<script>
+    $(document).ready(function(){
+        portfolioImg();
+    });
+
+    function portfolioImg()
+    {
+        // resize images at loading
+        var width = $('.img-portfolio').width();
+        $('.img-portfolio').innerHeight(width);
+        width = $('.img-portfolio').width();
+        var height = $('.img-portfolio').height();
+        if(width>height)
+        {
+            $('.img-portfolio>img').css({
+                "width":width+"px",
+                "height":width+"px",
+                "object-fit":"cover"
+            });
+        }
+        else
+        {
+            $('.img-portfolio>img').css({
+                "width":height+"px",
+                "height":height+"px",
+                "object-fit":"cover"
+            });
+        }
+        // effect on click
+        $('.img-portfolio').on("mouseenter mouseleave",function(){
+            var div = $(this).find('div');
+            $(div).fadeToggle(350);
+        });
+        // show images
+        $('.img-portfolio').show();
+    }
+</script>

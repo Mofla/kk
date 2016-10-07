@@ -11,7 +11,6 @@ use Cake\ORM\Entity;
  * @property string $description
  * @property string $url
  * @property string $picture_url
- * @property int $user_id
  *
  * @property \App\Model\Entity\User[] $users
  */

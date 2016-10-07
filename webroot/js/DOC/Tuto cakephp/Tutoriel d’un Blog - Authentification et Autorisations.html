@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<!-- saved from url=(0081)http://book.cakephp.org/3.0/fr/tutorials-and-examples/blog-auth-example/auth.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta content="Authentification Simple et Autorisation de l&#39;Application" lang="fr" name="title">
+<meta content="incrémentation auto,autorisation application,modèle user,tableau,conventions,authentification,urls,cakephp,suppression,doc,colonnes" lang="fr" name="keywords">
+
+    <title>Tutoriel d’un Blog - Authentification et Autorisations</title>
+    <link href="http://book.cakephp.org/3.0/fr/_static/favicon.png" type="image/png" rel="icon">
+
+    
+    <link rel="stylesheet" href="./Tutoriel d’un Blog - Authentification et Autorisations_files/app.css" type="text/css">
+    
+    <script type="text/javascript" async="" src="./Tutoriel d’un Blog - Authentification et Autorisations_files/ga.js"></script><script id="twitter-wjs" src="./Tutoriel d’un Blog - Authentification et Autorisations_files/widgets.js"></script><script id="facebook-jssdk" src="./Tutoriel d’un Blog - Authentification et Autorisations_files/sdk.js"></script><script type="text/javascript" src="./Tutoriel d’un Blog - Authentification et Autorisations_files/app.js"></script>
+
+    <link rel="alternate" hreflang="en" href="http://book.cakephp.org/3.0/en/tutorials-and-examples/blog-auth-example/auth.html"><link rel="alternate" hreflang="pt" href="http://book.cakephp.org/3.0/pt/tutorials-and-examples/blog-auth-example/auth.html"><link rel="alternate" hreflang="es" href="http://book.cakephp.org/3.0/es/tutorials-and-examples/blog-auth-example/auth.html"><link rel="alternate" hreflang="ja" href="http://book.cakephp.org/3.0/ja/tutorials-and-examples/blog-auth-example/auth.html"><link rel="alternate" hreflang="zh" href="http://book.cakephp.org/3.0/zh/tutorials-and-examples/blog-auth-example/auth.html"><link rel="alternate" hreflang="tr" href="http://book.cakephp.org/3.0/tr/tutorials-and-examples/blog-auth-example/auth.html">
+
+    <link rel="search" type="application/opensearchdescription+xml" title="Search within documentation CakePHP Cookbook 3.x" href="http://book.cakephp.org/3.0/fr/_static/opensearchdescription-book-3-x.xml">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="top" title="documentation CakePHP Cookbook 3.x" href="http://book.cakephp.org/3.0/fr/index.html">
+    <link rel="up" title="Tutoriels et exemples" href="http://book.cakephp.org/3.0/fr/tutorials-and-examples.html">
+    <link rel="next" title="Contribuer" href="http://book.cakephp.org/3.0/fr/contributing.html">
+    <link rel="prev" title="Tutoriel d’un Blog - Partie 3" href="http://book.cakephp.org/3.0/fr/tutorials-and-examples/blog/part-three.html">
+
+    <script type="text/javascript">
+    window.lang = "fr";
+    </script>
+  <script type="text/javascript" charset="utf-8" async="" src="./Tutoriel d’un Blog - Authentification et Autorisations_files/button.1813ea3f78757294e1ba1cea21b068a0.js"></script><style type="text/css">.fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_reposition{overflow:hidden;position:relative}.fb_invisible{display:none}.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}.fb_link img{border:none}@keyframes fb_transform{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}.fb_animate{animation:fb_transform .3s forwards}
+.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}.fb_reset .fb_dialog_legacy{overflow:visible}.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}.fb_dialog_content{background:#fff;color:#333}.fb_dialog_close_icon{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;_background-image:url(https://static.xx.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif);cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px}.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}.fb_dialog_close_icon:hover{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;_background-image:url(https://static.xx.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)}.fb_dialog_close_icon:active{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;_background-image:url(https://static.xx.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)}.fb_dialog_loader{background-color:#f6f7f9;border:1px solid #606060;font-size:24px;padding:20px}.fb_dialog_top_left,.fb_dialog_top_right,.fb_dialog_bottom_left,.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}.fb_dialog_top_left{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}.fb_dialog_top_right{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}.fb_dialog_bottom_left{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}.fb_dialog_bottom_right{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}.fb_dialog_vert_left,.fb_dialog_vert_right,.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}.fb_dialog_vert_left,.fb_dialog_vert_right{width:10px;height:100%}.fb_dialog_vert_left{margin-left:-10px}.fb_dialog_vert_right{right:0;margin-right:-10px}.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{width:100%;height:10px}.fb_dialog_horiz_top{margin-top:-10px}.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}.fb_dialog_iframe{line-height:0}.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #365899;color:#fff;font-size:14px;font-weight:bold;margin:0}.fb_dialog_content .dialog_title>span{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/yd/r/Cou7n-nqK52.gif) no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}body.fb_hidden{-webkit-transform:none;height:100%;margin:0;overflow:visible;position:absolute;top:-10000px;left:0;width:100%}.fb_dialog.fb_dialog_mobile.loading{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/ya/r/3rhSv5V8j3o.gif) white no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}.fb_dialog.fb_dialog_mobile.loading.centered{width:auto;height:auto;min-height:initial;min-width:initial;background:none}.fb_dialog.fb_dialog_mobile.loading.centered #fb_dialog_loader_spinner{width:100%}.fb_dialog.fb_dialog_mobile.loading.centered .fb_dialog_content{background:none}.loading.centered #fb_dialog_loader_close{color:#fff;display:block;padding-top:20px;clear:both;font-size:18px}#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;bottom:0;left:0;right:0;top:0;width:100%;min-height:100%;z-index:10000}#fb-root #fb_dialog_ipad_overlay.hidden{display:none}.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100%}.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px}.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px}.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#4966A6), color-stop(.5, #355492), to(#2A4887));border:1px solid #29487d;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset, rgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}.fb_dialog_content .dialog_content{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #555;border-bottom:0;border-top:0;height:150px}.fb_dialog_content .dialog_footer{background:#f6f7f9;border:1px solid #555;border-top-color:#ccc;height:40px}#fb_dialog_loader_close{float:left}.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}#fb_dialog_loader_spinner{animation:rotateSpinner 1.2s linear infinite;background-color:transparent;background-image:url(https://static.xx.fbcdn.net/rsrc.php/v2/yD/r/t-wz8gw1xG1.png);background-repeat:no-repeat;background-position:50% 50%;height:24px;width:24px}@keyframes rotateSpinner{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.fb_iframe_widget{display:inline-block;position:relative}.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}.fb_iframe_widget iframe{position:absolute}.fb_iframe_widget_fluid_desktop,.fb_iframe_widget_fluid_desktop span,.fb_iframe_widget_fluid_desktop iframe{max-width:100%}.fb_iframe_widget_fluid_desktop iframe{min-width:220px;position:relative}.fb_iframe_widget_lift{z-index:1}.fb_hide_iframes iframe{position:relative;left:-10000px}.fb_iframe_widget_loader{position:relative;display:inline-block}.fb_iframe_widget_fluid{display:inline}.fb_iframe_widget_fluid span{width:100%}.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}.fb_iframe_widget_loader .FB_Loader{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50%;z-index:4}</style></head>
+  <body>
+
+<div id="container">
+	
+	<header class="nav-down">
+		<div class="container-fluid hidden-xs hidden-sm">
+			<div class="row">
+				<div class="col-sm-3 col-md-3">
+					<a class="logo-cake" href="http://cakephp.org/">
+						<img src="./Tutoriel d’un Blog - Authentification et Autorisations_files/logo-cake.png" alt="CakePHP">
+					</a>
+				</div>
+
+				<div class="col-sm-9 col-md-9">
+					<nav class="navbar-right">
+						<ul class="menu">
+							<li class="first" style="">
+								<a href="http://book.cakephp.org/3.0/fr/tutorials-and-examples/blog-auth-example/auth.html#"><i class="fa fa-menu fa-chevron-down"></i>Documentation</a>
+								<ul class="submenu">
+									
+<li><a href="http://book.cakephp.org/"><i class="fa fa-menu fa-chevron-right"></i>CookBook</a></li>
+<li><a href="http://api.cakephp.org/"><i class="fa fa-menu fa-chevron-right"></i>API</a></li>
+
+<li><a href="http://cakephp.org/documentation/videos"><i class="fa fa-menu fa-chevron-right"></i>Videos</a></li>
+<li><a href="http://cakephp.org/privacy"><i class="fa fa-menu fa-chevron-right"></i>Privacy Policy</a></li>
+<li><a href="http://cakephp.org/pages/trademark"><i class="fa fa-menu fa-chevron-right"></i>Logos &amp; Trademarks</a></li>
+								</ul>
+							</li>
+
+							<li style=""><a href="http://cakephp.org/business-solutions">Business Solutions</a></li>
+							<li style=""><a href="http://cakephp.org/showcase">Showcase</a></li>
+
+							<li style="">
+								<a href="http://book.cakephp.org/3.0/fr/tutorials-and-examples/blog-auth-example/auth.html#"><i class="fa fa-menu fa-chevron-down"></i>Community</a>
+								<div class="megamenu full">
+									<div class="row">
+										<div class="col-6 pl30">
+											<ul class="megamenu-list">
+												
+<li class="menu-title"><i class="fa fa-menu-title fa-users"></i>Community</li>
+
+<li><a href="http://cakephp.org/team"><i class="fa fa-menu fa-chevron-right"></i>Team</a></li>
+<li><a href="https://github.com/cakephp/cakephp/issues"><i class="fa fa-menu fa-chevron-right"></i>Issues (Github)</a></li>
+<li><a href="http://www.youtube.com/user/CakePHP"><i class="fa fa-menu fa-chevron-right"></i>YouTube Channel</a></li>
+<li><a href="http://cakephp.org/get-involved"><i class="fa fa-menu fa-chevron-right"></i>Get Involved</a></li>
+
+<li><a href="http://bakery.cakephp.org/"><i class="fa fa-menu fa-chevron-right"></i>Bakery</a></li>
+<li><a href="http://cakephp.org/newsletter/signup"><i class="fa fa-menu fa-chevron-right"></i>Newsletter</a></li>
+<li><a href="http://certification.cakephp.org/"><i class="fa fa-menu fa-chevron-right"></i>Certification</a></li>
+<li><a href="http://my.cakephp.org/"><i class="fa fa-menu fa-chevron-right"></i>My CakePHP</a></li>
+<li><a href="http://cakefest.org/"><i class="fa fa-menu fa-chevron-right"></i>CakeFest</a></li>
+<li><a href="http://www.facebook.com/groups/cake.community"><i class="fa fa-menu fa-chevron-right"></i>Facebook</a></li>
+<li><a href="http://twitter.com/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Twitter</a></li>
+											</ul>
+										</div>
+										<div class="col-6 pl30">
+											<ul class="megamenu-list">
+												
+<li class="menu-title"><i class="fa fa-menu-title fa-comments-o"></i>Help &amp; Support</li>
+
+<li><a href="http://discourse.cakephp.org/"><i class="fa fa-menu fa-chevron-right"></i>Forum</a></li>
+<li><a href="http://stackoverflow.com/tags/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Stack Overflow</a></li>
+<li><a href="http://webchat.freenode.net/?channels=cakephp"><i class="fa fa-menu fa-chevron-right"></i>IRC</a></li>
+<li><a href="http://cakesf.herokuapp.com/"><i class="fa fa-menu fa-chevron-right"></i>Slack</a></li>
+<li><a href="http://cakedc.com/"><i class="fa fa-menu fa-chevron-right"></i>Paid Support</a></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</div>
+
+		
+		<div class="container-fluid hidden-md hidden-lg">
+			<div class="row">
+				<div class="col-sm-6 col-xs-6">
+					<a class="logo-cake" href="http://cakephp.org/">
+						<img src="./Tutoriel d’un Blog - Authentification et Autorisations_files/logo-cake.png" alt="CakePHP">
+					</a>
+				</div>
+
+				<div class="col-sm-6 col-xs-6">
+					<div class="navbar-right">
+						<button id="btn-menu" class="btn-menu" data-toggle="modal" data-target="#modal">
+							<i class="fa fa-bars toggle-modal"></i>
+						</button>
+					</div>
+					<div id="wrap">
+						<form class="search" action="http://book.cakephp.org/3.0/fr/search.html" method="get">
+							<span class="twitter-typeahead" style="position: relative; display: inline-block;"><input name="q" type="search" placeholder="What are you looking for?" class="tt-input" autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top;"><pre aria-hidden="true" style="position: absolute; visibility: hidden; white-space: pre; font-family: Raleway, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; word-spacing: 0px; letter-spacing: 0px; text-indent: 0px; text-rendering: auto; text-transform: none;"></pre><div class="tt-menu" style="position: absolute; top: 100%; left: 0px; z-index: 100; display: none;"><div class="tt-dataset tt-dataset-es"></div></div></span>
+							<input id="search_submit" value="Recherche" type="submit">
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		
+		<section id="nav-cook" class="hidden-xs hidden-sm">
+			<div class="container-fluid ">
+				<div class="row ">
+					<div class="col-md-12 back-book">
+						<div class="col-md-4 col-md-offset-1 text-center t-cook-nav p0 hidden-sm hidden-xs">
+							<h2>
+								<a href="http://book.cakephp.org/3.0/fr/contents.html">
+									<span class="glyph_range icon-submenu icon-submenu-cook">B</span>
+									CakePHP 3.2 Red Velvet <strong>Cookbook</strong>
+								</a>
+							</h2>
+						</div>
+
+						<div class="col-md-4 hidden-sm">
+							<form class="search" action="http://book.cakephp.org/3.0/fr/search.html" method="get">
+								<input type="hidden" name="check_keywords" value="yes">
+								<input type="hidden" name="area" value="default">
+
+								<div class="col-md-10 p0">
+									<span class="twitter-typeahead" style="position: relative; display: inline-block;"><input class="form-control form-cook tt-input" autocomplete="off" type="search" name="q" size="18" placeholder="Cookbook Search" spellcheck="false" dir="auto" style="position: relative; vertical-align: top;"><pre aria-hidden="true" style="position: absolute; visibility: hidden; white-space: pre; font-family: Raleway, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 500; word-spacing: 0px; letter-spacing: 0px; text-indent: 0px; text-rendering: auto; text-transform: none;"></pre><div class="tt-menu" style="position: absolute; top: 100%; left: 0px; z-index: 100; display: none;"><div class="tt-dataset tt-dataset-es"></div></div></span>
+								</div>
+								<div class="col-md-2 p0 search-cook">
+									<button type="submit">
+										<span class="glyph_range icon-submenu icon-submenu-cook">A</span>
+									</button>
+								</div>
+							</form>
+						</div>
+
+						
+						<div class="col-md-3">
+							<div class="col-md-6 p0">
+								<div class="col-md-7 t-language p0">
+									<h6>Language:</h6>
+								</div>
+								<div class="col-md-5 p0">
+									<ul class="nav navbar-nav">
+										<li class="dropdown">
+											<a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" href="http://book.cakephp.org/3.0/fr/tutorials-and-examples/blog-auth-example/auth.html#">
+														fr
+														<i class="fa fa-menu-en fa-chevron-down"></i>
+													</a>
+											<ul class="dropdown-menu">
+											
+												<li><a href="http://book.cakephp.org/3.0/en/tutorials-and-examples/blog-auth-example/auth.html">en</a></li>
+											
+												<li><a href="http://book.cakephp.org/3.0/pt/tutorials-and-examples/blog-auth-example/auth.html">pt</a></li>
+											
+												<li><a href="http://book.cakephp.org/3.0/es/tutorials-and-examples/blog-auth-example/auth.html">es</a></li>
+											
+												<li><a href="http://book.cakephp.org/3.0/ja/tutorials-and-examples/blog-auth-example/auth.html">ja</a></li>
+											
+												<li></li>
+											
+												<li><a href="http://book.cakephp.org/3.0/zh/tutorials-and-examples/blog-auth-example/auth.html">zh</a></li>
+											
+												<li><a href="http://book.cakephp.org/3.0/tr/tutorials-and-examples/blog-auth-example/auth.html">tr</a></li>
+											
+											</ul>
+										</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="col-md-6 p0">
+								<div class="col-md-7 t-language p0">
+									<h6>Version:</h6>
+								</div>
+								<div class="col-md-5 p0">
+									<ul class="nav navbar-nav">
+										<li class="dropdown">
+											<a href="http://book.cakephp.org/3.0/fr/tutorials-and-examples/blog-auth-example/auth.html#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">3.x <i class="fa fa-menu-en fa-chevron-down"></i></a>
+											<ul class="dropdown-menu">
+												<li><a href="http://book.cakephp.org/3.0/fr">3.x Book</a></li>
+												<li><a href="http://book.cakephp.org/2.0/fr">2.x Book</a></li>
+												<li><a href="http://book.cakephp.org/1.3/fr/">1.3 Book</a></li>
+												<li><a href="http://book.cakephp.org/1.2/fr/">1.2 Book</a></li>
+												<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+											</ul>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</section>
+	</header>
+
+	
+	<section class="nav-btn visible-sm visible-xs">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6 col-xs-6 text-center">
+					<button id="btn-nav" class="btn btn-b btn-nav" data-toggle="modal" data-target="#modal"><strong>Nav</strong></button>
+				</div>
+
+				<div class="col-sm-6 col-xs-6 text-center">
+					<button id="btn-toc" class="btn btn-b btn-nav" data-toggle="modal" data-target="#modal"><strong>Table of Contents</strong></button>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	
+	<div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal-header">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+					<h4 class="modal-title-cookbook" id="modal-header"></h4>
+				</div>
+				<div class="modal-body"></div>
+			</div>
+		</div>
+	</div>
+
+<div class="container page-container"><div id="improve-slideout">
+		<i class="fa fa-pencil icon-improve"></i>
+		<a href="https://github.com/cakephp/docs/edit/3.0/fr/tutorials-and-examples/blog-auth-example/auth.rst" target="_blank">
+			<div id="improve-slideout-inner"><h6>Improve This Doc <i class="fa fa-github git-improve"></i></h6></div>
+		</a>
+	</div><a id="back-to-contents" href="http://book.cakephp.org/3.0/fr/tutorials-and-examples/blog-auth-example/auth.html#page-contents"><i class="fa fa-arrow-circle-up icon-improve" title="Back to Contents"></i></a>
+
+	
+	<div class="row">
+		<div class="col-sm-12 col-md-9 col-md-push-3 space-left push-off"><div class="page-contents col-sm-5">
+				<h3>Page Contents</h3>
+				<ul>
+<li><a class="reference internal" href="http://book.cakephp.org/3.0/fr/tutorials-and-examples/blog-auth-example/auth.html#">Tutoriel d’un Blog - Authentification et Autorisations</a><ul>
+<li><a class="reference internal" href="http://book.cakephp.org/3.0/fr/tutorials-and-examples/blog-auth-example/auth.html#creer-le-code-lie-a-tous-les-utilisateurs">Créer le code lié à tous les utilisateurs</a></li>
+<li><a class="reference internal" href="http://book.cakephp.org/3.0/fr/tutorials-and-examples/blog-auth-example/auth.html#authentification-connexion-et-deconnexion">Authentification (Connexion et Déconnexion)</a></li>
+<li><a class="reference internal" href="http://book.cakephp.org/3.0/fr/tutorials-and-examples/blog-auth-example/auth.html#autorisation-qui-est-autorise-a-acceder-a-quoi">Autorisation (Qui est autorisé à accéder à quoi)</a><ul>
+<li><a class="reference internal" href="http://book.cakephp.org/3.0/fr/tutorials-and-examples/blog-auth-example/auth.html#lectures-suivantes-suggerees">Lectures suivantes suggérées</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+			</div><div class="document-body">
+			
+  <div class="section" id="tutoriel-d-un-blog-authentification-et-autorisations">
+<h1>Tutoriel d’un Blog - Authentification et Autorisations<a class="headerlink" href="http://book.cakephp.org/3.0/fr/tutorials-and-examples/blog-auth-example/auth.html#tutoriel-d-un-blog-authentification-et-autorisations" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Suivez notre exemple <a class="reference internal" href="http://book.cakephp.org/3.0/fr/tutorials-and-examples/blog/blog.html"><span class="doc">Tutoriel d’un Blog</span></a>, imaginons que
+nous souhaitions sécuriser l’accès de certaines URLs, basées sur la connexion de
+l’utilisateur. Nous avons aussi un autre impératif : permettre à notre blog
+d’avoir plusieurs auteurs, afin que chacun d’eux puisse créer ses propres
+articles, les modifier et les supprimer mais ne laisser la possibilité de ne
+modifier que ses propres messages.</p>
+<div class="section" id="creer-le-code-lie-a-tous-les-utilisateurs">
+<h2>Créer le code lié à tous les utilisateurs<a class="headerlink" href="http://book.cakephp.org/3.0/fr/tutorials-and-examples/blog-auth-example/auth.html#creer-le-code-lie-a-tous-les-utilisateurs" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Premièrement, créons une nouvelle table dans notre base de données blog pour
+enregistrer les données de notre utilisateur:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">CREATE</span> <span class="nx">TABLE</span> <span class="nx">users</span> <span class="p">(</span>
+    <span class="nx">id</span> <span class="nx">INT</span> <span class="nx">UNSIGNED</span> <span class="nx">AUTO_INCREMENT</span> <span class="nx">PRIMARY</span> <span class="nx">KEY</span><span class="p">,</span>
+    <span class="nx">username</span> <span class="nx">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span>
+    <span class="nx">password</span> <span class="nx">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+    <span class="nx">role</span> <span class="nx">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span>
+    <span class="nx">created</span> <span class="nx">DATETIME</span> <span class="k">DEFAULT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="nx">modified</span> <span class="nx">DATETIME</span> <span class="k">DEFAULT</span> <span class="k">NULL</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>Nous avons respecté les conventions de CakePHP pour le nommage des tables, mais
+nous profitons d’une autre convention: en utilisant les colonnes du nom
+d’utilisateur et du mot de passe dans une table users, CakePHP sera capable de
+configurer automatiquement la plupart des choses pour nous quand nous
+réaliserons la connexion de l’utilisateur.</p>
+<p>La prochaine étape est de créer notre classe <code class="docutils literal"><span class="pre">UsersTable</span></code>, qui a la
+responsabilité de trouver, sauvegarder et valider toute donnée d’utilisateur:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// src/Model/Table/UsersTable.php</span>
+<span class="k">namespace</span> <span class="nx">App\Model\Table</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Cake\ORM\Table</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Cake\Validation\Validator</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">UsersTable</span> <span class="k">extends</span> <span class="nx">Table</span>
+<span class="p">{</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">validationDefault</span><span class="p">(</span><span class="nx">Validator</span> <span class="nv">$validator</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$validator</span>
+            <span class="o">-&gt;</span><span class="na">notEmpty</span><span class="p">(</span><span class="s1">'username'</span><span class="p">,</span> <span class="s2">"Un nom d'utilisateur est nécessaire"</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">notEmpty</span><span class="p">(</span><span class="s1">'password'</span><span class="p">,</span> <span class="s1">'Un mot de passe est nécessaire'</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">notEmpty</span><span class="p">(</span><span class="s1">'role'</span><span class="p">,</span> <span class="s1">'Un role est nécessaire'</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">'role'</span><span class="p">,</span> <span class="s1">'inList'</span><span class="p">,</span> <span class="p">[</span>
+                <span class="s1">'rule'</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">'inList'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'admin'</span><span class="p">,</span> <span class="s1">'author'</span><span class="p">]],</span>
+                <span class="s1">'message'</span> <span class="o">=&gt;</span> <span class="s1">'Merci de rentrer un role valide'</span>
+            <span class="p">]);</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Créons aussi notre UsersController, le contenu suivant correspond à la
+classe obtenue grâce à l’utilitaire de génération de code fournis par CakePHP:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// src/Controller/UsersController.php</span>
+
+<span class="k">namespace</span> <span class="nx">App\Controller</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">App\Controller\AppController</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Cake\Event\Event</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">UsersController</span> <span class="k">extends</span> <span class="nx">AppController</span>
+<span class="p">{</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">beforeFilter</span><span class="p">(</span><span class="nx">Event</span> <span class="nv">$event</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">parent</span><span class="o">::</span><span class="na">beforeFilter</span><span class="p">(</span><span class="nv">$event</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Auth</span><span class="o">-&gt;</span><span class="na">allow</span><span class="p">(</span><span class="s1">'add'</span><span class="p">);</span>
+    <span class="p">}</span>
+
+     <span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">()</span>
+     <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">'users'</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Users</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">'all'</span><span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">view</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$user</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Users</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="nv">$id</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="nb">compact</span><span class="p">(</span><span class="s1">'user'</span><span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">add</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$user</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Users</span><span class="o">-&gt;</span><span class="na">newEntity</span><span class="p">();</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">is</span><span class="p">(</span><span class="s1">'post'</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nv">$user</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Users</span><span class="o">-&gt;</span><span class="na">patchEntity</span><span class="p">(</span><span class="nv">$user</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">);</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Users</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">(</span><span class="nv">$user</span><span class="p">))</span> <span class="p">{</span>
+                <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Flash</span><span class="o">-&gt;</span><span class="na">success</span><span class="p">(</span><span class="nx">__</span><span class="p">(</span><span class="s2">"L'utilisateur a été sauvegardé."</span><span class="p">));</span>
+                <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">([</span><span class="s1">'action'</span> <span class="o">=&gt;</span> <span class="s1">'index'</span><span class="p">]);</span>
+            <span class="p">}</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Flash</span><span class="o">-&gt;</span><span class="na">error</span><span class="p">(</span><span class="nx">__</span><span class="p">(</span><span class="s2">"Impossible d'ajouter l'utilisateur."</span><span class="p">));</span>
+        <span class="p">}</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">'user'</span><span class="p">,</span> <span class="nv">$user</span><span class="p">);</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>De la même façon, nous avons créé les vues pour nos articles de blog en
+utilisant l’outil de génération de code. Dans
+le cadre de ce tutoriel, nous allons juste montrer le add.ctp:</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="x">&lt;!-- src/Template/Users/add.ctp --&gt;</span>
+
+<span class="x">&lt;div class="users form"&gt;</span>
+<span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="nv">$user</span><span class="p">)</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">    &lt;fieldset&gt;</span>
+<span class="x">        &lt;legend&gt;</span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nx">__</span><span class="p">(</span><span class="s1">'Ajouter un utilisateur'</span><span class="p">)</span> <span class="cp">?&gt;</span><span class="x">&lt;/legend&gt;</span>
+<span class="x">        </span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">'username'</span><span class="p">)</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">        </span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">'password'</span><span class="p">)</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">        </span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">'role'</span><span class="p">,</span> <span class="p">[</span>
+            <span class="s1">'options'</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">'admin'</span> <span class="o">=&gt;</span> <span class="s1">'Admin'</span><span class="p">,</span> <span class="s1">'author'</span> <span class="o">=&gt;</span> <span class="s1">'Author'</span><span class="p">]</span>
+        <span class="p">])</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">    &lt;/fieldset&gt;</span>
+<span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">button</span><span class="p">(</span><span class="nx">__</span><span class="p">(</span><span class="s1">'Ajouter'</span><span class="p">));</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">end</span><span class="p">()</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">&lt;/div&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="authentification-connexion-et-deconnexion">
+<h2>Authentification (Connexion et Déconnexion)<a class="headerlink" href="http://book.cakephp.org/3.0/fr/tutorials-and-examples/blog-auth-example/auth.html#authentification-connexion-et-deconnexion" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Nous sommes maintenant prêt à ajouter notre couche d’authentification. Dans
+CakePHP, c’est géré par <code class="xref php php-class docutils literal"><span class="pre">Cake\Controller\Component\AuthComponent</span></code>,
+une classe responsable d’exiger la connexion pour certaines actions, de gérer
+la connexion et la déconnexion, et aussi d’autoriser aux utilisateurs connectés
+les actions que l’on souhaite leur voir autorisées.</p>
+<p>Pour ajouter ce component à votre application, ouvrez votre fichier
+<strong>src/Controller/AppController.php</strong> et ajoutez les lignes suivantes:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// src/Controller/AppController.php</span>
+
+<span class="k">namespace</span> <span class="nx">App\Controller</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Cake\Controller\Controller</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Cake\Event\Event</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">AppController</span> <span class="k">extends</span> <span class="nx">Controller</span>
+<span class="p">{</span>
+    <span class="c1">//...</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">initialize</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">loadComponent</span><span class="p">(</span><span class="s1">'Flash'</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">loadComponent</span><span class="p">(</span><span class="s1">'Auth'</span><span class="p">,</span> <span class="p">[</span>
+            <span class="s1">'loginRedirect'</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                <span class="s1">'controller'</span> <span class="o">=&gt;</span> <span class="s1">'Articles'</span><span class="p">,</span>
+                <span class="s1">'action'</span> <span class="o">=&gt;</span> <span class="s1">'index'</span>
+            <span class="p">],</span>
+            <span class="s1">'logoutRedirect'</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                <span class="s1">'controller'</span> <span class="o">=&gt;</span> <span class="s1">'Pages'</span><span class="p">,</span>
+                <span class="s1">'action'</span> <span class="o">=&gt;</span> <span class="s1">'display'</span><span class="p">,</span>
+                <span class="s1">'home'</span>
+            <span class="p">]</span>
+        <span class="p">]);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">beforeFilter</span><span class="p">(</span><span class="nx">Event</span> <span class="nv">$event</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Auth</span><span class="o">-&gt;</span><span class="na">allow</span><span class="p">([</span><span class="s1">'index'</span><span class="p">,</span> <span class="s1">'view'</span><span class="p">,</span> <span class="s1">'display'</span><span class="p">]);</span>
+    <span class="p">}</span>
+    <span class="c1">//...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Il n’y a pas grand chose à configurer, puisque nous avons utilisé les
+conventions pour la table users. Nous avons juste configuré les
+URLs qui seront chargées après que la connexion et la déconnexion des actions
+sont effectuées, dans notre cas, respectivement à <code class="docutils literal"><span class="pre">/articles/</span></code> et <code class="docutils literal"><span class="pre">/</span></code>.</p>
+<p>Ce que nous avons fait dans la fonction <code class="docutils literal"><span class="pre">beforeFilter()</span></code> a été de dire au
+AuthComponent de ne pas exiger un login pour toutes les actions <code class="docutils literal"><span class="pre">index()</span></code>
+et <code class="docutils literal"><span class="pre">view()</span></code>, dans chaque controller. Nous voulons que nos visiteurs soient
+capables de lire et lister les entrées sans s’inscrire sur le site.</p>
+<p>Maintenant, nous avons besoin d’être capable d’inscrire des nouveaux
+utilisateurs, de sauvegarder leur nom d’utilisateur et mot de passe, et plus
+important de hasher leur mot de passe afin qu’il ne soit pas stocké en
+clair dans notre base de données. Disons à AuthComponent de laisser
+certains utilisateurs non-authentifiés accéder à la fonction add des
+utilisateurs et de réaliser l’action connexion et déconnexion:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// src/Controller/UsersController.php</span>
+<span class="k">namespace</span> <span class="nx">App\Controller</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">App\Controller\AppController</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Cake\Event\Event</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">UsersController</span> <span class="k">extends</span> <span class="nx">AppController</span>
+<span class="p">{</span>
+    <span class="c1">// Other methods..</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">beforeFilter</span><span class="p">(</span><span class="nx">Event</span> <span class="nv">$event</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">parent</span><span class="o">::</span><span class="na">beforeFilter</span><span class="p">(</span><span class="nv">$event</span><span class="p">);</span>
+        <span class="c1">// Allow users to register and logout.</span>
+        <span class="c1">// You should not add the "login" action to allow list. Doing so would</span>
+        <span class="c1">// cause problems with normal functioning of AuthComponent.</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Auth</span><span class="o">-&gt;</span><span class="na">allow</span><span class="p">([</span><span class="s1">'add'</span><span class="p">,</span> <span class="s1">'logout'</span><span class="p">]);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">login</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">is</span><span class="p">(</span><span class="s1">'post'</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nv">$user</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Auth</span><span class="o">-&gt;</span><span class="na">identify</span><span class="p">();</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nv">$user</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Auth</span><span class="o">-&gt;</span><span class="na">setUser</span><span class="p">(</span><span class="nv">$user</span><span class="p">);</span>
+                <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Auth</span><span class="o">-&gt;</span><span class="na">redirectUrl</span><span class="p">());</span>
+            <span class="p">}</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Flash</span><span class="o">-&gt;</span><span class="na">error</span><span class="p">(</span><span class="nx">__</span><span class="p">(</span><span class="s1">'Invalid username or password, try again'</span><span class="p">));</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">logout</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Auth</span><span class="o">-&gt;</span><span class="na">logout</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Le hash du mot de passe n’est pas encore fait, nous avons besoin d’une classe
+Entity pour notre User afin de gérer sa propre logique spécifique. Créons
+fichier entity dans <strong>src/Model/Entity/User.php</strong> et ajoutons ce qui suit:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// src/Model/Entity/User.php</span>
+<span class="k">namespace</span> <span class="nx">App\Model\Entity</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Cake\Auth\DefaultPasswordHasher</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Cake\ORM\Entity</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">Entity</span>
+<span class="p">{</span>
+
+    <span class="c1">// Rend les champs assignables en masse sauf pour le champ clé primaire "id".</span>
+    <span class="k">protected</span> <span class="nv">$_accessible</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s1">'*'</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+        <span class="s1">'id'</span> <span class="o">=&gt;</span> <span class="k">false</span>
+    <span class="p">];</span>
+
+    <span class="c1">// ...</span>
+
+    <span class="k">protected</span> <span class="k">function</span> <span class="nf">_setPassword</span><span class="p">(</span><span class="nv">$password</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="p">(</span><span class="k">new</span> <span class="nx">DefaultPasswordHasher</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">hash</span><span class="p">(</span><span class="nv">$password</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Ainsi, maintenant à chaque fois qu’un utilisateur est sauvegardé, le mot de
+passe est hashé en utilisant la classe <code class="docutils literal"><span class="pre">DefaultPasswordHasher</span></code>. Il nous
+manque juste un fichier template de vue pour la fonction de connexion. Ouvrez
+votre fichier <strong>src/Template/Users/login.ctp</strong> et ajoutez les lignes suivantes:</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="x">&lt;!-- src/Template/Users/login.ctp --&gt;</span>
+
+<span class="x">&lt;div class="users form"&gt;</span>
+<span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Flash</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">'auth'</span><span class="p">)</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">()</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">    &lt;fieldset&gt;</span>
+<span class="x">        &lt;legend&gt;</span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nx">__</span><span class="p">(</span><span class="s2">"Merci de rentrer vos nom d'utilisateur et mot de passe"</span><span class="p">)</span> <span class="cp">?&gt;</span><span class="x">&lt;/legend&gt;</span>
+<span class="x">        </span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">'username'</span><span class="p">)</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">        </span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">'password'</span><span class="p">)</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">    &lt;/fieldset&gt;</span>
+<span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">button</span><span class="p">(</span><span class="nx">__</span><span class="p">(</span><span class="s1">'Se Connecter'</span><span class="p">));</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">end</span><span class="p">()</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">&lt;/div&gt;</span>
+</pre></div>
+</div>
+<p>Vous pouvez maintenant inscrire un nouvel utilisateur en rentrant l’URL
+<code class="docutils literal"><span class="pre">/users/add</span></code> et vous connecter avec ce profil nouvellement créé en allant
+sur l’URL <code class="docutils literal"><span class="pre">/users/login</span></code>. Essayez aussi d’aller sur n’importe quel URL
+qui n’a pas été explicitement autorisée telle que <code class="docutils literal"><span class="pre">/articles/add</span></code>, vous verrez
+que l’application vous redirige automatiquement vers la page de connexion.</p>
+<p>Et c’est tout! Cela semble trop simple pour être vrai. Retournons en arrière un
+peu pour expliquer ce qui s’est passé. La fonction <code class="docutils literal"><span class="pre">beforeFilter()</span></code> dit au
+component AuthComponent de ne pas exiger de connexion pour l’action <code class="docutils literal"><span class="pre">add()</span></code>
+en plus des actions <code class="docutils literal"><span class="pre">index()</span></code> et <code class="docutils literal"><span class="pre">view()</span></code> qui étaient déjà autorisées dans
+la fonction <code class="docutils literal"><span class="pre">beforeFilter()</span></code> de l’AppController.</p>
+<p>L’action <code class="docutils literal"><span class="pre">login()</span></code> appelle la fonction <code class="docutils literal"><span class="pre">$this-&gt;Auth-&gt;identify()</span></code> dans
+AuthComponent, et cela fonctionne sans autre config car nous suivons les
+conventions comme mentionnées plus tôt. C’est-à-dire, avoir un model
+User avec les colonnes username et password, et
+utiliser un formulaire posté à un controller avec les données d’utilisateur.
+Cette fonction retourne si la connexion a réussi ou non, et en cas de succès,
+alors nous redirigeons l’utilisateur vers l’URL de redirection configurée que
+nous utilisions quand nous avons ajouté AuthComponent à notre application.</p>
+<p>La déconnexion fonctionne juste en allant à l’URL <code class="docutils literal"><span class="pre">/users/logout</span></code> et
+redirigera l’utilisateur vers l’Url de Déconnexion configurée décrite
+précédemment. Cette URL est le résultat de la fonction
+<code class="docutils literal"><span class="pre">AuthComponent::logout()</span></code> en cas de succès.</p>
+</div>
+<div class="section" id="autorisation-qui-est-autorise-a-acceder-a-quoi">
+<h2>Autorisation (Qui est autorisé à accéder à quoi)<a class="headerlink" href="http://book.cakephp.org/3.0/fr/tutorials-and-examples/blog-auth-example/auth.html#autorisation-qui-est-autorise-a-acceder-a-quoi" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Comme mentionné avant, nous convertissons ce blog en un outil multi-utilisateur
+à autorisation, et pour ce faire, nous avons besoin de modifier un peu la table
+articles pour ajouter la référence à la table Users:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">ALTER</span> <span class="nx">TABLE</span> <span class="nx">articles</span> <span class="nx">ADD</span> <span class="nx">COLUMN</span> <span class="nx">user_id</span> <span class="nx">INT</span><span class="p">(</span><span class="mi">11</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Aussi, un petit changement dans ArticlesController est nécessaire pour stocker
+l’utilisateur connecté courant en référence pour l’article créé:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// src/Controller/ArticlesController.php</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">add</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="nv">$article</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Articles</span><span class="o">-&gt;</span><span class="na">newEntity</span><span class="p">();</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">is</span><span class="p">(</span><span class="s1">'post'</span><span class="p">))</span> <span class="p">{</span>
+        <span class="nv">$article</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Articles</span><span class="o">-&gt;</span><span class="na">patchEntity</span><span class="p">(</span><span class="nv">$article</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">);</span>
+        <span class="c1">// Ajout de cette ligne</span>
+        <span class="nv">$article</span><span class="o">-&gt;</span><span class="na">user_id</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Auth</span><span class="o">-&gt;</span><span class="na">user</span><span class="p">(</span><span class="s1">'id'</span><span class="p">);</span>
+        <span class="c1">// Vous pourriez aussi faire ce qui suit</span>
+        <span class="c1">//$newData = ['user_id' =&gt; $this-&gt;Auth-&gt;user('id')];</span>
+        <span class="c1">//$article = $this-&gt;Articles-&gt;patchEntity($article, $newData);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Articles</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">(</span><span class="nv">$article</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Flash</span><span class="o">-&gt;</span><span class="na">success</span><span class="p">(</span><span class="nx">__</span><span class="p">(</span><span class="s1">'Votre article a été sauvegardé.'</span><span class="p">));</span>
+            <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">([</span><span class="s1">'action'</span> <span class="o">=&gt;</span> <span class="s1">'index'</span><span class="p">]);</span>
+        <span class="p">}</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Flash</span><span class="o">-&gt;</span><span class="na">error</span><span class="p">(</span><span class="nx">__</span><span class="p">(</span><span class="s2">"Impossible d'ajouter votre article."</span><span class="p">));</span>
+    <span class="p">}</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">'article'</span><span class="p">,</span> <span class="nv">$article</span><span class="p">);</span>
+
+    <span class="c1">// Ajoute seulement la liste des catégories pour pouvoir choisir</span>
+    <span class="c1">// une catégorie pour un article</span>
+    <span class="nv">$categories</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Articles</span><span class="o">-&gt;</span><span class="na">Categories</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">'treeList'</span><span class="p">);</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="nb">compact</span><span class="p">(</span><span class="s1">'categories'</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>La fonction <code class="docutils literal"><span class="pre">user()</span></code> fournie par le component retourne toute colonne à partir
+de l’utilisateur connecté courant. Nous avons utilisé cette méthode pour
+ajouter les données dans les infos requêtées qui sont sauvegardées.</p>
+<p>Sécurisons maintenant notre app pour empêcher certains auteurs de modifier ou
+supprimer les articles des autres. Des règles basiques pour notre app sont que
+les utilisateurs admin peuvent accéder à tout URL, alors que les utilisateurs
+normaux (le role auteur) peuvent seulement accéder aux actions permises.
+Ouvrez encore la classe AppController et ajoutez un peu plus d’options à la
+config de Auth:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// src/Controller/AppController.php</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">initialize</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">loadComponent</span><span class="p">(</span><span class="s1">'Flash'</span><span class="p">);</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">loadComponent</span><span class="p">(</span><span class="s1">'Auth'</span><span class="p">,</span> <span class="p">[</span>
+        <span class="s1">'authorize'</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">'Controller'</span><span class="p">],</span> <span class="c1">// Ajout de cette ligne</span>
+        <span class="s1">'loginRedirect'</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">'controller'</span> <span class="o">=&gt;</span> <span class="s1">'Articles'</span><span class="p">,</span>
+            <span class="s1">'action'</span> <span class="o">=&gt;</span> <span class="s1">'index'</span>
+        <span class="p">],</span>
+        <span class="s1">'logoutRedirect'</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">'controller'</span> <span class="o">=&gt;</span> <span class="s1">'Pages'</span><span class="p">,</span>
+            <span class="s1">'action'</span> <span class="o">=&gt;</span> <span class="s1">'display'</span><span class="p">,</span>
+            <span class="s1">'home'</span>
+        <span class="p">]</span>
+    <span class="p">]);</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">isAuthorized</span><span class="p">(</span><span class="nv">$user</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// Admin peuvent accéder à chaque action</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$user</span><span class="p">[</span><span class="s1">'role'</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="nv">$user</span><span class="p">[</span><span class="s1">'role'</span><span class="p">]</span> <span class="o">===</span> <span class="s1">'admin'</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">true</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Par défaut refuser</span>
+    <span class="k">return</span> <span class="k">false</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Nous venons de créer un mécanisme très simple d’autorisation. Les utilisateurs
+avec le role <code class="docutils literal"><span class="pre">admin</span></code> pourront accéder à toutes les URL du site quand ils
+sont connectés. Tous les autres utilisateurs – ceux avec le role <code class="docutils literal"><span class="pre">author</span></code> –
+auront le même accès que les utilisateurs qui ne sont pas loggés.</p>
+<p>Ce n’est pas exactement ce que nous souhaitons. Nous devons fournir plus de
+règles à notre méthode <code class="docutils literal"><span class="pre">isAuthorized()</span></code>. Cependant au lieu de le faire
+dans AppController, nous déléguons la gestion de ces règles supplémentaires
+à chaque controller individuellement. Les règles que nous allons ajouter à
+ArticlesController devraient permettre aux auteurs de créer des articles mais
+évitent aux auteurs de modifier les articles qui ne leur appartiennent pas.
+Ajoutez le contenu suivant à votre <code class="docutils literal"><span class="pre">ArticlesController.php</span></code>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// src/Controller/ArticlesController.php</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">isAuthorized</span><span class="p">(</span><span class="nv">$user</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// Tous les utilisateurs enregistrés peuvent ajouter des articles</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">action</span> <span class="o">===</span> <span class="s1">'add'</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">true</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Le propriétaire d'un article peut l'éditer et le supprimer</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">in_array</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">action</span><span class="p">,</span> <span class="p">[</span><span class="s1">'edit'</span><span class="p">,</span> <span class="s1">'delete'</span><span class="p">]))</span> <span class="p">{</span>
+        <span class="nv">$articleId</span> <span class="o">=</span> <span class="p">(</span><span class="nx">int</span><span class="p">)</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">params</span><span class="p">[</span><span class="s1">'pass'</span><span class="p">][</span><span class="mi">0</span><span class="p">];</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Articles</span><span class="o">-&gt;</span><span class="na">isOwnedBy</span><span class="p">(</span><span class="nv">$articleId</span><span class="p">,</span> <span class="nv">$user</span><span class="p">[</span><span class="s1">'id'</span><span class="p">]))</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="k">true</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="k">parent</span><span class="o">::</span><span class="na">isAuthorized</span><span class="p">(</span><span class="nv">$user</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Nous surchargeons maintenant l’appel <code class="docutils literal"><span class="pre">isAuthorized()</span></code> de AppController’s et
+vérifions à l’intérieur si la classe parente autorise déjà l’utilisateur.
+Si elle ne le fait pas, alors nous ajoutons juste l’autorisation d’accéder
+à l’action add, et éventuellement autorisons l’accès pour modifier et supprimer.
+Une dernière chose à que nous avons oubliée de faire est de dire si
+l’utilisateur à l’autorisation ou non de modifier l’article, nous appelons
+une fonction <code class="docutils literal"><span class="pre">isOwnedBy()</span></code> dans la table Articles. Intégrons la fonction
+suivante:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// src/Model/Table/ArticlesTable.php</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">isOwnedBy</span><span class="p">(</span><span class="nv">$articleId</span><span class="p">,</span> <span class="nv">$userId</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">exists</span><span class="p">([</span><span class="s1">'id'</span> <span class="o">=&gt;</span> <span class="nv">$articleId</span><span class="p">,</span> <span class="s1">'user_id'</span> <span class="o">=&gt;</span> <span class="nv">$userId</span><span class="p">]);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Ceci conclut notre tutoriel simple sur l’authentification et les autorisations.
+Pour sécuriser le Controller UsersController, vous pouvez suivre la même
+technique que nous faisions pour ArticlesController, vous pouvez aussi être
+plus créatif et coder quelque chose de plus général dans AppController basé sur
+vos propres règles.</p>
+<p>Si vous avez besoin de plus de contrôle, nous vous suggérons de lire le guide
+complet de Auth dans la section
+<a class="reference internal" href="http://book.cakephp.org/3.0/fr/controllers/components/authentication.html"><span class="doc">Authentification</span></a> où vous en trouverez plus sur
+la configuration du component, la création de classes d’autorisation
+personnalisée, et bien plus encore.</p>
+<div class="section" id="lectures-suivantes-suggerees">
+<h3>Lectures suivantes suggérées<a class="headerlink" href="http://book.cakephp.org/3.0/fr/tutorials-and-examples/blog-auth-example/auth.html#lectures-suivantes-suggerees" title="Lien permanent vers ce titre">¶</a></h3>
+<ol class="arabic simple">
+<li><a class="reference internal" href="http://book.cakephp.org/3.0/fr/bake/usage.html"><span class="doc">Génération de Code avec Bake</span></a> Génération basique CRUD de code</li>
+<li><a class="reference internal" href="http://book.cakephp.org/3.0/fr/controllers/components/authentication.html"><span class="doc">Authentification</span></a>: Inscription d’utilisateur et connexion</li>
+</ol>
+</div>
+</div>
+</div>
+
+
+			</div>
+		</div>
+
+		
+		<div class="col-md-3 col-md-pull-9 pull-off hidden-xs hidden-sm" lang="fr">
+			<aside class="sidebar">
+				<div class="mb30 row">
+<div id="sidebar-navigation" class="hidden-xs">
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="http://book.cakephp.org/3.0/fr/intro.html">CakePHP en un Coup d’Oeil</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://book.cakephp.org/3.0/fr/quickstart.html">Guide de Démarrage Rapide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://book.cakephp.org/3.0/fr/appendices/3-x-migration-guide.html">3.x Guide de Migration</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="http://book.cakephp.org/3.0/fr/tutorials-and-examples.html">Tutoriels et exemples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="http://book.cakephp.org/3.0/fr/tutorials-and-examples/bookmarks/intro.html">Tutoriel de Bookmarker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://book.cakephp.org/3.0/fr/tutorials-and-examples/bookmarks/part-two.html">Tutoriel de Bookmarker Part 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://book.cakephp.org/3.0/fr/tutorials-and-examples/blog/blog.html">Tutoriel d’un Blog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://book.cakephp.org/3.0/fr/tutorials-and-examples/blog/part-two.html">Tutoriel d’un Blog - Partie 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://book.cakephp.org/3.0/fr/tutorials-and-examples/blog/part-three.html">Tutoriel d’un Blog - Partie 3</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="http://book.cakephp.org/3.0/fr/tutorials-and-examples/blog-auth-example/auth.html#">Tutoriel d’un Blog - Authentification et Autorisations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="http://book.cakephp.org/3.0/fr/contributing.html">Contribuer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://book.cakephp.org/3.0/fr/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://book.cakephp.org/3.0/fr/development/configuration.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://book.cakephp.org/3.0/fr/development/routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://book.cakephp.org/3.0/fr/controllers/request-response.html">Les Objets Request &amp; Response</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://book.cakephp.org/3.0/fr/controllers/middleware.html">Middleware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://book.cakephp.org/3.0/fr/controllers.html">Controllers (Contrôleurs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://book.cakephp.org/3.0/fr/views.html">Views (Vues)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://book.cakephp.org/3.0/fr/orm.html">Accès Base de Données &amp; ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://book.cakephp.org/3.0/fr/controllers/components/authentication.html">Authentification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://book.cakephp.org/3.0/fr/bake.html">Console Bake</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://book.cakephp.org/3.0/fr/core-libraries/caching.html">La mise en cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://book.cakephp.org/3.0/fr/console-and-shells.html">Shells, Tasks &amp; Outils de Console</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://book.cakephp.org/3.0/fr/development/debugging.html">Debugger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://book.cakephp.org/3.0/fr/deployment.html">Déploiement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://book.cakephp.org/3.0/fr/core-libraries/email.html">Email</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://book.cakephp.org/3.0/fr/development/errors.html">Gestion des Erreurs &amp; Exceptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://book.cakephp.org/3.0/fr/core-libraries/events.html">Événements système</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://book.cakephp.org/3.0/fr/core-libraries/internationalization-and-localization.html">Internationalisation &amp; Localisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://book.cakephp.org/3.0/fr/core-libraries/logging.html">Journalisation (logging)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://book.cakephp.org/3.0/fr/core-libraries/form.html">Formulaires Sans Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://book.cakephp.org/3.0/fr/controllers/components/pagination.html">Pagination</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://book.cakephp.org/3.0/fr/plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://book.cakephp.org/3.0/fr/development/rest.html">REST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://book.cakephp.org/3.0/fr/security.html">Sécurité</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://book.cakephp.org/3.0/fr/development/sessions.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://book.cakephp.org/3.0/fr/development/testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://book.cakephp.org/3.0/fr/core-libraries/validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://book.cakephp.org/3.0/fr/core-libraries/app.html">Classe App</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://book.cakephp.org/3.0/fr/core-libraries/collections.html">Collections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://book.cakephp.org/3.0/fr/core-libraries/file-folder.html">Folder &amp; File</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://book.cakephp.org/3.0/fr/core-libraries/hash.html">Hash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://book.cakephp.org/3.0/fr/core-libraries/httpclient.html">Client Http</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://book.cakephp.org/3.0/fr/core-libraries/inflector.html">Inflector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://book.cakephp.org/3.0/fr/core-libraries/number.html">Number</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://book.cakephp.org/3.0/fr/core-libraries/registry-objects.html">Objets Registry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://book.cakephp.org/3.0/fr/core-libraries/text.html">Text</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://book.cakephp.org/3.0/fr/core-libraries/time.html">Date &amp; Time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://book.cakephp.org/3.0/fr/core-libraries/xml.html">Xml</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://book.cakephp.org/3.0/fr/core-libraries/global-constants-and-functions.html">Globales &amp; Fonctions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://book.cakephp.org/3.0/fr/chronos.html">Chronos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://book.cakephp.org/3.0/fr/debug-kit.html">Debug Kit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://book.cakephp.org/3.0/fr/migrations.html">Migrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://book.cakephp.org/3.0/fr/elasticsearch.html">ElasticSearch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://book.cakephp.org/3.0/fr/upgrade-tool.html">Outil d’Upgrade</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://book.cakephp.org/3.0/fr/appendices.html">Annexes</a></li>
+</ul>
+
+</div>
+
+				</div>
+			</aside>
+			<aside class="sidebar">
+				<div class="mb30 row">
+				</div>
+			</aside>
+		</div>
+	</div>
+</div>
+
+<section id="socials" class="back-3">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-5  social text-center">
+				<div class="col-sm-3 col-xs-3">
+					<div id="fb-root" class=" fb_reset"><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div><iframe name="fb_xdm_frame_http" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" id="fb_xdm_frame_http" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tabindex="-1" src="./Tutoriel d’un Blog - Authentification et Autorisations_files/Lcj5EtQ5qmD.html" style="border: none;"></iframe><iframe name="fb_xdm_frame_https" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" id="fb_xdm_frame_https" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tabindex="-1" src="./Tutoriel d’un Blog - Authentification et Autorisations_files/Lcj5EtQ5qmD(1).html" style="border: none;"></iframe></div></div><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div></div></div></div>
+						<script>(function(d, s, id) {
+						  var js, fjs = d.getElementsByTagName(s)[0];
+						  if (d.getElementById(id)) return;
+						  js = d.createElement(s); js.id = id;
+						  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
+						  fjs.parentNode.insertBefore(js, fjs);
+						}(document, 'script', 'facebook-jssdk'));
+						</script>
+						<div id="fb-root-face" class="fb-like fb_iframe_widget" data-href="https://www.facebook.com/CakePHP/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false" fb-xfbml-state="rendered" fb-iframe-plugin-query="action=like&amp;app_id=&amp;container_width=90&amp;href=https%3A%2F%2Fwww.facebook.com%2FCakePHP%2F&amp;layout=button_count&amp;locale=en_US&amp;sdk=joey&amp;share=false&amp;show_faces=true"><span style="vertical-align: bottom; width: 85px; height: 20px;"><iframe name="f601b964038ca4" width="1000px" height="1000px" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" title="fb:like Facebook Social Plugin" src="./Tutoriel d’un Blog - Authentification et Autorisations_files/like.html" style="border: none; visibility: visible; width: 85px; height: 20px;" class=""></iframe></span></div>
+				</div>
+
+				<div class="col-sm-3 col-xs-3">
+					<iframe src="./Tutoriel d’un Blog - Authentification et Autorisations_files/github-btn.html" frameborder="0" scrolling="0" width="120px" height="30px"></iframe>
+				</div>
+
+				<div class="col-sm-3 col-xs-3">
+					<iframe src="./Tutoriel d’un Blog - Authentification et Autorisations_files/github-btn(1).html" frameborder="0" scrolling="0" width="120px" height="30px"></iframe>
+				</div>
+
+				<div class="col-sm-3 col-xs-3">
+					<iframe id="twitter-widget-0" scrolling="no" frameborder="0" allowtransparency="true" class="twitter-follow-button twitter-follow-button-rendered" title="Twitter Follow Button" src="./Tutoriel d’un Blog - Authentification et Autorisations_files/follow_button.a9003d9964444592507bbb36b98c709b.en.html" style="position: static; visibility: visible; width: 62px; height: 20px;" data-screen-name="CakePHP"></iframe>
+					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+				</div>
+			</div>
+
+			<div class="col-xs-12 col-sm-12 col-md-7 social-footer text-center ">
+				<a href="https://twitter.com/cakephp" data-toggle="tooltip" title="" data-original-title="Twitter"><i class="fa icon-social fa-twitter"></i>
+				</a><a href="http://www.facebook.com/groups/cake.community" data-toggle="tooltip" title="" data-original-title="Facebook"><i class="fa icon-social fa-facebook"></i></a>
+				<a href="http://goo.gl/mSC0s" data-toggle="tooltip" title="" data-original-title="Google Plus"><i class="fa icon-social  fa-google-plus"></i></a>
+				<a href="http://www.youtube.com/user/CakePHP" data-toggle="tooltip" title="" data-original-title="Youtube"><i class="fa icon-social fa-youtube-play"></i></a>
+				<a href="https://github.com/cakephp" data-toggle="tooltip" title="" data-original-title="Github"><i class="fa icon-social fa-git"></i></a>
+				<a href="http://cakesf.herokuapp.com/" target="_blank" title="" data-toggle="tooltip" data-original-title="Slack"><i class="fa fa-slack icon-social"></i></a>
+				<a href="http://stackoverflow.com/tags/cakephp" data-toggle="tooltip" title="" data-original-title="Stack Overflow"><i class="fa icon-social fa-stack-overflow"></i></a>
+				<a href="http://webchat.freenode.net/?channels=cakephp" data-toggle="tooltip" title="" class="icon-irc" data-original-title="IRC">#IRC</a>
+			</div>
+		</div>
+	</div>
+</section>
+
+<footer id="footer" class="footer-wrapper">
+	<div class="container">
+
+		<div class="row col-p30">
+			<div class="col-sm-12 col-md-3">
+				<div class="footer-widget t-footer">
+					<div class="col-md-12">
+						<a href="https://www.openhub.net/p/cakephp">
+							<img src="./Tutoriel d’un Blog - Authentification et Autorisations_files/open-hub.png">
+						</a>
+						<div class="mt10">
+							<a href="https://www.rackspace.com/">
+								<img src="./Tutoriel d’un Blog - Authentification et Autorisations_files/rackspace.png">
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-sm-12 col-md-9">
+				<div class="col-md-3 col-sm-6 business-solution">
+					<ul class="footer-menu">
+						<li class="menu-title">
+	<a href="http://cakephp.org/business-solutions"><i class="fa fa-menu-title fa-briefcase"></i>Business Solutions</a>
+</li>
+<li class="menu-title mt30">
+	<a href="http://cakephp.org/showcase"><i class="fa fa-menu-title fa-desktop"></i>Showcase</a>
+</li>
+					</ul>
+				</div>
+
+				<div class="col-md-3 col-sm-6">
+					<ul class="footer-menu">
+						
+<li class="menu-title">
+	<i class="fa fa-menu-title fa-book"></i>Documentation
+</li>
+
+<li><a href="http://book.cakephp.org/"><i class="fa fa-menu fa-chevron-right"></i>CookBook</a></li>
+<li><a href="http://api.cakephp.org/"><i class="fa fa-menu fa-chevron-right"></i>API</a></li>
+
+<li><a href="http://cakephp.org/documentation/videos"><i class="fa fa-menu fa-chevron-right"></i>Videos</a></li>
+<li><a href="http://cakephp.org/privacy"><i class="fa fa-menu fa-chevron-right"></i>Privacy Policy</a></li>
+<li><a href="http://cakephp.org/pages/trademark"><i class="fa fa-menu fa-chevron-right"></i>Logos &amp; Trademarks</a></li>
+					</ul>
+				</div>
+
+				<div class="col-md-3 col-sm-6">
+					<ul class="footer-menu">
+						
+<li class="menu-title"><i class="fa fa-menu-title fa-users"></i>Community</li>
+
+<li><a href="http://cakephp.org/team"><i class="fa fa-menu fa-chevron-right"></i>Team</a></li>
+<li><a href="https://github.com/cakephp/cakephp/issues"><i class="fa fa-menu fa-chevron-right"></i>Issues (Github)</a></li>
+<li><a href="http://www.youtube.com/user/CakePHP"><i class="fa fa-menu fa-chevron-right"></i>YouTube Channel</a></li>
+<li><a href="http://cakephp.org/get-involved"><i class="fa fa-menu fa-chevron-right"></i>Get Involved</a></li>
+
+<li><a href="http://bakery.cakephp.org/"><i class="fa fa-menu fa-chevron-right"></i>Bakery</a></li>
+<li><a href="http://cakephp.org/newsletter/signup"><i class="fa fa-menu fa-chevron-right"></i>Newsletter</a></li>
+<li><a href="http://certification.cakephp.org/"><i class="fa fa-menu fa-chevron-right"></i>Certification</a></li>
+<li><a href="http://my.cakephp.org/"><i class="fa fa-menu fa-chevron-right"></i>My CakePHP</a></li>
+<li><a href="http://cakefest.org/"><i class="fa fa-menu fa-chevron-right"></i>CakeFest</a></li>
+<li><a href="http://www.facebook.com/groups/cake.community"><i class="fa fa-menu fa-chevron-right"></i>Facebook</a></li>
+<li><a href="http://twitter.com/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Twitter</a></li>
+					</ul>
+				</div>
+
+				<div class="col-md-3 col-sm-6">
+					<ul class="footer-menu">
+						
+<li class="menu-title"><i class="fa fa-menu-title fa-comments-o"></i>Help &amp; Support</li>
+
+<li><a href="http://discourse.cakephp.org/"><i class="fa fa-menu fa-chevron-right"></i>Forum</a></li>
+<li><a href="http://stackoverflow.com/tags/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Stack Overflow</a></li>
+<li><a href="http://webchat.freenode.net/?channels=cakephp"><i class="fa fa-menu fa-chevron-right"></i>IRC</a></li>
+<li><a href="http://cakesf.herokuapp.com/"><i class="fa fa-menu fa-chevron-right"></i>Slack</a></li>
+<li><a href="http://cakedc.com/"><i class="fa fa-menu fa-chevron-right"></i>Paid Support</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12 text-center mt30">
+				<p class="copyright">
+							© Copyright 2016, Cake Software Foundation, Inc.
+						Mis à jour le août 08, 2016.
+						Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.5.
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
+<div id="inline-search-results"></div>
+
+
+</div>
+
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+  
+<iframe id="rufous-sandbox" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true" style="position: absolute; visibility: hidden; display: none; width: 0px; height: 0px; padding: 0px; border: none;" src="./Tutoriel d’un Blog - Authentification et Autorisations_files/saved_resource.html"></iframe></body></html>

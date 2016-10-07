@@ -1,0 +1,59 @@
+.panel-bordered
+{
+    border-color:#321 !important;
+    border-radius: 8px !important;
+    -moz-border-radius: 8px !important;
+    -webkit-border-radius: 8px !important;
+    overflow: hidden;
+}
+
+/*
+Travail sur les effets des images
+*/
+.img-portfolio
+{
+    position: relative;
+    width:100%;
+    overflow: hidden;
+}
+
+.img-portfolio>img
+{
+    position: absolute;
+    z-index:1;
+}
+
+.img-portfolio-description
+{
+    position: relative;
+    background-color: rgba(30,30,30,0.8);
+    z-index: 3;
+    width:100%;
+    height:100%;
+    color: #fff;
+}
+
+.img-portfolio-description *
+{
+    position: absolute;
+    width: 100%;
+}
+
+.img-portfolio-description p
+{
+    padding:8px;
+}
+
+/*
+Supprimer les espacements de bootstrap
+*/
+.row.no-gutter {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.col-no-gutter
+{
+    padding-left: 2px;
+    padding-right: 2px;
+}
