@@ -100,3 +100,8 @@ Router::prefix('forums', function($routes) {
     $routes->connect('/', ['controller' => 'Forums','action' => 'index'], ['routeClass' => 'InflectedRoute']);
     $routes->fallbacks(DashedRoute::class);
 });
+
+Router::prefix('dashboard', function($routes) {
+    $routes->connect('/', ['controller' => 'Projects','action' => 'index'], ['routeClass' => 'InflectedRoute']);
+    $routes->fallbacks(DashedRoute::class);
+});

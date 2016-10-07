@@ -1,8 +1,8 @@
 <?php
 namespace App\Model\Entity;
 
-use Cake\Auth\DefaultPasswordHasher;
 use Cake\ORM\Entity;
+use Cake\Auth\DefaultPasswordHasher;
 
 /**
  * User Entity
@@ -28,6 +28,9 @@ use Cake\ORM\Entity;
  * @property string $picture_url
  *
  * @property \App\Model\Entity\Role $role
+ * @property \App\Model\Entity\Diary[] $diaries
+ * @property \App\Model\Entity\Project[] $projects
+ * @property \App\Model\Entity\Task[] $tasks
  */
 class User extends Entity
 {
@@ -59,4 +62,5 @@ class User extends Entity
     {
         return (new DefaultPasswordHasher)->hash($password);
     }
+
 }

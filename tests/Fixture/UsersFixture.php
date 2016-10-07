@@ -67,10 +67,10 @@ class UsersFixture extends TestFixture
             'emergency_phone' => 'Lorem ipsum d',
             'firstname' => 'Lorem ipsum dolor sit amet',
             'lastname' => 'Lorem ipsum dolor sit amet',
-            'birthday' => '2016-10-04',
+            'birthday' => '2016-10-07',
             'github_username' => 'Lorem ipsum dolor sit amet',
-            'created' => '2016-10-04 13:12:21',
-            'modified' => '2016-10-04 13:12:21',
+            'created' => '2016-10-07 12:14:59',
+            'modified' => '2016-10-07 12:14:59',
             'role_id' => 1,
             'picture_url' => 'Lorem ipsum dolor sit amet'
         ],
