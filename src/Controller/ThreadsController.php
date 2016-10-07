@@ -66,8 +66,6 @@ class ThreadsController extends AppController
                 $this->Flash->error(__('The thread could not be saved. Please, try again.'));
             }
         }
-
-        $forums = $this->Threads->Forums->find('list', ['limit' => 200]);
         $this->set(compact('thread', 'user', 'forums'));
         $this->set('_serialize', ['thread']);
     }

@@ -24,13 +24,18 @@
         <?php foreach ($forum->forums as $section): ?>
             <tr  class="sscategory" >
                 <td width="5%">icone</td>
-                <td width="70%"> <?= $this->Html->link(__($section->name), ['action' => 'view', $section->id]) ?>
+                <td width="65%"> <?= $this->Html->link(__($section->name), ['action' => 'view', $section->id]) ?>
                     <br>
                     <?= $section->description ?></td>
                 <td width="5%"><span class="stat"><i class="fa fa-comment-o fa">  <?= count($section->threads) ?></i></span></td>
                 <td width="5%"><span class="stat"><i class="fa fa-comments-o fa"></i></span></td>
-                <td width="15%" style="text-align: right">Dernier commentaire <br> heure <br> par truc</td>
+                <td width="20%" style="text-align: right">Dernier commentaire <br> heure <br> par truc</td>
             </tr>
+<?php
+$id = $section->id ;
+
+
+        ?>
 
                 <!--<td class="actions">-->
                     <!--<?= $this->Html->link(__('View'), ['action' => 'view', $forum->id]) ?>-->
