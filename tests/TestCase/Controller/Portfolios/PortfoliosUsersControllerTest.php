@@ -1,13 +1,13 @@
 <?php
-namespace App\Test\TestCase\Controller;
+namespace App\Test\TestCase\Controller\Portfolios;
 
-use App\Controller\ForumsController;
+use App\Controller\Portfolios\PortfoliosUsersController;
 use Cake\TestSuite\IntegrationTestCase;
 
 /**
- * App\Controller\ForumsController Test Case
+ * App\Controller\Portfolios\PortfoliosUsersController Test Case
  */
-class ForumsControllerTest extends IntegrationTestCase
+class PortfoliosUsersControllerTest extends IntegrationTestCase
 {
 
     /**
@@ -16,16 +16,13 @@ class ForumsControllerTest extends IntegrationTestCase
      * @var array
      */
     public $fixtures = [
-        'app.forums',
-        'app.threads',
+        'app.portfolios_users',
+        'app.portfolios',
         'app.users',
         'app.roles',
         'app.permissions',
         'app.connectors',
-        'app.permissions_roles',
-        'app.posts',
-        'app.files',
-        'app.posts_files'
+        'app.permissions_roles'
     ];
 
     /**

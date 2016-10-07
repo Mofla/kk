@@ -1,22 +1,22 @@
 <?php
 namespace App\Test\TestCase\Model\Table;
 
-use App\Model\Table\ForumsTable;
+use App\Model\Table\CategoriesTable;
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
 
 /**
- * App\Model\Table\ForumsTable Test Case
+ * App\Model\Table\CategoriesTable Test Case
  */
-class ForumsTableTest extends TestCase
+class CategoriesTableTest extends TestCase
 {
 
     /**
      * Test subject
      *
-     * @var \App\Model\Table\ForumsTable
+     * @var \App\Model\Table\CategoriesTable
      */
-    public $Forums;
+    public $Categories;
 
     /**
      * Fixtures
@@ -24,6 +24,7 @@ class ForumsTableTest extends TestCase
      * @var array
      */
     public $fixtures = [
+        'app.categories',
         'app.forums',
         'app.threads',
         'app.users',
@@ -44,8 +45,8 @@ class ForumsTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableRegistry::exists('Forums') ? [] : ['className' => 'App\Model\Table\ForumsTable'];
-        $this->Forums = TableRegistry::get('Forums', $config);
+        $config = TableRegistry::exists('Categories') ? [] : ['className' => 'App\Model\Table\CategoriesTable'];
+        $this->Categories = TableRegistry::get('Categories', $config);
     }
 
     /**
@@ -55,7 +56,7 @@ class ForumsTableTest extends TestCase
      */
     public function tearDown()
     {
-        unset($this->Forums);
+        unset($this->Categories);
 
         parent::tearDown();
     }

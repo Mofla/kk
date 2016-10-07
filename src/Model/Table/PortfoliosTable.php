@@ -7,23 +7,20 @@ use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * Threads Model
+ * Portfolios Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Users
- * @property \Cake\ORM\Association\BelongsTo $Forums
- * @property \Cake\ORM\Association\HasMany $Posts
+ * @property \Cake\ORM\Association\BelongsToMany $Users
  *
- * @method \App\Model\Entity\Thread get($primaryKey, $options = [])
- * @method \App\Model\Entity\Thread newEntity($data = null, array $options = [])
- * @method \App\Model\Entity\Thread[] newEntities(array $data, array $options = [])
- * @method \App\Model\Entity\Thread|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Thread patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\Thread[] patchEntities($entities, array $data, array $options = [])
- * @method \App\Model\Entity\Thread findOrCreate($search, callable $callback = null)
- *
- * @mixin \Cake\ORM\Behavior\TimestampBehavior
+ * @method \App\Model\Entity\Portfolio get($primaryKey, $options = [])
+ * @method \App\Model\Entity\Portfolio newEntity($data = null, array $options = [])
+ * @method \App\Model\Entity\Portfolio[] newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\Portfolio|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\Portfolio patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\Portfolio[] patchEntities($entities, array $data, array $options = [])
+ * @method \App\Model\Entity\Portfolio findOrCreate($search, callable $callback = null)
  */
-class ThreadsTable extends Table
+class PortfoliosTable extends Table
 {
 
     /**
@@ -36,22 +33,18 @@ class ThreadsTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('threads');
-        $this->displayField('id');
+        $this->table('portfolios');
+        $this->displayField('name');
         $this->primaryKey('id');
-
-        $this->addBehavior('Timestamp');
 
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id',
             'joinType' => 'INNER'
         ]);
-        $this->belongsTo('Forums', [
-            'foreignKey' => 'forum_id',
-            'joinType' => 'INNER'
-        ]);
-        $this->hasMany('Posts', [
-            'foreignKey' => 'thread_id'
+        $this->belongsToMany('Users', [
+            'foreignKey' => 'portfolio_id',
+            'targetForeignKey' => 'user_id',
+            'joinTable' => 'portfolios_users'
         ]);
     }
 
@@ -68,12 +61,19 @@ class ThreadsTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->requirePresence('subject', 'create')
-            ->notEmpty('subject');
+            ->requirePresence('name', 'create')
+            ->notEmpty('name');
 
         $validator
-            ->requirePresence('text', 'create')
-            ->notEmpty('text');
+            ->allowEmpty('description');
+
+        $validator
+            ->requirePresence('url', 'create')
+            ->notEmpty('url');
+
+        $validator
+            ->requirePresence('picture_url', 'create')
+            ->notEmpty('picture_url');
 
         return $validator;
     }
@@ -88,7 +88,6 @@ class ThreadsTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['user_id'], 'Users'));
-        $rules->add($rules->existsIn(['forum_id'], 'Forums'));
 
         return $rules;
     }

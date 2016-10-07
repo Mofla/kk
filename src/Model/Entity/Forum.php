@@ -9,8 +9,8 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property string $name
  * @property string $description
- * @property int $parentid
  * @property bool $active
+ * @property int $category_id
  *
  * @property \App\Model\Entity\Thread[] $threads
  */

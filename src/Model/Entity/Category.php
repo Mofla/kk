@@ -4,20 +4,14 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * Thread Entity
+ * Category Entity
  *
  * @property int $id
- * @property string $subject
- * @property string $text
- * @property \Cake\I18n\Time $created
- * @property int $user_id
- * @property int $forum_id
+ * @property string $name
  *
- * @property \App\Model\Entity\User $user
- * @property \App\Model\Entity\Forum $forum
- * @property \App\Model\Entity\Post[] $posts
+ * @property \App\Model\Entity\Forum[] $forums
  */
-class Thread extends Entity
+class Category extends Entity
 {
 
     /**

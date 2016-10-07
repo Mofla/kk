@@ -54,6 +54,9 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->Html->css('../assets/layouts/layout3/css/themes/default.min.css') ?>
     <?= $this->Html->css('../assets/layouts/layout3/css/custom.min.css') ?>
     <!-- END THEME LAYOUT STYLES -->
+    <?= $this->Html->css('forum-styles.css') ?>
+    <?= $this->html->script('../assets/global/plugins/jquery.min.js') ?>
+
     <link rel="shortcut icon" href="favicon.ico" />
 </head>
 <body>
@@ -938,8 +941,14 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                                             </ul>
                                         </li>
                                     </ul>
+                                <li class="menu-dropdown classic-menu-dropdown ">
+                                    <a href="<?= $this->Url->build([ 'controller' => 'Forums', 'action' => 'index' ]); ?>"> Forum
+                                        <span class="arrow"></span>
+                                    </a>
+                                </li>
                                 </li>
                             </ul>
+
                         </div>
                         <!-- END MEGA MENU -->
                     </div>
@@ -1668,7 +1677,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 <?= $this->html->script('../assets/global/plugins/ie8.fix.min.js') ?>
 <!--[endif]-->
 <!-- BEGIN CORE PLUGINS -->
-<?= $this->html->script('../assets/global/plugins/jquery.min.js') ?>
+
 <?= $this->html->script('../assets/global/plugins/bootstrap/js/bootstrap.min.js') ?>
 <?= $this->html->script('../assets/global/plugins/js.cookie.min.js') ?>
 <?= $this->html->script('../assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js') ?>
@@ -1683,6 +1692,16 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 <?= $this->html->script('../assets/layouts/layout3/scripts/demo.min.js') ?>
 <?= $this->html->script('../assets/layouts/global/scripts/quick-sidebar.min.js') ?>
 <?= $this->html->script('../assets/layouts/global/scripts/quick-nav.min.js') ?>
+<?= $this->Html->script('../build/jquery.datetimepicker.full.min.js') ?>
+<?= $this->Html->css('../css/jquery.datetimepicker.css') ?>
+<script>
+
+    //datetimepicker on date field
+    $('#datepicker').datetimepicker({
+        timepicker:false,
+        format: "Y-m-d"
+    });
+</script>
 </body>
 
 <!-- END THEME LAYOUT SCRIPTS -->
