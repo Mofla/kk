@@ -95,3 +95,8 @@ Router::prefix('portfolios', function($routes) {
     $routes->connect('/voir/*', ['controller' => 'Portfolios','action' => 'view'], ['routeClass' => 'InflectedRoute']);
     $routes->fallbacks(DashedRoute::class);
 });
+
+Router::prefix('forums', function($routes) {
+    $routes->connect('/', ['controller' => 'Forums','action' => 'index'], ['routeClass' => 'InflectedRoute']);
+    $routes->fallbacks(DashedRoute::class);
+});
