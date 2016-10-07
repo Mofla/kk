@@ -9,7 +9,6 @@ use Cake\Validation\Validator;
 /**
  * Portfolios Model
  *
- * @property \Cake\ORM\Association\BelongsTo $Users
  * @property \Cake\ORM\Association\BelongsToMany $Users
  *
  * @method \App\Model\Entity\Portfolio get($primaryKey, $options = [])
@@ -37,10 +36,6 @@ class PortfoliosTable extends Table
         $this->displayField('name');
         $this->primaryKey('id');
 
-        $this->belongsTo('Users', [
-            'foreignKey' => 'user_id',
-            'joinType' => 'INNER'
-        ]);
         $this->belongsToMany('Users', [
             'foreignKey' => 'portfolio_id',
             'targetForeignKey' => 'user_id',
@@ -76,19 +71,5 @@ class PortfoliosTable extends Table
             ->notEmpty('picture_url');
 
         return $validator;
-    }
-
-    /**
-     * Returns a rules checker object that will be used for validating
-     * application integrity.
-     *
-     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
-     * @return \Cake\ORM\RulesChecker
-     */
-    public function buildRules(RulesChecker $rules)
-    {
-        $rules->add($rules->existsIn(['user_id'], 'Users'));
-
-        return $rules;
     }
 }
