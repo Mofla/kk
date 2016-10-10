@@ -16,11 +16,18 @@ class ProjectsController extends AppController
      *
      * @return \Cake\Network\Response|null
      */
+
+
     public function index()
     {
-        $projects = $this->paginate($this->Projects);
+        $projects = $this->Projects->find('all', [
+            'contain' => 'Tasks'
+        ]);
 
-        $this->set(compact('projects'));
+
+
+
+        $this->set(compact('projects', 'liste'));
         $this->set('_serialize', ['projects']);
     }
 
