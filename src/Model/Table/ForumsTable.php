@@ -75,9 +75,22 @@ class ForumsTable extends Table
             ->notEmpty('description');
 
         $validator
-            ->boolean('active')
-            ->requirePresence('active', 'create')
-            ->notEmpty('active');
+            ->integer('lasttopic')
+            ->allowEmpty('lasttopic');
+
+        $validator
+            ->integer('lastuser')
+            ->allowEmpty('lastuser');
+
+        $validator
+            ->integer('countthread')
+            ->allowEmpty('countthread');
+
+        $validator
+            ->integer('countpost')
+            ->allowEmpty('countpost');
+
+
 
         return $validator;
     }

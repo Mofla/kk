@@ -25,13 +25,21 @@ class ForumsTableTest extends TestCase
      */
     public $fixtures = [
         'app.forums',
-        'app.threads',
+        'app.categories',
         'app.users',
         'app.roles',
         'app.permissions',
         'app.connectors',
         'app.permissions_roles',
+        'app.diaries',
+        'app.projects',
+        'app.tasks',
+        'app.states',
+        'app.tasks_users',
+        'app.projects_users',
+        'app.entries',
         'app.posts',
+        'app.threads',
         'app.files',
         'app.posts_files'
     ];
@@ -76,6 +84,16 @@ class ForumsTableTest extends TestCase
      * @return void
      */
     public function testValidationDefault()
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+
+    /**
+     * Test buildRules method
+     *
+     * @return void
+     */
+    public function testBuildRules()
     {
         $this->markTestIncomplete('Not implemented yet.');
     }
