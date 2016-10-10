@@ -39,7 +39,11 @@ class ThreadsController extends AppController
         $thread = $this->Threads->get($id, [
             'contain' => ['Users', 'Forums', 'Posts.Users']
         ]);
-
+        $query = $this->Threads->query();
+        $query->update()
+            ->set($query->newExpr('countview = countview + 1'))
+            ->where(['id' => $id])
+            ->execute();
         $this->set('thread', $thread);
         $this->set('_serialize', ['thread']);
     }

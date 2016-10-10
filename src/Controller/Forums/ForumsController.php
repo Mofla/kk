@@ -34,7 +34,7 @@ class ForumsController extends AppController
     public function view($id = null)
     {
         $forum = $this->Forums->get($id, [
-            'contain' => ['Threads.Users']
+            'contain' => ['Threads.Users','Threads.Posts']
         ]);
 
         $this->set('forum', $forum);
