@@ -19,7 +19,7 @@ class ForumsController extends AppController
     public function index()
     {
         $cat = $this->Forums->Categories->find('all')
-        ->contain('Forums.Threads');
+        ->contain(['Forums.Users', 'Forums.Posts']);
 
         $this->set(compact('cat'));
     }
@@ -34,7 +34,7 @@ class ForumsController extends AppController
     public function view($id = null)
     {
         $forum = $this->Forums->get($id, [
-            'contain' => ['Threads.Users']
+            'contain' => ['Threads.Users','Threads.Posts']
         ]);
 
         $this->set('forum', $forum);

@@ -29,7 +29,11 @@
                     <?= $section->description ?></td>
                 <td width="7%"><span class="stat"><i class="fa fa-comment-o fa"><?= $section->countthread ?></i></span></td>
                 <td width="7%"><span class="stat"><i class="fa fa-comments-o fa"><?= $section->countpost ?></i></span></td>
-                <td width="20%" style="text-align: right">Dernier commentaire <br> heure <br> par truc</td>
+                <td width="20%" style="text-align: right">
+                    <?= $this->Html->link(__($section->post->title), ['controller' => 'Threads','action' => 'view', $section->post->thread_id]) ?>
+                    <br>
+                    <?php if ($section->post->created) { echo "le ".$section->post->created->i18nformat('dd/MM/YY à hh:mm', 'Europe/Paris') ;} ?> <br>
+                    <?php if ($section->user->username) { echo "par ".$section->user->username ;} ?></td>
             </tr>
 <?php
 $id = $section->id ;

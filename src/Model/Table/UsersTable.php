@@ -50,6 +50,7 @@ class UsersTable extends Table
         $this->hasMany('Diaries', [
             'foreignKey' => 'user_id'
         ]);
+
         $this->belongsToMany('Projects', [
             'foreignKey' => 'user_id',
             'targetForeignKey' => 'project_id',

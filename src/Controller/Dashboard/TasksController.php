@@ -19,7 +19,7 @@ class TasksController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['States', 'Projects']
+            'contain' => ['States', 'Projects', 'Users']
         ];
         $tasks = $this->paginate($this->Tasks);
 
