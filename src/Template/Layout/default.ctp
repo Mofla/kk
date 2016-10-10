@@ -54,6 +54,8 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->Html->css('../assets/layouts/layout3/css/themes/default.min.css') ?>
     <?= $this->Html->css('../assets/layouts/layout3/css/custom.min.css') ?>
     <!-- END THEME LAYOUT STYLES -->
+    <?= $this->Html->css('forum-styles.css') ?>
+    <?= $this->html->script('../assets/global/plugins/jquery.min.js') ?>
     <link rel="shortcut icon" href="favicon.ico" />
 </head>
 <body>
@@ -782,7 +784,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 <?= $this->html->script('../assets/global/plugins/ie8.fix.min.js') ?>
 <!--[endif]-->
 <!-- BEGIN CORE PLUGINS -->
-<?= $this->html->script('../assets/global/plugins/jquery.min.js') ?>
+
 <?= $this->html->script('../assets/global/plugins/bootstrap/js/bootstrap.min.js') ?>
 <?= $this->html->script('../assets/global/plugins/js.cookie.min.js') ?>
 <?= $this->html->script('../assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js') ?>
