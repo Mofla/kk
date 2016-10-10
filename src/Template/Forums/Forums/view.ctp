@@ -1,12 +1,14 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li><?= $this->Html->link(__('NOUVEAU SUJET'), ['controller' => 'Threads', 'action' => 'add',  $forum->id]) ?></li>
-    </ul>
-</nav>
+<div class="col-md-12">
+    <?= $this->Html->link($forum->name, ['controller' => 'Forums', 'action' => 'view', $forum->id])  ?>
+</div>
+<div class="col-md-12 voffset2">
 
+<div class="right">
+<a href="<?= $this->Url->build([ 'controller' => 'Threads', 'action' => 'add' , $forum->id]); ?>" class="btn btn-success " role="button" aria-pressed="true">NOUVEAU SUJET</a>
+</div>
 
-
-<div class="table-responsive">
+<div class="row"></div>
+<div class="table-responsive voffset2">
     <?php if (!empty($forum->threads)): ?>
     <table class="table">
         <tr>
@@ -21,10 +23,10 @@
         </tr>
         <?php foreach ($forum->threads as $threads): ?>
         <tr class="sscategory">
-            <td width="50%" <?= $this->Html->link(__($threads->subject), ['action' => 'view', $threads->id]) ?>
-             <br> par <?= h($threads->user->username) ?></td>
-            <td width="10%">0</td>
-            <td width="10%" >0</td>
+            <td width="50%"><?= $this->Html->link(__($threads->subject), ['controller' => 'Threads','action' => 'view', $threads->id]) ?>
+            <br> par <?= h($threads->user->username) ?></td>
+            <td width="10%"><?= count($threads->posts) ?></td>
+            <td width="10%" ><?= $threads->countview ?></td>
             <td width="25%">le <br> par </br></td>
             <td width="5%" class="actions">
                 <?= $this->Html->link(__('View'), ['controller' => 'Threads', 'action' => 'view', $threads->id]) ?>
@@ -35,12 +37,15 @@
         <?php endforeach; ?>
     </table>
     <?php endif; ?>
+    <div class="right">
+        <a href="<?= $this->Url->build([ 'controller' => 'Threads', 'action' => 'add' , $forum->id]); ?>" class="btn btn-success " role="button" aria-pressed="true">NOUVEAU SUJET</a>
+    </div>
+</div>
 </div>
 
 <script>
 $('tr').click( function() {
     window.location = $(this).find('a').attr('href');
-}).hover( function() {
-    $(this).toggleClass('hover');
-});
+})
+
 </script>
