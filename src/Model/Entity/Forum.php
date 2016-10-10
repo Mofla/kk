@@ -11,7 +11,15 @@ use Cake\ORM\Entity;
  * @property string $description
  * @property bool $active
  * @property int $category_id
+ * @property int $lasttopic
+ * @property int $lastuser
+ * @property int $countthread
+ * @property int $countpost
+ * @property string $icon
  *
+ * @property \App\Model\Entity\Category $category
+ * @property \App\Model\Entity\User $user
+ * @property \App\Model\Entity\Post $post
  * @property \App\Model\Entity\Thread[] $threads
  */
 class Forum extends Entity

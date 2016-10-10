@@ -2,6 +2,8 @@
 namespace App\Controller\forums;
 
 use App\Controller\AppController;
+use Cake\ORM\TableRegistry;
+use Cake\I18n\Time;
 
 /**
  * Forums Controller
@@ -50,10 +52,20 @@ class ForumsController extends AppController
     {
         $forum = $this->Forums->newEntity();
         if ($this->request->is('post')) {
+            $this->request->data['lasttopic'] = '1';
+            $this->request->data['lastuser'] = '2';
+            if (!empty($_FILES['icon']) ) {
+            $image = $_FILES['icon']['name'];
+            $extention = explode('.', $image);
+            $rename = str_replace($extention[0],Time::now()->format("Ymdhms"),$image);
+            $temp = $_FILES['icon']['tmp_name'];
+            move_uploaded_file($temp, WWW_ROOT . "uploads/icons/" . $rename);
+            $this->request->data['icon'] = $rename;
+            }
+
             $forum = $this->Forums->patchEntity($forum, $this->request->data);
             if ($this->Forums->save($forum)) {
                 $this->Flash->success(__('The forum has been saved.'));
-
                 return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__('The forum could not be saved. Please, try again.'));
