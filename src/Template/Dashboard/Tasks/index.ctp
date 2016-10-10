@@ -84,7 +84,7 @@
     }
 
     p {
-        max-width:700px;
+        max-width: 700px;
     }
 </style>
 
@@ -96,14 +96,21 @@
         {id: 201, label: 'TODO', color: 'red'},
         {id: 202, label: 'DOING', color: 'orange'},
         {id: 203, label: 'DONE', color: 'green'},
+
         <?php foreach ($tasks as $task): ?>
+        <?php foreach ($task->users as $user): ?>
+        {id: '<?= $task->id ?>'+<?= $user->id ?>, label: '<?= h($user->username) ?>'},
+        <?php endforeach; ?>
         {id: <?= $task->id ?>, label: '<?= h($task->name) ?>'},
+
         <?php endforeach; ?>
 
     ]);
 
     // create an array with edges
     var edges = new vis.DataSet([
+        {from: 201, to: 202},
+        {from: 202, to: 203},
         <?php foreach ($tasks as $task): ?>
         <?php if ($task->state->name == 'todo'): ?>
         {from: <?= $task->id ?>, to: 201},
