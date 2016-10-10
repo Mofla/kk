@@ -24,19 +24,22 @@ class MenuCell extends Cell
      */
     public function display($id)
     {
+        $i= $id;
         $this->loadModel('Permissions');
         $this->loadModel('Roles');
         $this->loadModel('Connectors');
         $this->loadModel('Users');
         //on récupère l'id de la colonne role_id
-        $role= $this->Users->find('all')->select('role_id')->where(['id'=> $id]);
+        $role= $this->Users->find('all')
+            ->select('role_id')
+            ->where(['id'=> $id]);
         //on affiche les permissions selon le rôle et si on a demandé qu'il soit afficher dans le menu
         $perm = $this->Permissions->find('all')
             ->contain('Connectors', 'Roles', 'Users')
             ->where(['menu' => 1])
             ->matching('Roles')->where(['Roles.id =' => $role]);
-
+        
         $this->set('_serialize', ['permission']);
-        $this->set(compact('perm'));
+        $this->set(compact('perm','connecor', 'i'));
     }
 }
