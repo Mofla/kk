@@ -41,6 +41,14 @@ class ForumsTable extends Table
             'foreignKey' => 'category_id',
             'joinType' => 'INNER'
         ]);
+        $this->belongsTo('Users', [
+            'foreignKey' => 'lastuser',
+            'joinType' => 'INNER'
+        ]);
+        $this->belongsTo('Posts', [
+            'foreignKey' => 'lasttopic',
+            'joinType' => 'INNER'
+        ]);
         $this->hasMany('Threads', [
             'foreignKey' => 'forum_id'
         ]);

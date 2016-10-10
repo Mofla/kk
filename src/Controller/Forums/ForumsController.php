@@ -19,7 +19,7 @@ class ForumsController extends AppController
     public function index()
     {
         $cat = $this->Forums->Categories->find('all')
-        ->contain('Forums.Threads');
+        ->contain(['Forums.Users', 'Forums.Posts']);
 
         $this->set(compact('cat'));
     }

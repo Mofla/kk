@@ -65,7 +65,8 @@ class PostsController extends AppController
                 $this->Flash->success(__('The post has been saved.'));
                 $query = $this->Posts->Threads->forums->query();
                 $query->update()
-                    ->set([$query->newExpr('countpost = countpost + 1'),'lastuser' => $user])
+                    ->set([$query->newExpr('countpost = countpost + 1'),'lastuser' => $user ,
+                        'lasttopic' => $post->id ])
                     ->where(['id' => $forumid->forum_id])
                     ->execute();
                 return $this->redirect(['action' => 'index']);

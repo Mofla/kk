@@ -29,7 +29,10 @@
                     <?= $section->description ?></td>
                 <td width="7%"><span class="stat"><i class="fa fa-comment-o fa"><?= $section->countthread ?></i></span></td>
                 <td width="7%"><span class="stat"><i class="fa fa-comments-o fa"><?= $section->countpost ?></i></span></td>
-                <td width="20%" style="text-align: right">Dernier commentaire <br> heure <br> par truc</td>
+                <td width="20%" style="text-align: right">
+                    <?php if ($section->post->title) { echo $section->post->title ;} ?> <br>
+                    <?php if ($section->post->created) { echo $section->post->created ;} ?> <br>
+                    <?php if ($section->user->username) { echo $section->user->username ;} ?></td>
             </tr>
 <?php
 $id = $section->id ;
