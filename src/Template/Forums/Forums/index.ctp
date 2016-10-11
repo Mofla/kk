@@ -23,8 +23,15 @@
 
         <?php foreach ($forum->forums as $section): ?>
             <tr  class="sscategory" >
-                <td width="5%">icone</td>
-                <td width="61%"> <?= $this->Html->link(__($section->name), ['action' => 'view', $section->id]) ?>
+                <td width="6%">
+                    <?php if ($section->icon): ?>
+                   <?= $this->Html->image("../uploads/icons/$section->icon" , ['class' => 'forum-icon'])?>
+                    <?php endif ?>
+                    <?php if (!$section->icon): ?>
+                    <?= $this->Html->image("../uploads/icons/defaut.png" , ['class' => 'forum-icon'])?>
+                    <?php endif ?>
+                </td>
+                <td width="60%"> <?= $this->Html->link(__($section->name), ['action' => 'view', $section->id]) ?>
                     <br>
                     <?= $section->description ?></td>
                 <td width="7%"><span class="stat"><i class="fa fa-comment-o fa"><?= $section->countthread ?></i></span></td>

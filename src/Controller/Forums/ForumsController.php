@@ -4,6 +4,8 @@ namespace App\Controller\forums;
 use App\Controller\AppController;
 use Cake\ORM\TableRegistry;
 use Cake\I18n\Time;
+require_once(ROOT . DS . 'src'. DS . 'Controller'. DS . 'Component' . DS . 'ImageTool.php');
+use ImageTool;
 
 /**
  * Forums Controller
@@ -54,13 +56,22 @@ class ForumsController extends AppController
         if ($this->request->is('post')) {
             $this->request->data['lasttopic'] = '1';
             $this->request->data['lastuser'] = '2';
+
             if (!empty($_FILES['icon']) ) {
-            $image = $_FILES['icon']['name'];
-            $extention = explode('.', $image);
-            $rename = str_replace($extention[0],Time::now()->format("Ymdhms"),$image);
-            $temp = $_FILES['icon']['tmp_name'];
-            move_uploaded_file($temp, WWW_ROOT . "uploads/icons/" . $rename);
-            $this->request->data['icon'] = $rename;
+                $img = $_FILES['icon']['name'];
+                $extention = explode('.', $img);
+                $rename = str_replace($extention[0], Time::now()->format("Ymdhms"), $img);
+                $temp = $_FILES['icon']['tmp_name'];
+                $pathimg = WWW_ROOT . "uploads" . DS . "icons" . DS . $rename;
+                move_uploaded_file($temp, $pathimg);
+               ImageTool::resize(array(
+                    'input' => $pathimg,
+                    'output' => $pathimg,
+                    'width' => 50,
+                    'height' => 50,
+                   'mode' => 'fit'
+                ));
+                $this->request->data['icon'] = $rename;
             }
 
             $forum = $this->Forums->patchEntity($forum, $this->request->data);
