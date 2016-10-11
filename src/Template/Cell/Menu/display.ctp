@@ -123,6 +123,18 @@
                       <?php endforeach; ?>
                     </ul>
                 </li>
+                <li class="menu-dropdown classic-menu-dropdown active">
+                  <a href="">Gérer permissions</a>
+                  <ul class="dropdown-menu pull-left">
+                    <?php foreach ($gperm as $gp) : ?>
+                      <?php foreach ($gp->connectors as $conn): ?>
+                        <li class=" ">
+                          <a href="<?= $this->Url->build(['controller' => $conn->controller, 'action' => $conn->function]) ?>"><?= $gp->name ?></a>
+                        </li>
+                      <?php endforeach; ?>
+                    <?php endforeach; ?>
+                  </ul>
+                </li>
                 <li class="menu-dropdown classic-menu-dropdown">
                     <a href="<?= $this->Url->build(['controller' => 'users', 'action' => 'edit', $i]) ?>" >Profil</a>
                 </li>  

@@ -37,9 +37,16 @@ class MenuCell extends Cell
         $perm = $this->Permissions->find('all')
             ->contain('Connectors', 'Roles', 'Users')
             ->where(['menu' => 1])
-            ->matching('Roles')->where(['Roles.id =' => $role]);
+            ->matching('Roles')->where(['Roles.id =' => $role])
+            ->matching('Connectors')->where(['Connectors.controller LIKE'=>'%sers%']);
+        
+        $gperm = $this->Permissions->find('all')
+            ->contain('Connectors', 'Roles', 'Users')
+            ->where(['menu' => 1])
+            ->matching('Roles')->where(['Roles.id =' => $role])
+            ->matching('Connectors')->where(['Connectors.controller LIKE'=>'%ermission%']);
         
         $this->set('_serialize', ['permission']);
-        $this->set(compact('perm','connecor', 'i'));
+        $this->set(compact('perm','connecor', 'i','gperm'));
     }
 }
