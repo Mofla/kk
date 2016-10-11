@@ -1,45 +1,44 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Permission'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Connectors'), ['controller' => 'Connectors', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Connector'), ['controller' => 'Connectors', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Roles'), ['controller' => 'Roles', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Role'), ['controller' => 'Roles', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="permissions index large-9 medium-8 columns content">
-    <h3><?= __('Permissions') ?></h3>
-    <table cellpadding="0" cellspacing="0">
-        <thead>
-            <tr>
-                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('name') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('menu') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($permissions as $permission): ?>
-            <tr>
-                <td><?= $this->Number->format($permission->id) ?></td>
-                <td><?= h($permission->name) ?></td>
-                <td><?= h($permission->menu) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $permission->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $permission->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $permission->id], ['confirm' => __('Are you sure you want to delete # {0}?', $permission->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-        </ul>
-        <p><?= $this->Paginator->counter() ?></p>
-    </div>
+<div>
+  <a class="btn btn-info"
+    href="permission/ajouter">
+      <i class="glyphicon glyphicon-plus"></i> Nouvelle permission</a>
+</div>
+<table class="table table-striped table-bordered table-hover table-checkable order-column" id="sample_1">
+  <thead>
+    <tr>
+      <th scope="col"><?= $this->Paginator->sort('id') ?></th>
+      <th scope="col"><?= $this->Paginator->sort('name') ?></th>
+      <th scope="col"><?= $this->Paginator->sort('menu') ?></th>
+      <th scope="col" class="actions"><?= __('Actions') ?></th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php foreach ($permissions as $permission): ?>
+      <tr class="odd gradeX">
+        <td><?= $this->Number->format($permission->id) ?></td>
+        <td><?= h($permission->name) ?></td>
+        <td><?php if (h($permission->menu)== 1):?>oui <?php else: ?>non <?php endif; ?></td>
+        <td>
+          <div class="btn-group">
+            <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
+              <i class="fa fa-angle-down"></i>
+            </button>
+            <ul class="dropdown-menu pull-left" role="menu">
+              <li><i class="icon-docs"></i><?= $this->Html->link(__('View'), ['action' => 'view', $permission->id]) ?></li>
+              <li><i class="icon-tag"></i><?= $this->Html->link(__('Edit'), ['action' => 'edit', $permission->id]) ?></li>
+              <li><i class="icon-user"></i> <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $permission->id], ['confirm' => __('Are you sure you want to delete # {0}?', $permission->id)]) ?></li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+    <?php endforeach; ?>
+  </tbody>
+</table>
+<div class="paginator">
+  <ul class="pagination">
+    <?= $this->Paginator->prev('< ' . __('previous')) ?>
+    <?= $this->Paginator->numbers() ?>
+    <?= $this->Paginator->next(__('next') . ' >') ?>
+  </ul>
+  <p><?= $this->Paginator->counter() ?></p>
 </div>
