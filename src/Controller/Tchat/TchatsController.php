@@ -2,6 +2,7 @@
 namespace App\Controller\Tchat;
 
 use App\Controller\AppController;
+use Cake\I18n\Time;
 
 /**
  * Tchats Controller
@@ -50,19 +51,25 @@ class TchatsController extends AppController
      */
     public function add()
     {
-        $tchat = $this->Tchats->newEntity();
-        if ($this->request->is('post')) {
-            $tchat = $this->Tchats->patchEntity($tchat, $this->request->data);
-            if ($this->Tchats->save($tchat)) {
-                $this->Flash->success(__('The tchat has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The tchat could not be saved. Please, try again.'));
-            }
+        $user = $this->Auth->User('username');
+        $id = $this->Auth->User('id');
+
+        $list_message = $this->Tchats->find('all')->contain('Users');
+
+        $tchat = $this->Tchats->newEntity();
+
+        if ($this->request->is('ajax')) {
+
+            $tchat = $this->Tchats->patchEntity($tchat, $this->request->data);
+
+            $tchat->user_id = $this->Auth->User('id');
+            $tchat->date = Time::now()->format('Y-m-d h:m:s');
+
+             $this->Tchats->save($tchat);
         }
-        $users = $this->Tchats->Users->find('list', ['limit' => 200]);
-        $this->set(compact('tchat', 'users'));
+
+        $this->set(compact('tchat','list_message','user','id'));
         $this->set('_serialize', ['tchat']);
     }
 
