@@ -1,69 +1,175 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New User'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Roles'), ['controller' => 'Roles', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Role'), ['controller' => 'Roles', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="users index large-9 medium-8 columns content">
-    <h3><?= __('Users') ?></h3>
-    <table cellpadding="0" cellspacing="0">
-        <thead>
-            <tr>
-                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('username') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('password') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('email') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('address') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('zipcode') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('city') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('phone') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('firstname') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('lastname') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('birthday') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('github_username') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('created') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('role_id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('picture_url') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($users as $user): ?>
-            <tr>
-                <td><?= $this->Number->format($user->id) ?></td>
-                <td><?= h($user->username) ?></td>
-                <td><?= h($user->password) ?></td>
-                <td><?= h($user->email) ?></td>
-                <td><?= h($user->address) ?></td>
-                <td><?= h($user->zipcode) ?></td>
-                <td><?= h($user->city) ?></td>
-                <td><?= h($user->phone) ?></td>
-                <td><?= h($user->firstname) ?></td>
-                <td><?= h($user->lastname) ?></td>
-                <td><?= h($user->birthday) ?></td>
-                <td><?= h($user->github_username) ?></td>
-                <td><?= h($user->created) ?></td>
-                <td><?= h($user->modified) ?></td>
-                <td><?= $user->has('role') ? $this->Html->link($user->role->name, ['controller' => 'Roles', 'action' => 'view', $user->role->id]) : '' ?></td>
-                <td><?= h($user->picture_url) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $user->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $user->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $user->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-        </ul>
-        <p><?= $this->Paginator->counter() ?></p>
+<!DOCTYPE html>
+<!--
+Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 3.3.7
+Version: 4.7
+Author: KeenThemes
+Website: http://www.keenthemes.com/
+Contact: support@keenthemes.com
+Follow: www.twitter.com/keenthemes
+Dribbble: www.dribbble.com/keenthemes
+Like: www.facebook.com/keenthemes
+Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes
+Renew Support: http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes
+License: You must have a valid license purchased only from themeforest(the above link) in order to legally use the theme for your project.
+-->
+<!--[if IE 8]>
+<html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]>
+<html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+
+<head>
+
+    <!--<style>
+        #taille {
+            width: 240px;
+            height: 212px;
+        }
+    </style>-->
+
+    <meta charset="utf-8"/>
+    <title>Metronic | The Ultimate Multi-purpose Bootstrap Admin Dashboard Theme | Theme #3 | Portfolio 1</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <meta
+        content="#1 selling multi-purpose bootstrap admin theme sold in themeforest marketplace packed with angularjs, material design, rtl support with over thausands of templates and ui elements and plugins to power any type of web applications including saas and admin dashboards. Preview page of Theme #3 for Portfolio 1 - Basic Grid"
+        name="description"/>
+    <meta content="" name="author"/>
+
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet"
+          type="text/css"/>
+    <link href="../assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link href="../assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
+    <link href="../assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="../assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet"
+          type="text/css"/>
+
+
+    <link href="../assets/global/plugins/cubeportfolio/css/cubeportfolio.css" rel="stylesheet" type="text/css"/>
+
+
+    <link href="../assets/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css"/>
+    <link href="../assets/global/css/plugins.min.css" rel="stylesheet" type="text/css"/>
+
+
+    <link href="../assets/pages/css/portfolio.min.css" rel="stylesheet" type="text/css"/>
+
+
+    <link href="../assets/layouts/layout3/css/layout.min.css" rel="stylesheet" type="text/css"/>
+    <link href="../assets/layouts/layout3/css/themes/default.min.css" rel="stylesheet" type="text/css"
+          id="style_color"/>
+    <link href="../assets/layouts/layout3/css/custom.min.css" rel="stylesheet" type="text/css"/>
+
+    <link rel="shortcut icon" href="favicon.ico"/>
+</head>
+<!-- END HEAD -->
+
+<body class="page-container-bg-solid">
+<div class="page-wrapper">
+    <div class="page-wrapper-row full-height">
+        <div class="page-wrapper-middle">
+            <!-- BEGIN CONTAINER -->
+            <div class="page-container">
+                <!-- BEGIN CONTENT -->
+                <div class="page-content-wrapper">
+                    <!-- BEGIN PAGE CONTENT BODY -->
+                    <div class="page-content">
+                        <div class="container">
+                            <!-- BEGIN PAGE CONTENT INNER -->
+                            <div class="page-content-inner">
+                                <div class="portfolio-content portfolio-1">
+                                    <div id="js-filters-juicy-projects" class="cbp-l-filters-button">
+                                        <div data-filter="*" class="cbp-filter-item-active cbp-filter-item btn dark btn-outline uppercase">All
+                                            <div class="cbp-filter-counter"></div>
+                                        </div>
+                                        <?php foreach ($promotions as $promotion): ?>
+                                            <div data-filter=".<?= $promotion->promotion ?>" class="cbp-filter-item btn dark btn-outline uppercase">Promotion <?= $promotion->promotion ?>
+                                                <div class="cbp-filter-counter"></div>
+                                            </div>
+                                        <?php endforeach; ?>
+
+                                        <div id="js-grid-juicy-projects">
+                                            <?php foreach ($users as $user): ?>
+                                                <div class="cbp-item . <?= $user->promotion ?>" id="taille">
+                                                    <div class="cbp-caption">
+                                                        <div class="cbp-caption-defaultWrap"
+                                                             style="background-color: #444d58">
+                                                            <img src="../img/<?= $user->id ?>.png" alt=""></div>
+                                                        <div class="cbp-caption-activeWrap">
+                                                            <div class="cbp-l-caption-alignCenter">
+                                                                <div class="cbp-l-caption-body">
+                                                                    <a href="<?= $this->url->build(['controller' => 'Users', 'action' => 'view', $user->id]); ?>"
+                                                                       class="cbp-singlePage cbp-l-caption-buttonLeft btn red uppercase btn red uppercase"
+                                                                       rel="nofollow">Profil</a>
+                                                                    <a href="<?= $this->url->build(['controller' => 'Users', 'action' => 'add']); ?>"
+                                                                       class="cbp-singlePage cbp-l-caption-buttonRight btn red uppercase btn red uppercase"
+                                                                       data-title="Dashboard<br>by Paul Flavius Nechita">Projets</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        class="cbp-l-grid-projects-title uppercase text-center"><?= h($user->firstname) ?></div>
+                                                    <div
+                                                        class="cbp-l-grid-projects-desc uppercase text-center"><?= h($user->lastname) ?></div>
+                                                </div>
+                                            <?php endforeach; ?>
+                                        </div>
+                                        <br>
+                                        <div class="paginator">
+                                            <ul class="pagination">
+                                                <?= $this->Paginator->prev('< ' . __('previous')) ?>
+                                                <?= $this->Paginator->numbers() ?>
+                                                <?= $this->Paginator->next(__('next') . ' >') ?>
+                                            </ul>
+                                            <p><?= $this->Paginator->counter() ?></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- END PAGE CONTENT INNER -->
+                            </div>
+                        </div>
+                        <!-- END PAGE CONTENT BODY -->
+                        <!-- END CONTENT BODY -->
+                    </div>
+                    <!-- END CONTENT -->
+                </div>
+
+                <!-- END CONTAINER -->
+            </div>
+        </div>
     </div>
-</div>
+    <!--[if lt IE 9]>
+    <script src="../assets/global/plugins/respond.min.js"></script>
+    <script src="../assets/global/plugins/excanvas.min.js"></script>
+    <script src="../assets/global/plugins/ie8.fix.min.js"></script>
+    <![endif]-->
+    <!-- BEGIN CORE PLUGINS -->
+    <script src="../assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+    <script src="../assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="../assets/global/plugins/js.cookie.min.js" type="text/javascript"></script>
+    <script src="../assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+    <script src="../assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+    <script src="../assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+    <!-- END CORE PLUGINS -->
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <script src="../assets/global/plugins/cubeportfolio/js/jquery.cubeportfolio.min.js" type="text/javascript"></script>
+    <!-- END PAGE LEVEL PLUGINS -->
+    <!-- BEGIN THEME GLOBAL SCRIPTS -->
+    <script src="../assets/global/scripts/app.min.js" type="text/javascript"></script>
+    <!-- END THEME GLOBAL SCRIPTS -->
+    <!-- BEGIN PAGE LEVEL SCRIPTS -->
+    <script src="../assets/pages/scripts/portfolio-1.min.js" type="text/javascript"></script>
+    <!-- END PAGE LEVEL SCRIPTS -->
+    <!-- BEGIN THEME LAYOUT SCRIPTS -->
+    <script src="../assets/layouts/layout3/scripts/layout.min.js" type="text/javascript"></script>
+    <script src="../assets/layouts/layout3/scripts/demo.min.js" type="text/javascript"></script>
+    <script src="../assets/layouts/global/scripts/quick-sidebar.min.js" type="text/javascript"></script>
+    <script src="../assets/layouts/global/scripts/quick-nav.min.js" type="text/javascript"></script>
+    <!-- END THEME LAYOUT SCRIPTS -->
+</body>
+
+</html>
