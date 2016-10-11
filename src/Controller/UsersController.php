@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use Cake\Event\Event;
 use App\Controller\AppController;
+use Cake\I18n\Time;
 
 /**
  * Users Controler
@@ -23,8 +24,12 @@ class UsersController extends AppController
         ];
         $users = $this->paginate($this->Users);
 
-        $this->set(compact('users'));
+        $promotions = $this->Users->find('all')->distinct('promotion');
+
+        $this->set(compact('users','promotions'));
         $this->set('_serialize', ['users']);
+
+
     }
 
     /**
@@ -63,8 +68,9 @@ class UsersController extends AppController
             }
         }
         $roles = $this->Users->Roles->find('list', ['limit' => 200]);
-        $this->set(compact('user', 'roles'));
+        $this->set(compact('images', 'erreur','user', 'roles'));
         $this->set('_serialize', ['user']);
+
     }
 
     /**

@@ -11,6 +11,7 @@
     <fieldset>
         <legend><?= __('Add User') ?></legend>
         <?php
+            echo $this->Form->input('promotion');
             echo $this->Form->input('username');
             echo $this->Form->input('password');
             echo $this->Form->input('email');
@@ -18,12 +19,14 @@
             echo $this->Form->input('zipcode');
             echo $this->Form->input('city');
             echo $this->Form->input('phone');
+            echo $this->Form->input('cellphone');
+            echo $this->Form->input('emergency_phone');
             echo $this->Form->input('firstname');
             echo $this->Form->input('lastname');
             echo $this->Form->input('birthday');
             echo $this->Form->input('github_username');
             echo $this->Form->input('role_id', ['options' => $roles]);
-            echo $this->Form->input('picture_url');
+            echo $this->Form->input('picture_url', ['type' => 'file']);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
