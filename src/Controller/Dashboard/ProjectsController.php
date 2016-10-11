@@ -21,13 +21,13 @@ class ProjectsController extends AppController
     public function index()
     {
         $projects = $this->Projects->find('all', [
-            'contain' => 'Tasks'
+            'contain' => ['Tasks.Users', 'Tasks.States']
         ]);
 
 
 
 
-        $this->set(compact('projects', 'liste'));
+        $this->set(compact('projects'));
         $this->set('_serialize', ['projects']);
     }
 
