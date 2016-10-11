@@ -19,20 +19,30 @@
         </table>
     </div>
 
+    <div id="test"></div>
+
 <script>
+
+
     var order = [];
-
-
-
         $('tbody').sortable({
             update: function( ) {
                 order.length = 0;
                 $('.sortab tr').each(function() {
                     order.push(this.id);
-                    console.log(order);
+                });
+                order.shift();
+                $.ajax({
+                    type: 'POST',
+                    url: '<?= $this->Url->build("Forums/saveordercategory"); ?>',
+                    data: 'id=' + order,
+                    success: function (html) {
+                        $('#test').text(html);
+                    }
                 });
             }
         });
+
         var $tbody = $('.sortab tbody');
         $tbody.find('tr').sort(function(a, b) {
             var tda = $(a).attr('data-order');
@@ -41,6 +51,7 @@
                     : tda < tdb ? -1
                     : 0;
         }).appendTo($tbody);
+
 
 </script>
 

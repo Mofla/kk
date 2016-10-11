@@ -101,6 +101,14 @@ class ForumsController extends AppController
         $this->set('_serialize', ['categories']);
     }
 
+    public function saveordercategory()
+    {
+        $categories = $this->Forums->Categories->find('all');
+
+        $this->set(compact('categories'));
+        $this->set('_serialize', ['categories']);
+    }
+
     public function addcategory()
     {
         $category = $this->Forums->Categories->newEntity();
