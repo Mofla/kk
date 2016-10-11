@@ -102,10 +102,26 @@ class PermissionsController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $permission = $this->Permissions->get($id);
-        if ($this->Permissions->delete($permission)) {
-            $this->Flash->success(__('The permission has been deleted.'));
-        } else {
-            $this->Flash->error(__('The permission could not be deleted. Please, try again.'));
+        //on regarde si la permission est lié à un rôle
+        $roleLie = $this->Permissions->find('all')
+            ->select('role_id')
+            ->contain('Permissions_roles')
+            ->where(['permission_id' => $id])
+            ->count();
+        //s'il y a une permission lié à un rôle 
+        if($roleLie >= 1){
+            echo 'La permission est encore lié à un rôle';
+        }else {
+            //on va rechercher la liaison de la permission dans la table connector pour pouvoir la supprimer
+            $connector = $this->Permissions->find('all')
+                ->delete('all')
+                ->contain('connectors')
+                ->where(['permission_id' => $id]);
+            if ($this->Permissions->delete($permission)) {
+                $this->Flash->success(__('The permission has been deleted.'));
+            } else {
+                $this->Flash->error(__('The permission could not be deleted. Please, try again.'));
+            }
         }
 
         return $this->redirect(['action' => 'index']);
