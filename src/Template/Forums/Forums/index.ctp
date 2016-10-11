@@ -39,7 +39,7 @@
                 <td width="20%" style="text-align: right">
                     <?= $this->Html->link(__($section->post->title), ['controller' => 'Threads','action' => 'view', $section->post->thread_id]) ?>
                     <br>
-                    <?php if ($section->post->created) { echo "le ".$section->post->created->i18nformat('dd/MM/YY à hh:mm', 'Europe/Paris') ;} ?> <br>
+                    <?php if ($section->post->created) { echo "le ".$section->post->created->i18nformat('dd/MM/YY à HH:mm', 'Europe/Paris') ;} ?> <br>
                     <?php if ($section->user->username) { echo "par ".$section->user->username ;} ?></td>
             </tr>
 <?php
