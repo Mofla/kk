@@ -87,6 +87,8 @@ Router::prefix('admin', function ($routes) {
     $routes->connect('/utilisateur', ['controller' => 'Users', 'action' => 'index']);
     $routes->connect('/utilisateur/ajouter', ['controller' => 'Users', 'action' => 'add']);
     $routes->connect('/utilisateur/editer/*', ['controller' => 'Users', 'action' => 'edit']);
+    $routes->connect('/utilisateur/permission', ['controller' => 'Permissions', 'action' => 'index']);
+    $routes->connect('/utilisateur/permission/ajouter', ['controller' => 'Permissions', 'action' => 'add']);
     $routes->fallbacks(DashedRoute::class);
 });
 

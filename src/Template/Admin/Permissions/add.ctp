@@ -1,24 +1,49 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('List Permissions'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Connectors'), ['controller' => 'Connectors', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Connector'), ['controller' => 'Connectors', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Roles'), ['controller' => 'Roles', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Role'), ['controller' => 'Roles', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="permissions form large-9 medium-8 columns content">
-    <?= $this->Form->create($permission) ?>
-    <fieldset>
-        <legend><?= __('Add Permission') ?></legend>
-        <?php
-            echo $this->Form->input('name');
-            echo $this->Form->input('description');
-            echo $this->Form->input('menu');
-            echo $this->Form->input('roles._ids', ['options' => $roles]);
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
+<div class="profile">
+    <div class="tab-pane" id="tab_1_3">
+        <div class="row profile-account">
+            <div class="col-md-3">
+                <ul class="ver-inline-menu tabbable margin-bottom-10">
+                    <li class="active">
+                        <a data-toggle="tab" href="#tab_1-1">
+                            <i class="fa fa-cog"></i> Ajouter une permission
+                        </a>
+                        <span class="after"> </span>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-9">
+                <div class="tab-content">
+                    <div id="tab_1-1" class="tab-pane active">
+                        <?= $this->Form->create($permission) ?>
+                        <fieldset>
+                            <legend><?= __('Nouvelle permission') ?></legend>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="label-control">Nom de la permission : </label>
+                                    <?= $this->Form->input('name',['label'=>false, 'class'=>'form-control']); ?>
+                                </div>
+                                <div class="form-group">
+                                    <label class="label-control">Description : </label>
+                                    <?= $this->Form->input('description',['label'=>false, 'class'=>'form-control']); ?>
+                                </div>
+                                <div class="mt-checkbox-inline">
+                                    <label class="mt-checkbox">
+                                        <?= $this->Form->input('menu',['label'=>false, 'class'=>'']); ?>
+                                        Afficher dans le menu
+                                    </label>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="label-control">Rôle :</label>
+                                    <?= $this->Form->input('roles._ids', ['options' => $roles, 'label'=>false, 'class'=>'form-control']); ?>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <?= $this->Form->button('Submit',['class'=>'btn green']) ?>
+                        <?= $this->Form->end() ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
