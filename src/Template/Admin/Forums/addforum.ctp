@@ -1,13 +1,5 @@
-<div class="col-md-3">
-    <nav class="large-3 medium-4 columns" id="actions-sidebar">
-        <ul class="side-nav">
-            <li class="heading"><?= __('Actions') ?></li>
-            <li><?= $this->Html->link(__('List Forums'), ['action' => 'index']) ?></li>
-            <li><?= $this->Html->link(__('List Threads'), ['controller' => 'Threads', 'action' => 'index']) ?></li>
-            <li><?= $this->Html->link(__('New Thread'), ['controller' => 'Threads', 'action' => 'add']) ?></li>
-        </ul>
-    </nav>
-</div>
+<?= $this->element('Forum/admin-menu') ?>
+
 <div class="col-md-9">
 <div class="table-responsive">
     <table class="table">
