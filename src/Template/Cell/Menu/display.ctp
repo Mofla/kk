@@ -117,13 +117,13 @@
                       <?php foreach ($perm as $p) : ?>
                         <?php foreach ($p->connectors as $conn): ?>
                           <li class=" ">
-                            <a href="<?= $this->Url->build(['controller' => $conn->controller, 'action' => $conn->function]) ?>"><?= $p->name ?></a>
+                            <a href="..<?= $this->Url->build(['controller' => $conn->controller, 'action' => $conn->function]) ?>"><?= $p->name ?></a>
                           </li>
                         <?php endforeach; ?>
                       <?php endforeach; ?>
                     </ul>
                 </li>
-                <li class="menu-dropdown classic-menu-dropdown active">
+                <li class="menu-dropdown classic-menu-dropdown">
                   <a href="">Gérer permissions</a>
                   <ul class="dropdown-menu pull-left">
                     <?php foreach ($gperm as $gp) : ?>
