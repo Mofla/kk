@@ -40,10 +40,10 @@
 
                                                     </div>
                                                 </div>
-                                                <div id="colum1" class="colum">
+                                                <div id="colum-1" class="colum">
                                                     <?php foreach ($project->tasks as $task): ?>
                                                         <?php if ($task->state->name === 'todo'): ?>
-                                                            <div
+                                                            <div id="task-<?= $task->id ?>"
                                                                 class="mt-list-container list-simple ext-1 group portle">
                                                                 <a class="list-toggle-container portlet-header"
                                                                    data-toggle="collapse"
@@ -93,10 +93,11 @@
                                                     </div>
                                                 </div>
 
-                                                <div id="colum2" class="colum">
+                                                <div id="colum-2" class="colum">
                                                     <?php foreach ($project->tasks as $task): ?>
                                                         <?php if ($task->state->name === 'doing'): ?>
-                                                            <div class="mt-list-container list-simple ext-1 group">
+                                                            <div id="task-<?= $task->id ?>"
+                                                                class="mt-list-container list-simple ext-1 group">
                                                                 <a class="list-toggle-container portlet-header"
                                                                    data-toggle="collapse"
                                                                    href="#pending-simple<?= $task->id ?>"
@@ -140,12 +141,12 @@
                                                     <div class="list-head-title-container">
                                                         <h4 class="list-title">DONE</h4>
                                                     </div>
-                                                    <div id="colum3" class="colum">
+                                                    <div id="colum-3" class="colum">
                                                         <?php foreach ($project->tasks as $task): ?>
                                                             <?php if ($task->state->name === 'done'): ?>
-                                                                <div
+                                                                <div id="task-<?= $task->id ?>"
                                                                     class="mt-list-container list-simple ext-1 group">
-                                                                    <a class="list-toggle-container"
+                                                                    <a class="list-toggle-container portlet-header"
                                                                        data-toggle="collapse"
                                                                        href="#pending-simple<?= $task->id ?>"
                                                                        aria-expanded="true">
@@ -301,15 +302,33 @@
             <script>
 
 
-                $("#colum1, #colum2, #colum3").sortable({
+                $("#colum-1, #colum-2, #colum-3").sortable({
                     connectWith: ".colum",
                     handle: ".portlet-header",
                     cancel: ".portlet-toggle",
                     placeholder: "ui-state-highlight",
-                    stop: function () {
-                        console.log($(this).attr('id'));
+                    receive: function (event, ui) {
+                        var elemID = ui.item.attr('id').split('-');
+                        console.log(elemID[1]);
+                        var newPos = $(this).attr('id').split('-');
+                        console.log(newPos[1]);
+
+                        var data = {
+                            state_id: parseInt(newPos[1])
+                        };
+                        var request = $.ajax({
+                            type: "POST",
+                            data: data,
+                            url: '<?= $this->Url->build(["controller" => "Tasks", "action" => "editation"]); ?>'+ '/' + elemID[1]
+
+                        });
+                        request.done(function() {
+                            console.log(data);
+                        })
+
                     }
                 });
+
 
 
                 $(".portlet-toggle").on("click", function () {

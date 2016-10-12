@@ -27,6 +27,29 @@ class TasksController extends AppController
         $this->set('_serialize', ['tasks']);
     }
 
+    public function editation($id = null) {
+        $this->autoRender = false;
+
+
+        $task = $this->Tasks->get($id, [
+            'contain' => ['Users']
+        ]);
+        if ($this->request->is(['patch', 'post', 'put'])) {
+
+            $task = $this->Tasks->patchEntity($task, $this->request->data);
+
+            if ($this->Tasks->save($task)) {
+                $this->Flash->success(__('The task has been saved.'));
+            } else {
+                $this->Flash->error(__('The task could not be saved. Please, try again.'));
+            }
+        }
+
+
+
+
+    }
+
     /**
      * View method
      *
