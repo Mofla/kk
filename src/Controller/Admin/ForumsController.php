@@ -103,10 +103,23 @@ class ForumsController extends AppController
 
     public function saveordercategory()
     {
-        $categories = $this->Forums->Categories->find('all');
+        $this->autoRender = false;
 
-        $this->set(compact('categories'));
-        $this->set('_serialize', ['categories']);
+        if ($this->request->data) {
+    $order = $this->request->data['id'];
+            $exp = explode(",", $order);
+            $number = null ;
+            foreach ($exp as $item){
+                $number++ ;
+             $query = $this->Forums->Categories->query();
+             $query->update()
+                 ->set(['sort' => $number])
+                 ->where(['id' => $item])
+                 ->execute();
+            }
+        }
+
+        $this->set(compact('order'));
     }
 
     public function addcategory()
