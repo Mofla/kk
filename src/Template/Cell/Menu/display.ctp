@@ -134,6 +134,8 @@
                       <?php endforeach; ?>
                     </ul>
                 </li>
+              <?php foreach ($role as $r) : ?>
+              <?php if ($r->role_id == 1): ?>
                 <li class="menu-dropdown classic-menu-dropdown">
                   <a href="">Gérer permissions</a>
                   <ul class="dropdown-menu pull-left">
@@ -146,6 +148,8 @@
                     <?php endforeach; ?>
                   </ul>
                 </li>
+                <?php endif; ?>
+              <?php endforeach; ?>
                 <li class="menu-dropdown classic-menu-dropdown">
                     <a href="<?= $this->Url->build(['controller' => 'users', 'action' => 'edit', $i]) ?>" >Profil</a>
                 </li>  
