@@ -14,7 +14,7 @@
                         <span class="label">Par :</span>
                         <?php foreach ($portfolio->users as $user): ?>
                             |<?= $this->Html->link($user->firstname . ' ' . $user->lastname,
-                                'users/view/'.$user->id,
+                                ['controller' => 'Users', 'action' => 'view',$user->id,'prefix'=> false],
                                 ['fullBase'=>true]) ?>|
                         <?php endforeach; ?>
 
