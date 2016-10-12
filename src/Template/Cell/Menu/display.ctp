@@ -117,7 +117,18 @@
                       <?php foreach ($perm as $p) : ?>
                         <?php foreach ($p->connectors as $conn): ?>
                           <li class=" ">
-                            <a href="..<?= $this->Url->build(['controller' => $conn->controller, 'action' => $conn->function]) ?>"><?= $p->name ?></a>
+                            <a href="
+                            <?php foreach ($role as $r) : ?>
+                              <?php if ($r->role_id == 1): ?>
+                                <?= $this->Url->build(['controller' => $conn->controller, 'action' => $conn->function, 'prefix'=> 'admin']) ?>">
+                              <?= $p->name ?>
+                              <?php else: ?>
+                                <?= $this->Url->build(['controller' => $conn->controller, 'action' => $conn->function, 'prefix'=> false]) ?>">
+                                <?= $p->name ?>
+                              <?php endif ; ?>
+                            <?php endforeach; ?>
+
+                            </a>
                           </li>
                         <?php endforeach; ?>
                       <?php endforeach; ?>
@@ -126,7 +137,7 @@
                 <li class="menu-dropdown classic-menu-dropdown">
                   <a href="">Gérer permissions</a>
                   <ul class="dropdown-menu pull-left">
-                    <?php foreach ($gperm as $gp) : ?>
+                    <?php foreach ($gererPerm as $gp) : ?>
                       <?php foreach ($gp->connectors as $conn): ?>
                         <li class=" ">
                           <a href="<?= $this->Url->build(['controller' => $conn->controller, 'action' => $conn->function]) ?>"><?= $gp->name ?></a>
