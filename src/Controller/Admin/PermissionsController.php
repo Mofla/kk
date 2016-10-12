@@ -2,6 +2,7 @@
 namespace App\Controller\Admin;
 
 use App\Controller\AppController;
+use Cake\Network\Response;
 
 /**
  * Permissions Controller
@@ -102,28 +103,22 @@ class PermissionsController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $permission = $this->Permissions->get($id);
+        $this->loadModel('Permissions_roles');
         //on regarde si la permission est lié à un rôle
-        $roleLie = $this->Permissions->find('all')
+        $count = $this->Permissions_roles->find('all')
             ->select('role_id')
-            ->contain('Permissions_roles')
             ->where(['permission_id' => $id])
             ->count();
-        //s'il y a une permission lié à un rôle 
-        if($roleLie >= 1){
-            echo 'La permission est encore lié à un rôle';
-        }else {
-            //on va rechercher la liaison de la permission dans la table connector pour pouvoir la supprimer
-            $connector = $this->Permissions->find('all')
-                ->delete('all')
-                ->contain('connectors')
-                ->where(['permission_id' => $id]);
+        if ($count == 0) {
             if ($this->Permissions->delete($permission)) {
-                $this->Flash->success(__('The permission has been deleted.'));
+                $this->Flash->success(__('The permissions has been deleted.'));
             } else {
-                $this->Flash->error(__('The permission could not be deleted. Please, try again.'));
+                $this->Flash->error(__('The permissions could not be deleted. Please, try again.'));
             }
+        }else{
+            $this->Flash->error(__('Un rôle est lié à la permission que vous souhaitez supprimer'));
+          
         }
-
         return $this->redirect(['action' => 'index']);
     }
 }

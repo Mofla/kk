@@ -38,7 +38,8 @@ class PermissionsTable extends Table
         $this->primaryKey('id');
 
         $this->hasMany('Connectors', [
-            'foreignKey' => 'permission_id'
+            'foreignKey' => 'permission_id',
+            'dependent' => true
         ]);
         $this->belongsToMany('Roles', [
             'foreignKey' => 'permission_id',

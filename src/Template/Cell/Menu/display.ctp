@@ -151,7 +151,7 @@
                 </li>  
               <?php endif; ?>
               <li class="menu-dropdown classic-menu-dropdown ">
-                <a href="<?= $this->Url->build(['controller' => 'Forums', 'action' => 'index']); ?>">
+                <a href="<?= $this->Url->build(['controller' => 'Forums', 'action' => 'index', 'prefix' => false]); ?>">
                           Forum
                   <span class="arrow"></span>
                 </a>
