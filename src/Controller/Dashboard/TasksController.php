@@ -123,14 +123,16 @@ class TasksController extends AppController
 
     public function addtask($id = null) {
 
+
         $task = $this->Tasks->newEntity();
         if ($this->request->is('post')) {
             $task = $this->Tasks->patchEntity($task, $this->request->data);
             $task->project_id = $id;
+            $task->state_id = 1;
             if ($this->Tasks->save($task)) {
                 $this->Flash->success(__('The task has been saved.'));
 
-
+                return $this->redirect($this->referer());
             } else {
                 $this->Flash->error(__('The task could not be saved. Please, try again.'));
             }
