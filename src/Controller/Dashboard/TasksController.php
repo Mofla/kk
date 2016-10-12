@@ -121,6 +121,28 @@ class TasksController extends AppController
         $this->set('_serialize', ['task']);
     }
 
+    public function addtask($id = null) {
+
+        $task = $this->Tasks->newEntity();
+        if ($this->request->is('post')) {
+            $task = $this->Tasks->patchEntity($task, $this->request->data);
+            $task->project_id = $id;
+            if ($this->Tasks->save($task)) {
+                $this->Flash->success(__('The task has been saved.'));
+
+
+            } else {
+                $this->Flash->error(__('The task could not be saved. Please, try again.'));
+            }
+        }
+        $states = $this->Tasks->States->find('list', ['limit' => 200]);
+        $users = $this->Tasks->Users->find('list', ['limit' => 200]);
+        $this->set(compact('task', 'states', 'projects', 'users'));
+        $this->set('_serialize', ['task']);
+
+
+    }
+
     /**
      * Delete method
      *
