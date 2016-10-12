@@ -1,3 +1,6 @@
+
+
+
 <div class="task-modal-base">
     <div class="task-modal-cont"></div>
 </div>
@@ -206,10 +209,13 @@
         </div>
     </div>
 </div>
+<?= $this->Html->script('../js/jquery.js') ?>
     <?= $this->Html->css('../assets/vis/vis.css') ?>
     <?= $this->Html->script('../assets/vis/vis.js') ?>
     <?= $this->Html->css('../assets/global/plugins/jquery-ui/jquery-ui.min.css') ?>
     <?= $this->Html->script('../assets/global/plugins/jquery-ui/jquery-ui.min.js') ?>
+<?= $this->Html->script('../assets/global/plugins/bootstrap/js/bootstrap.min.js') ?>
+
 
 
     <?php foreach ($projects as $project): ?>
@@ -247,6 +253,7 @@
         p {
             max-width: 700px;
         }
+
     </style>
 
 
@@ -255,33 +262,29 @@
         <script type="text/javascript">
             // create an array with nodes
             var nodes = new vis.DataSet([
-                {id: 201, label: 'TODO', color: 'red'},
-                {id: 202, label: 'DOING', color: 'orange'},
-                {id: 203, label: 'DONE', color: 'green'},
+                {id: 20000000001, label: 'TODO', color: 'red'},
+                {id: 20000000002, label: 'DOING', color: 'orange'},
+                {id: 20000000003, label: 'DONE', color: 'green'},
 
                 <?php foreach ($project->tasks as $task): ?>
-                <?php foreach ($task->users as $user): ?>
-                {id: '<?= $task->id ?>' +<?= $user->id ?>, label: '<?= h($user->username) ?>'},
-                <?php endforeach; ?>
                 {id: <?= $task->id ?>, label: '<?= h($task->name) ?>'},
-
                 <?php endforeach; ?>
 
             ]);
 
             // create an array with edges
             var edges = new vis.DataSet([
-                {from: 201, to: 202},
-                {from: 202, to: 203},
+                {from: 20000000001, to: 20000000002},
+                {from: 20000000002, to: 20000000003},
                 <?php foreach ($project->tasks as $task): ?>
                 <?php if ($task->state->name == 'todo'): ?>
-                {from: <?= $task->id ?>, to: 201},
+                {from: <?= $task->id ?>, to: 20000000001},
                 <?php endif; ?>
                 <?php if ($task->state->name == 'doing'): ?>
-                {from: <?= $task->id ?>, to: 202},
+                {from: <?= $task->id ?>, to: 20000000002},
                 <?php endif; ?>
                 <?php if ($task->state->name == 'done'): ?>
-                {from: <?= $task->id ?>, to: 203},
+                {from: <?= $task->id ?>, to: 20000000003},
                 <?php endif; ?>
                 <?php endforeach; ?>
             ]);
@@ -344,8 +347,9 @@
 
             var url = '<?= $this->Url->build(['controller' => 'Tasks', 'action' => 'addtask']); ?>' + '/' + id[1];
 
-            console.log(id[1]);
+
             $('.task-modal-cont').load(url, function (result) {
+                console.log($('#taskModal'));
                 $('#taskModal').modal({show: true});
             });
         });
