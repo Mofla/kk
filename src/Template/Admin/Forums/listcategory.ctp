@@ -11,7 +11,7 @@
             </thead>
             <tbody class="sscategory">
             <?php foreach($categories as $cat): ?>
-            <tr data-order="<?= $cat->sort ?>" id="<?= $cat->sort ?>">
+            <tr data-order="<?= $cat->sort ?>" id="<?= $cat->id ?>">
                 <td><?= $cat->name ?></td>
             </tr>
             <?php endforeach ?>
@@ -24,18 +24,18 @@
 <script>
 
 
-    var order = [];
+    var id = [];
         $('tbody').sortable({
             update: function( ) {
-                order.length = 0;
+                id.length = 0;
                 $('.sortab tr').each(function() {
-                    order.push(this.id);
+                    id.push(this.id);
                 });
-                order.shift();
+                id.shift();
                 $.ajax({
                     type: 'POST',
-                    url: '<?= $this->Url->build("Forums/saveordercategory"); ?>',
-                    data: 'id=' + order,
+                    url: '<?= $this->Url->build("admin/forums/saveordercategory"); ?>',
+                    data: 'id=' + id,
                     success: function (html) {
                         $('#test').text(html);
                     }
