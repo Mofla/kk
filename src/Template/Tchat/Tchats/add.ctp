@@ -141,6 +141,9 @@
                 $('.page-content').load('<?= $this->Url->build(['controller' => 'Tchats', 'action' => 'add'])?>');
             });
         });
+        setInterval($('.page-content').load('<?= $this->Url->build(['controller' => 'Tchats', 'action' => 'add'])?>'),1000);
+/*
         $('.tchat').animate({ scrollTop: $(document).height()});
+*/
     </script>
 </div>
