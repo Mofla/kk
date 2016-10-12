@@ -65,3 +65,11 @@
 .curs{
     cursor: move;
 }
+.ui-sortable-helper {
+    display: table;
+    background-color: white;
+}
+
+#newcat{
+    width: 50%;
+}
