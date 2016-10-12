@@ -64,7 +64,7 @@
         // effect on click
         $('.img-portfolio').on("mouseenter mouseleave",function(){
             var div = $(this).find('div');
-            $(div).fadeToggle(425);
+            $(div).fadeToggle(1);
         });
 
         // show images
