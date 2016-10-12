@@ -3,7 +3,7 @@
     <?php foreach($portfolios as $portfolio): ?>
         <div class="col-xs-12 col-sm-6 col-md-3 col-no-gutter">
             <div class="img-portfolio collapse">
-                <?= $this->Html->image('portfolios/'.$portfolio->picture_url,['class' => 'img-portfolio-img']) ?>
+                <?= $this->Html->image('../uploads/portfolios/'.$portfolio->picture_url,['class' => 'img-portfolio-img']) ?>
                 <div class="img-portfolio-description collapse">
                     <h6 class="h4 text-center"><?= $portfolio->name ?></h6>
                     <p>
