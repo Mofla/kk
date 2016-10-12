@@ -56,13 +56,24 @@ class UsersController extends AppController
      */
     public function add()
     {
+
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
+
+            //if (!empty($_FILES['picture_url']) ) {
+               // $img = $_FILES['picture_url']['name'];
+                //$ext = explode('.', $img);
+                //$rename = str_replace($ext[0],Time::now()->format("Ymdhis"),$img);
+                //$temp = $_FILES['picture_url']['tmp_name'];
+                //move_uploaded_file($temp, WWW_ROOT . "uploads" . DS ."imgs" . DS . $rename);
+                //$user->picture_url = $rename;
+            //}
+
             $user = $this->Users->patchEntity($user, $this->request->data);
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('The user has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                //return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__('The user could not be saved. Please, try again.'));
             }
