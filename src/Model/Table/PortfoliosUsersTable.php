@@ -34,12 +34,16 @@ class PortfoliosUsersTable extends Table
         parent::initialize($config);
 
         $this->table('portfolios_users');
+        $this->displayField('user_id');
+        $this->primaryKey('user_id');
 
         $this->belongsTo('Portfolios', [
-            'foreignKey' => 'portfolio_id'
+            'foreignKey' => 'portfolio_id',
+            'joinType' => 'INNER'
         ]);
         $this->belongsTo('Users', [
-            'foreignKey' => 'user_id'
+            'foreignKey' => 'user_id',
+            'joinType' => 'INNER'
         ]);
     }
 

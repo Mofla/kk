@@ -94,6 +94,7 @@ Router::prefix('admin', function ($routes) {
 
 Router::prefix('portfolios', function($routes) {
     $routes->connect('/', ['controller' => 'Portfolios','action' => 'index'], ['routeClass' => 'InflectedRoute']);
+    $routes->connect('/:id', ['controller' => 'Portfolios','action' => 'index'],['id' => '[0-9]+','pass'=>['id']], ['routeClass' => 'InflectedRoute']);
     $routes->connect('/voir/*', ['controller' => 'Portfolios','action' => 'view'], ['routeClass' => 'InflectedRoute']);
     $routes->fallbacks(DashedRoute::class);
 });
