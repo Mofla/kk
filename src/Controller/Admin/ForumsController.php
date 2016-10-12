@@ -118,14 +118,20 @@ class ForumsController extends AppController
                  ->execute();
             }
         }
-
         $this->set(compact('order'));
     }
 
     public function addcategory()
     {
         $category = $this->Forums->Categories->newEntity();
+        $catsort = $this->Forums->Categories->find()
+            ->select('sort')
+            ->order(['sort' => 'DESC'])
+            ->first();
+        $csort = $catsort->sort + 1;
+
         if ($this->request->is('post')) {
+            $this->request->data['sort'] = $csort;
             $category = $this->Forums->Categories->patchEntity($category, $this->request->data);
             if ($this->Forums->Categories->save($category)) {
                 $this->Flash->success(__('The category has been saved.'));
@@ -139,35 +145,30 @@ class ForumsController extends AppController
         $this->set('_serialize', ['category']);
     }
 
-    public function editcategory($id = null)
+    public function ajaxeditcategory()
     {
-        $category = $this->Forums->Categories->get($id, [
-            'contain' => []
-        ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $category = $this->Forums->Categories->patchEntity($category, $this->request->data);
-            if ($this->Forums->Categories->save($category)) {
-                $this->Flash->success(__('The category has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The category could not be saved. Please, try again.'));
-            }
+        $this->autoRender = false ;
+        $table = $this->Forums->Categories;
+        if ($this->request->is(['post'])) {
+            $id = $this->request->data['id'];
+            $category = $this->Forums->Categories->find()
+                ->where(['id' => $id])->first();
+            $categories = $this->request->data['title'];
+            $category->name = $categories;
+            $table->save($category);
         }
-        $this->set(compact('category'));
-        $this->set('_serialize', ['category']);
     }
 
-    public function delete($id = null)
-    {
-        $this->request->allowMethod(['post', 'delete']);
-        $category = $this->Forums->Categories->get($id);
-        if ($this->Forums->Categories->delete($category)) {
-            $this->Flash->success(__('The category has been deleted.'));
-        } else {
-            $this->Flash->error(__('The category could not be deleted. Please, try again.'));
-        }
-
-        return $this->redirect(['action' => 'index']);
+    public function deletecategory($id = null)
+{
+    $this->request->allowMethod(['post', 'delete']);
+    $category = $this->Forums->Categories->get($id);
+    if ($this->Forums->Categories->delete($category)) {
+        $this->Flash->success(__('The category has been deleted.'));
+    } else {
+        $this->Flash->error(__('The category could not be deleted. Please, try again.'));
     }
+
+    return $this->redirect(['controller' => 'Forums','action' => 'listcategory']);
+}
 }

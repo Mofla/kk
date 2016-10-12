@@ -61,3 +61,7 @@
     border-radius: 50%!important;
     margin: 5px;
 }
+
+.curs{
+    cursor: move;
+}
