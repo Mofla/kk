@@ -54,8 +54,16 @@ class TchatsController extends AppController
 
         $user = $this->Auth->User('username');
         $id = $this->Auth->User('id');
+        $time = Time::now();
+        $time->timezone = 'Europe/Paris';
+        $time->i18nFormat('Y-m-d h:m:s');
 
-        $list_message = $this->Tchats->find('all')->contain('Users');
+        $time_2 = Time::now();
+        $time_2->timezone = 'Europe/Paris';
+        $time_2->i18nFormat('Ymdhms');
+        $time_2->modify('-1 weeks');
+
+        $list_message = $this->Tchats->find('all')->contain('Users')->order('date');
 
         $tchat = $this->Tchats->newEntity();
 
@@ -64,12 +72,13 @@ class TchatsController extends AppController
             $tchat = $this->Tchats->patchEntity($tchat, $this->request->data);
 
             $tchat->user_id = $this->Auth->User('id');
-            $tchat->date = Time::now()->format('Y-m-d h:m:s');
+
+            $tchat->date = $time;
 
              $this->Tchats->save($tchat);
         }
 
-        $this->set(compact('tchat','list_message','user','id'));
+        $this->set(compact('tchat','list_message','user','id','time_2'));
         $this->set('_serialize', ['tchat']);
     }
 

@@ -1,23 +1,32 @@
 <div class="container">
     <h3><?= __('Wellcom <b>' . $user . '</b> to Tchats') ?></h3>
     <div class="tchat">
-            <?php $i=0; foreach ($list_message as $tchats): $i++ ?>
-                <div class="<?= $i ?> pad" id="<?= $tchats->user_id ?>">
-                    <p class="message"><?= $tchats->message ?></p>
-                    <p class="users"><?= $tchats->has('user') ? $this->Html->link($tchats->user->username, ['controller' => 'Users', 'action' => 'view', $tchats->user->id], ['value' => $tchats->user->id, 'class' => 'hh']) : '' ?>
+        <?php $i = 0;
+        foreach ($list_message as $tchats): $i++ ?>
+            <div class="<?= $i ?> pad" id="<?= $tchats->user_id ?>" date="<?= $tchats->date->toUnixString(); ?>">
+                <p class="message"><?= $tchats->message ?></p>
+                <p class="users"><?= $tchats->has('user') ? $this->Html->link($tchats->user->username, ['controller' => 'Users', 'action' => 'view', $tchats->user->id], ['value' => $tchats->user->id, 'class' => 'hh']) : '' ?>
                     <?= $tchats->date ?></p>
-                </div>
+            </div>
             <script>
-            if ($('.<?= $i ?>').attr('id') == <?= $id ?>) {
 
-            $('.<?= $i ?>').addClass('moi');
 
-            } else if ($('.<?= $i ?>').attr('id') != <?= $id ?>) {
+                if ($('.<?= $i ?>').attr('date') < <?= $time_2->toUnixString(); ?>) {
 
-            $('.<?= $i ?>').addClass('lui');
-            }
+                    $('.<?= $i ?>').addClass('hidden');
+                }
+
+                if ($('.<?= $i ?>').attr('id') == <?= $id ?>) {
+
+                    $('.<?= $i ?>').addClass('moi');
+
+                } else if ($('.<?= $i ?>').attr('id') != <?= $id ?>) {
+
+                    $('.<?= $i ?>').addClass('lui');
+                }
+
             </script>
-            <?php endforeach; ?>
+        <?php endforeach; ?>
     </div>
     <?= $this->Form->create($tchat) ?>
     <fieldset>
@@ -29,22 +38,26 @@
         .error-message {
             display: none;
         }
+
         .in {
             display: inline-block;
             height: 35px;
             border: none;
         }
+
         .date {
             font-size: 11px;
             color: black;
         }
+
         .tchat {
             height: 400px;
             overflow-y: scroll;
             text-align: left;
             padding: 1%;
-            background-color:#ffffff ;
+            background-color: #ffffff;
         }
+
         .lui {
             margin-top: 2%;
             left: 10px;
@@ -53,8 +66,9 @@
             height: auto;
             padding: 0px;
             background: #0c5eff;
-            border-radius: 10%!important;
+            border-radius: 10% !important;
         }
+
         .lui:after {
             content: '';
             position: absolute;
@@ -67,6 +81,7 @@
             left: -12px;
             top: 25px;
         }
+
         .moi {
             margin-top: 2%;
             left: 83%;
@@ -77,6 +92,7 @@
             background: #00A000;
             border-radius: 10px !important;
         }
+
         .moi:after {
             content: '';
             position: absolute;
@@ -89,14 +105,17 @@
             right: -12px;
             top: 25px;
         }
+
         p a {
             color: white;
             text-decoration: none;
             text-transform: capitalize;
         }
-        .pad{
+
+        .pad {
             padding: 10px;
         }
+
         hr, p {
             font-size: 11px;
             margin: 20px 0;
@@ -104,6 +123,7 @@
             word-wrap: break-word;
 
         }
+
         .message {
             font-size: 18px;
             margin: 0 0;
@@ -118,8 +138,9 @@
                     dataType: 'html',
                     type: 'post'
                 });
-                $('.page-content').load('<?= $this->Url->build(['controller' => 'Tchats', 'action' => 'add'])?>').show('fade');
+                $('.page-content').load('<?= $this->Url->build(['controller' => 'Tchats', 'action' => 'add'])?>');
             });
         });
-</script
+        $('.tchat').animate({ scrollTop: $(document).height()});
+    </script>
 </div>
