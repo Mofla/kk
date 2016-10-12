@@ -101,7 +101,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                                         <div class="cbp-caption-activeWrap">
                                                             <div class="cbp-l-caption-alignCenter">
                                                                 <div class="cbp-l-caption-body">
-                                                                    <a href="<?= $this->url->build(['controller' => 'Users', 'action' => 'view', $user->id]); ?>"
+                                                                    <a href="<?= $this->Url->build(['controller' => 'Users', 'action' => 'view', $user->id]); ?>"
                                                                        class="cbp-singlePage cbp-l-caption-buttonLeft btn red uppercase btn red uppercase"
                                                                        rel="nofollow">Profil</a>
                                                                     <a href="../portfolios/<?= $user->id ?>"
