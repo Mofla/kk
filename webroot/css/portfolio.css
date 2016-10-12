@@ -30,6 +30,12 @@ Travail sur les effets des images
 .img-portfolio-description a
 {
     color: #326bff;
+    text-decoration: none;
+}
+
+.img-portfolio-description a:hover
+{
+    color: #619cff;
 }
 
 .bottom-btn{
