@@ -40,6 +40,7 @@ class MenuCell extends Cell
             ->matching('Roles')->where(['Roles.id =' => $role])
             ->matching('Connectors')->where(['Connectors.controller LIKE'=>'%sers%']);
         
+
         $gererPerm = $this->Permissions->find('all')
             ->contain('Connectors', 'Roles', 'Users')
             ->where(['menu' => 1])
