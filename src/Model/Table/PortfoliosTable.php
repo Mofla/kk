@@ -67,8 +67,7 @@ class PortfoliosTable extends Table
             ->notEmpty('url');
 
         $validator
-            ->requirePresence('picture_url', 'create')
-            ->notEmpty('picture_url');
+            ->allowEmpty('picture_url');
 
         return $validator;
     }

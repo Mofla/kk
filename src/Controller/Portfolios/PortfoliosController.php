@@ -16,10 +16,20 @@ class PortfoliosController extends AppController
      *
      * @return \Cake\Network\Response|null
      */
-    public function index()
+    public function index($id=null)
     {
-        $portfolios = $this->Portfolios->find()->contain(['Users']);
-
+        $portfolios = $this->Portfolios->find('all',[
+            'contain' => 'Users'
+        ]);
+        if($id!=null)
+        {
+            $portfolios = $portfolios->matching('Users',function($q)use($id){
+                return $q->where(['Users.id' => $id]);
+            });
+        }
+        $this->paginate = [
+            'limit' => 8
+        ];
         $portfolios = $this->paginate($portfolios);
         $this->set(compact('portfolios'));
         $this->set('_serialize', ['portfolios']);
@@ -60,7 +70,12 @@ class PortfoliosController extends AppController
                 $this->Flash->error(__('The portfolio could not be saved. Please, try again.'));
             }
         }
-        $users = $this->Portfolios->Users->find('list', ['limit' => 200]);
+        $users = $this->Portfolios->Users->find('list', [
+            'keyField' => 'id',
+            'valueField' => function($q){
+                return $q['firstname'].' '.$q['lastname'];
+            }
+        ]);
         $this->set(compact('portfolio', 'users'));
         $this->set('_serialize', ['portfolio']);
     }
