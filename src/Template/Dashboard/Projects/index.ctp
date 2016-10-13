@@ -71,7 +71,7 @@
                                                                                 <?= $this->Form->postLink('<i class="glyphicon glyphicon-trash"></i>', ['controller' => 'Tasks', 'action' => 'delete', $task->id], ['class' => 'btn', 'escape' => false], ['confirm' => __('Are you sure you want to delete # {0}?', $task->id)]) ?>
                                                                             </div>
                                                                             <div class="list-icon-container pull-right">
-                                                                                <?= $this->Html->link('<i class="glyphicon glyphicon-pencil"></i>', ['controller' => 'Tasks', 'action' => 'edit', $task->id], ['class' => 'btn', 'escape' => false]) ?>
+                                                                                <?= $this->Html->link('<i class="glyphicon glyphicon-pencil"></i>', ['controller' => 'Tasks', 'action' => 'edit', $task->id], ['id' => 'task-'.$task->id,'class' => 'btn edittask', 'escape' => false]) ?>
                                                                             </div>
 
                                                                             <div class="list-item-content">
@@ -120,6 +120,12 @@
                                                                      aria-expanded="true">
                                                                     <ul>
                                                                         <li class="mt-list-item">
+                                                                            <div class="list-icon-container pull-right">
+                                                                                <?= $this->Form->postLink('<i class="glyphicon glyphicon-trash"></i>', ['controller' => 'Tasks', 'action' => 'delete', $task->id], ['class' => 'btn', 'escape' => false], ['confirm' => __('Are you sure you want to delete # {0}?', $task->id)]) ?>
+                                                                            </div>
+                                                                            <div class="list-icon-container pull-right">
+                                                                                <?= $this->Html->link('<i class="glyphicon glyphicon-pencil"></i>', ['controller' => 'Tasks', 'action' => 'edit', $task->id], ['id' => 'task-'.$task->id,'class' => 'btn edittask', 'escape' => false]) ?>
+                                                                            </div>
                                                                             <div class="list-icon-container">
                                                                                 <i class="icon-close"></i>
                                                                             </div>
@@ -169,6 +175,12 @@
                                                                      aria-expanded="true">
                                                                     <ul>
                                                                         <li class="mt-list-item">
+                                                                            <div class="list-icon-container pull-right">
+                                                                                <?= $this->Form->postLink('<i class="glyphicon glyphicon-trash"></i>', ['controller' => 'Tasks', 'action' => 'delete', $task->id], ['class' => 'btn', 'escape' => false], ['confirm' => __('Are you sure you want to delete # {0}?', $task->id)]) ?>
+                                                                            </div>
+                                                                            <div class="list-icon-container pull-right">
+                                                                                <?= $this->Html->link('<i class="glyphicon glyphicon-pencil"></i>', ['controller' => 'Tasks', 'action' => 'edit', $task->id], ['id' => 'task-'.$task->id,'class' => 'btn edittask', 'escape' => false]) ?>
+                                                                            </div>
                                                                             <div class="list-icon-container">
                                                                                 <i class="icon-close"></i>
                                                                             </div>
@@ -189,7 +201,7 @@
                                                             </div>
                                                         <?php endif; ?>
                                                     <?php endforeach; ?>
-                                                    <div class="portlet-sortable-empty"></div>
+                                                    <div class="portlet-sortable-empty ui-state-disabled"></div>
 
                                                 </div>
                                             </div>
@@ -245,8 +257,8 @@
 
     <style type="text/css">
         .nodes {
-            width: 100%;
-            height: 500px;
+            width: 600px;
+            height: 400px;
             border: 1px solid lightgray;
         }
 
@@ -295,7 +307,25 @@
                 nodes: nodes,
                 edges: edges
             };
-            var options = {};
+            var options = {
+                "edges": {
+                    "arrows": {
+                        "to": {
+                            "enabled": true
+                        }
+                    },
+                    "smooth": {
+                        "forceDirection": "none"
+                    }
+                },
+                "interaction": {
+                    "hover": true,
+                    "navigationButtons": true
+                },
+                "physics": {
+                    "minVelocity": 0.75
+                }
+            };
             var network<?= $project->id?> = new vis.Network(container, data, options);
         </script>
     <?php endforeach; ?>
@@ -310,6 +340,7 @@
 
         //sortable stuff
         $("#colum-1, #colum-2, #colum-3").sortable({
+
             connectWith: ".colum",
             handle: ".portlet-header",
             cancel: ".portlet-toggle",
@@ -349,7 +380,19 @@
 
 
             $('.task-modal-cont').load(url, function (result) {
-                console.log($('#taskModal'));
+                $('#taskModal').modal({show: true});
+            });
+        });
+
+        //task edit modal
+        $(document).on('click', '.edittask', function (event) {
+            event.preventDefault();
+            var id = $(this).attr('id').split('-');
+
+            var url = '<?= $this->Url->build(['controller' => 'Tasks', 'action' => 'edittask']); ?>' + '/' + id[1];
+
+
+            $('.task-modal-cont').load(url, function (result) {
                 $('#taskModal').modal({show: true});
             });
         });
