@@ -228,6 +228,35 @@
     <?= $this->Html->script('../assets/global/plugins/jquery-ui/jquery-ui.min.js') ?>
 <?= $this->Html->script('../assets/global/plugins/bootstrap/js/bootstrap.min.js') ?>
 
+<style type="text/css">
+    .nodes {
+        width: 600px;
+        height: 400px;
+        border: 1px solid lightgray;
+    }
+
+    p {
+        max-width: 700px;
+    }
+
+    .vis-item.red {
+        color: white;
+        background-color: red;
+        border-color: darkred;
+    }
+    .vis-item.orange {
+        color: black;
+        background-color: orange;
+        border-color: orangered;
+    }
+    .vis-item.green {
+        color: black;
+        background-color: green;
+        border-color: darkolivegreen;
+    }
+
+</style>
+
 
 
     <?php foreach ($projects as $project): ?>
@@ -242,7 +271,17 @@
                     id: <?= $task->id ?>,
                     content: '<?= h($task->name) ?>',
                     start: '<?= h($task->start_date) ?>',
-                    end: '<?= h($task->end_date) ?>'
+                    end: '<?= h($task->end_date) ?>',
+                    <?php if ($task->state->name == "todo"): ?>
+                    className: 'red'
+                    <?php endif; ?>
+                    <?php if ($task->state->name == "doing"): ?>
+                    className: 'orange'
+                    <?php endif; ?>
+                    <?php if ($task->state->name == "done"): ?>
+                    className: 'green'
+                    <?php endif; ?>
+
                 },
 
                 <?php endforeach; ?>
@@ -255,18 +294,7 @@
     <?php endforeach; ?>
 
 
-    <style type="text/css">
-        .nodes {
-            width: 600px;
-            height: 400px;
-            border: 1px solid lightgray;
-        }
 
-        p {
-            max-width: 700px;
-        }
-
-    </style>
 
 
     <?php foreach ($projects as $project): ?>
