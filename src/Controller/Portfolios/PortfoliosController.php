@@ -10,6 +10,10 @@ use App\Controller\AppController;
  */
 class PortfoliosController extends AppController
 {
+    public function initialize()
+    {
+        $this->loadComponent('Upload');
+    }
 
     /**
      * Index method
@@ -93,6 +97,14 @@ class PortfoliosController extends AppController
             'contain' => ['Users']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
+            if(isset($this->request->data['picture']))
+            {
+                $picture = $this->Upload->getPicture($this->request->data['picture'],'Portfolio',$id);
+                if($picture != false)
+                {
+                    $this->request->data['picture_url'] = $picture;
+                }
+            }
             $portfolio = $this->Portfolios->patchEntity($portfolio, $this->request->data);
             if ($this->Portfolios->save($portfolio)) {
                 $this->Flash->success(__('The portfolio has been saved.'));
@@ -102,7 +114,12 @@ class PortfoliosController extends AppController
                 $this->Flash->error(__('The portfolio could not be saved. Please, try again.'));
             }
         }
-        $users = $this->Portfolios->Users->find('list', ['limit' => 200]);
+        $users = $this->Portfolios->Users->find('list', [
+            'keyField' => 'id',
+            'valueField' => function($q){
+                return $q['firstname'].' '.$q['lastname'];
+            }
+        ]);
         $this->set(compact('portfolio', 'users'));
         $this->set('_serialize', ['portfolio']);
     }
