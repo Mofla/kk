@@ -44,10 +44,6 @@ class TasksController extends AppController
                 $this->Flash->error(__('The task could not be saved. Please, try again.'));
             }
         }
-
-
-
-
     }
 
     /**
@@ -100,6 +96,28 @@ class TasksController extends AppController
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
     public function edit($id = null)
+    {
+        $task = $this->Tasks->get($id, [
+            'contain' => ['Users']
+        ]);
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $task = $this->Tasks->patchEntity($task, $this->request->data);
+            if ($this->Tasks->save($task)) {
+                $this->Flash->success(__('The task has been saved.'));
+
+                return $this->redirect(['action' => 'index']);
+            } else {
+                $this->Flash->error(__('The task could not be saved. Please, try again.'));
+            }
+        }
+        $states = $this->Tasks->States->find('list', ['limit' => 200]);
+        $projects = $this->Tasks->Projects->find('list', ['limit' => 200]);
+        $users = $this->Tasks->Users->find('list', ['limit' => 200]);
+        $this->set(compact('task', 'states', 'projects', 'users'));
+        $this->set('_serialize', ['task']);
+    }
+
+    public function edittask($id = null)
     {
         $task = $this->Tasks->get($id, [
             'contain' => ['Users']

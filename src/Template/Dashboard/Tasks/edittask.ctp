@@ -25,7 +25,7 @@
                     <?= $this->Form->button(__('Ajouter'), ['class' => 'btn btn-default']) ?>
                     <?= $this->Form->end() ?>
                 </div>
-                <!--<div class="modal-footer">
+               <!-- <div class="modal-footer">
                     <button class="btn" data-dismiss="modal">Annuler</button>
                 </div>-->
             </div>
@@ -46,6 +46,8 @@
 
     <script>
         $('.multi-select').multiSelect();
+
+
     </script>
 
 
