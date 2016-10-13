@@ -14,39 +14,20 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><span class="glyphicon glyphicon-list">
+                <a  href="<?= $this->Url->build(['controller' => 'Forums','action' => 'listcategory']) ?>"><span class="glyphicon glyphicon-list">
                             </span>Catégories</a>
             </h4>
         </div>
-        <div id="collapseOne" class="panel-collapse collapse">
-            <div class="panel-body">
-                <table class="table">
-                    <tr>
-                        <td>
-                            <span class="glyphicon glyphicon-plus text-primary"></span>
-                            <?= $this->Html->link(__('Créer'), ['controller' => 'Forums','action' => 'addcategory']) ?>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <span class="glyphicon glyphicon-pencil text-primary"></span>
-                            <?= $this->Html->link(__('Editer / Supprimer'), ['controller' => 'Forums','action' => 'listcategory']) ?>
-                        </td>
-                    </tr>
 
-
-                </table>
-            </div>
-        </div>
     </div>
     <div class="panel panel-default">
         <div class="panel-heading">
             <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><span class="glyphicon glyphicon-comment">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><span class="glyphicon glyphicon-comment">
                             </span>Forums</a>
             </h4>
         </div>
-        <div id="collapseTwo" class="panel-collapse collapse">
+        <div id="collapseOne" class="panel-collapse collapse">
             <div class="panel-body">
                 <table class="table">
                     <tr>
