@@ -9,19 +9,25 @@
 </div>
 
 <div class="col-md-9 hidden" id="hiddiv">
-<div class="input-group pull-right voffset3" style="text-align:left" id="newcat">
-    <input type="text" class="form-control" name="username1" >
+<div class="input-group block-center voffset3" style="text-align:left" id="newcat">
+    <?= $this->Form->create($category, ['url' => ['action' => 'addcategory']]) ?>
+    <!--<input type="text" class="form-control" name="name" >-->
+    <!--<span class="input-group-btn">-->
+ <!--<a href="javascript:;" class="btn green-jungle"-->
+  <!--id="username1_checker">-->
+
+          <!--<i class="fa fa-check"></i> Valider </a>-->
+                        <!--</span>-->
     <span class="input-group-btn">
- <a href="javascript:;" class="btn green-jungle"
-  id="username1_checker">
-          <i class="fa fa-check"></i> Valider </a>
-                        </span>
+    <?= $this->Form->input('name' , ['label' => false ,'placeholder' =>'Titre de la nouvelle catégorie', 'class' => 'form-control']); ?>
+
+    <?= $this->Form->button('VALIDER', ['class' => 'btn green-jungle']) ?>
+    </span>
+    <?= $this->Form->end() ?>
+</div>
 </div>
 
-
-</div>
-
-<div class="col-md-9 voffset3">
+<div class="col-md-9 voffset3 pull-right">
 <div class="table-responsive">
     <table class="table sortab">
         <thead>

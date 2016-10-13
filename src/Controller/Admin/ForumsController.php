@@ -55,17 +55,17 @@ class ForumsController extends AppController
 
     public function listforum()
     {
-        $forum = $this->Forums->find('all');
+        $forum = $this->Forums->Categories->find('all')
+        ->contain('Forums');
 
         $this->set(compact('forum'));
         $this->set('_serialize', ['forum']);
     }
 
-    public function editforum($id = null)
+    public function editforum()
     {
-        $forum = $this->Forums->get($id, [
-            'contain' => []
-        ]);
+        $forum = $this->Forums->find('all');
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             $forum = $this->Forums->patchEntity($forum, $this->request->data);
             if ($this->Forums->save($forum)) {
@@ -96,8 +96,9 @@ class ForumsController extends AppController
     public function listcategory()
     {
         $categories = $this->Forums->Categories->find('all');
+        $category = $this->Forums->Categories->newEntity();
 
-        $this->set(compact('categories'));
+        $this->set(compact('categories','category'));
         $this->set('_serialize', ['categories']);
     }
 
@@ -136,7 +137,7 @@ class ForumsController extends AppController
             if ($this->Forums->Categories->save($category)) {
                 $this->Flash->success(__('The category has been saved.'));
 
-                return $this->redirect(['action' => 'addcategory']);
+                return $this->redirect(['action' => 'listcategory']);
             } else {
                 $this->Flash->error(__('The category could not be saved. Please, try again.'));
             }
