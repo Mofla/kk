@@ -1,33 +1,8 @@
 <div class="container">
-    <h3><?= __('Wellcom <b>' . $user . '</b> to Tchats') ?></h3>
-    <div class="tchat">
-        <?php $i = 0;
-        foreach ($list_message as $tchats): $i++ ?>
-            <div class="<?= $i ?> pad" id="<?= $tchats->user_id ?>" date="<?= $tchats->date->toUnixString(); ?>">
-                <p class="message"><?= $tchats->message ?></p>
-                <p class="users"><?= $tchats->has('user') ? $this->Html->link($tchats->user->username, ['controller' => 'Users', 'action' => 'view', $tchats->user->id], ['value' => $tchats->user->id, 'class' => 'hh']) : '' ?>
-                    <?= $tchats->date ?></p>
-            </div>
-            <script>
-
-
-                if ($('.<?= $i ?>').attr('date') < <?= $time_2->toUnixString(); ?>) {
-
-                    $('.<?= $i ?>').addClass('hidden');
-                }
-
-                if ($('.<?= $i ?>').attr('id') == <?= $id ?>) {
-
-                    $('.<?= $i ?>').addClass('moi');
-
-                } else if ($('.<?= $i ?>').attr('id') != <?= $id ?>) {
-
-                    $('.<?= $i ?>').addClass('lui');
-                }
-
-            </script>
-        <?php endforeach; ?>
+    <div class="row_tchat">
+        </div>
     </div>
+    <hr>
     <?= $this->Form->create($tchat) ?>
     <fieldset>
         <?= $this->Form->input('message', ['type' => 'text', 'class' => 'col-md-11 in', 'label' => false, 'placeholder' => 'Message', 'id' => 'mess']) ?>
@@ -50,13 +25,7 @@
             color: black;
         }
 
-        .tchat {
-            height: 400px;
-            overflow-y: scroll;
-            text-align: left;
-            padding: 1%;
-            background-color: #ffffff;
-        }
+
 
         .lui {
             margin-top: 2%;
@@ -138,12 +107,9 @@
                     dataType: 'html',
                     type: 'post'
                 });
-                $('.page-content').load('<?= $this->Url->build(['controller' => 'Tchats', 'action' => 'add'])?>');
+                $('.row_tchat').load('<?= $this->Url->build(['controller' => 'Tchats', 'action' => 'index'])?>');
             });
         });
-        setInterval($('.page-content').load('<?= $this->Url->build(['controller' => 'Tchats', 'action' => 'add'])?>'),1000);
-/*
-        $('.tchat').animate({ scrollTop: $(document).height()});
-*/
-    </script>
+        $('.row_tchat').load('<?= $this->Url->build(['controller' => 'Tchats', 'action' => 'index'])?>');
+        </script>
 </div>
