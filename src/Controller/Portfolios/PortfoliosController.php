@@ -141,4 +141,17 @@ class PortfoliosController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+    public function admin()
+    {
+        $portfolios = $this->Portfolios->find('all', [
+            'contain' => 'Users'
+        ]);
+        $this->paginate = [
+            'limit' => 10
+        ];
+        $portfolios = $this->paginate($portfolios);
+
+        $this->set(compact('portfolios'));
+    }
 }
