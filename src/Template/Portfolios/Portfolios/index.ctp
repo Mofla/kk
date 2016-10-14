@@ -8,7 +8,12 @@
                     <h6 class="h4 text-center"><?= $portfolio->name ?></h6>
                     <p>
                         <span class="label">Description :</span><br>
-                        <?= $portfolio->description ?>
+                        <?php
+                            // Cut the description if too long
+                            $description = mb_substr($portfolio->description,0,100);
+                            echo $description;
+                            echo (strlen($description) < strlen($portfolio->description)) ? '...' : '';
+                        ?>
                     </p>
                     <p>
                         <span class="label">Par :</span>
@@ -20,12 +25,13 @@
 
                     </p>
                     <span class="bottom-btn">
-                            <?= $this->Html->link('<span class="glyphicon glyphicon-eye-open"></span> Voir',
-                                $portfolio->url,[
-                                    'class' => 'btn btn-xs btn-primary img-rounded',
-                                    'fullBase' => true,
-                                    'escape' => false
-                                ]) ?>
+                            <?= $this->Html->link('<span class="glyphicon glyphicon-eye-open"></span> Voir',[
+                                'action' => 'view',$portfolio->id
+                            ],[
+                                'class' => 'btn btn-xs btn-primary img-rounded',
+                                'fullBase' => true,
+                                'escape' => false
+                            ]) ?>
                     </span>
                 </div>
             </div>
