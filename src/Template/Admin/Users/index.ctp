@@ -29,8 +29,8 @@
                     <i class="fa fa-angle-down"></i>
                 </button>
                 <ul class="dropdown-menu pull-left" role="menu">
-                    <i class="glyphicon glyphicon-search"></i> <a href="<?= $this->Url->build(['controller' => 'Users', 'action' => 'view', $user->id]); ?>">Profil</a><br>
-                    <i class="glyphicon glyphicon-pencil"></i> <a href="<?= $this->Url->build(['controller' => 'Users', 'action' => 'edit', $user->id]); ?>">Editer</a><br>
+                    <i class="glyphicon glyphicon-search"></i> <a href="<?= $this->Url->build(['controller' => 'Users', 'action' => 'view', $user->id]); ?>">Profil</a><br><br>
+                    <i class="glyphicon glyphicon-pencil"></i> <a href="<?= $this->Url->build(['controller' => 'Users', 'action' => 'edit', $user->id]); ?>">Editer</a><br><br>
                     <i class="glyphicon glyphicon-remove"></i> <a href="<?= $this->Url->build(['controller' => 'Users', 'action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $user->id)]); ?>">Supprimer</a>
                 </ul>
             </div>
