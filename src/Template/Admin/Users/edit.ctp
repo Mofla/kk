@@ -53,7 +53,7 @@
                                                 </li>
                                             </ul>
                                             <?php if (!empty($user->github_username)): ?>
-                                                <a href="javascript:;"> <?= $user->github_username ?></a>
+                                                Compte Github :<a href="https://github.com/<?=$user->github_username?>"> <?= $user->github_username ?></a>
                                             <?php endif; ?>
                                         </div>
                                         <!--end col-md-8-->
