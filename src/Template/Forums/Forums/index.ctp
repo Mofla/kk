@@ -48,12 +48,6 @@ $id = $section->id ;
 
         ?>
 
-                <!--<td class="actions">-->
-                    <!--<?= $this->Html->link(__('View'), ['action' => 'view', $forum->id]) ?>-->
-                    <!--<?= $this->Html->link(__('Edit'), ['action' => 'edit', $forum->id]) ?>-->
-                    <!--<?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $forum->id], ['confirm' => __('Are you sure you want to delete # {0}?', $forum->id)]) ?>-->
-                <!--</td>-->
-
         <?php endforeach; ?>
 
         </tbody>

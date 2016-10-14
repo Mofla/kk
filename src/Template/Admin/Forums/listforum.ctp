@@ -5,38 +5,36 @@
 <div class="col-md-9 voffset3 pull-right">
 <div class="table-responsive">
 
-    <?php foreach($forum as $cat): ?>
+    <?php foreach($cat as $forum): ?>
 
-    <table class="table sortab">
+    <table class="table" id="<?= $forum->id ?>">
         <thead>
         <tr>
-            <th class="category" colspan="2"><?= $cat->name ?></th>
+            <th class="category" colspan="2"><?= $forum->name ?></th>
         </tr>
-        <!--<tr>-->
-        <!--<th width="70%" class="ssthead">Titre</th>-->
-        <!--<th width="30%" class="ssthead">Action</th>-->
-        <!--</tr>-->
         </thead>
         <tbody class="sscategory curs">
-        <?php foreach($cat->forums as $cats): ?>
-        <tr class="test" data-order="<?= $cats->sort ?>" id="<?= $cats->id ?>">
+
+        <?php foreach ($forum->forums as $section): ?>
+
+        <tr class="test" data-order="<?= $section->sort ?>" id="<?= $section->id ?>">
             <td width="70%" class="name">
-                <?= $cats->name ?>
+                <?= $section->name ?>
             </td>
             <td width="30%" class="option">
                 <?= $this->Form->button('<i class="fa fa-pencil" aria-hidden="true"></i> EDITER', ['type' =>
                 'button','class' => 'btn btn-warning btn-sm cedit-bt', 'id' => 'edit-bt']); ?>
                 <?= $this->Form->postLink(__('<i class="fa fa-trash-o" aria-hidden="true"></i> SUPPRIMER'),
-                ['controller' => 'Forums','action' => 'deletecategory', $cats->id], ['class' => 'btn btn-danger btn-sm',
+                ['controller' => 'Forums','action' => 'deletecategory', $section->id], ['class' => 'btn btn-danger btn-sm',
                 'escape'=> false , 'confirm' => __('Etes-vous sûr de vouloir supprimer la catégorie : {0}?',
-                $cats->name)]) ?>
+                $section->name)]) ?>
             </td>
         </tr>
-        <?php endforeach ?>
+        <?php endforeach; ?>
         </tbody>
     </table>
 
-    <?php endforeach ?>
+    <?php endforeach; ?>
 
 </div>
 
@@ -70,7 +68,7 @@ $('tbody').sortable({
     }
 });
 
-// affiche les categories dans l'ordre indiqué dans la bdd
+// affiche les forums dans l'ordre indiqué dans la bdd
 var $tbody = $('.sortab tbody');
 $tbody.find('tr').sort(function (a, b) {
     var tda = $(a).attr('data-order');
@@ -80,7 +78,7 @@ $tbody.find('tr').sort(function (a, b) {
             : 0;
 }).appendTo($tbody);
 
-// edition d'une catégorie
+// edition d'un forum
 $(document).on('click', '#edit-bt', function () {
     var origin = $.trim($(this).closest('tr').find('.name').html());
     $(this).closest('tr').find('.name').html('<input type="text" value="' + origin + '" id="e-val" class="edit-mod">');

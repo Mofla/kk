@@ -55,11 +55,10 @@ class ForumsController extends AppController
 
     public function listforum()
     {
-        $forum = $this->Forums->Categories->find('all')
+        $cat = $this->Forums->Categories->find('all')
         ->contain('Forums');
 
-        $this->set(compact('forum'));
-        $this->set('_serialize', ['forum']);
+        $this->set(compact('cat'));
     }
 
     public function editforum()

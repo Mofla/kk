@@ -72,7 +72,7 @@ class ThreadsController extends AppController
                     ->execute();
 
                 $this->Flash->success(__('The thread has been saved.'));
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'view', $thread->id ]);
             } else {
                 $this->Flash->error(__('The thread could not be saved. Please, try again.'));
             }

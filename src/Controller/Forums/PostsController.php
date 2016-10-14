@@ -69,13 +69,13 @@ class PostsController extends AppController
                         'lasttopic' => $post->id ])
                     ->where(['id' => $forumid->forum_id])
                     ->execute();
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['controller'=>'Threads','action' => 'view' ,$id ]);
             } else {
                 $this->Flash->error(__('The post could not be saved. Please, try again.'));
             }
         }
 
-        $this->set(compact('post'));
+        $this->set(compact('post','threadid'));
         $this->set('_serialize', ['post']);
     }
 
