@@ -9,7 +9,7 @@
             echo $this->Form->input('name',['class' => 'form-control']);
             echo $this->Form->input('description',['class' => 'form-control']);
             echo $this->Form->input('url',['class' => 'form-control']);
-            echo $this->Form->input('picture',['type' => 'file','class' => 'form-control']);
+            echo $this->Form->input('picture',['type' => 'file']);
             echo $this->Form->input('users._ids', ['options' => $users,'id' => 'multiselect','class' => 'form-control']);
         ?>
     </fieldset>
