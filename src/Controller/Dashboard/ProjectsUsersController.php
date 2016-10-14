@@ -18,10 +18,12 @@ class ProjectsUsersController extends AppController
      */
     public function index()
     {
+
         $this->paginate = [
             'contain' => ['Projects', 'Users']
         ];
         $projectsUsers = $this->paginate($this->ProjectsUsers);
+
 
         $this->set(compact('projectsUsers'));
         $this->set('_serialize', ['projectsUsers']);
