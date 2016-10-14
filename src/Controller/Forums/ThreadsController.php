@@ -36,16 +36,21 @@ class ThreadsController extends AppController
      */
     public function view($id = null)
     {
+
+
         $thread = $this->Threads->get($id, [
-            'contain' => ['Users', 'Forums', 'Posts.Users']
+            'contain' => ['Posts.Users','Users', 'Forums', 'Posts' => function($q) {
+                return $q->order(['Posts.id' => 'ASC']);
+            }]
         ]);
+
+
         $query = $this->Threads->query();
         $query->update()
             ->set($query->newExpr('countview = countview + 1'))
             ->where(['id' => $id])
             ->execute();
-        $this->set('thread', $thread);
-        $this->set('_serialize', ['thread']);
+        $this->set(compact('thread'));
     }
 
     /**
