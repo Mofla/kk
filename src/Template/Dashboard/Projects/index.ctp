@@ -211,6 +211,7 @@
                                 </div>
                                 <div class="row">
                                     <div id="visualization-<?= $project->id ?>"></div>
+                                    <div id="log"></div>
                                     <div class="nodes" id="mynetwork<?= $project->id ?>"></div>
                                 </div>
                             </div>
@@ -340,11 +341,21 @@
             });
 
             function logEvent(event, properties) {
-                var log = document.getElementById('log');
-                var msg = document.createElement('div');
-                msg.innerHTML = 'event=' + JSON.stringify(event) + ', ' +
-                    'properties=' + JSON.stringify(properties);
-                log.firstChild ? log.insertBefore(msg, log.firstChild) : log.appendChild(msg);
+
+                var eventType = JSON.stringify(event);
+
+                var start = JSON.stringify(properties.data[0].start).split('T');
+                var end = JSON.stringify(properties.data[0].end).split('T');
+                var datAjax = {
+                    start_date: start[0].substring(1),
+                    end_date: end[0].substring(1)
+                };
+
+                $.ajax({
+                    type: "POST",
+                    data: datAjax,
+                    url: '<?= $this->Url->build(["controller" => "Tasks", "action" => "editation"]); ?>' + '/' + properties.data[0].id
+                });
             }
 
             function prettyConfirm(title, text, callback) {
