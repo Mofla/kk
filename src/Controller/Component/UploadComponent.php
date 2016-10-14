@@ -2,26 +2,20 @@
 namespace App\Controller\Component;
 use Cake\Controller\Component;
 
-class CustomComponent extends Component
+class UploadComponent extends Component
 {
     public function getPicture($upload,$directory,$id)
     {
         $extensions = ['jpg','jpeg','png'];
         $file_extension = explode('.',$upload['name'])[1];
-        if(in_array($file_extension,$extensions))
+        if(!in_array($file_extension,$extensions))
         {
-            return false;
+            return $file_newName = 'default.png';
         }
         // define new file name
-        $file_newName = '';
-        switch (ucfirst(strtolower($directory)))
-        {
-            case 'Portfolio':
-                $dir_name = 'pf-'.$id;
-                break;
-        }
+        $file_newName = strtolower($directory).'-'.$id.'.'.$file_extension;
         // upload
-        if(move_uploaded_file($upload['tmp_name'], WWW_ROOT . '/uploads/'.$directory.'/' . $file_newName . '.' . $file_extension))
+        if(move_uploaded_file($upload['tmp_name'], WWW_ROOT . '/uploads/'.strtolower($directory).'/' . $file_newName))
         {
             return $file_newName;
         }

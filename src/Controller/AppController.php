@@ -58,6 +58,7 @@ class AppController extends Controller
             'authorize' => 'Controller'
         ]);
         $this->loadComponent('Common');
+        $this->loadComponent('Upload');
     }
 
     /**
