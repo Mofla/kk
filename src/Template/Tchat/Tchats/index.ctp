@@ -1,43 +1,138 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Tchat'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="tchats index large-9 medium-8 columns content">
-    <h3><?= __('Tchats') ?></h3>
-    <table cellpadding="0" cellspacing="0">
-        <thead>
-            <tr>
-                <th><?= $this->Paginator->sort('id') ?></th>
-                <th><?= $this->Paginator->sort('user_id') ?></th>
-                <th><?= $this->Paginator->sort('date') ?></th>
-                <th class="actions"><?= __('Actions') ?></th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($tchats as $tchat): ?>
-            <tr>
-                <td><?= $this->Number->format($tchat->id) ?></td>
-                <td><?= $tchat->has('user') ? $this->Html->link($tchat->user->id, ['controller' => 'Users', 'action' => 'view', $tchat->user->id]) : '' ?></td>
-                <td><?= h($tchat->date) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $tchat->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $tchat->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $tchat->id], ['confirm' => __('Are you sure you want to delete # {0}?', $tchat->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-        </ul>
-        <p><?= $this->Paginator->counter() ?></p>
+<div class="container">
+    <h3><?= __('Wellcom <b>' . $user . '</b> to Tchats') ?></h3>
+    <hr>
+    <div class="tchat">
+        <?php $i = 0;
+        foreach ($list_message as $tchats): $i++ ?>
+            <div class="<?= $i ?> pad" id="<?= $tchats->user_id ?>" date="<?= $tchats->date->toUnixString(); ?>">
+                <p class="message"><?= $tchats->message ?></p>
+                <p class="users"><?= $tchats->has('user') ? $this->Html->link($tchats->user->username, ['controller' => 'Users', 'action' => 'view', $tchats->user->id], ['value' => $tchats->user->id, 'class' => 'hh']) : '' ?>
+                    <?= $tchats->date ?></p>
+            </div>
+            <script>
+
+                if ($('.<?= $i ?>').attr('date') < <?= $time_2->toUnixString(); ?>) {
+
+                    $('.<?= $i ?>').addClass('hidden');
+                }
+
+                if ($('.<?= $i ?>').attr('id') == <?= $id ?>) {
+
+                    $('.<?= $i ?>').addClass('moi');
+
+                } else if ($('.<?= $i ?>').attr('id') != <?= $id ?>) {
+
+                    $('.<?= $i ?>').addClass('lui');
+                }
+
+            </script>
+        <?php endforeach; ?>
     </div>
+    <style>
+        .error-message {
+            display: none;
+        }
+
+        .in {
+            display: inline-block;
+            height: 35px;
+            border: none;
+        }
+
+        .date {
+            font-size: 11px;
+            color: black;
+        }
+
+        .tchat {
+            height: 400px;
+            overflow: auto;
+            text-align: left;
+            padding: 1%;
+            background-color: #ffffff;
+        }
+
+        .lui {
+            margin-top: 2%;
+            left: 10px;
+            position: relative;
+            width: 180px;
+            height: auto;
+            padding: 0px;
+            background: #0c5eff;
+            border-radius: 10% !important;
+        }
+
+        .lui:after {
+            content: '';
+            position: absolute;
+            border-style: solid;
+            border-width: 15px 15px 15px 0;
+            border-color: transparent #0c5eff;
+            display: block;
+            width: 0;
+            z-index: 1;
+            left: -12px;
+            top: 25px;
+        }
+
+        .moi {
+            margin-top: 2%;
+            left: 83%;
+            position: relative;
+            width: 180px;
+            height: auto;
+            padding: 0px;
+            background: #00A000;
+            border-radius: 10px !important;
+        }
+
+        .moi:after {
+            content: '';
+            position: absolute;
+            border-style: solid;
+            border-width: 15px 0 15px 15px;
+            border-color: transparent #00A000;
+            display: block;
+            width: 0;
+            z-index: 1;
+            right: -12px;
+            top: 25px;
+        }
+
+        p a {
+            color: white;
+            text-decoration: none;
+            text-transform: capitalize;
+        }
+
+        .pad {
+            padding: 10px;
+        }
+
+        hr, p {
+            font-size: 11px;
+            margin: 20px 0;
+            margin-bottom: 0;
+            word-wrap: break-word;
+
+        }
+
+        .message {
+            font-size: 18px;
+            margin: 0 0;
+        }
+    </style>
+    <script>
+        var tchat = $(".tchat");
+
+        tchat.scroll(function () {
+            scrollval = tchat.scrollTop();
+            console.log(scrollval);
+
+        });
+        setInterval($('.row_tchat').load('<?= $this->Url->build(['controller' => 'Tchats', 'action' => 'index'])?>'),1000);
+        tchat.scrollTop(scrollval);
+
+    </script>
 </div>

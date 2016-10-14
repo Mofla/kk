@@ -18,13 +18,21 @@ class TchatsController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Users']
-        ];
-        $tchats = $this->paginate($this->Tchats);
+        $user = $this->Auth->User('username');
+        $id = $this->Auth->User('id');
+        $time = Time::now();
+        $time->timezone = 'Europe/Paris';
+        $time->i18nFormat('Y-m-d h:m:s');
 
-        $this->set(compact('tchats'));
-        $this->set('_serialize', ['tchats']);
+        $time_2 = Time::now();
+        $time_2->timezone = 'Europe/Paris';
+        $time_2->i18nFormat('Ymdhms');
+        $time_2->modify('-1 weeks');
+
+        $list_message = $this->Tchats->find('all')->contain('Users')->order('date');
+
+        $this->set(compact('tchat','list_message','user','id','time_2'));
+        $this->set('_serialize', ['tchat']);
     }
 
     /**
@@ -81,6 +89,7 @@ class TchatsController extends AppController
         $this->set(compact('tchat','list_message','user','id','time_2'));
         $this->set('_serialize', ['tchat']);
     }
+
 
     /**
      * Edit method
