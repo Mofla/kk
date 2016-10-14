@@ -97,6 +97,8 @@ Router::prefix('portfolios', function($routes) {
     $routes->connect('/:id', ['controller' => 'Portfolios','action' => 'index'],['id' => '[0-9]+','pass'=>['id']], ['routeClass' => 'InflectedRoute']);
     $routes->connect('/voir/*', ['controller' => 'Portfolios','action' => 'view'], ['routeClass' => 'InflectedRoute']);
     $routes->connect('/ajouter', ['controller' => 'Portfolios','action' => 'add'], ['routeClass' => 'InflectedRoute']);
+    $routes->connect('/editer', ['controller' => 'Portfolios','action' => 'edit'], ['routeClass' => 'InflectedRoute']);
+    $routes->connect('/gestion', ['controller' => 'Portfolios','action' => 'admin'], ['routeClass' => 'InflectedRoute']);
     $routes->fallbacks(DashedRoute::class);
 });
 
