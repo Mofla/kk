@@ -56,18 +56,24 @@ class ProjectsController extends AppController
      */
     public function add()
     {
+
         $project = $this->Projects->newEntity();
         if ($this->request->is('post')) {
             $project = $this->Projects->patchEntity($project, $this->request->data);
             if ($this->Projects->save($project)) {
                 $this->Flash->success(__('The project has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'index', '#' => 'tab_'.$project->id]);
             } else {
                 $this->Flash->error(__('The project could not be saved. Please, try again.'));
             }
         }
-        $users = $this->Projects->Users->find('list', ['limit' => 200]);
+        $users = $this->Projects->Users->find('list', [
+            'keyField' => 'id',
+            'valueField' => function($q){
+                return $q['firstname'].' '.$q['lastname'];
+            }
+        ]);
         $this->set(compact('project', 'users'));
         $this->set('_serialize', ['project']);
     }

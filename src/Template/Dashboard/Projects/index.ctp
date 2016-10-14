@@ -11,6 +11,9 @@
         <div class="row">
             <div class="col-md-2' col-sm-2 col-xs-2" style="width: 130px;">
                 <ul class="nav nav-tabs tabs-left">
+                    <li class="project-add">
+                        <a href=""> Créer un projet </a>
+                    </li>
                     <?php foreach ($projects as $project): ?>
                         <li class="">
                             <a href="#tab_<?= $project->id ?>" data-toggle="tab"
@@ -264,7 +267,7 @@
 </style>
 
 
-
+<!--generates timelines-->
     <?php foreach ($projects as $project): ?>
         <script type="text/javascript">
             var container = document.getElementById('visualization-<?= $project->id?>');
@@ -276,6 +279,7 @@
 
 
                 <?php foreach ($project->tasks as $task): ?>
+                <?php if ($task->state->name !== 'done'): ?>
 
                 {
                     id: <?= $task->id ?>,
@@ -288,12 +292,9 @@
                     <?php if ($task->state->name == "doing"): ?>
                     className: 'orange'
                     <?php endif; ?>
-                    <?php if ($task->state->name == "done"): ?>
-                    className: 'green'
-                    <?php endif; ?>
 
                 },
-
+                <?php endif; ?>
                 <?php endforeach; ?>
             ]);
             var options = {
@@ -340,6 +341,8 @@
                 logEvent(event, properties);
             });
 
+
+            /*Saves edits to tasks from timeline*/
             function logEvent(event, properties) {
 
                 var eventType = JSON.stringify(event);
@@ -384,7 +387,7 @@
 
 
 
-
+<!--node graph views-->
     <?php foreach ($projects as $project): ?>
 
         <script type="text/javascript">
@@ -506,6 +509,18 @@
             var id = $(this).attr('id').split('-');
 
             var url = '<?= $this->Url->build(['controller' => 'Tasks', 'action' => 'edittask']); ?>' + '/' + id[1];
+
+
+            $('.task-modal-cont').load(url, function (result) {
+                $('#taskModal').modal({show: true});
+            });
+        });
+
+        //project add modal
+        $(document).on('click', '.project-add', function (event) {
+            event.preventDefault();
+
+            var url = '<?= $this->Url->build(['controller' => 'Projects', 'action' => 'add']); ?>';
 
 
             $('.task-modal-cont').load(url, function (result) {
