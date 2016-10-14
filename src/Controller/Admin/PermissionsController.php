@@ -3,6 +3,7 @@ namespace App\Controller\Admin;
 
 use App\Controller\AppController;
 use Cake\Network\Response;
+use App\Controller\Component\CommonComponent;
 
 /**
  * Permissions Controller
