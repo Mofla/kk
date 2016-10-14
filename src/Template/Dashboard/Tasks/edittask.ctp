@@ -1,7 +1,4 @@
-<?= $this->Html->css('../assets/global/plugins/bootstrap-select/css/bootstrap-select.min.css') ?>
-<?= $this->Html->css('../assets/global/plugins/jquery-multi-select/css/multi-select.css') ?>
-<?= $this->Html->css('../assets/global/plugins/select2/css/select2.min.css') ?>
-<?= $this->Html->css('../assets/global/plugins/select2/css/select2-bootstrap.min.css') ?>
+<?= $this->Html->css('multi-select.css') ?>
 
 <div id="taskModal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog">
@@ -38,10 +35,8 @@
 
 
 
-    <?= $this->Html->script('../assets/global/plugins/bootstrap-select/js/bootstrap-select.min.js') ?>
-    <?= $this->Html->script('../assets/global/plugins/jquery-multi-select/js/jquery.multi-select.js') ?>
-    <?= $this->Html->script('../assets/pages/scripts/components-multi-select.js') ?>
-    <?= $this->Html->script('../assets/global/plugins/select2/js/select2.full.min.js') ?>
+    <?= $this->Html->script('jquery.multi-select.js') ?>
+
 
 
     <script>

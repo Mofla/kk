@@ -127,15 +127,19 @@ class TasksController extends AppController
             if ($this->Tasks->save($task)) {
                 $this->Flash->success(__('The task has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['controller' => 'projects', 'action' => 'index', '#' => 'tab_'.$task->project_id]);
             } else {
                 $this->Flash->error(__('The task could not be saved. Please, try again.'));
             }
         }
-        $states = $this->Tasks->States->find('list', ['limit' => 200]);
-        $projects = $this->Tasks->Projects->find('list', ['limit' => 200]);
-        $users = $this->Tasks->Users->find('list', ['limit' => 200]);
-        $this->set(compact('task', 'states', 'projects', 'users'));
+
+        $users = $this->Tasks->Users->find('list', [
+            'keyField' => 'id',
+            'valueField' => function($q){
+                return $q['firstname'].' '.$q['lastname'];
+            }
+        ]);
+        $this->set(compact('task', 'users'));
         $this->set('_serialize', ['task']);
     }
 
@@ -150,13 +154,18 @@ class TasksController extends AppController
             if ($this->Tasks->save($task)) {
                 $this->Flash->success(__('The task has been saved.'));
 
-                return $this->redirect($this->referer());
+                return $this->redirect(['controller' => 'projects', 'action' => 'index', '#' => 'tab_'.$task->project_id]);
             } else {
                 $this->Flash->error(__('The task could not be saved. Please, try again.'));
             }
         }
         $states = $this->Tasks->States->find('list', ['limit' => 200]);
-        $users = $this->Tasks->Users->find('list', ['limit' => 200]);
+        $users = $this->Tasks->Users->find('list', [
+            'keyField' => 'id',
+            'valueField' => function($q){
+                return $q['firstname'].' '.$q['lastname'];
+            }
+        ]);
         $this->set(compact('task', 'states', 'projects', 'users'));
         $this->set('_serialize', ['task']);
 
