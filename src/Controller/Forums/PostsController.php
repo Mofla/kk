@@ -3,6 +3,9 @@ namespace App\Controller\Forums;
 
 use App\Controller\AppController;
 use Cake\ORM\TableRegistry;
+use Cake\I18n\Time;
+Time::setToStringFormat('yyyy/MM/dd HH:mm');
+
 /**
  * Posts Controller
  *
@@ -51,9 +54,10 @@ class PostsController extends AppController
      */
     public function add($id = null)
     {
+        $time = Time::now();
         $user = $this->Auth->user('id');
         $forumid = $this->Posts->Threads->find()
-            ->select('forum_id')
+            ->select(['forum_id','subject'])
             ->where(['id' => $id])
             ->first();
         $post = $this->Posts->newEntity();
@@ -69,13 +73,21 @@ class PostsController extends AppController
                         'lasttopic' => $post->id ])
                     ->where(['id' => $forumid->forum_id])
                     ->execute();
+
+                $threadlast = $this->Posts->Threads->query();
+                $threadlast->update()
+                    ->set(['lastuser' => $user ,
+                        'lastpost' => $time ])
+                    ->where(['id' => $id])
+                    ->execute();
+
                 return $this->redirect(['controller'=>'Threads','action' => 'view' ,$id ]);
             } else {
                 $this->Flash->error(__('The post could not be saved. Please, try again.'));
             }
         }
 
-        $this->set(compact('post','threadid'));
+        $this->set(compact('post','forumid'));
         $this->set('_serialize', ['post']);
     }
 

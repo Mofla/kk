@@ -12,7 +12,7 @@ class ForumsController extends AppController
     public function index()
     {
         $cat = $this->Forums->Categories->find('all')
-        ->contain(['Forums.Users', 'Forums.Posts'])
+        ->contain(['Forums.Users'])
         ->order(['sort' => 'ASC']);
 
         $this->set(compact('cat'));
@@ -21,7 +21,7 @@ class ForumsController extends AppController
     public function view($id = null)
     {
         $forum = $this->Forums->get($id, [
-            'contain' => ['Threads.Users','Threads.Posts']
+            'contain' => ['Threads.Posts','Threads.Users','Threads.Lastuserthread']
         ]);
 
         $this->set('forum', $forum);

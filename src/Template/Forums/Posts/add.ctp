@@ -17,13 +17,13 @@
         <tbody>
         <?= $this->Form->create($post) ?>
         <fieldset>
-            <tr>
-                <td width="20%"> Titre du sujet </td>
-                <td width="80%">   <?= $this->Form->input('title' , ['label' => false , 'class' => 'form-control']); ?> </td>
+            <tr class="hidden">
+                <td width="20%" > Titre du sujet </td>
+                <td width="80%">   <?= $this->Form->input('title' , ['label' => false , 'class' => 'form-control' ,'value'=>$forumid->subject]); ?> </td>
             </tr>
             <tr>
-                <td> Votre message </td>
-                <td>
+                <td width="20%"> Votre message </td>
+                <td width="80%">
                     <div class="form-body">
                         <textarea class="ckeditor form-control" name="message" rows="6"></textarea>
                     </div>

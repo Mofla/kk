@@ -42,10 +42,6 @@ class ThreadsTable extends Table
 
         $this->addBehavior('Timestamp');
 
-        $this->belongsTo('Users', [
-            'foreignKey' => 'user_id',
-            'joinType' => 'INNER'
-        ]);
         $this->belongsTo('Forums', [
             'foreignKey' => 'forum_id',
             'joinType' => 'INNER'
@@ -53,9 +49,20 @@ class ThreadsTable extends Table
         $this->hasMany('Posts', [
             'foreignKey' => 'thread_id'
         ]);
+
+        $this->belongsTo('Users', [
+            'foreignKey' => 'user_id',
+            'joinType' => 'INNER'
+        ]);
+
+        $this->belongsTo('Lastuserthread', [
+            'className' => 'Users',
+            'foreignKey' => 'lastuser',
+        ]);
     }
 
-    /**
+
+/**
      * Default validation rules.
      *
      * @param \Cake\Validation\Validator $validator Validator instance.

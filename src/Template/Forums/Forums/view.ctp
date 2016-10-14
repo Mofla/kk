@@ -27,12 +27,21 @@
             <br> par <?= h($threads->user->username) ?></td>
             <td width="10%"><?= count($threads->posts) ?></td>
             <td width="10%" ><?= $threads->countview ?></td>
-            <td width="25%">le <br> par </br></td>
+
+            <?php if ($threads->lastpost) : ?>
+            <td width="25%">le <?= $threads->lastpost->i18nformat('dd/MM/YY à HH:mm', 'Europe/Paris') ?>
+                <br> par <?= $threads->lastuserthread->username ?> </br></td>
             <td width="5%" class="actions">
-                <?= $this->Html->link(__('View'), ['controller' => 'Threads', 'action' => 'view', $threads->id]) ?>
-                <?= $this->Html->link(__('Edit'), ['controller' => 'Threads', 'action' => 'edit', $threads->id]) ?>
                 <?= $this->Form->postLink(__('Delete'), ['controller' => 'Threads', 'action' => 'delete', $threads->id], ['confirm' => __('Are you sure you want to delete # {0}?', $threads->id)]) ?>
             </td>
+            <?php else: ?>
+            <td width="25%">
+            Aucun Message
+            </td>
+            <td>
+            </td>
+            <?php endif ?>
+
         </tr>
         <?php endforeach; ?>
     </table>
@@ -43,9 +52,3 @@
 </div>
 </div>
 
-<script>
-$('tr').click( function() {
-    window.location = $(this).find('a').attr('href');
-})
-
-</script>
