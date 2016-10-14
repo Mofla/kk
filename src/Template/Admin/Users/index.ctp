@@ -29,7 +29,7 @@
                     <i class="fa fa-angle-down"></i>
                 </button>
                 <ul class="dropdown-menu pull-left" role="menu">
-                    <li><i class="icon-docs"></i><?= $this->Html->link(__('View'), ['action' => 'view', $user->id]) ?></li>
+                    <li><i class="icon-docs"></i><?= $this->Html->link(__('View'), ['action' => 'edit', $user->id]) ?></li>
                     <li><i class="icon-tag"></i><?= $this->Html->link(__('Edit'), ['action' => 'edit', $user->id]) ?></li>
                     <li><i class="icon-user"></i><?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $user->id)]) ?></li>
                 </ul>
