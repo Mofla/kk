@@ -20,7 +20,7 @@
                                 <div class="col-md-3">
                                     <ul class="list-unstyled profile-nav">
                                         <li>
-                                            <img src="../img/<?= $user->id ?>.png" class="img-responsive pic-bordered" alt=""/>
+                                            <img src="../uploads/imgs/<?= $user->picture_url ?>" class="img-responsive pic-bordered" alt=""/>
                                         </li>
                                     </ul>
                                 </div>
@@ -49,7 +49,7 @@
                                                 </li>
                                             </ul>
                                             <?php if (!empty($user->github_username)): ?>
-                                                <a href="javascript:;"> <?= $user->github_username ?></a>
+                                                <a href="https://github.com/<?= $user->github_username ?>"><?= $user->github_username ?></a>
                                             <?php endif; ?>
                                         </div>
                                         <!--end col-md-8-->
