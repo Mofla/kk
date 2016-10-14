@@ -62,6 +62,12 @@ class PortfoliosController extends AppController
         if ($this->request->is('post')) {
             $portfolio = $this->Portfolios->patchEntity($portfolio, $this->request->data);
             if ($this->Portfolios->save($portfolio)) {
+                // add image
+                $picture = $this->Upload->getPicture($this->request->data['picture'],'Portfolios',$portfolio->id);
+                $this->request->data['picture_url'] = $picture;
+                $portfolio = $this->Portfolios->patchEntity($portfolio, $this->request->data);
+                $this->Portfolios->save($portfolio);
+                // end add image
                 $this->Flash->success(__('The portfolio has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
@@ -92,7 +98,7 @@ class PortfoliosController extends AppController
             'contain' => ['Users']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            if(isset($this->request->data['picture']))
+            if(!empty($this->request->data['picture']['name']))
             {
                 $picture = $this->Upload->getPicture($this->request->data['picture'],'Portfolios',$id);
                 $this->request->data['picture_url'] = $picture;
