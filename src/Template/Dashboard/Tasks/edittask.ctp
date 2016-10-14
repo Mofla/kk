@@ -8,18 +8,18 @@
                 <div class="tasks form large-9 medium-8 columns content">
                     <?= $this->Form->create($task) ?>
                     <fieldset>
-                        <legend><?= __('Ajouter une tâche') ?></legend>
+                        <legend><?= __('Editer la tâche') ?></legend>
                         <div class="form-group">
                         <?php
                         echo $this->Form->input('name', ['class' => 'form-control']);
                         echo $this->Form->input('description', ['class' => 'form-control']);
-                        echo $this->Form->input('start_date', ['type' => 'text', 'id' => 'start', 'class' => 'form-control']);
+                        echo $this->Form->input('start_date', ['type' => 'text', 'id' => 'start', 'class' => 'form-control', 'dateFormat' => 'YMD']);
                         echo $this->Form->input('end_date', ['type' => 'text', 'id' => 'end', 'class' => 'form-control']);
                         echo $this->Form->input('users._ids', ['options' => $users, 'class' => 'multi-select']);
                         ?>
                         </div>
                     </fieldset>
-                    <?= $this->Form->button(__('Ajouter'), ['class' => 'btn btn-default']) ?>
+                    <?= $this->Form->button(__('Valider les changements'), ['class' => 'btn btn-default']) ?>
                     <?= $this->Form->end() ?>
                 </div>
                <!-- <div class="modal-footer">
@@ -42,6 +42,11 @@
     <script>
         $('.multi-select').multiSelect();
 
+        var startDate = $('#start').val().split('/');
+        $('#start').val('20' + startDate[2] + '-' + startDate[0] + '-' + startDate[1]);
+
+        var endDate = $('#end').val().split('/');
+        $('#end').val('20' + endDate[2] + '-' + endDate[0] + '-' + endDate[1]);
 
     </script>
 

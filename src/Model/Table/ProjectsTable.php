@@ -76,10 +76,7 @@ class ProjectsTable extends Table
             ->requirePresence('users_number', 'create')
             ->notEmpty('users_number');
 
-        $validator
-            ->boolean('finished')
-            ->requirePresence('finished', 'create')
-            ->notEmpty('finished');
+
 
         $validator
             ->date('start_date')

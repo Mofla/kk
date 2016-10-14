@@ -1,29 +1,66 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('List Projects'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Diaries'), ['controller' => 'Diaries', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Diary'), ['controller' => 'Diaries', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Tasks'), ['controller' => 'Tasks', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Task'), ['controller' => 'Tasks', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="projects form large-9 medium-8 columns content">
-    <?= $this->Form->create($project) ?>
-    <fieldset>
-        <legend><?= __('Add Project') ?></legend>
-        <?php
-            echo $this->Form->input('name');
-            echo $this->Form->input('description');
-            echo $this->Form->input('users_number');
-            echo $this->Form->input('finished');
-            echo $this->Form->input('start_date');
-            echo $this->Form->input('end_date');
-            echo $this->Form->input('users._ids', ['options' => $users]);
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
-</div>
+
+<?= $this->Html->css('multi-select.css') ?>
+
+
+<div id="taskModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <div class="tasks form large-9 medium-8 columns content">
+                    <?= $this->Form->create($project) ?>
+                    <fieldset>
+                        <legend><?= __('Créer un projet') ?></legend>
+                        <div class="form-group">
+                        <?php
+                        echo $this->Form->input('name', ['class' => 'form-control']);
+                        echo $this->Form->input('description', ['class' => 'form-control']);
+                        echo $this->Form->input('users_number', ['class' => 'form-control']);
+                        echo $this->Form->input('start_date', ['type' => 'text', 'id' => 'start', 'class' => 'form-control']);
+                        echo $this->Form->input('end_date', ['type' => 'text', 'id' => 'end', 'class' => 'form-control']);
+                        echo $this->Form->input('users._ids', ['options' => $users, 'class' => 'multi-select']);
+                        ?>
+                            </div>
+                    </fieldset>
+                    <?= $this->Form->button(__('Créer'), ['class' => 'btn btn-default']) ?>
+                    <?= $this->Form->end() ?>
+
+                </div>
+                <!--<div class="modal-footer">
+                    <button class="btn" data-dismiss="modal">Annuler</button>
+                </div>-->
+            </div>
+        </div>
+    </div>
+    <?= $this->Html->css('../assets/global/plugins/jquery-ui/jquery-ui.min.css') ?>
+    <?= $this->Html->script('../assets/global/plugins/jquery-ui/jquery-ui.min.js') ?>
+    <?= $this->Html->script('jquery.datetimepicker.full.min.js') ?>
+    <?= $this->Html->css('jquery.datetimepicker.css') ?>
+
+
+
+    <?= $this->Html->script('jquery.multi-select.js') ?>
+
+
+
+    <script>
+        $('.multi-select').multiSelect();
+    </script>
+
+
+    <script>
+
+
+        //datetimepicker on date fields
+        //todo: fix startdate
+        $('#start').datetimepicker({
+            timepicker:false,
+            format: "Y-m-d"
+        });
+
+        $('#end').datetimepicker({
+            timepicker:false,
+            format: "Y-m-d"
+        });
+
+    </script>
