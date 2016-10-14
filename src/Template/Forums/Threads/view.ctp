@@ -31,7 +31,7 @@
             </td>
             <td>
                 <div class="pull-right"> Message: #1 </div>
-                <div><?= $this->Text->autoParagraph(h($thread->text)); ?></div>
+                <div><?= $thread->text; ?></div>
             </td>
         </tr>
 
@@ -64,7 +64,7 @@
                 </td>
                 <td width="75%">
                     <div class="pull-right"> Message: #<?= $messagecount ?></div>
-                    <div><?= $this->Text->autoParagraph(h($posts->message)); ?></div>
+                    <div><?= $posts->message; ?></div>
                 </td>
             </tr>
 

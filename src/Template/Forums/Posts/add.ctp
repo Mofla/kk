@@ -1,5 +1,6 @@
+<?= $this->Html->script('../assets/global/plugins/ckeditor/ckeditor.js') ?>
 
-            <!--echo $this->Form->input('title');-->
+        <!--echo $this->Form->input('title');-->
             <!--echo $this->Form->input('message');-->
             <!--echo $this->Form->input('user_id', ['options' => $users]);-->
             <!--echo $this->Form->input('thread_id', ['options' => $threads]);-->
@@ -18,11 +19,15 @@
         <fieldset>
             <tr>
                 <td width="20%"> Titre du sujet </td>
-                <td width="80%">   <?= $this->Form->input('title' , ['label' => false , 'class' => 'inputwidth']); ?> </td>
+                <td width="80%">   <?= $this->Form->input('title' , ['label' => false , 'class' => 'form-control']); ?> </td>
             </tr>
             <tr>
                 <td> Votre message </td>
-                <td>  <?= $this->Form->input('message' , ['label' => false , 'class' => 'inputwidth' ]); ?> </td>
+                <td>
+                    <div class="form-body">
+                        <textarea class="ckeditor form-control" name="message" rows="6"></textarea>
+                    </div>
+                </td>
             </tr>
         </fieldset>
         <tr>
