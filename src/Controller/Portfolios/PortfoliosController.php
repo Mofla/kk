@@ -10,11 +10,6 @@ use App\Controller\AppController;
  */
 class PortfoliosController extends AppController
 {
-    public function initialize()
-    {
-        $this->loadComponent('Upload');
-    }
-
     /**
      * Index method
      *
@@ -99,11 +94,8 @@ class PortfoliosController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             if(isset($this->request->data['picture']))
             {
-                $picture = $this->Upload->getPicture($this->request->data['picture'],'Portfolio',$id);
-                if($picture != false)
-                {
-                    $this->request->data['picture_url'] = $picture;
-                }
+                $picture = $this->Upload->getPicture($this->request->data['picture'],'Portfolios',$id);
+                $this->request->data['picture_url'] = $picture;
             }
             $portfolio = $this->Portfolios->patchEntity($portfolio, $this->request->data);
             if ($this->Portfolios->save($portfolio)) {
