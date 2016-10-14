@@ -20,6 +20,7 @@ class ProjectsController extends AppController
 
     public function index()
     {
+        $this->viewBuilder()->layout('dashboard');
         $projects = $this->Projects->find('all', [
             'contain' => ['Tasks.Users', 'Tasks.States']
         ]);

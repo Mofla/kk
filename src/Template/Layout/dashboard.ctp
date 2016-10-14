@@ -84,38 +84,30 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                     <!-- END PAGE HEAD-->
                     <!-- BEGIN PAGE CONTENT BODY -->
                     <div class="page-content">
-                        <div class="container">
-                            <!-- BEGIN PAGE BREADCRUMBS -->
-                            <!-- END PAGE BREADCRUMBS -->
-                            <!-- BEGIN PAGE CONTENT INNER -->
-                            <div class="page-content-inner">
-                                <?= $this->fetch('content') ?>
-                            </div>
-                            <!-- END PAGE CONTENT INNER -->
+
+                        <!-- BEGIN PAGE BREADCRUMBS -->
+                        <!-- END PAGE BREADCRUMBS -->
+                        <!-- BEGIN PAGE CONTENT INNER -->
+                        <div class="page-content-inner">
+                            <?= $this->fetch('content') ?>
                         </div>
+                        <!-- END PAGE CONTENT INNER -->
+
                     </div>
                     <!-- END PAGE CONTENT BODY -->
                     <!-- END CONTENT BODY -->
                 </div>
                 <!-- END CONTENT -->
+                <!-- BEGIN QUICK SIDEBAR -->
 
             </div>
             <!-- END CONTAINER -->
         </div>
     </div>
 
-<!-- END QUICK NAV -->
-<!--[if lt IE 9]>
+<!--        <footer>-->
 
-
-
-
-
-
-    <footer>
-        <div class="page-wrapper-row">
-        <div class="page-wrapper-bottom">
-            <!-- BEGIN FOOTER -->
+                <!-- BEGIN FOOTER -->
     <!-- BEGIN PRE-FOOTER -->
     <div class="page-prefooter">
         <div class="container">
@@ -218,7 +210,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 <!--    <span aria-hidden="true" class="quick-nav-bg"></span>-->
 <!--</nav>-->
 <div class="quick-nav-overlay"></div>
-    </footer>
+</footer>
 <?= $this->html->script('../assets/global/plugins/respond.min.js') ?>
 <?= $this->html->script('../assets/global/plugins/excanvas.min.js') ?>
 <?= $this->html->script('../assets/global/plugins/ie8.fix.min.js') ?>
