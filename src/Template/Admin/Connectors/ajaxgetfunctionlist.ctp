@@ -5,5 +5,5 @@
                 echo "<option>".$list_actions_controller[$option]."</option>";
                 }
 
-                ?>
+        ?>
 

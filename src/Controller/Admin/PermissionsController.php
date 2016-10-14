@@ -12,7 +12,7 @@ use App\Controller\Component\CommonComponent;
  */
 class PermissionsController extends AppController
 {
-
+    public $components = ['Common'];
     /**
      * Index method
      *
@@ -50,19 +50,31 @@ class PermissionsController extends AppController
      */
     public function add()
     {
+        $controller = $this->Common->getControllers();
+        $this->loadModel('Connectors');
+
         $permission = $this->Permissions->newEntity();
+        $connector = $this->Connectors->newEntity();
         if ($this->request->is('post')) {
             $permission = $this->Permissions->patchEntity($permission, $this->request->data);
             if ($this->Permissions->save($permission)) {
                 $this->Flash->success(__('The permission has been saved.'));
+            $id = $this->Permissions->id;
+                $connector->controller = 'controller';
+                $connector->function = 'function';
+                $connector->permission_id= $id;
+                if ($this->Connectors->save($connector)) {
+                    $this->Flash->success(__('The permission has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                    return $this->redirect(['action' => 'index']);
+
+                }
             } else {
                 $this->Flash->error(__('The permission could not be saved. Please, try again.'));
             }
         }
         $roles = $this->Permissions->Roles->find('list', ['limit' => 200]);
-        $this->set(compact('permission', 'roles'));
+        $this->set(compact('permission', 'roles','controller', 'list_actions_controller'));
         $this->set('_serialize', ['permission']);
     }
 
