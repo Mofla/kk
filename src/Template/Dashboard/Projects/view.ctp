@@ -38,9 +38,9 @@
 
     Options de la vue en arbre :
     <select id="layout">
+        <option value="directed-false">none</option>
         <option value="hubsize-true">hubsize</option>
         <option value="directed-true">directed</option>
-        <option value="directed-false">none</option>
     </select><br/>
 
     <div id="network-popUp">
@@ -156,7 +156,7 @@
         };
 
         var layoutMethod = "directed";
-        var layoutBool = true;
+        var layoutBool = false;
 
         function draw() {
 
@@ -183,17 +183,10 @@
             // create an array with edges
             var edges = new vis.DataSet([
 
-                <?php foreach ($project->tasks as $task): ?>
-                <?php if ($task->state->name == 'todo'): ?>
-                {from: <?= $task->id ?>, to: 20000000001},
-                <?php endif; ?>
-                <?php if ($task->state->name == 'doing'): ?>
-                {from: <?= $task->id ?>, to: 20000000002},
-                <?php endif; ?>
-                <?php if ($task->state->name == 'done'): ?>
-                {from: <?= $task->id ?>, to: 20000000003},
-                <?php endif; ?>
+                <?php foreach ($project->from_to_tasks as $fromto) : ?>
+                {from: <?= $fromto->from_id ?>, to: <?= $fromto->to_id ?>},
                 <?php endforeach; ?>
+
             ]);
             var data = {
                 nodes: nodes,
@@ -256,8 +249,48 @@
                             }
                         }
                         else {
+                            var datAjax = {
+                                project_id: <?= $project->id ?>,
+                                from_id: data.from,
+                                to_id: data.to
+                            }
+                            var ajax = $.ajax({
+                                type: "POST",
+                                data: datAjax,
+                                url: '<?= $this->Url->build(["controller" => "FromToTasks", "action" => "add"]); ?>'
+                            });
+
+
                             callback(data);
                         }
+                    },
+                    deleteEdge: function (data, callback) {
+
+                        //gets the id of the deleted edge and gets connected nodes ids before deleting them
+                        var keyD = data.edges[0];
+                        var array = $.map(edges._data, function(value, index) {
+                            return [value];
+                        });
+
+                        for ( var i = 0 ; i < array.length ; i++) {
+                            if (array[i].id == keyD) {
+                                var datAjax = {
+                                    project_id: <?= $project->id ?>,
+                                    from_id: array[i].from,
+                                    to_id: array[i].to
+                                }
+                                var ajax = $.ajax({
+                                    type: "POST",
+                                    data: datAjax,
+                                    url: '<?= $this->Url->build(["controller" => "FromToTasks", "action" => "deleteajax"]); ?>'
+                                });
+
+
+                            }
+                        }
+
+
+                            callback(data);
                     }
                 }
             };
