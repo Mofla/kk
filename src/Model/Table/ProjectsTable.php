@@ -11,6 +11,7 @@ use Cake\Validation\Validator;
  *
  * @property \Cake\ORM\Association\HasMany $Diaries
  * @property \Cake\ORM\Association\HasMany $Tasks
+ *  * @property \Cake\ORM\Association\HasMany $FromToTasks
  * @property \Cake\ORM\Association\BelongsToMany $Users
  *
  * @method \App\Model\Entity\Project get($primaryKey, $options = [])
@@ -44,6 +45,10 @@ class ProjectsTable extends Table
         $this->hasMany('Tasks', [
             'foreignKey' => 'project_id'
         ]);
+        $this->hasMany('FromToTasks', [
+            'foreignKey' => 'project_id'
+        ]);
+
         $this->belongsToMany('Users', [
             'foreignKey' => 'project_id',
             'targetForeignKey' => 'user_id',
