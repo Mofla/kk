@@ -52,10 +52,21 @@ class PostsController extends AppController
      *
      * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
      */
-    public function add($id = null)
+    public function add($id = null, $quote=null)
     {
         $time = Time::now();
         $user = $this->Auth->user('id');
+
+if($quote !== 'quotetopic'){
+        $pastquote = $this->Posts->get($quote);
+}
+else{
+    $pastquote = NULL;
+}
+        if($quote == 'quotetopic'){
+            $pastquote = $this->Posts->Threads->get($id);
+        }
+
         $forumid = $this->Posts->Threads->find()
             ->select(['forum_id','subject'])
             ->where(['id' => $id])
@@ -87,7 +98,7 @@ class PostsController extends AppController
             }
         }
 
-        $this->set(compact('post','forumid'));
+        $this->set(compact('post','forumid','pastquote'));
         $this->set('_serialize', ['post']);
     }
 
