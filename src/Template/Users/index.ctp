@@ -104,7 +104,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                                                     <a href="<?= $this->Url->build(['controller' => 'Users', 'action' => 'view', $user->id]); ?>"
                                                                        class="cbp-singlePage cbp-l-caption-buttonLeft btn green uppercase "
                                                                        rel="nofollow">Profil</a>
-                                                                    <a href="../portfolios/<?= $user->id ?>"
+                                                                    <a href="<?= $this->Url->build(['controller' => 'Portfolios', 'action' => '/', $user->id])?>"
                                                                        class="cbp-singlePage cbp-l-caption-buttonRight btn green uppercase "
                                                                        data-title="Dashboard<br>by Paul Flavius Nechita">Projets</a>
                                                                 </div>

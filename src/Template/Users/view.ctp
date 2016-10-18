@@ -10,9 +10,13 @@
                         <li class="active">
                             <a href="#tab_1_1" data-toggle="tab"> Profil </a>
                         </li>
+                        <?php
+                        if ($autoriser) {
+                        ?>
                         <li>
                             <a href="#tab_1_3" data-toggle="tab"> Compte </a>
                         </li>
+                        <?php }?>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="tab_1_1">
@@ -28,26 +32,14 @@
                                     <div class="row">
                                         <div class="col-md-8 profile-info">
                                             <h1 class="font-green sbold uppercase"><?= $user->firstname ?> <?= $user->lastname ?></h1>
-                                            <ul class="list-inline">
-                                                <li>
-                                                    <i class="fa fa-map-marker"></i> <?= $user->city ?>
-                                                </li>
-                                                <li>
-                                                    <i class="fa fa-birthday-cake"></i> <?= $user->birthday ?>
-                                                </li>
-                                                <li>
-                                                    <i class="fa fa-phone"></i> <?= $user->phone ?>
-                                                </li>
-                                                <li>
-                                                    <i class="fa fa-mobile"></i> <?= $user->cellphone ?>
-                                                </li>
-                                                <li>
-                                                    <i class="fa fa-at"></i> <?= $user->email ?>
-                                                </li>
-                                                <li>
-                                                    <i class="fa fa-at"></i> <?= $user->role->name ?>
-                                                </li>
-                                            </ul>
+                                            <div class="list-inline" style="font-size: 22px">
+                                                    <i class="fa fa-map-marker"></i> <?= $user->city ?><br>
+                                                    <i class="fa fa-birthday-cake"></i> <?= $user->birthday ?><br>
+                                                    <i class="fa fa-phone"></i> <?= $user->phone ?><br>
+                                                    <i class="fa fa-mobile"></i> <?= $user->cellphone ?><br>
+                                                    <i class="fa fa-at"></i> <?= $user->email ?><br>
+                                                    <i class="fa fa-user"></i> <?= $user->role->name ?>
+                                            </div>
                                             <?php if (!empty($user->github_username)): ?>
                                                 <a href="https://github.com/<?= $user->github_username ?>"><?= $user->github_username ?></a>
                                             <?php endif; ?>
@@ -67,6 +59,9 @@
                             </div>
                         </div>
                         <!--tab_1_2-->
+                        <?php
+                        if ($autoriser) {
+                        ?>
                         <div class="tab-pane" id="tab_1_3">
                             <div class="row profile-account">
                                 <div class="col-md-3">
@@ -342,6 +337,7 @@
                                 <!--end col-md-9-->
                             </div>
                         </div>
+                        <?php }?>
                         <!--end tab-pane-->
                         <div class="tab-pane" id="tab_1_6">
                             <div class="row">
