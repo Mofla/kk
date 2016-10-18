@@ -20,7 +20,11 @@
                                 <div class="col-md-3">
                                     <ul class="list-unstyled profile-nav">
                                         <li>
+<<<<<<< HEAD
                                             <img src="../uploads/user/<?= $user->picture_url ?>" class="img-responsive pic-bordered" alt=""/>
+=======
+                                            <?= $this->Html->image('../uploads/user/'. $user->picture_url,['class' => 'img-responsive pic-bordered'])?>
+>>>>>>> 0b0e4c6823d1ff50a2253e98ccd92aa5a956d5aa
                                         </li>
                                     </ul>
                                 </div>
