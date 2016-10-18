@@ -184,17 +184,19 @@
                 <h3>Hiérarchisation des tâches</h3>
             </div>
             <div class="panel-body">
-                Options de la vue en arbre :
-                <select id="layout">
+
+                <h3>Options de la vue en arbre :</h3><br>
+
+                <input type="button" id="btn-UD" value="Up-Down" class="btn btn-default">
+                <input type="button" id="btn-DU" value="Down-Up" class="btn btn-default">
+                <input type="button" id="btn-LR" value="Left-Right" class="btn btn-default">
+                <input type="button" id="btn-RL" value="Right-Left" class="btn btn-default">
+                <input type="hidden" id='direction' value="UD">
+                <select id="layout" class="form-control">
                     <option value="directed-true">directed</option>
                     <option value="hubsize-true">hubsize</option>
                     <option value="directed-false">none</option>
-                </select><br/>
-                <input type="button" id="btn-UD" value="Up-Down">
-                <input type="button" id="btn-DU" value="Down-Up">
-                <input type="button" id="btn-LR" value="Left-Right">
-                <input type="button" id="btn-RL" value="Right-Left">
-                <input type="hidden" id='direction' value="UD">
+                </select>
 
                 <div id="network-popUp">
                     <span id="operation">node</span> <br>
@@ -213,13 +215,11 @@
                 </div>
                 <br/>
                 <div class="nodes" id="mynetwork"></div>
-                <p id="selection"></p>
+
             </div>
         </div>
 
     </div>
-
-
 
 
     <?= $this->Html->script('../js/jquery.js') ?>
