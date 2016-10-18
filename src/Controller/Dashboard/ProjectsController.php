@@ -45,6 +45,10 @@ class ProjectsController extends AppController
             'contain' => ['Users', 'Diaries', 'Tasks.States', 'FromToTasks']
         ]);
 
+        $endPoints = $this->Projects->Tasks->find()->where(['id NOT' => $project->from_to_tasks->id]);
+
+
+        $this->set(compact('endPoints'));
         $this->set('project', $project);
         $this->set('_serialize', ['project']);
     }

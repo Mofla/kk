@@ -38,9 +38,9 @@
 
     Options de la vue en arbre :
     <select id="layout">
-        <option value="directed-false">none</option>
-        <option value="hubsize-true">hubsize</option>
         <option value="directed-true">directed</option>
+        <option value="hubsize-true">hubsize</option>
+        <option value="directed-false">none</option>
     </select><br/>
 
     <div id="network-popUp">
@@ -72,8 +72,8 @@
     <style type="text/css">
         #mynetwork {
             position:relative;
-            width: 800px;
-            height: 600px;
+            width: 100%;
+            height: 800px;
             border: 1px solid lightgray;
         }
         table.legend_table {
@@ -156,16 +156,33 @@
         };
 
         var layoutMethod = "directed";
-        var layoutBool = false;
+        var layoutBool = true;
+
+        function cleanPonctuation(data) {
+            return data.replace(/'/g, "\\'");
+        }
+
 
         function draw() {
 
             // create an array with nodes
             var nodes = new vis.DataSet([
+                {
+                    id: 'end',
+                    size: 10,
+                    label: "Fin du projet",
+                    shape: 'box',
+                    font: {'face': 'monospace', 'align': 'left'},
+                    color: 'blue'
+                },
                 <?php foreach ($project->tasks as $task): ?>
+
                 {
                     id: <?= $task->id ?>,
-                    label: '<?= h($task->name) ?>',
+                    size: 10,
+                    label: "<?= $task->name ?>",
+                    shape: 'box',
+                    font: {'face': 'monospace', 'align': 'left'},
                     <?php if ($task->state->name == 'todo'): ?>
                     color: 'red'
                     <?php endif; ?>
@@ -182,10 +199,16 @@
 
             // create an array with edges
             var edges = new vis.DataSet([
+                <?php foreach ($endPoints as $endPoint) : ?>
+                <?php debug($endPoint) ?>
+                {from: <?= $endPoint->id ?>, to: 'end'},
+                <?php endforeach; ?>
 
                 <?php foreach ($project->from_to_tasks as $fromto) : ?>
                 {from: <?= $fromto->from_id ?>, to: <?= $fromto->to_id ?>},
                 <?php endforeach; ?>
+
+
 
             ]);
             var data = {
@@ -213,12 +236,16 @@
                     "navigationButtons": true
                 },
                 "physics": {
-                    "minVelocity": 0.75
+                    "minVelocity": 0.75,
+                    hierarchicalRepulsion: {
+                        nodeDistance: 150
+                    }
                 },
                 layout: {
                     hierarchical: {
                         enabled:layoutBool,
-                        sortMethod: layoutMethod
+                        sortMethod: layoutMethod,
+                        levelSeparation: 150
                     }
                 },
 
