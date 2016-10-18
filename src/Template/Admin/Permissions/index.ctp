@@ -24,9 +24,9 @@
               <i class="fa fa-angle-down"></i>
             </button>
             <ul class="dropdown-menu pull-left" role="menu">
-              <li><i class="icon-docs"></i><?= $this->Html->link(__('View'), ['action' => 'view', $permission->id]) ?></li>
-              <li><i class="icon-tag"></i><?= $this->Html->link(__('Edit'), ['action' => 'edit', $permission->id]) ?></li>
-              <li><i class="icon-user"></i> <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $permission->id], ['confirm' => __('Are you sure you want to delete # {0}?', $permission->id)]) ?></li>
+              <i class="glyphicon glyphicon-search"></i><a href="<?= $this->Url->build(['controller' => 'Permissions', 'action' => 'view', $permission->id]); ?>">Voir</a><br><br>
+              <i class="glyphicon glyphicon-pencil"></i><a href="<?= $this->Url->build(['controller' => 'Permissions', 'action' => 'edit', $permission->id]); ?>">Editer</a><br><br>
+              <i class="glyphicon glyphicon-remove"></i><a href="<?= $this->Url->build(['controller' => 'Permissions', 'action' => 'delete',$permission->id], ['confirm' => __('Are you sure you want to delete # {0}?', $permission->id)]) ?>">supprimer</a><br><br>
             </ul>
           </div>
         </td>

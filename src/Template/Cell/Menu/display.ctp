@@ -142,17 +142,27 @@
                     <?php foreach ($gererPerm as $gp) : ?>
                       <?php foreach ($gp->connectors as $conn): ?>
                         <li class=" ">
-                          <a href="<?= $this->Url->build(['controller' => $conn->controller, 'action' => $conn->function]) ?>"><?= $gp->name ?></a>
+                          <a href="<?= $this->Url->build(['controller' => $conn->controller, 'action' => $conn->function, 'prefix'=> 'admin']) ?>"><?= $gp->name ?></a>
                         </li>
                       <?php endforeach; ?>
                     <?php endforeach; ?>
                   </ul>
                 </li>
-                <?php endif; ?>
-              <?php endforeach; ?>
                 <li class="menu-dropdown classic-menu-dropdown">
-                    <a href="<?= $this->Url->build(['controller' => 'users', 'action' => 'edit', $i]) ?>" >Profil</a>
-                </li>  
+                  <a href="<?= $this->Url->build(['controller' => 'users', 'action' => 'edit', $i , 'prefix'=>'admin']) ?>" >Profil</a>
+                </li>
+                <?php else: ?>
+                  <li class="menu-dropdown classic-menu-dropdown">
+                    <a href="<?= $this->Url->build(['controller' => 'users', 'action' => 'view', $i]) ?>" >Profil</a>
+                  </li>
+              <?php endif; ?>
+                  <li class="menu-dropdown classic-menu-dropdown ">
+                    <a href="<?= $this->Url->build(['controller' => 'Tchat', 'action' => 'add', 'prefix' => false]); ?>">
+                      Tchat
+                      <span class="arrow"></span>
+                    </a>
+                  </li>
+              <?php endforeach; ?>
               <?php endif; ?>
               <li class="menu-dropdown classic-menu-dropdown ">
                 <a href="<?= $this->Url->build(['controller' => 'Forums', 'action' => 'index', 'prefix' => false]); ?>">
