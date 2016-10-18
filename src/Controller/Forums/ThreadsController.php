@@ -86,13 +86,8 @@ class ThreadsController extends AppController
         $this->set('_serialize', ['thread']);
     }
 
-    /**
-     * Edit method
-     *
-     * @param string|null $id Thread id.
-     * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
+
+
     public function edit($id = null)
     {
         $thread = $this->Threads->get($id, [

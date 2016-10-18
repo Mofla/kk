@@ -25,7 +25,23 @@
                 <td width="20%"> Votre message </td>
                 <td width="80%">
                     <div class="form-body">
-                        <textarea class="ckeditor form-control" name="message" rows="6"></textarea>
+                        <textarea class="ckeditor form-control" name="message" rows="6">
+                            <?php if ($pastquote) : ?>
+
+                            <p>&nbsp;</p>
+<blockquote>
+    <?php if ($pastquote->message) : ?>
+ <?= $pastquote->message ?>
+    <?php endif ?>
+    <?php if ($pastquote->text) : ?>
+    <?= $pastquote->text ?>
+    <?php endif ?>
+</blockquote>
+
+
+                            <?php endif ?>
+
+                        </textarea>
                     </div>
                 </td>
             </tr>

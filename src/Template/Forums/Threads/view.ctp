@@ -4,10 +4,11 @@
 </div>
 <div class="col-md-12 voffset2">
 
-
+<?php $check = 'quotetopic' ; ?>
 <div class="right">
     <a href="<?= $this->Url->build([ 'controller' => 'Posts', 'action' => 'add' , $thread->id]); ?>"
        class="btn btn-success " role="button" aria-pressed="true">REPONDRE</a>
+
 </div>
 
 <div class="row"></div>
@@ -49,8 +50,10 @@
             <td>
                 <div class="left">MP</div>
                 <div class="right">
-                    <a href="<?= $this->Url->build([ 'controller' => 'Threads', 'action' => 'edit' , $thread->id]); ?>">EDITER</a>
-
+                    <a href="<?= $this->Url->build([ 'controller' => 'Threads', 'action' => 'edit' , $thread->id]); ?>"
+                       class="btn purple" role="button" aria-pressed="true">EDITER</a>
+                    <a href="<?= $this->Url->build([ 'controller' => 'Posts', 'action' => 'add' , $thread->id, $check]); ?>"
+                       class="btn blue" role="button" aria-pressed="true">CITER</a>
                 </div>
             </td>
         </tr>
@@ -90,8 +93,10 @@
                 <td>
                     <div class="left">MP</div>
                     <div class="right">
-                        <a href="<?= $this->Url->build([ 'controller' => 'Posts', 'action' => 'edit' , $posts->id]); ?>">EDITER</a>
-
+                        <a href="<?= $this->Url->build([ 'controller' => 'Posts', 'action' => 'edit' , $posts->id]); ?>"
+                           class="btn purple" role="button" aria-pressed="true">EDITER</a>
+                        <a href="<?= $this->Url->build([ 'controller' => 'Posts', 'action' => 'add' , $thread->id, $posts->id]); ?>"
+                           class="btn blue" role="button" aria-pressed="true">CITER</a>
                     </div>
                 </td>
             </tr>
