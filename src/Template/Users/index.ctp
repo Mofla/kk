@@ -102,11 +102,10 @@ License: You must have a valid license purchased only from themeforest(the above
                                                             <div class="cbp-l-caption-alignCenter">
                                                                 <div class="cbp-l-caption-body">
                                                                     <a href="<?= $this->Url->build(['controller' => 'Users', 'action' => 'view', $user->id]); ?>"
-                                                                       class="cbp-singlePage cbp-l-caption-buttonLeft btn green uppercase "
-                                                                       rel="nofollow">Profil</a>
+                                                                       class="cbp-l-caption-buttonLeft btn green uppercase ">Profil</a>
                                                                     <a href="<?= $this->Url->build(['controller' => 'Portfolios', 'action' => '/', $user->id])?>"
-                                                                       class="cbp-singlePage cbp-l-caption-buttonRight btn green uppercase "
-                                                                       data-title="Dashboard<br>by Paul Flavius Nechita">Projets</a>
+                                                                       class="cbp-l-caption-buttonRight btn green uppercase ">Projets</a>
+                                                                    <!--cbp-singlePage -->
                                                                 </div>
                                                             </div>
                                                         </div>
