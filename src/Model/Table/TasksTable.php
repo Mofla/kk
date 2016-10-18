@@ -46,6 +46,11 @@ class TasksTable extends Table
             'foreignKey' => 'project_id',
             'joinType' => 'INNER'
         ]);
+
+        $this->belongsTo('FromToTasks', [
+            'foreignKey' => 'id',
+            'joinType' => 'LEFT'
+        ]);
         $this->belongsToMany('Users', [
             'foreignKey' => 'task_id',
             'targetForeignKey' => 'user_id',

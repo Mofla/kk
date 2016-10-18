@@ -200,7 +200,7 @@
             // create an array with edges
             var edges = new vis.DataSet([
                 <?php foreach ($endPoints as $endPoint) : ?>
-                <?php debug($endPoint) ?>
+
                 {from: <?= $endPoint->id ?>, to: 'end'},
                 <?php endforeach; ?>
 

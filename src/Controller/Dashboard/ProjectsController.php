@@ -44,8 +44,8 @@ class ProjectsController extends AppController
         $project = $this->Projects->get($id, [
             'contain' => ['Users', 'Diaries', 'Tasks.States', 'FromToTasks']
         ]);
-
-        $endPoints = $this->Projects->Tasks->find()->where(['id NOT' => $project->from_to_tasks->id]);
+        $to = $this->Projects->FromToTasks->find()->select(['from_id']);
+        $endPoints = $this->Projects->Tasks->find()->where(['Tasks.id NOT IN' => $to])->toArray();
 
 
         $this->set(compact('endPoints'));

@@ -42,10 +42,7 @@ class FromToTasksTable extends Table
             'joinType' => 'INNER'
         ]);
 
-        $this->belongsTo('Tasks', [
-            'foreignKey' => 'from_id',
-            'joinType' => 'INNER'
-        ]);
+
 
     }
 
