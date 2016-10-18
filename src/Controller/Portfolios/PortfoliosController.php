@@ -63,7 +63,7 @@ class PortfoliosController extends AppController
             $portfolio = $this->Portfolios->patchEntity($portfolio, $this->request->data);
             if ($this->Portfolios->save($portfolio)) {
                 // add image
-                $picture = $this->Upload->getPicture($this->request->data['picture'],'Portfolios',$portfolio->id);
+                $picture = $this->Upload->getPicture($this->request->data['picture'],'Portfolios',$portfolio->id,500,500);
                 $this->request->data['picture_url'] = $picture;
                 $portfolio = $this->Portfolios->patchEntity($portfolio, $this->request->data);
                 $this->Portfolios->save($portfolio);
@@ -100,7 +100,7 @@ class PortfoliosController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             if(!empty($this->request->data['picture']['name']))
             {
-                $picture = $this->Upload->getPicture($this->request->data['picture'],'Portfolios',$id);
+                $picture = $this->Upload->getPicture($this->request->data['picture'],'Portfolios',$id,500,500);
                 $this->request->data['picture_url'] = $picture;
             }
             $portfolio = $this->Portfolios->patchEntity($portfolio, $this->request->data);
@@ -133,7 +133,9 @@ class PortfoliosController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $portfolio = $this->Portfolios->get($id);
+        $image = $portfolio->picture_url;
         if ($this->Portfolios->delete($portfolio)) {
+            $this->Upload->deleteImage('Portfolios',$image);
             $this->Flash->success(__('The portfolio has been deleted.'));
         } else {
             $this->Flash->error(__('The portfolio could not be deleted. Please, try again.'));
