@@ -1,8 +1,6 @@
 <div class="page-wrapper-row">
   <div class="page-wrapper-top">
-    <!-- BEGIN HEADER -->
     <div class="page-header">
-      <!-- BEGIN HEADER TOP -->
       <div class="page-header-top">
         <div class="container">
           <!-- BEGIN LOGO -->
@@ -12,22 +10,12 @@
             </a>
           </div>
           <!-- END LOGO -->
-          <!-- BEGIN RESPONSIVE MENU TOGGLER -->
           <a href="javascript:;" class="menu-toggler"></a>
-          <!-- END RESPONSIVE MENU TOGGLER -->
-          <!-- BEGIN TOP NAVIGATION MENU -->
           <div class="top-menu">
             <ul class="nav navbar-nav pull-right">
-            <!-- BEGIN NOTIFICATION DROPDOWN -->
-            <!-- DOC: Apply "dropdown-hoverable" class after "dropdown" and remove data-toggle="dropdown" data-hover="dropdown" data-close-others="true" attributes to enable hover dropdown mode -->
-            <!-- DOC: Remove "dropdown-hoverable" and add data-toggle="dropdown" data-hover="dropdown" data-close-others="true" attributes to the below A element with dropdown-toggle class -->
-            <!-- END NOTIFICATION DROPDOWN -->
-            <!-- BEGIN TODO DROPDOWN -->
-            <!-- END TODO DROPDOWN -->
               <li class="droddown dropdown-separator">
                 <span class="separator"></span>
               </li>
-              <!-- BEGIN INBOX DROPDOWN -->
               <li class="dropdown dropdown-extended dropdown-inbox dropdown-dark" id="header_inbox_bar">
                 <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"
                      data-hover="dropdown" data-close-others="true">
@@ -42,19 +30,28 @@
                     </li>
                   </ul>
               </li>
-              <!-- END INBOX DROPDOWN -->
-              <!-- BEGIN USER LOGIN DROPDOWN -->
               <li class="dropdown dropdown-user dropdown-dark">
+                <?php $Ses=$this->request->session()->read('Auth');
+                if(isset($Ses)): ?>
                 <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"
                       data-hover="dropdown" data-close-others="true">
                   <img alt="" class="img-circle" src="../assets/layouts/layout3/img/avatar9.jpg">
                   <span class="username username-hide-mobile">Nick</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-default">
+                  <?php foreach ($role as $r) : ?>
+                    <?php if ($r->role_id == 1): ?>
                   <li>
-                    <a href="page_user_profile_1.html">
-                      <i class="icon-user"></i> My Profile </a>
+                    <a href="<?= $this->Url->build(['controller' => 'users', 'action' => 'edit', $i , 'prefix'=>'admin']) ?>" >
+                      <i class="icon-user"></i> Profil </a>
                   </li>
+                    <?php else: ?>
+                      <li>
+                        <a href="<?= $this->Url->build(['controller' => 'users', 'action' => 'view', $i ]) ?>" >
+                          <i class="icon-user"></i> Profil </a>
+                      </li>
+                    <?php endif; ?>
+                  <?php endforeach; ?>
                   <li>
                     <a href="app_calendar.html">
                       <i class="icon-calendar"></i> My Calendar </a>
@@ -65,34 +62,21 @@
                         <span class="badge badge-danger"> 0</span>
                     </a>
                   </li>
-                  <!--                                        <li>-->
-                  <!--                                            <a href="app_todo_2.html">-->
-                  <!--                                                <i class="icon-rocket"></i> My Tasks-->
-                  <!--                                                <span class="badge badge-success"> 0 </span>-->
-                  <!--                                            </a>-->
-                  <!--                                        </li>-->
                   <li class="divider"></li>
                   <li>
-                    <a href="page_user_lock_1.html">
-                      <i class="icon-lock"></i> Lock Screen </a>
-                  </li>
-                  <li>
-                    <a href="<?php $this->Html->link(['controller' => 'Users', 'action' => 'logout']); ?>">
+                    <a href="<?php echo $this->Url->build(['controller' => 'users', 'action' => 'logout', 'prefix'=>false]); ?>">
                       <i class="icon-key"></i> Déconnecter </a>
                   </li>
                 </ul>
+                <?php endif; ?>
               </li>
-              <!-- END USER LOGIN DROPDOWN -->
             </ul>
           </div>
-          <!-- END TOP NAVIGATION MENU -->
         </div>
       </div>
-      <!-- END HEADER TOP -->
       <!-- BEGIN HEADER MENU -->
       <div class="page-header-menu">
         <div class="container">
-          <!-- BEGIN HEADER SEARCH BOX -->
           <form class="search-form" action="page_general_search.html" method="GET">
             <div class="input-group">
               <input type="text" class="form-control" placeholder="Search" name="query">
@@ -103,14 +87,15 @@
               </span>
             </div>
           </form>
-          <!-- END HEADER SEARCH BOX -->
-          <!-- BEGIN MEGA MENU -->
-          <!-- DOC: Apply "hor-menu-light" class after the "hor-menu" class below to have a horizontal menu with white background -->
-          <!-- DOC: Remove data-hover="dropdown" and data-close-others="true" attributes below to disable the dropdown opening on mouse hover -->
           <div class="hor-menu ">
             <ul class="nav navbar-nav">
               <?php $Ses=$this->request->session()->read('Auth');
               if(isset($Ses)): ?>
+                <li class="menu-dropdown classic-menu-dropdown ">
+                  <a href="<?= $this->Url->build(['controller' => 'dashboard', 'action' => 'index', 'prefix' => false]); ?>">
+                    Dashboard
+                  </a>
+                </li>
                 <li class="menu-dropdown classic-menu-dropdown active">
                   <a href="">Gérer utilisateurs</a>
                     <ul class="dropdown-menu pull-left">
@@ -148,21 +133,14 @@
                     <?php endforeach; ?>
                   </ul>
                 </li>
-                <li class="menu-dropdown classic-menu-dropdown">
-                  <a href="<?= $this->Url->build(['controller' => 'users', 'action' => 'edit', $i , 'prefix'=>'admin']) ?>" >Profil</a>
-                </li>
-                <?php else: ?>
-                  <li class="menu-dropdown classic-menu-dropdown">
-                    <a href="<?= $this->Url->build(['controller' => 'users', 'action' => 'view', $i]) ?>" >Profil</a>
-                  </li>
               <?php endif; ?>
+                <?php endforeach; ?>
                   <li class="menu-dropdown classic-menu-dropdown ">
                     <a href="<?= $this->Url->build(['controller' => 'Tchat', 'action' => 'add', 'prefix' => false]); ?>">
                       Tchat
                       <span class="arrow"></span>
                     </a>
                   </li>
-              <?php endforeach; ?>
               <?php endif; ?>
               <li class="menu-dropdown classic-menu-dropdown ">
                 <a href="<?= $this->Url->build(['controller' => 'Forums', 'action' => 'index', 'prefix' => false]); ?>">
@@ -172,11 +150,9 @@
               </li>
             </ul>
           </div>
-          <!-- END MEGA MENU -->
         </div>
       </div>
       <!-- END HEADER MENU -->
     </div>
-   <!-- END HEADER -->
   </div>
 </div>
