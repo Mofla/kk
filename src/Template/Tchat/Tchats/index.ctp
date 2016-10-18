@@ -1,6 +1,7 @@
 <div class="container">
-    <h3><?= __('Wellcom <b>' . $user . '</b> to Tchats') ?></h3>
+<h3><?= __('Wellcom <b>' . $user . '</b> to Tchats') ?></h3>
     <hr>
+    <p class="hjh" hjh="<?= $count_message ?>"></p>
     <div class="tchat">
         <?php $i = 0;
         foreach ($list_message as $tchats): $i++ ?>
@@ -24,7 +25,6 @@
 
                     $('.<?= $i ?>').addClass('lui');
                 }
-
             </script>
         <?php endforeach; ?>
     </div>
@@ -125,14 +125,9 @@
     </style>
     <script>
         var tchat = $(".tchat");
-
-        tchat.scroll(function () {
+        var scrollval = 0 ;
+        tchat.scroll('onchange',function () {
             scrollval = tchat.scrollTop();
-            console.log(scrollval);
-
         });
-        setInterval($('.row_tchat').load('<?= $this->Url->build(['controller' => 'Tchats', 'action' => 'index'])?>'),1000);
-        tchat.scrollTop(scrollval);
-
     </script>
-</div>
+    </div>

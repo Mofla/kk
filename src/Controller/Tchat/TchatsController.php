@@ -30,33 +30,19 @@ class TchatsController extends AppController
         $time_2->modify('-1 weeks');
 
         $list_message = $this->Tchats->find('all')->contain('Users')->order('date');
+        $count_message = $this->Tchats->find('all')->count();
 
-        $this->set(compact('tchat','list_message','user','id','time_2'));
+        $this->set(compact('tchat','list_message','user','id','time_2','count_message'));
         $this->set('_serialize', ['tchat']);
     }
 
-    /**
-     * View method
-     *
-     * @param string|null $id Tchat id.
-     * @return \Cake\Network\Response|null
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function view($id = null)
+    public function counttchat()
     {
-        $tchat = $this->Tchats->get($id, [
-            'contain' => ['Users']
-        ]);
+        $nombre_message = $this->Tchats->find('all')->count();
 
-        $this->set('tchat', $tchat);
-        $this->set('_serialize', ['tchat']);
+        $this->set(compact('nombre_message'));
     }
 
-    /**
-     * Add method
-     *
-     * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
-     */
     public function add()
     {
 
@@ -86,55 +72,9 @@ class TchatsController extends AppController
              $this->Tchats->save($tchat);
         }
 
-        $this->set(compact('tchat','list_message','user','id','time_2'));
+        $count_message = $this->Tchats->find('all')->count();
+
+        $this->set(compact('tchat','list_message','user','id','time_2','count_message'));
         $this->set('_serialize', ['tchat']);
-    }
-
-
-    /**
-     * Edit method
-     *
-     * @param string|null $id Tchat id.
-     * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
-    public function edit($id = null)
-    {
-        $tchat = $this->Tchats->get($id, [
-            'contain' => []
-        ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $tchat = $this->Tchats->patchEntity($tchat, $this->request->data);
-            if ($this->Tchats->save($tchat)) {
-                $this->Flash->success(__('The tchat has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The tchat could not be saved. Please, try again.'));
-            }
-        }
-        $users = $this->Tchats->Users->find('list', ['limit' => 200]);
-        $this->set(compact('tchat', 'users'));
-        $this->set('_serialize', ['tchat']);
-    }
-
-    /**
-     * Delete method
-     *
-     * @param string|null $id Tchat id.
-     * @return \Cake\Network\Response|null Redirects to index.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function delete($id = null)
-    {
-        $this->request->allowMethod(['post', 'delete']);
-        $tchat = $this->Tchats->get($id);
-        if ($this->Tchats->delete($tchat)) {
-            $this->Flash->success(__('The tchat has been deleted.'));
-        } else {
-            $this->Flash->error(__('The tchat could not be deleted. Please, try again.'));
-        }
-
-        return $this->redirect(['action' => 'index']);
     }
 }

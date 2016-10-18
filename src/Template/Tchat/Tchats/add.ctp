@@ -1,7 +1,6 @@
-<div class="container">
-    <div class="row_tchat">
-        </div>
-    </div>
+
+    <div class="row_tchat"></div>
+    <div class="count"></div>
     <hr>
     <?= $this->Form->create($tchat) ?>
     <fieldset>
@@ -13,7 +12,6 @@
         .error-message {
             display: none;
         }
-
         .in {
             display: inline-block;
             height: 35px;
@@ -24,9 +22,6 @@
             font-size: 11px;
             color: black;
         }
-
-
-
         .lui {
             margin-top: 2%;
             left: 10px;
@@ -107,9 +102,25 @@
                     dataType: 'html',
                     type: 'post'
                 });
-                $('.row_tchat').load('<?= $this->Url->build(['controller' => 'Tchats', 'action' => 'index'])?>');
+                tchat = $('.tchat');
+                $('.count').load('/tchat/tchats/counttchat');
+                tchat.scrollTop(tchat[0].scrollHeight);
             });
         });
-        $('.row_tchat').load('<?= $this->Url->build(['controller' => 'Tchats', 'action' => 'index'])?>');
+        setInterval(function (){
+
+            $('.count').load('/tchat/tchats/counttchat');
+
+        },1000);
+        setInterval(function (){
+            if ($('.count p').attr('data') != $('.hjh').attr('hjh')){
+
+                tchat = $('.tchat');
+                $('.row_tchat').load('/tchat');
+                tchat.scrollTop(tchat[0].scrollHeight);
+
+            }else if ($('.count p').attr('data') == $('.hjh').attr('hjh')) {
+            }
+        },1700);
+
         </script>
-</div>
