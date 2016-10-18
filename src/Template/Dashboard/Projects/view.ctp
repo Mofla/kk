@@ -3,7 +3,7 @@
 </div>
 
 
-<div class="container">
+<div class="container-fluid">
     <div class="row">
 
         <div class="col-md-12 col-sm-12 col-xs-12">
@@ -24,7 +24,6 @@
                                 <h4 class="list-title">
                                     TODO <?= $this->Html->link('<i class="glyphicon glyphicon-plus"></i>', ['controller' => 'Tasks', 'action' => 'add'], ['id' => 'add-' . $project->id, 'class' => 'add-task btn btn-danger', 'escape' => false]) ?>
                                 </h4>
-
                             </div>
                         </div>
                         <div id="colum-1" class="colum">
@@ -36,11 +35,12 @@
                                            data-toggle="collapse"
                                            href="#pending-simple<?= $task->id ?>"
                                            aria-expanded="false">
+
                                             <div
                                                 class="list-toggle uppercase"> <?= $task->name ?>
-                                                <span
-                                                    class="badge badge-default pull-right bg-white font-dark bold">3</span>
+
                                             </div>
+
                                         </a>
                                         <div class="panel-collapse collapse"
                                              id="pending-simple<?= $task->id ?>"
@@ -56,9 +56,6 @@
 
                                                     <div class="list-item-content">
                                                         <p><?= $task->description ?></p>
-                                                        <h3 class="uppercase">
-                                                            <a href="javascript:;">un lien</a>
-                                                        </h3>
                                                         <div
                                                             class="list-datetime"> <?= $task->start_date ?>
                                                             au <?= $task->end_date ?></div>
@@ -91,8 +88,6 @@
                                            aria-expanded="true">
                                             <div
                                                 class="list-toggle uppercase"> <?= $task->name ?>
-                                                <span
-                                                    class="badge badge-default pull-right bg-white font-dark bold">3</span>
                                             </div>
                                         </a>
                                         <div class="panel-collapse collapse"
@@ -106,15 +101,8 @@
                                                     <div class="list-icon-container pull-right">
                                                         <?= $this->Html->link('<i class="glyphicon glyphicon-pencil"></i>', ['controller' => 'Tasks', 'action' => 'edit', $task->id], ['id' => 'task-' . $task->id, 'class' => 'btn edittask', 'escape' => false]) ?>
                                                     </div>
-                                                    <div class="list-icon-container">
-                                                        <i class="icon-close"></i>
-                                                    </div>
                                                     <div class="list-item-content">
                                                         <p><?= $task->description ?></p>
-                                                        <h3 class="uppercase">
-                                                            <a href="javascript:;">un
-                                                                lien</a>
-                                                        </h3>
                                                         <div
                                                             class="list-datetime"> <?= $task->start_date ?>
                                                             au <?= $task->end_date ?></div>
@@ -146,8 +134,6 @@
                                            aria-expanded="true">
                                             <div
                                                 class="list-toggle uppercase"> <?= $task->name ?>
-                                                <span
-                                                    class="badge badge-default pull-right bg-white font-dark bold">3</span>
                                             </div>
                                         </a>
                                         <div class="panel-collapse collapse"
@@ -161,15 +147,8 @@
                                                     <div class="list-icon-container pull-right">
                                                         <?= $this->Html->link('<i class="glyphicon glyphicon-pencil"></i>', ['controller' => 'Tasks', 'action' => 'edit', $task->id], ['id' => 'task-' . $task->id, 'class' => 'btn edittask', 'escape' => false]) ?>
                                                     </div>
-                                                    <div class="list-icon-container">
-                                                        <i class="icon-close"></i>
-                                                    </div>
                                                     <div class="list-item-content">
                                                         <p><?= $task->description ?></p>
-                                                        <h3 class="uppercase">
-                                                            <a href="javascript:;">un
-                                                                lien</a>
-                                                        </h3>
                                                         <div
                                                             class="list-datetime"> <?= $task->start_date ?>
                                                             au <?= $task->end_date ?></div>
@@ -192,41 +171,55 @@
 
     </div>
     <div class="row">
-        <div id="visualization-<?= $project->id ?>"></div>
-        <div id="log"></div>
-        <div class="nodes" id="mynetwork<?= $project->id ?>"></div>
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3>TIMELINE</h3>
+            </div>
+            <div class="panel-body">
+                <div id="visualization-<?= $project->id ?>"></div>
+            </div>
+        </div>
+        <div class="panel panel-success">
+            <div class="panel panel-heading">
+                <h3>Hiérarchisation des tâches</h3>
+            </div>
+            <div class="panel-body">
+                Options de la vue en arbre :
+                <select id="layout">
+                    <option value="directed-true">directed</option>
+                    <option value="hubsize-true">hubsize</option>
+                    <option value="directed-false">none</option>
+                </select><br/>
+                <input type="button" id="btn-UD" value="Up-Down">
+                <input type="button" id="btn-DU" value="Down-Up">
+                <input type="button" id="btn-LR" value="Left-Right">
+                <input type="button" id="btn-RL" value="Right-Left">
+                <input type="hidden" id='direction' value="UD">
+
+                <div id="network-popUp">
+                    <span id="operation">node</span> <br>
+                    <table style="margin:auto;">
+                        <tr>
+                            <td>id</td>
+                            <td><input id="node-id" value="new value"/></td>
+                        </tr>
+                        <tr>
+                            <td>label</td>
+                            <td><input id="node-label" value="new value"/></td>
+                        </tr>
+                    </table>
+                    <input type="button" value="save" id="saveButton"/>
+                    <input type="button" value="cancel" id="cancelButton"/>
+                </div>
+                <br/>
+                <div class="nodes" id="mynetwork"></div>
+                <p id="selection"></p>
+            </div>
+        </div>
+
     </div>
 
-    Options de la vue en arbre :
-    <select id="layout">
-        <option value="directed-true">directed</option>
-        <option value="hubsize-true">hubsize</option>
-        <option value="directed-false">none</option>
-    </select><br/>
-    <input type="button" id="btn-UD" value="Up-Down">
-    <input type="button" id="btn-DU" value="Down-Up">
-    <input type="button" id="btn-LR" value="Left-Right">
-    <input type="button" id="btn-RL" value="Right-Left">
-    <input type="hidden" id='direction' value="UD">
 
-    <div id="network-popUp">
-        <span id="operation">node</span> <br>
-        <table style="margin:auto;">
-            <tr>
-                <td>id</td>
-                <td><input id="node-id" value="new value"/></td>
-            </tr>
-            <tr>
-                <td>label</td>
-                <td><input id="node-label" value="new value"/></td>
-            </tr>
-        </table>
-        <input type="button" value="save" id="saveButton"/>
-        <input type="button" value="cancel" id="cancelButton"/>
-    </div>
-    <br/>
-    <div class="nodes" id="mynetwork"></div>
-    <p id="selection"></p>
 
 
     <?= $this->Html->script('../js/jquery.js') ?>
