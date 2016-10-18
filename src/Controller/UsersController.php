@@ -44,8 +44,18 @@ class UsersController extends AppController
         $user = $this->Users->get($id, [
             'contain' => ['Roles']
         ]);
+        if($id==$this->Auth->User('id') OR $this->Auth->User('role_id')==1) {
+            $autoriser= true;
+        }
+        else{
+            $autoriser=false;
+        }
+
+        $roles = $this->Users->Roles->find('list', ['limit' => 200]);
 
         $this->set('user', $user);
+        $this->set('roles', $roles);
+        $this->set('autoriser',$autoriser);
         $this->set('_serialize', ['user']);
     }
 
@@ -102,7 +112,8 @@ class UsersController extends AppController
             }
         }
         $roles = $this->Users->Roles->find('list', ['limit' => 200]);
-        $this->set(compact('user', 'roles'));
+        $this->set(compact('user'));
+        $this->set('roles', $roles);
         $this->set('_serialize', ['user']);
     }
 
