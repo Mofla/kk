@@ -89,6 +89,9 @@ Router::prefix('admin', function ($routes) {
     $routes->connect('/utilisateur/editer/*', ['controller' => 'Users', 'action' => 'edit']);
     $routes->connect('/utilisateur/permission', ['controller' => 'Permissions', 'action' => 'index']);
     $routes->connect('/utilisateur/permission/ajouter', ['controller' => 'Permissions', 'action' => 'add']);
+    $routes->connect('/portfolios/', ['controller' => 'Portfolios', 'action' => 'index']);
+    $routes->connect('/portfolios/ajouter', ['controller' => 'Portfolios', 'action' => 'add']);
+    $routes->connect('/portfolios/editer/*', ['controller' => 'Portfolios', 'action' => 'edit']);
     $routes->fallbacks(DashedRoute::class);
 });
 
@@ -96,9 +99,6 @@ Router::prefix('portfolios', function($routes) {
     $routes->connect('/', ['controller' => 'Portfolios','action' => 'index'], ['routeClass' => 'InflectedRoute']);
     $routes->connect('/:id', ['controller' => 'Portfolios','action' => 'index'],['id' => '[0-9]+','pass'=>['id']], ['routeClass' => 'InflectedRoute']);
     $routes->connect('/voir/*', ['controller' => 'Portfolios','action' => 'view'], ['routeClass' => 'InflectedRoute']);
-    $routes->connect('/ajouter', ['controller' => 'Portfolios','action' => 'add'], ['routeClass' => 'InflectedRoute']);
-    $routes->connect('/editer', ['controller' => 'Portfolios','action' => 'edit'], ['routeClass' => 'InflectedRoute']);
-    $routes->connect('/gestion', ['controller' => 'Portfolios','action' => 'admin'], ['routeClass' => 'InflectedRoute']);
     $routes->fallbacks(DashedRoute::class);
 });
 
