@@ -35,7 +35,6 @@ class PortfoliosUsersTable extends Table
 
         $this->table('portfolios_users');
         $this->displayField('user_id');
-        $this->primaryKey('user_id');
 
         $this->belongsTo('Portfolios', [
             'foreignKey' => 'portfolio_id',
