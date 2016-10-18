@@ -45,10 +45,13 @@
 
         <tr class="grey">
 
-            <td>Créé le <?= h($thread->created) ?></td>
+            <td><?= h($thread->created) ?></td>
             <td>
                 <div class="left">MP</div>
-                <div class="right">EDITER / CITER</div>
+                <div class="right">
+                    <a href="<?= $this->Url->build([ 'controller' => 'Threads', 'action' => 'edit' , $thread->id]); ?>">EDITER</a>
+
+                </div>
             </td>
         </tr>
         </tbody>
@@ -83,10 +86,13 @@
 
             <tr class="grey">
 
-                <td>Créé le <?= h($posts->created) ?></td>
+                <td><?= h($posts->created) ?></td>
                 <td>
                     <div class="left">MP</div>
-                    <div class="right">EDITER / CITER</div>
+                    <div class="right">
+                        <a href="<?= $this->Url->build([ 'controller' => 'Posts', 'action' => 'edit' , $posts->id]); ?>">EDITER</a>
+
+                    </div>
                 </td>
             </tr>
             <!--<tr>-->

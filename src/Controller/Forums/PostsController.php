@@ -108,7 +108,7 @@ class PostsController extends AppController
             if ($this->Posts->save($post)) {
                 $this->Flash->success(__('The post has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['controller'=>'Threads' , 'action' => 'view', $post->thread_id]);
             } else {
                 $this->Flash->error(__('The post could not be saved. Please, try again.'));
             }

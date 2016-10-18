@@ -27,20 +27,21 @@
             <br> par <?= h($threads->user->username) ?></td>
             <td width="10%"><?= count($threads->posts) ?></td>
             <td width="10%" ><?= $threads->countview ?></td>
+            <td width="25%">
 
             <?php if ($threads->lastpost) : ?>
-            <td width="25%">le <?= $threads->lastpost->i18nformat('dd/MM/YY à HH:mm', 'Europe/Paris') ?>
-                <br> par <?= $threads->lastuserthread->username ?> </br></td>
+            le <?= $threads->lastpost->i18nformat('dd/MM/YY à HH:mm', 'Europe/Paris') ?>
+                <br> par <?= $threads->lastuserthread->username ?> </br>
+
+            <?php else: ?>
+            Aucun Message
+            <?php endif ?>
+            </td>
             <td width="5%" class="actions">
                 <?= $this->Form->postLink(__('Delete'), ['controller' => 'Threads', 'action' => 'delete', $threads->id], ['confirm' => __('Are you sure you want to delete # {0}?', $threads->id)]) ?>
             </td>
-            <?php else: ?>
-            <td width="25%">
-            Aucun Message
-            </td>
-            <td>
-            </td>
-            <?php endif ?>
+
+
 
         </tr>
         <?php endforeach; ?>

@@ -1,33 +1,36 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $post->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $post->id)]
-            )
-        ?></li>
-        <li><?= $this->Html->link(__('List Posts'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Threads'), ['controller' => 'Threads', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Thread'), ['controller' => 'Threads', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Files'), ['controller' => 'Files', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New File'), ['controller' => 'Files', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="posts form large-9 medium-8 columns content">
-    <?= $this->Form->create($post) ?>
-    <fieldset>
-        <legend><?= __('Edit Post') ?></legend>
-        <?php
-            echo $this->Form->input('title');
-            echo $this->Form->input('message');
-            echo $this->Form->input('user_id', ['options' => $users]);
-            echo $this->Form->input('thread_id', ['options' => $threads]);
-            echo $this->Form->input('files._ids', ['options' => $files]);
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
+
+
+<div class="col-md-12">
+    <div class="table-responsive">
+        <table class="table sscategory">
+            <thead class="category">
+            <tr>
+                <th colspan="2" scope="col"> Editer un Sujet </th>
+            </tr>
+            </thead>
+            <tbody>
+            <?= $this->Form->create($post) ?>
+            <fieldset>
+
+                <tr>
+                    <td> Votre message </td>
+                    <td>
+
+                        <div class="form-body">
+                            <textarea class="ckeditor form-control" name="text" rows="6"><?= $post->message ?></textarea>
+
+                        </div>
+
+                        <div class="voffset3 text-center">
+                            <?= $this->Form->button('Valider',['class' => 'btn btn-success']) ?>
+                            <?= $this->Form->end() ?>
+                        </div>
+
+                    </td>
+                </tr>
+            </fieldset>
+
+        </table>
+    </div>
 </div>
+        <?= $this->Html->script('../assets/global/plugins/ckeditor/ckeditor.js') ?>
