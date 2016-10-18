@@ -15,13 +15,14 @@ class ForumsController extends AppController
         ->contain(['Forums.Lasttopicuser','Forums.Users'])
         ->order(['sort' => 'ASC']);
 
+
         $this->set(compact('cat'));
     }
 
     public function view($id = null)
     {
         $forum = $this->Forums->get($id, [
-            'contain' => ['Threads.Users','Threads.Lastuserthread']
+            'contain' => ['Threads.Users','Threads.Posts','Threads.Lastuserthread']
         ]);
 
         $this->set('forum', $forum);

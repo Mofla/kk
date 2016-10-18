@@ -1,32 +1,39 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $thread->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $thread->id)]
-            )
-        ?></li>
-        <li><?= $this->Html->link(__('List Threads'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Forums'), ['controller' => 'Forums', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Forum'), ['controller' => 'Forums', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Posts'), ['controller' => 'Posts', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Post'), ['controller' => 'Posts', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="threads form large-9 medium-8 columns content">
-    <?= $this->Form->create($thread) ?>
-    <fieldset>
-        <legend><?= __('Edit Thread') ?></legend>
-        <?php
-            echo $this->Form->input('subject');
-            echo $this->Form->input('text');
-            echo $this->Form->input('user_id', ['options' => $users]);
-            echo $this->Form->input('forum_id', ['options' => $forums]);
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
+
+
+<div class="col-md-12">
+    <div class="table-responsive">
+        <table class="table sscategory">
+            <thead class="category">
+            <tr>
+                <th colspan="2" scope="col"> Editer un Sujet </th>
+            </tr>
+            </thead>
+            <tbody>
+            <?= $this->Form->create($thread) ?>
+            <fieldset>
+                <tr>
+                    <td width="20%"> Titre du sujet </td>
+                    <td width="80%">   <?= $this->Form->input('subject' , ['label' => false , 'class' => 'form-control']); ?> </td>
+                </tr>
+                <tr>
+                    <td> Votre message </td>
+                    <td>
+
+                        <div class="form-body">
+                            <textarea class="ckeditor form-control" name="text" rows="6"><?= $thread->text ?></textarea>
+
+                        </div>
+
+                        <div class="voffset3 text-center">
+                            <?= $this->Form->button('Valider',['class' => 'btn btn-success']) ?>
+                            <?= $this->Form->end() ?>
+                        </div>
+
+                    </td>
+                </tr>
+            </fieldset>
+
+        </table>
+    </div>
 </div>
+        <?= $this->Html->script('../assets/global/plugins/ckeditor/ckeditor.js') ?>
