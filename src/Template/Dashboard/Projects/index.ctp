@@ -9,8 +9,9 @@
 <?= $this->Html->script('../assets/global/plugins/bootstrap/js/bootstrap.min.js') ?>
 
 
-<button class="btn btn-default" id="project-add">Ajouter un projet</button><br>
+
 <div class="container-fluid">
+    <button class="btn btn-default" id="project-add">Ajouter un projet</button><br>
     <div class="row">
         <?php foreach ($projects as $project): ?>
             <div class="col-md-4 col-sm-4 col-xs-4">
