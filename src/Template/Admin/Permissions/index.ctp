@@ -26,7 +26,7 @@
             <ul class="dropdown-menu pull-left" role="menu">
               <i class="glyphicon glyphicon-search"></i><a href="<?= $this->Url->build(['controller' => 'Permissions', 'action' => 'view', $permission->id]); ?>">Voir</a><br><br>
               <i class="glyphicon glyphicon-pencil"></i><a href="<?= $this->Url->build(['controller' => 'Permissions', 'action' => 'edit', $permission->id]); ?>">Editer</a><br><br>
-              <i class="glyphicon glyphicon-remove"></i><a href="<?= $this->Url->build(['controller' => 'Permissions', 'action' => 'delete',$permission->id], ['confirm' => __('Are you sure you want to delete # {0}?', $permission->id)]) ?>">supprimer</a><br><br>
+              <i class="glyphicon glyphicon-remove"></i><?= $this->Form->postLink(__('Supprimer'), ['controller'=>'Permissions','action' => 'delete', $permission->id], ['confirm' => __('Are you sure you want to delete # {0}?', $permission->id)]) ?><br><br>
             </ul>
           </div>
         </td>
