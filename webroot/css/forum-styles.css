@@ -73,3 +73,14 @@
 #newcat{
     width: 50%;
 }
+
+.avatar{
+    width: 100px;
+    border: 1px solid grey;
+    border-radius: 50%!important;
+    margin: 10px;
+}
+
+.username{
+    text-align: center;
+}
