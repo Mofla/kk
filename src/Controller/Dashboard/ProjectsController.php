@@ -41,6 +41,7 @@ class ProjectsController extends AppController
      */
     public function view($id = null)
     {
+        $this->viewBuilder()->layout('dashboard');
         $project = $this->Projects->get($id, [
             'contain' => ['Users', 'Diaries', 'Tasks.States', 'FromToTasks']
         ]);
