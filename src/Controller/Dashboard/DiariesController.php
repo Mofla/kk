@@ -18,10 +18,14 @@ class DiariesController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Users', 'Projects']
-        ];
-        $diaries = $this->paginate($this->Diaries);
+
+        $diaries = $this->Diaries->find()->contain([
+            'Entries',
+            'Users',
+            'Projects',
+            'Users.Tasks',
+            'Users.Tasks.States',
+       ]);
 
         $this->set(compact('diaries'));
         $this->set('_serialize', ['diaries']);
