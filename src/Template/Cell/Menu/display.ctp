@@ -6,30 +6,13 @@
           <!-- BEGIN LOGO -->
           <div class="page-logo">
             <a href="/">
-              <img src="../assets/layouts/layout3/img/logo-default.jpg" alt="logo" class="logo-default">
+              <img src="" alt="logo" class="logo-default">
             </a>
           </div>
           <!-- END LOGO -->
           <a href="javascript:;" class="menu-toggler"></a>
           <div class="top-menu">
             <ul class="nav navbar-nav pull-right">
-              <li class="droddown dropdown-separator">
-                <span class="separator"></span>
-              </li>
-              <li class="dropdown dropdown-extended dropdown-inbox dropdown-dark" id="header_inbox_bar">
-                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"
-                     data-hover="dropdown" data-close-others="true">
-                  <span class="circle">0</span>
-                  <span class="corner"></span>
-                </a>
-                  <ul class="dropdown-menu">
-                    <li class="external">
-                      <h3>You have
-                        <strong>0 New</strong> Messages</h3>
-                        <a href="app_inbox.html">view all</a>
-                    </li>
-                  </ul>
-              </li>
               <li class="dropdown dropdown-user dropdown-dark">
                 <?php $Ses=$this->request->session()->read('Auth');
                 if(isset($Ses)): ?>
@@ -64,7 +47,7 @@
                   </li>
                   <li class="divider"></li>
                   <li>
-                    <a href="<?php echo $this->Url->build(['controller' => 'users', 'action' => 'logout', 'prefix'=>false]); ?>">
+                    <a href="<?php echo $this->Url->build(['controller' => 'users', 'action' => 'logout', 'prefix'=>'utilisateur']); ?>">
                       <i class="icon-key"></i> Déconnecter </a>
                   </li>
                 </ul>
@@ -96,8 +79,8 @@
                     Dashboard
                   </a>
                 </li>
-                <li class="menu-dropdown classic-menu-dropdown active">
-                  <a href="">Gérer utilisateurs</a>
+                <li class="menu-dropdown classic-menu-dropdown">
+                  <a href="<?=$this->Url->build(['controller' => 'Users', 'action' => 'index', 'prefix'=> 'admin']) ?>">Gérer utilisateurs</a>
                     <ul class="dropdown-menu pull-left">
                       <?php foreach ($perm as $p) : ?>
                         <?php foreach ($p->connectors as $conn): ?>
@@ -122,7 +105,7 @@
               <?php foreach ($role as $r) : ?>
               <?php if ($r->role_id == 1): ?>
                 <li class="menu-dropdown classic-menu-dropdown">
-                  <a href="">Gérer permissions</a>
+                  <a href="<?=$this->Url->build(['controller' => 'Permissions', 'action' => 'index', 'prefix'=> 'admin']) ?>">Gérer permissions</a>
                   <ul class="dropdown-menu pull-left">
                     <?php foreach ($gererPerm as $gp) : ?>
                       <?php foreach ($gp->connectors as $conn): ?>
@@ -142,6 +125,11 @@
                     </a>
                   </li>
               <?php endif; ?>
+              <li class="menu-dropdown classic-menu-dropdown ">
+                <a href="<?= $this->Url->build(['controller' => 'Portfolios', 'action' => 'index', 'prefix' => false]); ?>">
+                  Portfolios
+                </a>
+              </li>
               <li class="menu-dropdown classic-menu-dropdown ">
                 <a href="<?= $this->Url->build(['controller' => 'Forums', 'action' => 'index', 'prefix' => false]); ?>">
                           Forum

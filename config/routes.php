@@ -122,6 +122,7 @@ Router::prefix('dashboard', function($routes) {
 Router::prefix('utilisateur', function($routes) {
     $routes->connect('/', ['controller' => 'Users','action' => 'index'], ['routeClass' => 'InflectedRoute']);
     $routes->connect('/connexion', ['controller' => 'Users','action' => 'login'], ['routeClass' => 'InflectedRoute']);
+    $routes->connect('/deconnexion', ['controller' => 'Users','action' => 'logout'], ['routeClass' => 'InflectedRoute']);
     $routes->connect('/editer/*', ['controller' => 'Users','action' => 'edit'], ['routeClass' => 'InflectedRoute']);
     $routes->connect('/profil/*', ['controller' => 'Users','action' => 'view'], ['routeClass' => 'InflectedRoute']);
     $routes->fallbacks(DashedRoute::class);
