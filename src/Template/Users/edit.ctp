@@ -13,7 +13,7 @@
     </ul>
 </nav>
 <div class="users form large-9 medium-8 columns content">
-    <?= $this->Form->create($user) ?>
+    <?= $this->Form->create($user,['enctype' => 'multipart/form-data']) ?>
     <fieldset>
         <legend><?= __('Edit User') ?></legend>
         <?php
@@ -29,7 +29,7 @@
             echo $this->Form->input('birthday');
             echo $this->Form->input('github_username');
             echo $this->Form->input('role_id', ['options' => $roles]);
-            echo $this->Form->input('picture_url');
+            echo $this->Form->input('picture',['type' => 'file']);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

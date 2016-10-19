@@ -77,7 +77,7 @@ class UsersController extends AppController
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->data);
             if ($this->Users->save($user)) {
-                $picture = $this->Upload->getPicture($this->request->data['picture'],'user',$user->id);
+                $picture = $this->Upload->getPicture($this->request->data['picture'],'user',$user->id, 300, 300, false);
                 $this->request->data['picture_url'] = $picture;
                 $user = $this->Users->patchEntity($user, $this->request->data);
                 $this->Users->save($user);
@@ -108,6 +108,10 @@ class UsersController extends AppController
             'contain' => []
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
+            if(!empty($this->request->data['picture']['name'])) {
+                $picture = $this->Upload->getPicture($this->request->data['picture'], 'user', $user->id, 300, 300, false);
+                $this->request->data['picture_url'] = $picture;
+            }
             $user = $this->Users->patchEntity($user, $this->request->data);
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('The user has been saved.'));
