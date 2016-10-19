@@ -41,6 +41,7 @@ class UsersController extends AppController
      */
     public function view($id = null)
     {
+        $this->loadModel('Portfolios_users');
         $user = $this->Users->get($id, [
             'contain' => ['Roles']
         ]);
@@ -52,9 +53,14 @@ class UsersController extends AppController
         }
 
         $roles = $this->Users->Roles->find('list', ['limit' => 200]);
+        $portfolios = $this->Portfolios_users->find('all', [
+            'contain' => ['Portfolios'],
+            'conditions' => ['user_id' => $id ]
+        ]);
 
         $this->set('user', $user);
         $this->set('roles', $roles);
+        $this->set('portfolios', $portfolios);
         $this->set('autoriser',$autoriser);
         $this->set('_serialize', ['user']);
     }
