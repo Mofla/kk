@@ -29,6 +29,8 @@ class MenuCell extends Cell
         $this->loadModel('Roles');
         $this->loadModel('Connectors');
         $this->loadModel('Users');
+        $user = $this->Users->find('all')
+            ->where(['id'=> $id]);
         //on récupère l'id de la colonne role_id
         $role= $this->Users->find('all')
             ->select('role_id')
@@ -48,6 +50,6 @@ class MenuCell extends Cell
             ->matching('Connectors')->where(['Connectors.controller LIKE'=>'%ermission%']);
         
         $this->set('_serialize', ['permission']);
-        $this->set(compact('perm','connecor', 'i','gererPerm','role'));
+        $this->set(compact('perm','i','gererPerm','role', 'user'));
     }
 }
