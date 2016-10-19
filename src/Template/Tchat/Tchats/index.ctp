@@ -1,13 +1,13 @@
 <div class="container">
-<h3><?= __('Wellcom <b>' . $user . '</b> to Tchats') ?></h3>
+    <h3><?= __('Wellcom <b>' . $user . '</b> to Tchats') ?></h3>
     <hr>
     <p class="hjh" hjh="<?= $count_message ?>"></p>
-    <div class="tchat">
+    <div class="tchat col-md-12">
         <?php $i = 0;
         foreach ($list_message as $tchats): $i++ ?>
             <div class="<?= $i ?> pad" id="<?= $tchats->user_id ?>" date="<?= $tchats->date->toUnixString(); ?>">
                 <p class="message"><?= $tchats->message ?></p>
-                <p class="users"><?= $tchats->has('user') ? $this->Html->link($tchats->user->username, ['controller' => 'Users', 'action' => 'view', $tchats->user->id], ['value' => $tchats->user->id, 'class' => 'hh']) : '' ?>
+                <p class="users"><?= $tchats->has('user') ? $this->Html->link($tchats->user->username, ['controller' => 'Users', 'action' => 'view', $tchats->user->id, 'prefix'=> false], ['value' => $tchats->user->id, 'class' => 'hh']) : '' ?>
                     <?= $tchats->date ?></p>
             </div>
             <script>
@@ -37,6 +37,7 @@
             display: inline-block;
             height: 35px;
             border: none;
+
         }
 
         .date {
@@ -50,6 +51,9 @@
             text-align: left;
             padding: 1%;
             background-color: #ffffff;
+            -webkit-box-shadow: 10px 15px 15px 0px rgba(0, 0, 0, 0.30);
+            -moz-box-shadow: 10px 15px 15px 0px rgba(0, 0, 0, 0.30);
+            box-shadow: 10px 15px 15px 0px rgba(0, 0, 0, 0.30);
         }
 
         .lui {
@@ -123,11 +127,4 @@
             margin: 0 0;
         }
     </style>
-    <script>
-        var tchat = $(".tchat");
-        var scrollval = 0 ;
-        tchat.scroll('onchange',function () {
-            scrollval = tchat.scrollTop();
-        });
-    </script>
-    </div>
+</div>
