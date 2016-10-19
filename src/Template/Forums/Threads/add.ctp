@@ -1,6 +1,4 @@
 
-    <?= $this->Html->css('../assets/global/plugins/bootstrap-summernote/summernote.css') ?>
-        <?= $this->Html->script('../assets/global/plugins/bootstrap-summernote/summernote.min.js') ?>
 <div class="col-md-12">
     <div class="table-responsive">
         <table class="table sscategory">
@@ -40,8 +38,14 @@
 
 
 
+        <?= $this->Html->css('../assets/global/plugins/bootstrap-summernote/summernote.css') ?>
+        <?= $this->Html->script('../assets/global/plugins/bootstrap-summernote/summernote.min.js') ?>
+        <?= $this->Html->script('../assets/global/plugins/bootstrap-summernote/lang/summernote-fr-FR.js') ?>
 <script>
 $(document).ready(function() {
-    $('#summernote').summernote();
+    $('#summernote').summernote({
+        height: 150,
+        lang:"fr-FR"
+    });
 });
 </script>

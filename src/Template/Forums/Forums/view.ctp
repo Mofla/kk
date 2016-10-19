@@ -4,7 +4,8 @@
 <div class="col-md-12 voffset2">
 
 <div class="right">
-<a href="<?= $this->Url->build([ 'controller' => 'Threads', 'action' => 'add' , $forum->id]); ?>" class="btn btn-success " role="button" aria-pressed="true">NOUVEAU SUJET</a>
+    <a href="<?= $this->Url->build([ 'controller' => 'Threads', 'action' => 'add' , $forum->id]); ?>"
+       class="btn btn-success " role="button" aria-pressed="true"> <i class="fa fa-plus"></i> CREER UN SUJET</a>
 </div>
 
 <div class="row"></div>
@@ -38,7 +39,8 @@
             <?php endif ?>
             </td>
             <td width="5%" class="actions">
-                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Threads', 'action' => 'delete', $threads->id], ['confirm' => __('Are you sure you want to delete # {0}?', $threads->id)]) ?>
+                <?= $this->Form->postLink(__('<i class="fa fa-times"></i>'),[ 'controller' => 'Threads'
+                , 'action' => 'delete' , $threads->id],['escape'=>false , 'class'=>'btn btn-sm btn-danger']); ?>
             </td>
 
 
@@ -48,7 +50,8 @@
     </table>
     <?php endif; ?>
     <div class="right">
-        <a href="<?= $this->Url->build([ 'controller' => 'Threads', 'action' => 'add' , $forum->id]); ?>" class="btn btn-success " role="button" aria-pressed="true">NOUVEAU SUJET</a>
+        <a href="<?= $this->Url->build([ 'controller' => 'Threads', 'action' => 'add' , $forum->id]); ?>"
+           class="btn btn-success " role="button" aria-pressed="true"> <i class="fa fa-plus"></i> CREER UN SUJET</a>
     </div>
 </div>
 </div>

@@ -58,7 +58,6 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->html->script('../assets/global/plugins/jquery.min.js') ?>
     <link rel="shortcut icon" href="favicon.ico" />
 </head>
-<body>
 
 
 <body class="page-container-bg-solid">
@@ -242,14 +241,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 <!--<?= $this->Html->script('../js/jquery.js') ?>-->
 <!--<?= $this->Html->script('../build/jquery.datetimepicker.full.min.js') ?>-->
 <!--<?= $this->Html->css('../css/jquery.datetimepicker.css') ?>-->
-<script>
 
-    //datetimepicker on date field
-    $('#datepicker').datetimepicker({
-        timepicker:false,
-        format: "Y-m-d"
-    });
-</script>
 </body>
 
 <!-- END THEME LAYOUT SCRIPTS -->
