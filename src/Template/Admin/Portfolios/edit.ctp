@@ -1,4 +1,6 @@
 <?= $this->Html->css('multi-select.css') ?>
+<?= $this->Html->css('../assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css') ?>
+<?= $this->Html->script('../assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js') ?>
 <div class="row">
     <div class="col-xs-12 col-sm-10 col-md-8 col-lg-6 col-sm-offset-1 col-md-offset-2 col-lg-offset-3">
         <?= $this->Form->create($portfolio,['enctype' => 'multipart/form-data']) ?>
@@ -8,7 +10,20 @@
             echo $this->Form->input('name',['class' => 'form-control']);
             echo $this->Form->input('description',['class' => 'form-control']);
             echo $this->Form->input('url',['class' => 'form-control']);
-            echo $this->Form->input('picture',['type' => 'file']);
+            ?>
+            <div class="fileinput fileinput-new" data-provides="fileinput">
+                <div class="fileinput-new thumbnail" style="width: 125px; height: 125px;">
+                </div>
+                <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 125px; max-height: 125px;"> </div>
+                <div class="text-center">
+                                                                                <span class="btn default btn-file">
+                                                                                    <span class="fileinput-new"> Selectionner une image </span>
+                                                                                    <span class="fileinput-exists"> Modifier </span>
+                                                                                    <input type="file" name="picture"> </span>
+                    <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput"> Retirer </a>
+                </div>
+            </div>
+            <?php
             echo $this->Form->input('users._ids', ['options' => $users,'id' => 'multiselect','class' => 'form-control']);
             ?>
         </fieldset>

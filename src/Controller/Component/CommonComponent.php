@@ -12,15 +12,29 @@ class CommonComponent extends Component
 {
     public $components = ['Auth'];
 
+    function listFolderFiles($dir){
+        $dirs = scandir($dir);
+        $files = [];
+        foreach ($dirs as $dir)
+        {
+            if(is_dir($dir))
+            {
+                $file[$dir] = scandir($dir);
+            }
+        }
+
+        echo '<pre>',print_r($file),'</pre>';
+    }
+
     public function getControllers()
     {
-        $files = scandir('./src/Controller');
+        //$files = scandir('./src/Controller');
+        $files = $this->listFolderFiles(APP . 'Controller');
         $results = [];
         $ignoreList = [
             '.',
             '..',
             'Component',
-            'Admin',
             'PagesController.php',
             'AppController.php',
             'ErrorController.php',

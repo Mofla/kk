@@ -8,7 +8,7 @@ use ImageTool;
 class UploadComponent extends Component
 {
 
-    public function getPicture($upload,$directory,$id,$width,$height)
+    public function getPicture($upload,$directory,$id,$width,$height,$fit=true)
     {
         $extensions = ['jpg','jpeg','png'];
         $file_extension = explode('.',$upload['name'])[1];
@@ -22,12 +22,20 @@ class UploadComponent extends Component
         $path = WWW_ROOT . '/uploads/'.strtolower($directory).'/' . $file_newName;
         if(move_uploaded_file($upload['tmp_name'], $path))
         {
+            if($fit)
+            {
+                $fit = 'fit';
+            }
+            else
+            {
+                $fit = 'crop';
+            }
             ImageTool::resize([
                 'input' => $path,
                 'output' => $path,
                 'width' => $width,
                 'height' => $height,
-                'mode' => 'fit'
+                'mode' => $fit
             ]);
             return $file_newName;
         }

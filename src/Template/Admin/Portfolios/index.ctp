@@ -11,6 +11,7 @@
                     <tr>
                         <td class="btn-caret"><?= $portfolio->name ?><span class="caret"></span>
                             <div class="well collapse">
+                                <?= $this->Html->image('../uploads/portfolios/' . $portfolio->picture_url,['style' => 'float:right;max-width:100px;max-height:100px']) ?>
                                 <i>
                                     <?php
                                     // Cut the description if too long
@@ -27,12 +28,17 @@
                                             $users[$user->id] = $this->Html->link($user->firstname . ' ' . $user->lastname,
                                                 ['controller' => 'Users', 'action' => 'view',$user->id,'prefix' => false]);
                                         }
-                                        echo implode(', ',$users);
+                                        echo nl2br(implode(', ',$users));
                                     ?>
                                 </p>
+                                <span class="clearfix"></span>
                             </div>
                         </td>
-                        <td class="actions">
+                        <td class="actions" width="20%">
+                            <?= $this->Html->link('<span class="glyphicon glyphicon-eye-open"></span>',
+                                ['controller' => 'Portfolios','action' => 'voir',$portfolio->id,'prefix' => false],
+                                ['escape' => false,'class' => 'btn btn-sm btn-primary']
+                            ) ?>
                             <?= $this->Html->link('<span class="glyphicon glyphicon-pencil"></span>',
                                 ['action' => 'edit',$portfolio->id],
                                 ['escape' => false,'class' => 'btn btn-sm btn-info']
@@ -49,6 +55,14 @@
                     ['action' => 'add'],
                     ['escape' => false,'class' => 'btn btn-lg btn-info']
                 ) ?>
+
+                <div class="paginator text-center">
+                    <ul class="pagination">
+                        <?= $this->Paginator->prev('< ') ?>
+                        <?= $this->Paginator->numbers() ?>
+                        <?= $this->Paginator->next(' >') ?>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
