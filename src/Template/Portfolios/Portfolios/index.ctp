@@ -17,12 +17,25 @@
                     </p>
                     <p>
                         <span class="label">Par :</span>
+                        <?php $users = []; ?>
                         <?php foreach ($portfolio->users as $user): ?>
-                            |<?= $this->Html->link($user->firstname . ' ' . $user->lastname,
+                            <?php
+                            $users[$user->id] = $this->Html->link($user->firstname . ' ' . $user->lastname,
                                 ['controller' => 'Users', 'action' => 'view',$user->id,'prefix'=> false],
-                                ['fullBase'=>true]) ?>|
+                                ['fullBase'=>true]);
+                            ?>
                         <?php endforeach; ?>
-
+                        <?php
+                            if(count($users) > 5)
+                            {
+                                $count = count($users) - 5;
+                                echo implode(', ',array_slice($users,0,5)) . ' <i>et ' . $count . ' autres personnes.</i>';
+                            }
+                            else
+                            {
+                                echo implode(', ',$users);
+                            }
+                        ?>
                     </p>
                     <span class="bottom-btn">
                             <?= $this->Html->link('<span class="glyphicon glyphicon-eye-open"></span> Voir',[
@@ -40,9 +53,9 @@
 </div>
 <div class="paginator text-center">
     <ul class="pagination">
-        <?= $this->Paginator->prev('< ' . __('previous')) ?>
+        <?= $this->Paginator->prev('< ') ?>
         <?= $this->Paginator->numbers() ?>
-        <?= $this->Paginator->next(__('next') . ' >') ?>
+        <?= $this->Paginator->next(' >') ?>
     </ul>
 </div>
 
