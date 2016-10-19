@@ -233,6 +233,8 @@
     <?= $this->Html->css('sweetalert.css') ?>
     <?= $this->Html->script('sweetalert.min.js') ?>
 
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
     <style type="text/css">
         #mynetwork {
             position: relative;
@@ -469,15 +471,20 @@
         var layoutMethod = "directed";
         var layoutBool = true;
 
-
+        //may be useful someday
         function cleanPonctuation(data) {
             return data.replace(/'/g, "\\'");
+        }
+        //may be useful someday
+        function breakLine(data) {
+            return '"' + [data.slice(0, 15), '\\n', data.slice(15)].join('') +'"';
         }
 
 
         function draw() {
 
             var directionInput = document.getElementById("direction").value;
+
 
             // create an array with nodes
             var nodes = new vis.DataSet([
@@ -486,7 +493,7 @@
                     size: 10,
                     label: "Fin du projet",
                     shape: 'box',
-                    font: {'face': 'monospace', 'align': 'left'},
+                    font: {'face': 'monospace', 'align': 'left', 'color': 'white'},
                     color: 'blue'
                 },
                 <?php foreach ($project->tasks as $task): ?>
@@ -495,15 +502,17 @@
                     id: <?= $task->id ?>,
                     size: 10,
                     label: "<?= $task->name ?>",
-                    shape: 'box',
                     font: {'face': 'monospace', 'align': 'left'},
                     <?php if ($task->state->name == 'todo'): ?>
+                    group: 'todo',
                     color: 'red'
                     <?php endif; ?>
                     <?php if ($task->state->name == 'doing'): ?>
+                    group: 'doing',
                     color: 'orange'
                     <?php endif; ?>
                     <?php if ($task->state->name == 'done'): ?>
+                    group: 'done',
                     color: 'green'
                     <?php endif; ?>
                 },
@@ -515,7 +524,7 @@
             var edges = new vis.DataSet([
                 <?php foreach ($endPoints as $endPoint) : ?>
 
-                {from: <?= $endPoint->id ?>, to: 'end'},
+                {from: <?= $endPoint->id ?>, to: 'end', dashes: true},
                 <?php endforeach; ?>
 
                 <?php foreach ($project->from_to_tasks as $fromto) : ?>
@@ -534,6 +543,35 @@
             var container = document.getElementById('mynetwork');
 
             var options = {
+                groups: {
+                    todo: {
+                        shape: 'icon',
+                        icon: {
+                            face: 'FontAwesome',
+                            code: '\uf073',
+                            size: 50,
+                            color: 'red'
+                        }
+                    },
+                    doing: {
+                        shape: 'icon',
+                        icon: {
+                            face: 'FontAwesome',
+                            code: '\uf0ad',
+                            size: 50,
+                            color: 'orange'
+                        }
+                    },
+                    done: {
+                        shape: 'icon',
+                        icon: {
+                            face: 'FontAwesome',
+                            code: '\uf058',
+                            size: 50,
+                            color: 'green'
+                        }
+                    }
+                },
                 "edges": {
                     "arrows": {
                         "to": {
@@ -541,7 +579,9 @@
                         }
                     },
                     "smooth": {
-                        "forceDirection": "none"
+                        "type": "cubicBezier",
+                        "forceDirection": "none",
+                        "roundness": 0.6
                     }
                 },
 
@@ -552,7 +592,7 @@
                 "physics": {
                     "minVelocity": 0.75,
                     hierarchicalRepulsion: {
-                        nodeDistance: 200
+                        nodeDistance: 100
                     }
                 },
                 layout: {
