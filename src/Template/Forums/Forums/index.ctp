@@ -16,7 +16,10 @@
     <table class="table">
         <thead class="category">
         <tr>
-            <th colspan="5" scope="col"><?= $forum->name ?></th>
+            <th colspan="2" scope="col"><?= $forum->name ?></th>
+            <th class="hidden-xs"></th>
+            <th class="hidden-xs"></th>
+            <th class="hidden-xs"></th>
         </tr>
         </thead>
         <tbody>
@@ -34,9 +37,9 @@
                 <td width="60%"> <?= $this->Html->link(__($section->name), ['action' => 'view', $section->id]) ?>
                     <br>
                     <?= $section->description ?></td>
-                <td width="7%"><span class="stat"><i class="fa fa-comment-o fa"><?= $section->countthread ?></i></span></td>
-                <td width="7%"><span class="stat"><i class="fa fa-comments-o fa"><?= $section->countpost ?></i></span></td>
-                <td width="20%" style="text-align: right">
+                <td class="hidden-xs" width="7%"><span class="hidden-s stat"><i class="fa fa-comment-o fa"><?= $section->countthread ?></i></span></td>
+                <td class="hidden-xs" width="7%"><span class="stat"><i class="fa fa-comments-o fa"><?= $section->countpost ?></i></span></td>
+                <td class="hidden-xs" width="20%" style="text-align: right">
                     <?php if ($section->lasttopicuser) : ?>
                     <?= $this->Html->link(__($section->lasttopicuser->title), ['controller' => 'Threads','action' => 'view', $section->lasttopicuser->thread_id]) ?>
                     <br>
@@ -50,8 +53,6 @@
             </tr>
 <?php
 $id = $section->id ;
-
-
         ?>
 
         <?php endforeach; ?>

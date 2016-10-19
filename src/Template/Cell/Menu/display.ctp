@@ -147,6 +147,11 @@
                           Forum
                   <span class="arrow"></span>
                 </a>
+                <ul class="dropdown-menu pull-left">
+                  <li class=" ">
+                    <a href="<?= $this->Url->build('/admin/forums/listcategory') ?>">ACP Forum</a>
+                  </li>
+                </ul>
               </li>
             </ul>
           </div>
