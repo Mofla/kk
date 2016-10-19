@@ -1,92 +1,63 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit User'), ['action' => 'edit', $user->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete User'), ['action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $user->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Users'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New User'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Roles'), ['controller' => 'Roles', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Role'), ['controller' => 'Roles', 'action' => 'add']) ?> </li>
-    </ul>
-</nav>
-<div class="users view large-9 medium-8 columns content">
-    <h3><?= h($user->id) ?></h3>
-    <table class="vertical-table">
-        <tr>
-            <th scope="row"><?= __('Promotion') ?></th>
-            <td><?= h($user->promotion) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Username') ?></th>
-            <td><?= h($user->username) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Password') ?></th>
-            <td><?= h($user->password) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Email') ?></th>
-            <td><?= h($user->email) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Address') ?></th>
-            <td><?= h($user->address) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Zipcode') ?></th>
-            <td><?= h($user->zipcode) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('City') ?></th>
-            <td><?= h($user->city) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Phone') ?></th>
-            <td><?= h($user->phone) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Cellphone') ?></th>
-            <td><?= h($user->cellphone) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Emergency Phone') ?></th>
-            <td><?= h($user->emergency_phone) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Firstname') ?></th>
-            <td><?= h($user->firstname) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Lastname') ?></th>
-            <td><?= h($user->lastname) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Github Username') ?></th>
-            <td><?= h($user->github_username) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Role') ?></th>
-            <td><?= $user->has('role') ? $this->Html->link($user->role->name, ['controller' => 'Roles', 'action' => 'view', $user->role->id]) : '' ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Picture Url') ?></th>
-            <td><?= h($user->picture_url) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Id') ?></th>
-            <td><?= $this->Number->format($user->id) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Birthday') ?></th>
-            <td><?= h($user->birthday) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Created') ?></th>
-            <td><?= h($user->created) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Modified') ?></th>
-            <td><?= h($user->modified) ?></td>
-        </tr>
-    </table>
+<?= $this->Html->link('Accueil',['controller' => 'Pages','action' => '/','prefix' => false]) ?> /
+<?= $this->Html->link($this->request->params['controller'],['action' => 'index','prefix' => false]) ?> /
+<?= $user->firstname.$user->lastname ?>
+<div class="page-title">
+  <h1><?php echo $user->firstname ?> <?= $user->lastname ?>
+    <small><?= $user->role->name ?></small>
+  </h1>
+</div>
+<div class="page-content">
+  <div class="container">
+    <div class="page-content-inner">
+      <div class="profile">
+        <div class="tabbable-line tabbable-full-width">
+          <ul class="nav nav-tabs">
+            <li class="active">
+              <a href="#tab_1_1" data-toggle="tab"> Profil </a>
+            </li>
+          </ul>
+          <div class="tab-content">
+            <div class="tab-pane active" id="tab_1_1">
+              <div class="row">
+                <div class="col-md-3">
+                  <ul class="list-unstyled profile-nav">
+                    <li>
+                      <?= $this->Html->image('../uploads/user/'. $user->picture_url,['class' => 'img-responsive pic-bordered'])?>
+                    </li>
+                  </ul>
+                </div>
+                <div class="col-md-9">
+                  <div class="row">
+                    <div class="col-md-8 profile-info">
+                      <h1 class="font-green sbold uppercase"><?= $user->firstname ?> <?= $user->lastname ?></h1>
+                      <ul class="list-inline">
+                        <li>
+                          <i class="fa fa-map-marker"></i> <?= $user->city ?>
+                        </li>
+                        <li>
+                          <i class="fa fa-birthday-cake"></i> <?= $user->birthday ?>
+                        </li>
+                        <li>
+                          <i class="fa fa-phone"></i> <?= $user->phone ?>
+                        </li>
+                        <li>
+                          <i class="fa fa-mobile"></i> <?= $user->cellphone ?>
+                        </li>
+                        <li>
+                          <i class="fa fa-at"></i> <?= $user->email ?>
+                        </li>
+                      </ul>
+                      <?php if (!empty($user->github_username)): ?>
+                        Compte github : <a href="https://github.com/<?= $user->github_username?>"> <?= $user->github_username ?></a>
+                      <?php endif; ?>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

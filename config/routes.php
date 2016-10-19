@@ -85,6 +85,7 @@ Router::prefix('admin', function ($routes) {
 // Parce que vous êtes dans le scope admin, vous n'avez pas besoin
 // d'inclure le prefix /admin ou l'élément de route admin.
     $routes->connect('/utilisateur', ['controller' => 'Users', 'action' => 'index']);
+    $routes->connect('/utilisateur/voir/*', ['controller' => 'Users', 'action' => 'view']);
     $routes->connect('/utilisateur/ajouter', ['controller' => 'Users', 'action' => 'add']);
     $routes->connect('/utilisateur/editer/*', ['controller' => 'Users', 'action' => 'edit']);
     $routes->connect('/utilisateur/permission', ['controller' => 'Permissions', 'action' => 'index']);

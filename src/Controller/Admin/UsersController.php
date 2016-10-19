@@ -84,8 +84,10 @@ class UsersController extends AppController
             'contain' => ['Roles']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $picture = $this->Upload->getPicture($this->request->data['picture'],'user',$user->id, 300,300,false);
-            $this->request->data['picture_url'] = $picture;
+            if(!empty($this->request->data['picture']['name'])) {
+                $picture = $this->Upload->getPicture($this->request->data['picture'], 'user', $user->id, 300, 300, false);
+                $this->request->data['picture_url'] = $picture;
+            }
             $user = $this->Users->patchEntity($user, $this->request->data);
             if ($this->Users->save($user)) {
                 $this->Users->save($user);
