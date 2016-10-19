@@ -12,42 +12,71 @@ class CommonComponent extends Component
 {
     public $components = ['Auth'];
 
-    function listFolderFiles($dir){
-        $dirs = scandir($dir);
+
+    function loadControllerAndActions()
+    {
+        $path = './src/Controller';
+        $dirs = scandir($path);
         $files = [];
+        $ignore = [
+            '.',
+            '..',
+            'empty',
+            'Component'
+        ];
         foreach ($dirs as $dir)
         {
-            if(is_dir($dir))
+            if ($dir === '.' or $dir === '..') continue;
+            if(is_dir($path . '/' . $dir))
             {
-                $file[$dir] = scandir($dir);
+                $temp_file = scandir($path . '/' . $dir);
+                foreach ($temp_file as $temp)
+                {
+                    if (!in_array($temp, $ignore) && !in_array($dir,$ignore))
+                    {
+                        $temp = explode('.',$temp)[0];
+                        $files[$dir][] = $temp;
+                    }
+                }
             }
         }
-
-        echo '<pre>',print_r($file),'</pre>';
+        return $files;
     }
 
     public function getControllers()
     {
-        //$files = scandir('./src/Controller');
-        $files = $this->listFolderFiles(APP . 'Controller');
-        $results = [];
-        $ignoreList = [
-            '.',
-            '..',
-            'Component',
-            'PagesController.php',
-            'AppController.php',
-            'ErrorController.php',
-        ];
-        foreach($files as $file){
-            if(!in_array($file, $ignoreList)) {
-                $controller = explode('.', $file)[0];
-                //array_push($results, str_replace('Controller', '', $controller));
-                array_push($results, $controller);
-            }
-        }
-        return $results;
+        $files = $this->loadControllerAndActions();
+        return array_keys($files);
     }
+
+    public function getControllerActions($id)
+    {
+        $files = $this->loadControllerAndActions();
+        return $files[$id];
+    }
+
+//    public function getControllers()
+//    {
+//        $files = scandir('./src/Controller');
+//        $files = $this->listFolderFiles();
+//        $results = [];
+//        $ignoreList = [
+//            '.',
+//            '..',
+//            'Component',
+//            'PagesController.php',
+//            'AppController.php',
+//            'ErrorController.php',
+//        ];
+//        foreach($files as $file){
+//            if(!in_array($file, $ignoreList)) {
+//                $controller = explode('.', $file)[0];
+//                //array_push($results, str_replace('Controller', '', $controller));
+//                array_push($results, $controller);
+//            }
+//        }
+//        return $files;
+//    }
 
     public function getActions($controllerName)
     {
@@ -65,21 +94,21 @@ class CommonComponent extends Component
         return $results;
     }
 
-    public function getControllerActions($controllerName)
-    {
-        $className = 'App\\Controller\\'.$controllerName;
-        $class = new ReflectionClass($className);
-        $actions = $class->getMethods(ReflectionMethod::IS_PUBLIC);
-
-        $results = [];
-        $ignoreList = ['beforeFilter', 'afterFilter', 'initialize'];
-        foreach($actions as $action){
-            if($action->class == $className && !in_array($action->name, $ignoreList)){
-                array_push($results, $action->name);
-            }
-        }
-        return $results;
-    }
+//    public function getControllerActions($controllerName)
+//    {
+//        $className = 'App\\Controller\\'.$controllerName;
+//        $class = new ReflectionClass($className);
+//        $actions = $class->getMethods(ReflectionMethod::IS_PUBLIC);
+//
+//        $results = [];
+//        $ignoreList = ['beforeFilter', 'afterFilter', 'initialize'];
+//        foreach($actions as $action){
+//            if($action->class == $className && !in_array($action->name, $ignoreList)){
+//                array_push($results, $action->name);
+//            }
+//        }
+//        return $results;
+//    }
 
 
     //Return Front And Admin Controller => actions list

@@ -26,7 +26,7 @@
                       <?= $this->Form->input('name',['label'=>false, 'class'=>'form-control']); ?>
                   </div>
                   <div class="form-group">
-                    <label class="label-control">Personne concerné par la permission : </label><br>
+                    <label class="label-control">Module : </label><br>
                       <select name="controller" required="required" id="controller" class="bs-select form-control">
                         <?php foreach ($controller as $c) : ?>
                           <option value="<?= $c ?>"><?= $c ?></option>
@@ -34,15 +34,20 @@
                       </select>
                   </div>
                   <div class="form-group">
-                    <label>Fonctionnalité de la permission : </label>
+                    <label>Controller : </label>
                       <select name="function"id="function" class="bs-select form-control">
                       <?php
                       foreach ($list_actions_controller as $option => $key)  {
-                          echo "<option>".$list_actions_controller[$option]."</option>";
+                          echo "<option>".$list_actions_controller[$option][$key]."</option>";
                       }
                       ?>
                       </select>
                   </div>
+                    <div class="form-group">
+                        <label>Controller : </label>
+                        <select name="function"id="actions" class="bs-select form-control">
+                        </select>
+                    </div>
                   <div class="form-group">
                     <label class="label-control">Description : </label>
                       <?= $this->Form->input('description',['label'=>false, 'class'=>'form-control']); ?>
@@ -76,6 +81,16 @@
           data  : "id="+$('#controller').find('option:selected').text(),
           success: function (data) {
               $('#function').html(data);
+          }
+      });
+  });
+  $('#function').change(function(){
+      $.ajax({
+          type: 'POST',
+          url: '<?= $this->Url->build(['controller' => 'Connectors','action' => 'ajaxgetactionlist']); ?>',
+          data  : "id="+$('#function').find('option:selected').text(),
+          success: function (data) {
+              $('#actions').html(data);
           }
       });
   });
