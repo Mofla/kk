@@ -219,29 +219,29 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 <!--</nav>-->
 <div class="quick-nav-overlay"></div>
     </footer>
-<?= $this->html->script('../assets/global/plugins/respond.min.js') ?>
-<?= $this->html->script('../assets/global/plugins/excanvas.min.js') ?>
-<?= $this->html->script('../assets/global/plugins/ie8.fix.min.js') ?>
-<!--[endif]-->
-<!-- BEGIN CORE PLUGINS -->
+<!--<?= $this->html->script('../assets/global/plugins/respond.min.js') ?>-->
+<!--<?= $this->html->script('../assets/global/plugins/excanvas.min.js') ?>-->
+<!--<?= $this->html->script('../assets/global/plugins/ie8.fix.min.js') ?>-->
+<!--&lt;!&ndash;[endif]&ndash;&gt;-->
+<!--&lt;!&ndash; BEGIN CORE PLUGINS &ndash;&gt;-->
 
 <?= $this->html->script('../assets/global/plugins/bootstrap/js/bootstrap.min.js') ?>
-<?= $this->html->script('../assets/global/plugins/js.cookie.min.js') ?>
-<?= $this->html->script('../assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js') ?>
-<?= $this->html->script('../assets/global/plugins/jquery.blockui.min.js') ?>
-<?= $this->html->script('../assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js') ?>
-<!-- END CORE PLUGINS -->
-<!-- BEGIN THEME GLOBAL SCRIPTS -->
-<?= $this->html->script('../assets/global/scripts/app.min.js') ?>
-<!-- END THEME GLOBAL SCRIPTS -->
-<!-- BEGIN THEME LAYOUT SCRIPTS -->
-<?= $this->html->script('../assets/layouts/layout3/scripts/layout.min.js') ?>
-<?= $this->html->script('../assets/layouts/layout3/scripts/demo.min.js') ?>
-<?= $this->html->script('../assets/layouts/global/scripts/quick-sidebar.min.js') ?>
-<?= $this->html->script('../assets/layouts/global/scripts/quick-nav.min.js') ?>
-<?= $this->Html->script('../js/jquery.js') ?>
-<?= $this->Html->script('../build/jquery.datetimepicker.full.min.js') ?>
-<?= $this->Html->css('../css/jquery.datetimepicker.css') ?>
+<!--<?= $this->html->script('../assets/global/plugins/js.cookie.min.js') ?>-->
+<!--<?= $this->html->script('../assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js') ?>-->
+<!--<?= $this->html->script('../assets/global/plugins/jquery.blockui.min.js') ?>-->
+<!--<?= $this->html->script('../assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js') ?>-->
+<!--&lt;!&ndash; END CORE PLUGINS &ndash;&gt;-->
+<!--&lt;!&ndash; BEGIN THEME GLOBAL SCRIPTS &ndash;&gt;-->
+<!--<?= $this->html->script('../assets/global/scripts/app.min.js') ?>-->
+<!--&lt;!&ndash; END THEME GLOBAL SCRIPTS &ndash;&gt;-->
+<!--&lt;!&ndash; BEGIN THEME LAYOUT SCRIPTS &ndash;&gt;-->
+<!--<?= $this->html->script('../assets/layouts/layout3/scripts/layout.min.js') ?>-->
+<!--<?= $this->html->script('../assets/layouts/layout3/scripts/demo.min.js') ?>-->
+<!--<?= $this->html->script('../assets/layouts/global/scripts/quick-sidebar.min.js') ?>-->
+<!--<?= $this->html->script('../assets/layouts/global/scripts/quick-nav.min.js') ?>-->
+<!--<?= $this->Html->script('../js/jquery.js') ?>-->
+<!--<?= $this->Html->script('../build/jquery.datetimepicker.full.min.js') ?>-->
+<!--<?= $this->Html->css('../css/jquery.datetimepicker.css') ?>-->
 <script>
 
     //datetimepicker on date field

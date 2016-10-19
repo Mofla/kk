@@ -56,16 +56,19 @@ class PostsController extends AppController
     {
         $time = Time::now();
         $user = $this->Auth->user('id');
-
-if($quote !== 'quotetopic'){
-        $pastquote = $this->Posts->get($quote);
-}
+        if($quote) {
+            if ($quote !== 'quotetopic') {
+                $pastquote = $this->Posts->get($quote);
+            }
+            if ($quote == 'quotetopic') {
+                $pastquote = $this->Posts->Threads->get($id);
+            }
+        }
 else{
     $pastquote = NULL;
 }
-        if($quote == 'quotetopic'){
-            $pastquote = $this->Posts->Threads->get($id);
-        }
+
+
 
         $forumid = $this->Posts->Threads->find()
             ->select(['forum_id','subject'])
@@ -140,9 +143,13 @@ else{
      */
     public function delete($id = null)
     {
+        $threadid = $this->Posts->find()
+            ->select('thread_id')
+            ->where(['id' => $id])
+            ->first();
         $forumid = $this->Posts->Threads->find()
             ->select('forum_id')
-            ->where(['id' => $id])
+            ->where(['id' => $threadid->thread_id])
             ->first();
         $this->request->allowMethod(['post', 'delete']);
         $post = $this->Posts->get($id);
@@ -157,6 +164,6 @@ else{
             $this->Flash->error(__('The post could not be deleted. Please, try again.'));
         }
 
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect($this->referer());
     }
 }

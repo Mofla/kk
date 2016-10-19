@@ -1,5 +1,6 @@
-<?= $this->Html->script('../assets/global/plugins/ckeditor/ckeditor.js') ?>
 
+    <?= $this->Html->css('../assets/global/plugins/bootstrap-summernote/summernote.css') ?>
+        <?= $this->Html->script('../assets/global/plugins/bootstrap-summernote/summernote.min.js') ?>
 <div class="col-md-12">
     <div class="table-responsive">
         <table class="table sscategory">
@@ -20,7 +21,8 @@
             <td>
 
                     <div class="form-body">
-                                <textarea class="ckeditor form-control" name="text" rows="6"></textarea>
+
+                        <textarea name="text" id="summernote" class="form-control" rows="6"></textarea>
                     </div>
 
                 <div class="voffset3 text-center">
@@ -35,3 +37,11 @@
         </table>
 </div>
 </div>
+
+
+
+<script>
+$(document).ready(function() {
+    $('#summernote').summernote();
+});
+</script>

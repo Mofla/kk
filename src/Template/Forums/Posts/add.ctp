@@ -1,4 +1,5 @@
-<?= $this->Html->script('../assets/global/plugins/ckeditor/ckeditor.js') ?>
+<?= $this->Html->css('../assets/global/plugins/bootstrap-summernote/summernote.css') ?>
+        <?= $this->Html->script('../assets/global/plugins/bootstrap-summernote/summernote.min.js') ?>
 
         <!--echo $this->Form->input('title');-->
             <!--echo $this->Form->input('message');-->
@@ -25,7 +26,7 @@
                 <td width="20%"> Votre message </td>
                 <td width="80%">
                     <div class="form-body">
-                        <textarea class="ckeditor form-control" name="message" rows="6">
+                        <textarea class="form-control" id="summernote" name="message" rows="6">
                             <?php if ($pastquote) : ?>
 
                             <p>&nbsp;</p>
@@ -55,3 +56,8 @@
     </table>
 </div>
 </div>
+<script>
+$(document).ready(function() {
+    $('#summernote').summernote();
+});
+</script>

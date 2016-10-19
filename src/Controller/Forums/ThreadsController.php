@@ -120,23 +120,24 @@ class ThreadsController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $thread = $this->Threads->get($id);
-        $post = $this->Threads->find()
-            ->contain('Posts')
-            ->where(['Threads.id' => $id])->count();
 
-        $forumid = $this->Threads->find()
-            ->select('forum_id')
-            ->where(['id' => $id])
-            ->first();
+//        $post = $this->Threads->find()
+//            ->contain('Posts')
+//            ->where(['Threads.id' => $id])->count();
+//
+//        $forumid = $this->Threads->find()
+//            ->select('forum_id')
+//            ->where(['id' => $id])
+//            ->first();
 
         if ($this->Threads->delete($thread)) {
             $this->Flash->success(__('The thread has been deleted.'));
-            $query = $this->Threads->Forums->query();
-            $query->update()
-                ->set([$query->newExpr('countthread = countthread - 1'),
-                    $query->newExpr('countpost = countpost - '.$post.'')])
-                ->where(['id' => $forumid->forum_id])
-                ->execute();
+//            $query = $this->Threads->Forums->query();
+//            $query->update()
+//                ->set([$query->newExpr('countthread = countthread - 1'),
+//                    $query->newExpr('countpost = countpost - '.$post.'')])
+//                ->where(['id' => $forumid->forum_id])
+//                ->execute();
         } else {
             $this->Flash->error(__('The thread could not be deleted. Please, try again.'));
         }

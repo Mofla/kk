@@ -7,8 +7,7 @@
 <?php $check = 'quotetopic' ; ?>
 <div class="right">
     <a href="<?= $this->Url->build([ 'controller' => 'Posts', 'action' => 'add' , $thread->id]); ?>"
-       class="btn btn-success " role="button" aria-pressed="true">REPONDRE</a>
-
+       class="btn btn-success " role="button" aria-pressed="true"> <i class="fa fa-comments-o"></i> REPONDRE</a>
 </div>
 
 <div class="row"></div>
@@ -50,11 +49,16 @@
             <td>
                 <div class="left">MP</div>
                 <div class="right">
-                    <a href="<?= $this->Url->build([ 'controller' => 'Threads', 'action' => 'edit' , $thread->id]); ?>"
-                       class="btn purple" role="button" aria-pressed="true">EDITER</a>
                     <a href="<?= $this->Url->build([ 'controller' => 'Posts', 'action' => 'add' , $thread->id, $check]); ?>"
-                       class="btn blue" role="button" aria-pressed="true">CITER</a>
+                       class="btn btn-sm blue" role="button" aria-pressed="true"><i class="fa fa-quote-right"></i> CITER</a>
+                    <a href="<?= $this->Url->build([ 'controller' => 'Threads', 'action' => 'edit' , $thread->id]); ?>"
+                       class="btn btn-sm purple" role="button" aria-pressed="true"><i class="fa fa-pencil"></i> EDITER</a>
+                    <?= $this->Form->postLink(__('<i class="fa fa-times"></i>'),[ 'controller' => 'Threads'
+                    , 'action' => 'delete' , $thread->id],['escape'=>false , 'class'=>'btn btn-sm btn-danger']); ?>
+
                 </div>
+
+
             </td>
         </tr>
         </tbody>
@@ -93,10 +97,13 @@
                 <td>
                     <div class="left">MP</div>
                     <div class="right">
-                        <a href="<?= $this->Url->build([ 'controller' => 'Posts', 'action' => 'edit' , $posts->id]); ?>"
-                           class="btn purple" role="button" aria-pressed="true">EDITER</a>
                         <a href="<?= $this->Url->build([ 'controller' => 'Posts', 'action' => 'add' , $thread->id, $posts->id]); ?>"
-                           class="btn blue" role="button" aria-pressed="true">CITER</a>
+                           class="btn btn-sm blue" role="button" aria-pressed="true"><i class="fa fa-quote-right"></i> CITER</a>
+                        <a href="<?= $this->Url->build([ 'controller' => 'Posts', 'action' => 'edit' , $posts->id]); ?>"
+                           class="btn btn-sm purple" role="button" aria-pressed="true"><i class="fa fa-pencil"></i> EDITER</a>
+                        <?= $this->Form->postLink(__('<i class="fa fa-times"></i>'),[ 'controller' => 'Posts'
+                        , 'action' => 'delete' , $posts->id],['escape'=>false , 'class'=>'btn btn-sm btn-danger']); ?>
+
                     </div>
                 </td>
             </tr>
@@ -119,7 +126,7 @@
         <?php endif; ?>
         <div class="right">
             <a href="<?= $this->Url->build([ 'controller' => 'Posts', 'action' => 'add' , $thread->id]); ?>"
-               class="btn btn-success " role="button" aria-pressed="true">REPONDRE</a>
+               class="btn btn-success " role="button" aria-pressed="true"> <i class="fa fa-comments-o"></i> REPONDRE</a>
         </div>
     </div>
 </div>
