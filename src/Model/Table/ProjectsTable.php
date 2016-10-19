@@ -10,8 +10,8 @@ use Cake\Validation\Validator;
  * Projects Model
  *
  * @property \Cake\ORM\Association\HasMany $Diaries
+ * @property \Cake\ORM\Association\HasMany $FromToTasks
  * @property \Cake\ORM\Association\HasMany $Tasks
- *  * @property \Cake\ORM\Association\HasMany $FromToTasks
  * @property \Cake\ORM\Association\BelongsToMany $Users
  *
  * @method \App\Model\Entity\Project get($primaryKey, $options = [])
@@ -42,13 +42,13 @@ class ProjectsTable extends Table
         $this->hasMany('Diaries', [
             'foreignKey' => 'project_id'
         ]);
-        $this->hasMany('Tasks', [
-            'foreignKey' => 'project_id'
-        ]);
         $this->hasMany('FromToTasks', [
             'foreignKey' => 'project_id'
         ]);
 
+        $this->hasMany('Tasks', [
+            'foreignKey' => 'project_id'
+        ]);
         $this->belongsToMany('Users', [
             'foreignKey' => 'project_id',
             'targetForeignKey' => 'user_id',
@@ -81,7 +81,9 @@ class ProjectsTable extends Table
             ->requirePresence('users_number', 'create')
             ->notEmpty('users_number');
 
-
+        $validator
+            ->boolean('finished')
+            ->allowEmpty('finished');
 
         $validator
             ->date('start_date')
@@ -92,6 +94,12 @@ class ProjectsTable extends Table
             ->date('end_date')
             ->requirePresence('end_date', 'create')
             ->notEmpty('end_date');
+
+        $validator
+            ->allowEmpty('picture_url');
+
+        $validator
+            ->allowEmpty('url');
 
         return $validator;
     }
