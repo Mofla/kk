@@ -7,7 +7,7 @@
     <table class="table">
         <thead class="category">
         <tr>
-            <th colspan="2"><?= __('Créer un forum') ?></th>
+            <th colspan="2"><span class="h4">Créer un forum</span></th>
         </tr>
         </thead>
 <tbody class="sscategory">

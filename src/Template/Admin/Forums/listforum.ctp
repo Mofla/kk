@@ -10,7 +10,7 @@
     <table class="table" id="<?= $forum->id ?>">
         <thead>
         <tr>
-            <th class="category" colspan="2"><?= $forum->name ?></th>
+            <th class="category" colspan="2"><span class="h4"><?= $forum->name ?></span></th>
         </tr>
         </thead>
         <tbody class="sscategory curs">

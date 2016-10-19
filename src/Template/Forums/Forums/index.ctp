@@ -16,7 +16,7 @@
     <table class="table">
         <thead class="category">
         <tr>
-            <th colspan="2" scope="col"><?= $forum->name ?></th>
+            <th colspan="2" scope="col"><span class="h4"><?= $forum->name ?></span></th>
             <th class="hidden-xs"></th>
             <th class="hidden-xs"></th>
             <th class="hidden-xs"></th>
