@@ -95,7 +95,7 @@
                                                             <div class="col-md-12">
                                                                 <div class="tab-content">
                                                                     <div id="tab_1-1" class="tab-pane active">
-                                                                        <?= $this->Form->create($user) ?>
+                                                                        <?= $this->Form->create($user,['enctype' => 'multipart/form-data']) ?>
                                                                         <fieldset>
                                                                             <legend><?= __('Editer son profil') ?></legend>
                                                                             <div class="col-md-6">
@@ -134,7 +134,7 @@
                                                                                     <label class="label-control">Url
                                                                                         avatar
                                                                                         : </label>
-                                                                                    <?= $this->Form->input('picture_url', ['label' => false, 'class' => 'form-control']); ?>
+                                                                                    <?= $this->Form->input('picture_url', ['label' => false, 'class' => 'form-control','type' => 'file']); ?>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-6">

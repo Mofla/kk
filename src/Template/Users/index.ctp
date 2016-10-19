@@ -97,7 +97,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                                     <div class="cbp-caption">
                                                         <div class="cbp-caption-defaultWrap"
                                                              style="background-color: #444d58">
-                                                            <img src="../uploads/user/<?= $user->picture_url ?>" alt="" style="border: 1px solid black"></div>
+                                                            <img src="../uploads/user/<?= $user->picture_url ?>" alt="" style="border: 1px solid black; max-height: 215px "></div>
                                                         <div class="cbp-caption-activeWrap">
                                                             <div class="cbp-l-caption-alignCenter">
                                                                 <div class="cbp-l-caption-body">
