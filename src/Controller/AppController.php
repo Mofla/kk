@@ -54,7 +54,7 @@ class AppController extends Controller
                 'action' => 'display',
                 'home'
             ],
-            'loginAction' => '/users/login', // à cause des prefixes
+            'loginAction' => '/utilisateur/connexion', // à cause des prefixes
             'authorize' => 'Controller'
         ]);
         $this->loadComponent('Common');
