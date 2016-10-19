@@ -13,9 +13,12 @@ use Cake\ORM\Entity;
  * @property bool $finished
  * @property \Cake\I18n\Time $start_date
  * @property \Cake\I18n\Time $end_date
+ * @property string $picture_url
+ * @property string $url
  *
  * @property \App\Model\Entity\Diary[] $diaries
  * @property \App\Model\Entity\Task[] $tasks
+ * @property \App\Model\Entity\FromToTask[] $from_to_tasks
  * @property \App\Model\Entity\User[] $users
  */
 class Project extends Entity

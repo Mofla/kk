@@ -318,6 +318,7 @@
     <!--generates timelines-->
 
     <script type="text/javascript">
+
         var container = document.getElementById('visualization-<?= $project->id?>');
 
         var min = new Date(2016, 3, 1); // 1 april
@@ -507,7 +508,7 @@
                     font: {'face': 'monospace', 'align': 'left'},
                     <?php if ($task->state->name == 'todo'): ?>
                     group: 'todo',
-                    color: 'red'
+                    color: 'lightSkyBlue'
                     <?php endif; ?>
                     <?php if ($task->state->name == 'doing'): ?>
                     group: 'doing',
@@ -552,7 +553,7 @@
                             face: 'FontAwesome',
                             code: '\uf073',
                             size: 50,
-                            color: 'red'
+                            color: 'lightSkyBlue'
                         }
                     },
                     doing: {
@@ -690,12 +691,10 @@
 
 
             // add event listeners
-            network.on('select', function (params) {
-                document.getElementById('selection').innerHTML = 'Selection: ' + params.nodes;
-            });
 
-            network.on("hoverNode", function (params) {
-                console.log(params);
+
+            network.on("click", function (params) {
+                console.log(params.nodes[0]);
 
             });
         }
