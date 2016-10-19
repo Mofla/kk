@@ -1,14 +1,13 @@
-<!-- BEGIN PAGE TITLE -->
+<?= $this->Html->link('Accueil',['controller' => 'Pages','action' => '/','prefix' => false]) ?> /
+<?= $this->Html->link($this->request->params['controller'],['action' => 'edit','prefix' => false]) ?> /
+<?= $user->firstname.$user->lastname ?>
 <div class="page-title">
     <h1><?php echo $user->firstname ?> <?= $user->lastname ?>
         <small><?= $user->role->name ?></small>
     </h1>
 </div>
-<!-- END PAGE TITLE -->
-<!-- BEGIN PAGE TOOLBAR -->
 <div class="page-content">
     <div class="container">
-        <!-- BEGIN PAGE CONTENT INNER -->
         <div class="page-content-inner">
             <div class="profile">
                 <div class="tabbable-line tabbable-full-width">
@@ -26,8 +25,7 @@
                                 <div class="col-md-3">
                                     <ul class="list-unstyled profile-nav">
                                         <li>
-                                            <img src="../assets/pages/media/profile/people19.png"
-                                                 class="img-responsive pic-bordered" alt=""/>
+                                            <?= $this->Html->image('../uploads/user/'. $user->picture_url,['class' => 'img-responsive pic-bordered'])?>
                                         </li>
                                     </ul>
                                 </div>
@@ -56,9 +54,7 @@
                                                 <a href="https://github.com/"> <?= $user->github_username ?></a>
                                             <?php endif; ?>
                                         </div>
-                                        <!--end col-md-8-->
                                     </div>
-                                    <!--end row-->
                                     <div class="tabbable-line tabbable-custom-profile">
                                         <div class="tab-content">
                                             <div class="tab-pane active" id="tab_1_11">
@@ -103,7 +99,7 @@
                                                         <div class="col-md-12">
                                                             <div class="tab-content">
                                                                 <div id="tab_1-1" class="tab-pane active">
-                                                                    <?= $this->Form->create($user) ?>
+                                                                    <?= $this->Form->create($user,['enctype' => 'multipart/form-data']) ?>
                                                                     <fieldset>
                                                                         <legend><?= __('Editer son profil') ?></legend>
                                                                         <div class="col-md-6">
@@ -140,7 +136,7 @@
                                                                             <div class="form-group">
                                                                                 <label class="label-control">Url avatar
                                                                                     : </label>
-                                                                                <?= $this->Form->input('picture_url', ['label' => false, 'class' => 'form-control']); ?>
+                                                                                <?= $this->Form->input('picture',['type' => 'file']); ?>
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-md-6">

@@ -14,8 +14,8 @@
       <div class="col-md-9">
         <div class="tab-content">
           <div id="tab_1-1" class="tab-pane active">
-            
-            <?= $this->Form->create($user) ?>
+
+            <?= $this->Form->create($user,['enctype' => 'multipart/form-data']) ?>
               <fieldset>
                 <legend><?= __('Nouvel Utilisateur') ?></legend>
                   <div class="col-md-6">
@@ -43,8 +43,9 @@
                       <label class="label-control">Compte Github : </label><?= $this->Form->input('github_username',['label'=>false, 'class'=>'form-control']); ?>
                     </div>
                     <div class="form-group">
-                      <label class="label-control">Url avatar : </label>
-                      <?= $this->Form->input('picture_url',['label'=>false, 'class'=>'form-control']); ?>
+                      <label class="label-control">Url avatar
+                        : </label>
+                      <?= $this->Form->input('picture',['type' => 'file']); ?>
                     </div>
                   </div>
                   <div class="col-md-6">
@@ -83,6 +84,7 @@
                       <label class="label-control">Date de naissance : </label>
                       <?= $this->Form->input('birthday', ['type' => 'text','label'=>false, 'class'=>'form-control', 'id' => 'datepicker']); ?>
                     </div>
+
                   </div>
                 </fieldset>
             <?= $this->Form->button(__('Submit')) ?>
