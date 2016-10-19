@@ -42,13 +42,13 @@
         <tbody class="sscategory curs">
         <?php foreach($categories as $cat): ?>
         <tr class="test" data-order="<?= $cat->sort ?>" id="<?= $cat->id ?>">
-            <td width="70%" class="name">
+            <td width="80%" class="name">
                 <?= $cat->name ?>
             </td>
-            <td width="30%" class="option">
+            <td width="20%" class="option">
                 <?= $this->Form->button('<i class="fa fa-pencil" aria-hidden="true"></i> EDITER', ['type' =>
-                'button','class' => 'btn btn-warning btn-sm cedit-bt', 'id' => 'edit-bt']); ?>
-                <?= $this->Form->postLink(__('<i class="fa fa-trash-o" aria-hidden="true"></i> SUPPRIMER'),
+                'button','class' => 'btn purple btn-sm cedit-bt', 'id' => 'edit-bt']); ?>
+                <?= $this->Form->postLink(__('<i class="fa fa-times" aria-hidden="true"></i>'),
                 ['controller' => 'Forums','action' => 'deletecategory', $cat->id], ['class' => 'btn btn-danger btn-sm',
                 'escape'=> false , 'confirm' => __('Etes-vous sûr de vouloir supprimer la catégorie : {0}?',
                 $cat->name)]) ?>
@@ -104,14 +104,14 @@ $(document).on('click', '#edit-bt', function () {
     var origin = $.trim($(this).closest('tr').find('.name').html());
     $(this).closest('tr').find('.name').html('<input type="text" value="' + origin + '" id="e-val" class="edit-mod">');
     $(this).closest('tr').find('.option').html
-    ('<button id="btok" class="btn btn-success btn-sm"><i class="fa fa-check" aria-hidden="true"></i> VALIDER</button><button class="btn dark btn-sm" id="cancel"><i class="fa fa-times" aria-hidden="true"></i> ANNULER</button>');
+    ('<button id="btok" class="btn btn-success btn-sm"><i class="fa fa-check" aria-hidden="true"></i></button><button class="btn dark btn-sm" id="cancel"><i class="fa fa-times" aria-hidden="true"></i> ANNULER</button>');
 
 
     $(document).on('click', '#cancel', function () {
         var vle = $('#e-val').val();
         $(this).closest('tr').find('.name').html(vle);
         $(this).closest('tr').find('.option').html
-        ('<button id="edit-bt" class="btn btn-warning btn-sm"><i class="fa fa-pencil" aria-hidden="true"></i> EDITER</button> <button class="btn btn-danger btn-sm" id="cancel"><i class="fa fa-trash-o" aria-hidden="true"></i> SUPPRIMER</button>');
+        ('<button id="edit-bt" class="btn purple btn-sm"><i class="fa fa-pencil" aria-hidden="true"></i> EDITER</button> <button class="btn btn-danger btn-sm" id="cancel"><i class="fa fa-times" aria-hidden="true"></i></button>');
     });
 
     $(document).on('click', '#btok', function () {
@@ -126,7 +126,7 @@ $(document).on('click', '#edit-bt', function () {
         $('#btok').addClass("hidden");
         $(this).closest('tr').find('.name').html(title);
         $(this).closest('tr').find('.option').html
-        ('<button id="edit-bt" class="btn btn-warning btn-sm"><i class="fa fa-pencil" aria-hidden="true"></i> EDITER</button> <button class="btn btn-danger btn-sm" id="cancel"><i class="fa fa-trash-o" aria-hidden="true"></i> SUPPRIMER</button>');
+        ('<button id="edit-bt" class="btn purple btn-sm"><i class="fa fa-pencil" aria-hidden="true"></i> EDITER</button> <button class="btn btn-danger btn-sm" id="cancel"><i class="fa fa-times" aria-hidden="true"></i></button>');
     });
 });
 
