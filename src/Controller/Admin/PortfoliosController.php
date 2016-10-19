@@ -41,7 +41,7 @@ class PortfoliosController extends AppController
             $portfolio = $this->Portfolios->patchEntity($portfolio, $this->request->data);
             if ($this->Portfolios->save($portfolio)) {
                 // add image
-                $picture = $this->Upload->getPicture($this->request->data['picture'],'Portfolios',$portfolio->id,500,500,false);
+                $picture = $this->Upload->getPicture($this->request->data['picture'],'Portfolios',$portfolio->id,500,500);
                 $this->request->data['picture_url'] = $picture;
                 $portfolio = $this->Portfolios->patchEntity($portfolio, $this->request->data);
                 $this->Portfolios->save($portfolio);

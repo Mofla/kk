@@ -46,4 +46,31 @@ class UploadComponent extends Component
         $path = WWW_ROOT . '/uploads/'.strtolower($directory).'/' . $image;
         @unlink($path);
     }
+
+    public function getFile($upload,$directory)
+    {
+        $file_extension = explode('.',$upload['name'])[1];
+        $ignoreList = [
+            'exe'
+        ];
+        if(!in_array($file_extension,$ignoreList))
+        {
+            $file_newName = $this->renameByTimestamp();
+            $file_newName = $file_newName . '.' . $file_extension;
+            $path = WWW_ROOT . '/uploads/'.strtolower($directory).'/' . $file_newName;
+            if(move_uploaded_file($upload['tmp_name'], $path))
+            {
+                return $file_newName;
+            }
+        }
+        return '';
+    }
+
+
+    function renameByTimestamp()
+    {
+        $time = microtime();
+        $time = str_replace(' ','',str_replace('.','',$time));
+        return $time;
+    }
 }
