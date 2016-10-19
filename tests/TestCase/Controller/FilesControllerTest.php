@@ -23,8 +23,19 @@ class FilesControllerTest extends IntegrationTestCase
         'app.permissions',
         'app.connectors',
         'app.permissions_roles',
+        'app.diaries',
+        'app.projects',
+        'app.tasks',
+        'app.states',
+        'app.from_to_tasks',
+        'app.tasks_users',
+        'app.lastuserthread',
+        'app.projects_users',
+        'app.entries',
         'app.threads',
         'app.forums',
+        'app.categories',
+        'app.lasttopicuser',
         'app.posts_files'
     ];
 

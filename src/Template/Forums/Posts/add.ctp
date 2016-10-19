@@ -1,3 +1,5 @@
+<?= $this->Html->css('../assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css') ?>
+        <?= $this->Html->script('../assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js') ?>
 
         <!--echo $this->Form->input('title');-->
             <!--echo $this->Form->input('message');-->
@@ -10,12 +12,11 @@
     <table class="table sscategory">
         <thead class="category">
         <tr>
-            <th colspan="2" scope="col"> Poster une nouvelle réponse </th>
+            <th colspan="2" scope="col"><span class="h4"> Poster une nouvelle réponse </span></th>
         </tr>
         </thead>
         <tbody>
         <?= $this->Form->create($post) ?>
-        <fieldset>
             <tr class="hidden">
                 <td width="20%" > Titre du sujet </td>
                 <td width="80%">   <?= $this->Form->input('title' , ['label' => false , 'class' => 'form-control' ,'value'=>$forumid->subject]); ?> </td>
@@ -44,10 +45,26 @@
                     </div>
                 </td>
             </tr>
-        </fieldset>
         <tr>
-            <td colspan="2" class="grey text-center">
-                <?= $this->Form->button(__('POSTER LA REPONSE')) ?>
+        <td width="20%"> Options </td>
+        <td width="80%">
+            <div class="fileinput fileinput-new" data-provides="fileinput">
+                <div class="input-group input-large">
+                    <div class="form-control uneditable-input input-fixed input-medium" data-trigger="fileinput">
+                        <i class="fa fa-file fileinput-exists"></i>&nbsp;
+                        <span class="fileinput-filename"> </span>
+                    </div>
+                    <span class="input-group-addon btn default btn-file">
+                                                                                    <span class="fileinput-new"> Joindre un fichier </span>
+                                                                                    <span class="fileinput-exists"> Modifier </span>
+                                                                                    <input type="file" name="name"> </span>
+                    <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput"> Retirer </a>
+                </div>
+            </div>
+        </tr>
+        <tr>
+            <td colspan="2" class=" text-center">
+                <?= $this->Form->button('POSTER LA REPONSE',['class'=>'btn btn-success']) ?>
                 <?= $this->Form->end() ?>
             </td>
         </tr>

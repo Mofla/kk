@@ -9,6 +9,7 @@ use Cake\Validation\Validator;
 /**
  * Files Model
  *
+ * @property \Cake\ORM\Association\BelongsTo $Posts
  * @property \Cake\ORM\Association\BelongsToMany $Posts
  *
  * @method \App\Model\Entity\File get($primaryKey, $options = [])
@@ -36,6 +37,10 @@ class FilesTable extends Table
         $this->displayField('name');
         $this->primaryKey('id');
 
+        $this->belongsTo('Posts', [
+            'foreignKey' => 'post_id',
+            'joinType' => 'INNER'
+        ]);
         $this->belongsToMany('Posts', [
             'foreignKey' => 'file_id',
             'targetForeignKey' => 'post_id',
@@ -59,10 +64,20 @@ class FilesTable extends Table
             ->requirePresence('name', 'create')
             ->notEmpty('name');
 
-        $validator
-            ->requirePresence('type', 'create')
-            ->notEmpty('type');
-
         return $validator;
+    }
+
+    /**
+     * Returns a rules checker object that will be used for validating
+     * application integrity.
+     *
+     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
+     * @return \Cake\ORM\RulesChecker
+     */
+    public function buildRules(RulesChecker $rules)
+    {
+        $rules->add($rules->existsIn(['post_id'], 'Posts'));
+
+        return $rules;
     }
 }

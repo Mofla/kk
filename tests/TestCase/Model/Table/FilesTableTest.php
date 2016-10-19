@@ -31,9 +31,20 @@ class FilesTableTest extends TestCase
         'app.permissions',
         'app.connectors',
         'app.permissions_roles',
+        'app.diaries',
+        'app.projects',
+        'app.tasks',
+        'app.states',
+        'app.from_to_tasks',
+        'app.tasks_users',
+        'app.projects_users',
+        'app.entries',
         'app.threads',
         'app.forums',
-        'app.posts_files'
+        'app.categories',
+        'app.lasttopicuser',
+        'app.posts_files',
+        'app.lastuserthread'
     ];
 
     /**
