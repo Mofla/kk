@@ -67,14 +67,34 @@ class PostsController extends AppController
 else{
     $pastquote = NULL;
 }
-
-
-
         $forumid = $this->Posts->Threads->find()
             ->select(['forum_id','subject'])
             ->where(['id' => $id])
             ->first();
         $post = $this->Posts->newEntity();
+
+
+//        if(!empty($this->request->data['file']['name'])){
+//            $fileName = $this->request->data['file']['name'];
+//            $uploadPath = 'uploads/files/';
+//            $uploadFile = $uploadPath.$fileName;
+//            if(move_uploaded_file($this->request->data['file']['tmp_name'],$uploadFile)){
+//                $uploadData = $this->Files->newEntity();
+//                $uploadData->name = $fileName;
+//                $uploadData->post_id = $id;
+//                if ($this->Files->save($uploadData)) {
+//                    $this->Flash->success(__('File has been uploaded and inserted successfully.'));
+//                }else{
+//                    $this->Flash->error(__('Unable to upload file, please try again.'));
+//                }
+//            }else{
+//                $this->Flash->error(__('Unable to upload file, please try again.'));
+//            }
+//        }else{
+//            $this->Flash->error(__('Please choose a file to upload.'));
+//        }
+
+
         if ($this->request->is('post')) {
             $this->request->data['user_id'] = $user;
             $this->request->data['thread_id'] = $id;

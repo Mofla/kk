@@ -4,7 +4,7 @@
         <table class="table sscategory">
             <thead class="category">
             <tr>
-                <th colspan="2" scope="col"> Poster un nouveau Sujet </th>
+                <th colspan="2" scope="col"> <span class="h4"> Poster un nouveau Sujet</span> </th>
             </tr>
             </thead>
             <tbody>

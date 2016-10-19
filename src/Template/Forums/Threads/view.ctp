@@ -5,7 +5,10 @@
 <div class="col-md-12 voffset2">
 
 <?php $check = 'quotetopic' ; ?>
+
 <div class="right">
+
+    <button class="btn btn-warning " role="button" aria-pressed="true"> <i class="fa fa-thumb-tack"></i> S'ABONNER A CE SUJET</button>
     <a href="<?= $this->Url->build([ 'controller' => 'Posts', 'action' => 'add' , $thread->id]); ?>"
        class="btn btn-success " role="button" aria-pressed="true"> <i class="fa fa-comments-o"></i> REPONDRE</a>
 </div>
@@ -124,10 +127,15 @@
         </table>
         <?php endforeach; ?>
         <?php endif; ?>
+
         <div class="right">
             <a href="<?= $this->Url->build([ 'controller' => 'Posts', 'action' => 'add' , $thread->id]); ?>"
                class="btn btn-success " role="button" aria-pressed="true"> <i class="fa fa-comments-o"></i> REPONDRE</a>
         </div>
+
     </div>
 </div>
 </div>
+
+     <!--   <?= $this->Form->postLink(__('<i class="fa fa-thumb-tack"></i> S\'ABONNER A CE SUJET'),[ 'controller' => 'Subscriptions'
+        , 'action' => 'add' , $thread->id],['escape'=>false , 'class'=>'btn btn-warning']); ?>-->
