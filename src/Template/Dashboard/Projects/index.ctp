@@ -9,9 +9,9 @@
 <?= $this->Html->script('../assets/global/plugins/bootstrap/js/bootstrap.min.js') ?>
 
 
-
 <div class="container-fluid">
-    <button class="btn btn-default" id="project-add">Ajouter un projet</button><br>
+    <button class="btn btn-default" id="project-add">Ajouter un projet</button>
+    <br>
     <div class="row">
         <?php foreach ($projects as $project): ?>
             <div class="col-md-4 col-sm-4 col-xs-4">
@@ -24,8 +24,45 @@
             </div>
         <?php endforeach; ?>
     </div>
-</div>
+    <div class="row">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3>Timeline des projets</h3>
+            </div>
+            <div class="panel-body">
+                <div id="visualization"></div>
+            </div>
+        </div>
 
+
+    </div>
+
+</div>
+<?= $this->Html->css('../assets/vis/vis.css') ?>
+<?= $this->Html->script('../assets/vis/vis.js') ?>
+
+<script type="text/javascript">
+    // DOM element where the Timeline will be attached
+    var container = document.getElementById('visualization');
+
+    // Create a DataSet (allows two way data-binding)
+    var items = new vis.DataSet([
+        <?php foreach ($projects as $project): ?>
+        {
+            id: <?= $project->id ?>,
+            content: '<?= $project->name?>',
+            start: '<?= $project->start_date?>',
+            end: '<?= $project->end_date?>'
+        },
+        <?php endforeach; ?>
+    ]);
+
+    // Configuration for the Timeline
+    var options = {};
+
+    // Create a Timeline
+    var timeline = new vis.Timeline(container, items, options);
+</script>
 
 <script>
 

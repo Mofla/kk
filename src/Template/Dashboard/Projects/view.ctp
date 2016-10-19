@@ -481,6 +481,7 @@
         }
 
 
+
         function draw() {
 
             var directionInput = document.getElementById("direction").value;
@@ -497,6 +498,7 @@
                     color: 'blue'
                 },
                 <?php foreach ($project->tasks as $task): ?>
+
 
                 {
                     id: <?= $task->id ?>,
@@ -570,6 +572,14 @@
                             size: 50,
                             color: 'green'
                         }
+                    },
+                    focus: {
+                        "physics": {
+                            "minVelocity": 0.75,
+                            hierarchicalRepulsion: {
+                                nodeDistance: 500
+                            }
+                        }
                     }
                 },
                 "edges": {
@@ -592,7 +602,7 @@
                 "physics": {
                     "minVelocity": 0.75,
                     hierarchicalRepulsion: {
-                        nodeDistance: 100
+                        nodeDistance: 200
                     }
                 },
                 layout: {
@@ -682,6 +692,11 @@
             // add event listeners
             network.on('select', function (params) {
                 document.getElementById('selection').innerHTML = 'Selection: ' + params.nodes;
+            });
+
+            network.on("hoverNode", function (params) {
+                console.log(params);
+
             });
         }
 
