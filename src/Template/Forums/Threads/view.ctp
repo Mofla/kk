@@ -33,7 +33,7 @@
                     'action' => 'view', $thread->user->id]) : '' ?>
                 </div>
                 <div class="avatardiv">
-                    <?= $this->Html->image('../uploads/imgs/'.$thread->user->picture_url ,['class'=>'avatar']); ?>
+                    <?= $this->Html->image('../uploads/user/'.$thread->user->picture_url ,['class'=>'avatar']); ?>
                 </div>
             </td>
             <td>
@@ -81,7 +81,7 @@
                         $posts->user_id]) ?>
                     </div>
                     <div class="avatardiv">
-                        <?= $this->Html->image('../uploads/imgs/'.$posts->user->picture_url ,['class'=>'avatar']); ?>
+                        <?= $this->Html->image('../uploads/user/'.$posts->user->picture_url ,['class'=>'avatar']); ?>
                     </div>
                 </td>
                 <td>

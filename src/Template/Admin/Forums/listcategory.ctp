@@ -32,7 +32,7 @@
     <table class="table sortab">
         <thead>
         <tr>
-            <th class="category" colspan="2"><?= __('Liste des catégories') ?></th>
+            <th class="category" colspan="2"> <span class="h4">Liste des catégories</span></th>
         </tr>
         <!--<tr>-->
         <!--<th width="70%" class="ssthead">Titre</th>-->
