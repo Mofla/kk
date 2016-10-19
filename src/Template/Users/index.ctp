@@ -82,11 +82,15 @@ License: You must have a valid license purchased only from themeforest(the above
                             <div class="page-content-inner">
                                 <div class="portfolio-content portfolio-1">
                                     <div id="js-filters-juicy-projects" class="cbp-l-filters-button">
-                                        <div data-filter="*" class="cbp-filter-item-active cbp-filter-item btn dark btn-outline uppercase">All
+                                        <div data-filter="*"
+                                             class="cbp-filter-item-active cbp-filter-item btn dark btn-outline uppercase">
+                                            All
                                             <div class="cbp-filter-counter"></div>
                                         </div>
                                         <?php foreach ($promotions as $promotion): ?>
-                                            <div data-filter=".<?= $promotion->promotion ?>" class="cbp-filter-item btn dark btn-outline uppercase">Promotion <?= $promotion->promotion ?>
+                                            <div data-filter=".<?= $promotion->promotion ?>"
+                                                 class="cbp-filter-item btn dark btn-outline uppercase">
+                                                Promotion <?= $promotion->promotion ?>
                                                 <div class="cbp-filter-counter"></div>
                                             </div>
                                         <?php endforeach; ?>
@@ -97,13 +101,15 @@ License: You must have a valid license purchased only from themeforest(the above
                                                     <div class="cbp-caption">
                                                         <div class="cbp-caption-defaultWrap"
                                                              style="background-color: #444d58">
-                                                            <img src="../uploads/user/<?= $user->picture_url ?>" alt="" style="border: 1px solid black; max-height: 215px "></div>
+                                                            <img src="../uploads/user/<?= $user->picture_url ?>" alt=""
+                                                                 style="border: 1px solid black; max-height: 215px ">
+                                                        </div>
                                                         <div class="cbp-caption-activeWrap">
                                                             <div class="cbp-l-caption-alignCenter">
                                                                 <div class="cbp-l-caption-body">
                                                                     <a href="<?= $this->Url->build(['controller' => 'Users', 'action' => 'view', $user->id]); ?>"
                                                                        class="cbp-singlePage cbp-l-caption-buttonLeft btn green uppercase ">Profil</a>
-                                                                    <a href="<?= $this->Url->build(['controller' => 'Portfolios', 'action' => '/', $user->id])?>"
+                                                                    <a href="<?= $this->Url->build(['controller' => 'Portfolios', 'action' => '/', $user->id]) ?>"
                                                                        class="cbp-l-caption-buttonRight btn green uppercase ">Projets</a>
                                                                     <!--cbp-singlePage -->
                                                                 </div>
@@ -141,34 +147,35 @@ License: You must have a valid license purchased only from themeforest(the above
             </div>
         </div>
     </div>
-    <!--[if lt IE 9]>
-    <script src="../assets/global/plugins/respond.min.js"></script>
-    <script src="../assets/global/plugins/excanvas.min.js"></script>
-    <script src="../assets/global/plugins/ie8.fix.min.js"></script>
-    <![endif]-->
-    <!-- BEGIN CORE PLUGINS -->
-    <script src="../assets/global/plugins/jquery.min.js" type="text/javascript"></script>
-    <script src="../assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="../assets/global/plugins/js.cookie.min.js" type="text/javascript"></script>
-    <script src="../assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-    <script src="../assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
-    <script src="../assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
-    <!-- END CORE PLUGINS -->
-    <!-- BEGIN PAGE LEVEL PLUGINS -->
-    <script src="../assets/global/plugins/cubeportfolio/js/jquery.cubeportfolio.min.js" type="text/javascript"></script>
-    <!-- END PAGE LEVEL PLUGINS -->
-    <!-- BEGIN THEME GLOBAL SCRIPTS -->
-    <script src="../assets/global/scripts/app.min.js" type="text/javascript"></script>
-    <!-- END THEME GLOBAL SCRIPTS -->
-    <!-- BEGIN PAGE LEVEL SCRIPTS -->
-    <script src="../assets/pages/scripts/portfolio-1.min.js" type="text/javascript"></script>
-    <!-- END PAGE LEVEL SCRIPTS -->
-    <!-- BEGIN THEME LAYOUT SCRIPTS -->
-    <script src="../assets/layouts/layout3/scripts/layout.min.js" type="text/javascript"></script>
-    <script src="../assets/layouts/layout3/scripts/demo.min.js" type="text/javascript"></script>
-    <script src="../assets/layouts/global/scripts/quick-sidebar.min.js" type="text/javascript"></script>
-    <script src="../assets/layouts/global/scripts/quick-nav.min.js" type="text/javascript"></script>
-    <!-- END THEME LAYOUT SCRIPTS -->
+</div>
+<!--[if lt IE 9]>
+<script src="../assets/global/plugins/respond.min.js"></script>
+<script src="../assets/global/plugins/excanvas.min.js"></script>
+<script src="../assets/global/plugins/ie8.fix.min.js"></script>
+<![endif]-->
+<!-- BEGIN CORE PLUGINS -->
+<script src="../assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+<script src="../assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="../assets/global/plugins/js.cookie.min.js" type="text/javascript"></script>
+<script src="../assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="../assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+<script src="../assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+<!-- END CORE PLUGINS -->
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+<script src="../assets/global/plugins/cubeportfolio/js/jquery.cubeportfolio.min.js" type="text/javascript"></script>
+<!-- END PAGE LEVEL PLUGINS -->
+<!-- BEGIN THEME GLOBAL SCRIPTS -->
+<script src="../assets/global/scripts/app.min.js" type="text/javascript"></script>
+<!-- END THEME GLOBAL SCRIPTS -->
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script src="../assets/pages/scripts/portfolio-1.min.js" type="text/javascript"></script>
+<!-- END PAGE LEVEL SCRIPTS -->
+<!-- BEGIN THEME LAYOUT SCRIPTS -->
+<script src="../assets/layouts/layout3/scripts/layout.min.js" type="text/javascript"></script>
+<script src="../assets/layouts/layout3/scripts/demo.min.js" type="text/javascript"></script>
+<script src="../assets/layouts/global/scripts/quick-sidebar.min.js" type="text/javascript"></script>
+<script src="../assets/layouts/global/scripts/quick-nav.min.js" type="text/javascript"></script>
+<!-- END THEME LAYOUT SCRIPTS -->
 </body>
 
 </html>
