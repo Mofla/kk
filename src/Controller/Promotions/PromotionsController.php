@@ -55,6 +55,10 @@ class PromotionsController extends AppController
         if ($this->request->is('post')) {
             $promotion = $this->Promotions->patchEntity($promotion, $this->request->data);
             if ($this->Promotions->save($promotion)) {
+                $picture = $this->Upload->getPicture($this->request->data['picture'],'promotion',$promotion->id, 450, 450, false);
+                $this->request->data['picture_url'] = $picture;
+                $promotion = $this->Promotions->patchEntity($promotion, $this->request->data);
+                $this->Promotions->save($promotion);
                 $this->Flash->success(__('The promotion has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
