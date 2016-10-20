@@ -75,29 +75,6 @@ else{
             ->where(['id' => $id])
             ->first();
         $post = $this->Posts->newEntity();
-
-
-//        if(!empty($this->request->data['file']['name'])){
-//            $fileName = $this->request->data['file']['name'];
-//            $uploadPath = 'uploads/files/';
-//            $uploadFile = $uploadPath.$fileName;
-//            if(move_uploaded_file($this->request->data['file']['tmp_name'],$uploadFile)){
-//                $uploadData = $this->Files->newEntity();
-//                $uploadData->name = $fileName;
-//                $uploadData->post_id = $id;
-//                if ($this->Files->save($uploadData)) {
-//                    $this->Flash->success(__('File has been uploaded and inserted successfully.'));
-//                }else{
-//                    $this->Flash->error(__('Unable to upload file, please try again.'));
-//                }
-//            }else{
-//                $this->Flash->error(__('Unable to upload file, please try again.'));
-//            }
-//        }else{
-//            $this->Flash->error(__('Please choose a file to upload.'));
-//        }
-
-
         if ($this->request->is('post')) {
             $this->request->data['user_id'] = $user;
             $this->request->data['thread_id'] = $id;
@@ -112,6 +89,16 @@ else{
                 $this->request->data['post_id'] = $post->id ;
                 $file = $this->Posts->Files->patchEntity($file, $this->request->data);
                 $this->Posts->Files->save($file);
+                $data = [
+                    'post_id' => $post->id
+                    ,
+                    'file_id' => $file->id
+
+                ];
+                $fp = TableRegistry::get('posts_files');
+                $postsFiles = $fp->newEntity();
+                $postsFiles = $fp->patchEntity($postsFiles,$data);
+                $fp->save($postsFiles);
 
                 #envoyer un mail aux abonnés
                 if($sub){

@@ -34,6 +34,7 @@ class PostsFilesTable extends Table
         parent::initialize($config);
 
         $this->table('posts_files');
+        $this->primaryKey('file_id');
 
         $this->belongsTo('Posts', [
             'foreignKey' => 'post_id',

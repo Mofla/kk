@@ -82,7 +82,7 @@
 
             <tr class="sscategory">
 
-                <td width="120px">
+                <td width="120px" <?php if($posts->files) { echo 'rowspan="2"';} ?> >
                     <div class="username">
                         <?= $this->Html->link($posts->user->username, ['controller' => 'Users', 'action' => 'view',
                         $posts->user_id]) ?>
@@ -96,6 +96,19 @@
                     <div><?= $posts->message; ?></div>
                 </td>
             </tr>
+
+            <!--_________________________________________________________________________________pièces jointes-->
+            <?php if($posts->files) : ?>
+            <tr class="sscategory">
+                <td> <u>Fichier Joint :</u> <br>
+                <?php foreach($posts->files as $files) : ?>
+
+                <?= $files->name ; ?>
+
+                <?php endforeach ?>
+                </td>
+            </tr>
+            <?php endif ?>
 
 
             <tr class="grey">
