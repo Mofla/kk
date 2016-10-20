@@ -33,7 +33,7 @@ class TasksUsersTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('tasks_users');
+        $this->table('dashboard_tasks_users');
 
         $this->belongsTo('Tasks', [
             'foreignKey' => 'task_id',

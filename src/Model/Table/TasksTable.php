@@ -34,7 +34,7 @@ class TasksTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('tasks');
+        $this->table('dashboard_tasks');
         $this->displayField('name');
         $this->primaryKey('id');
 

@@ -32,7 +32,7 @@ class StatesTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('states');
+        $this->table('dashboard_states');
         $this->displayField('name');
         $this->primaryKey('id');
 
