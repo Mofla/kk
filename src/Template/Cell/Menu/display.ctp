@@ -119,8 +119,8 @@
                       <?php endforeach; ?>
                     </ul>
                 </li>
-              <?php foreach ($role as $r) : ?>
-              <?php if ($r->role_id == 1): ?>
+                <?php foreach ($role as $r) : ?>
+                <?php if ($r->role_id == 1): ?>
                 <li class="menu-dropdown classic-menu-dropdown">
                   <a href="<?= $this->Url->build(['controller' => 'Permissions', 'action' => 'index', 'prefix'=> 'admin']) ?>">
                     Gérer permissions</a>
@@ -134,21 +134,19 @@
                     <?php endforeach; ?>
                   </ul>
                 </li>
-                <?php foreach ($role as $r) : ?>
-                  <?php if ($r->role_id == 1): ?>
-                    <li class="menu-dropdown classic-menu-dropdown">
-                      <a href="">Gérer permissions</a>
-                      <ul class="dropdown-menu pull-left">
-                        <?php foreach ($gererPerm as $gp) : ?>
-                          <?php foreach ($gp->connectors as $conn): ?>
-                            <li class=" ">
-                              <a href="<?= $this->Url->build(['controller' => $conn->controller, 'action' => $conn->function, 'prefix'=> 'admin']) ?>"><?= $gp->name ?></a>
-                            </li>
-                          <?php endforeach; ?>
-                        <?php endforeach; ?>
-                      </ul>
-                    </li>
-                  <?php endif; ?>
+                <li class="menu-dropdown classic-menu-dropdown">
+                  <a href="">Gérer permissions</a>
+                  <ul class="dropdown-menu pull-left">
+                    <?php foreach ($gererPerm as $gp) : ?>
+                      <?php foreach ($gp->connectors as $conn): ?>
+                        <li class=" ">
+                          <a href="<?= $this->Url->build(['controller' => $conn->controller, 'action' => $conn->function, 'prefix'=> 'admin']) ?>"><?= $gp->name ?></a>
+                        </li>
+                      <?php endforeach; ?>
+                    <?php endforeach; ?>
+                  </ul>
+                </li>
+                 <?php endif; ?>
                 <?php endforeach; ?>
                 <li class="menu-dropdown classic-menu-dropdown ">
                   <a href="<?= $this->Url->build(['controller' => 'Tchat', 'action' => 'add', 'prefix' => false]); ?>">
