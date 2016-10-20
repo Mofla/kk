@@ -6,11 +6,15 @@
 
 <?php $check = 'quotetopic' ; ?>
 
-<div class="right">
+<div class="right" id="right">
+<?php if($subscription) : ?>
+    <button id="issub" class="btn btn-danger" role="button" aria-pressed="true"> <i class="fa fa-times"></i> SE DESABONNER DU SUJET</button>
+<?php else: ?>
+    <button id="sub" class="btn btn-warning " role="button" aria-pressed="true"> <i class="fa fa-thumb-tack"></i> S'ABONNER A CE SUJET</button>
+<?php endif ?>
 
-    <button class="btn btn-warning " role="button" aria-pressed="true"> <i class="fa fa-thumb-tack"></i> S'ABONNER A CE SUJET</button>
     <a href="<?= $this->Url->build([ 'controller' => 'Posts', 'action' => 'add' , $thread->id]); ?>"
-       class="btn btn-success " role="button" aria-pressed="true"> <i class="fa fa-comments-o"></i> REPONDRE</a>
+       class="btn btn-success "  role="button" aria-pressed="true"> <i class="fa fa-comments-o"></i> REPONDRE</a>
 </div>
 
 <div class="row"></div>
@@ -136,6 +140,31 @@
     </div>
 </div>
 </div>
+<script>
+var id = '<?= $thread->id ?>';
+// s'abonner a un sujet
+$(document).on('click', '#sub', function () {
+    $.ajax({
+        type:'post',
+        data: 'thread_id=' + id,
+        url: '<?= $this->Url->build("forums/subscriptions/add"); ?>',
+        success:function(){
+            $('#sub').addClass('hidden');
+            $('#right').prepend('<button id="issub" class="btn btn-danger" role="button" aria-pressed="true"> <i class="fa fa-times"></i> SE DESABONNER DU SUJET</button>')
+        }
+    });
+});
 
-     <!--   <?= $this->Form->postLink(__('<i class="fa fa-thumb-tack"></i> S\'ABONNER A CE SUJET'),[ 'controller' => 'Subscriptions'
-        , 'action' => 'add' , $thread->id],['escape'=>false , 'class'=>'btn btn-warning']); ?>-->
+//se desabonner d'un sujet
+$(document).on('click', '#issub', function () {
+    $.ajax({
+        type:'post',
+        data: 'thread_id=' + id,
+        url: '<?= $this->Url->build("forums/subscriptions/delete"); ?>',
+        success:function(){
+            $('#issub').addClass('hidden');
+            $('#right').prepend('<button id="sub" class="btn btn-warning " role="button" aria-pressed="true"> <i class="fa fa-thumb-tack"></i> S\'ABONNER A CE SUJET</button>')
+        }
+    });
+});
+</script>

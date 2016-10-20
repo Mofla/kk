@@ -2,7 +2,7 @@
 namespace App\Controller\Forums;
 
 use App\Controller\AppController;
-
+use Cake\ORM\TableRegistry;
 /**
  * Threads Controller
  *
@@ -36,7 +36,12 @@ class ThreadsController extends AppController
      */
     public function view($id = null)
     {
-
+        $sub = TableRegistry::get('subscriptions');
+        $user = $this->Auth->user('id');
+        $subscription = $sub->find()
+            ->select('id')
+            ->where(['user_id'=> $user , 'thread_id'=> $id])
+            ->first();
 
         $thread = $this->Threads->get($id, [
             'contain' => ['Posts.Users','Users', 'Forums', 'Posts' => function($q) {
@@ -50,7 +55,7 @@ class ThreadsController extends AppController
             ->set($query->newExpr('countview = countview + 1'))
             ->where(['id' => $id])
             ->execute();
-        $this->set(compact('thread'));
+        $this->set(compact('thread','subscription'));
     }
 
     /**
