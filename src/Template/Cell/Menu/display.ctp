@@ -6,7 +6,8 @@
           <!-- BEGIN LOGO -->
           <div class="page-logo">
             <a href="/">
-              <img src="../assets/layouts/layout3/img/logo-default.jpg" alt="logo" class="logo-default">
+
+              <?= $this->Html->image('../assets/layouts/layout3/img/logo-default.jpg',['class'=>'logo-default']) ?>
             </a>
           </div>
           <!-- END LOGO -->
@@ -35,7 +36,7 @@
                 if(isset($Ses)): ?>
                   <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"
                      data-hover="dropdown" data-close-others="true">
-                    <img alt="" class="img-circle" src="../assets/layouts/layout3/img/avatar9.jpg">
+                    <?= $this->Html->image('../assets/layouts/layout3/img/avatar9.jpg',['class'=>'img-circle']) ?>
                     <span class="username username-hide-mobile">Nick</span>
                   </a>
                   <ul class="dropdown-menu dropdown-menu-default">
