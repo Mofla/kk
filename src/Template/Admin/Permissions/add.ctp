@@ -27,7 +27,7 @@
                   </div>
                   <div class="form-group">
                     <label class="label-control">Module : </label><br>
-                      <select name="controller" required="required" id="controller" class="bs-select form-control">
+                      <select name="" required="required" id="controller" class="bs-select form-control">
                           <option value="" selected="selected">---</option>
                         <?php foreach ($controller as $c) : ?>
                           <option value="<?= $c ?>"><?= $c ?></option>
@@ -36,7 +36,7 @@
                   </div>
                   <div class="form-group">
                     <label>Controller : </label>
-                      <select name="function"id="function" class="bs-select form-control">
+                      <select name="controller"id="function" class="bs-select form-control">
                       <?php
                       foreach ($list_actions_controller as $option => $key)  {
                           echo "<option>".$list_actions_controller[$option][$key]."</option>";

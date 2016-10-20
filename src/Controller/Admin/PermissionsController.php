@@ -58,11 +58,11 @@ class PermissionsController extends AppController
         if ($this->request->is('post')) {
             $permission = $this->Permissions->patchEntity($permission, $this->request->data);
             if ($this->Permissions->save($permission)) {
-                $this->Flash->success(__('The permission has been saved.'));
-            $id = $this->Permissions->id;
+                $id = $permission->id;
                 $connector->controller = 'controller';
                 $connector->function = 'function';
                 $connector->permission_id= $id;
+                $connector = $this->Connectors->patchEntity($connector, $this->request->data);
                 if ($this->Connectors->save($connector)) {
                     $this->Flash->success(__('The permission has been saved.'));
 
