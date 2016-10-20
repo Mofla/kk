@@ -6,7 +6,6 @@
           <!-- BEGIN LOGO -->
           <div class="page-logo">
             <a href="/">
-
               <?= $this->Html->image('../assets/layouts/layout3/img/logo-default.jpg',['class'=>'logo-default']) ?>
             </a>
           </div>
