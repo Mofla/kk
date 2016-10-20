@@ -7,12 +7,12 @@
     </ul>
 </nav>
 <div class="promotions form large-9 medium-8 columns content">
-    <?= $this->Form->create($promotion) ?>
+    <?= $this->Form->create($promotion,['enctype' => 'multipart/form-data']) ?>
     <fieldset>
         <legend><?= __('Add Promotion') ?></legend>
         <?php
             echo $this->Form->input('name');
-            echo $this->Form->input('picture_url');
+            echo $this->Form->input('picture',['type' => 'file']);
             echo $this->Form->input('description');
             echo $this->Form->input('year');
         ?>
