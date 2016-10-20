@@ -24,9 +24,8 @@ class UsersController extends AppController
         ];
         $users = $this->paginate($this->Users);
 
-        $promotions = $this->Users->find('all')->distinct('promotion');
 
-        $this->set(compact('users','promotions'));
+        $this->set(compact('users'));
         $this->set('_serialize', ['users']);
 
 
@@ -53,14 +52,9 @@ class UsersController extends AppController
         }
 
         $roles = $this->Users->Roles->find('list', ['limit' => 200]);
-        $portfolios = $this->Portfolios_users->find('all', [
-            'contain' => ['Portfolios'],
-            'conditions' => ['user_id' => $id ]
-        ]);
 
         $this->set('user', $user);
         $this->set('roles', $roles);
-        $this->set('portfolios', $portfolios);
         $this->set('autoriser',$autoriser);
         $this->set('_serialize', ['user']);
     }
