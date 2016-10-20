@@ -17,7 +17,7 @@
             <div class="col-md-4 col-sm-4 col-xs-4">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title"><?= $this->Html->link($project->name, ['action' => 'view', $project->id]) ?></h3>
+                        <h3 class="panel-title"><?= $this->Html->link($project->name, ['action' => 'gestion', $project->id]) ?></h3>
                     </div>
                     <div class="panel-body"><?= $project->description ?></div>
                 </div>
