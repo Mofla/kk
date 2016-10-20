@@ -16,7 +16,7 @@
         </tr>
         </thead>
         <tbody>
-        <?= $this->Form->create($post) ?>
+        <?= $this->Form->create($post, ['enctype' =>'multipart/form-data']) ?>
             <tr class="hidden">
                 <td width="20%" > Titre du sujet </td>
                 <td width="80%">   <?= $this->Form->input('title' , ['label' => false , 'class' => 'form-control' ,'value'=>$forumid->subject]); ?> </td>
@@ -57,7 +57,7 @@
                     <span class="input-group-addon btn default btn-file">
                                                                                     <span class="fileinput-new"> Joindre un fichier </span>
                                                                                     <span class="fileinput-exists"> Modifier </span>
-                                                                                    <input type="file" name="name"> </span>
+                                                                                    <input type="file" name="upload"> </span>
                     <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput"> Retirer </a>
                 </div>
             </div>

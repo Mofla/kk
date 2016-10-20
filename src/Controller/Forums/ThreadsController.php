@@ -44,7 +44,7 @@ class ThreadsController extends AppController
             ->first();
 
         $thread = $this->Threads->get($id, [
-            'contain' => ['Posts.Users','Users', 'Forums', 'Posts' => function($q) {
+            'contain' => ['Posts.Users','Posts.Files','Users', 'Forums', 'Posts' => function($q) {
                 return $q->order(['Posts.id' => 'ASC']);
             }]
         ]);

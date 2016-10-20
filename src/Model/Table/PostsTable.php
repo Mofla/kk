@@ -51,6 +51,7 @@ class PostsTable extends Table
             'foreignKey' => 'thread_id',
             'joinType' => 'INNER'
         ]);
+
         $this->belongsToMany('Files', [
             'foreignKey' => 'post_id',
             'targetForeignKey' => 'file_id',
