@@ -103,6 +103,16 @@ else{
             $this->request->data['thread_id'] = $id;
             $post = $this->Posts->patchEntity($post, $this->request->data);
             if ($this->Posts->save($post)) {
+
+                #upload de fichier
+                $picture = $this->Upload->getFile($this->request->data['upload'],'files');
+                $this->request->data['upload'] = $picture;
+                $file = $this->Posts->Files->newEntity();
+                $this->request->data['name'] = $picture ;
+                $this->request->data['post_id'] = $post->id ;
+                $file = $this->Posts->Files->patchEntity($file, $this->request->data);
+                $this->Posts->Files->save($file);
+
                 #envoyer un mail aux abonnés
                 if($sub){
                     $data = [$username->username , $id];
