@@ -36,9 +36,12 @@ class PromotionsController extends AppController
         $promotion = $this->Promotions->get($id, [
             'contain' => ['Users']
         ]);
+        //$users = $this->Promotions->Users;
+        //$users = $this->paginate($users);
 
+        $this->set(compact('users'));
         $this->set('promotion', $promotion);
-        $this->set('_serialize', ['promotion']);
+        $this->set('_serialize', ['promotion','users']);
     }
 
     /**
