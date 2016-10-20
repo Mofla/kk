@@ -15,7 +15,6 @@ class ForumsController extends AppController
         ->contain(['Forums.Lasttopicuser','Forums.Users'])
         ->order(['sort' => 'ASC']);
 
-
         $this->set(compact('cat'));
     }
 
