@@ -441,7 +441,7 @@
         btnUD.onclick = function () {
             directionInput.value = "UD";
             draw();
-        }
+        };
         var btnDU = document.getElementById("btn-DU");
         btnDU.onclick = function () {
             directionInput.value = "DU";

@@ -60,11 +60,41 @@ class ProjectsController extends AppController
         $project = $this->Projects->get($id, [
             'contain' => ['Users', 'Diaries', 'Tasks.States', 'FromToTasks']
         ]);
+        $this->set('project', $project);
+        $this->set('_serialize', ['project']);
+    }
+    public function graph($id = null)
+    {
+
+        $project = $this->Projects->get($id, [
+            'contain' => ['Users', 'Diaries', 'Tasks.States', 'FromToTasks']
+        ]);
         $to = $this->Projects->FromToTasks->find()->select(['from_id']);
         $endPoints = $this->Projects->Tasks->find()->where(['Tasks.id NOT IN' => $to])->toArray();
 
 
         $this->set(compact('endPoints'));
+        $this->set('project', $project);
+        $this->set('_serialize', ['project']);
+    }
+    public function liste($id = null)
+    {
+
+        $project = $this->Projects->get($id, [
+            'contain' => ['Users', 'Diaries', 'Tasks.States']
+        ]);
+
+
+        $this->set('project', $project);
+        $this->set('_serialize', ['project']);
+    }
+
+    public function timeline($id = null)
+    {
+        $project = $this->Projects->get($id, [
+            'contain' => ['Users', 'Diaries', 'Tasks.States']
+        ]);
+
         $this->set('project', $project);
         $this->set('_serialize', ['project']);
     }
