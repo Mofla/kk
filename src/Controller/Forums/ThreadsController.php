@@ -36,7 +36,7 @@ class ThreadsController extends AppController
      */
     public function view($id = null)
     {
-        $sub = TableRegistry::get('subscriptions');
+        $sub = $this->Threads->Subscriptions;
         $user = $this->Auth->user('id');
         $subscription = $sub->find()
             ->select('id')
