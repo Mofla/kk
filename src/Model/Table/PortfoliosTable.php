@@ -32,14 +32,14 @@ class PortfoliosTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('portfolios');
+        $this->table('projects');
         $this->displayField('name');
         $this->primaryKey('id');
 
         $this->belongsToMany('Users', [
-            'foreignKey' => 'portfolio_id',
+            'foreignKey' => 'project_id',
             'targetForeignKey' => 'user_id',
-            'joinTable' => 'portfolios_users'
+            'joinTable' => 'projects_users'
         ]);
     }
 

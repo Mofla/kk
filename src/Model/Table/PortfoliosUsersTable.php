@@ -33,11 +33,11 @@ class PortfoliosUsersTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('portfolios_users');
+        $this->table('projects_users');
         $this->displayField('user_id');
 
-        $this->belongsTo('Portfolios', [
-            'foreignKey' => 'portfolio_id',
+        $this->belongsTo('Projects', [
+            'foreignKey' => 'project_id',
             'joinType' => 'INNER'
         ]);
         $this->belongsTo('Users', [
@@ -55,7 +55,7 @@ class PortfoliosUsersTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['portfolio_id'], 'Portfolios'));
+        $rules->add($rules->existsIn(['project_id'], 'Projects'));
         $rules->add($rules->existsIn(['user_id'], 'Users'));
 
         return $rules;
