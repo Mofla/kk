@@ -54,6 +54,21 @@ class ProjectsController extends AppController
         $this->set('_serialize', ['project']);
     }
 
+    public function gestion($id = null)
+    {
+        $this->viewBuilder()->layout('dashboard');
+        $project = $this->Projects->get($id, [
+            'contain' => ['Users', 'Diaries', 'Tasks.States', 'FromToTasks']
+        ]);
+        $to = $this->Projects->FromToTasks->find()->select(['from_id']);
+        $endPoints = $this->Projects->Tasks->find()->where(['Tasks.id NOT IN' => $to])->toArray();
+
+
+        $this->set(compact('endPoints'));
+        $this->set('project', $project);
+        $this->set('_serialize', ['project']);
+    }
+
     /**
      * Add method
      *
