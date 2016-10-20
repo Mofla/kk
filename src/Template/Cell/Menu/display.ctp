@@ -18,17 +18,17 @@
               </li>
               <li class="dropdown dropdown-extended dropdown-inbox dropdown-dark" id="header_inbox_bar">
                 <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"
-                     data-hover="dropdown" data-close-others="true">
+                   data-hover="dropdown" data-close-others="true">
                   <span class="circle">0</span>
                   <span class="corner"></span>
                 </a>
-                  <ul class="dropdown-menu">
-                    <li class="external">
-                      <h3>You have
-                        <strong>0 New</strong> Messages</h3>
-                        <a href="app_inbox.html">view all</a>
-                    </li>
-                  </ul>
+                <ul class="dropdown-menu">
+                  <li class="external">
+                    <h3>You have
+                      <strong>0 New</strong> Messages</h3>
+                    <a href="app_inbox.html">view all</a>
+                  </li>
+                </ul>
               </li>
               <li class="dropdown dropdown-user dropdown-dark">
                 <?php $Ses=$this->request->session()->read('Auth');
@@ -60,14 +60,14 @@
                     <a href="app_inbox.html">
                       <i class="icon-envelope-open"></i> My Inbox
                         <span class="badge badge-danger"> 0</span>
-                    </a>
-                  </li>
-                  <li class="divider"></li>
-                  <li>
-                    <a href="<?php echo $this->Url->build(['controller' => 'users', 'action' => 'logout', 'prefix'=>false]); ?>">
-                      <i class="icon-key"></i> Déconnecter </a>
-                  </li>
-                </ul>
+                      </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                      <a href="<?php echo $this->Url->build(['controller' => 'users', 'action' => 'logout', 'prefix'=>false]); ?>">
+                        <i class="icon-key"></i> Déconnecter </a>
+                    </li>
+                  </ul>
                 <?php endif; ?>
               </li>
             </ul>
@@ -107,13 +107,12 @@
                             <?php foreach ($role as $r) : ?>
                               <?php if ($r->role_id == 1): ?>
                                 <?= $this->Url->build(['controller' => $conn->controller, 'action' => $conn->function, 'prefix'=> 'admin']) ?>">
+                            <?= $p->name ?>
+                            <?php else: ?>
+                              <?= $this->Url->build(['controller' => $conn->controller, 'action' => $conn->function, 'prefix'=> false]) ?>">
                               <?= $p->name ?>
-                              <?php else: ?>
-                                <?= $this->Url->build(['controller' => $conn->controller, 'action' => $conn->function, 'prefix'=> false]) ?>">
-                                <?= $p->name ?>
-                              <?php endif ; ?>
+                            <?php endif ; ?>
                             <?php endforeach; ?>
-
                             </a>
                           </li>
                         <?php endforeach; ?>
@@ -135,7 +134,21 @@
                     <?php endforeach; ?>
                   </ul>
                 </li>
-              <?php endif; ?>
+                <?php foreach ($role as $r) : ?>
+                  <?php if ($r->role_id == 1): ?>
+                    <li class="menu-dropdown classic-menu-dropdown">
+                      <a href="">Gérer permissions</a>
+                      <ul class="dropdown-menu pull-left">
+                        <?php foreach ($gererPerm as $gp) : ?>
+                          <?php foreach ($gp->connectors as $conn): ?>
+                            <li class=" ">
+                              <a href="<?= $this->Url->build(['controller' => $conn->controller, 'action' => $conn->function, 'prefix'=> 'admin']) ?>"><?= $gp->name ?></a>
+                            </li>
+                          <?php endforeach; ?>
+                        <?php endforeach; ?>
+                      </ul>
+                    </li>
+                  <?php endif; ?>
                 <?php endforeach; ?>
                 <li class="menu-dropdown classic-menu-dropdown ">
                   <a href="<?= $this->Url->build(['controller' => 'Tchat', 'action' => 'add', 'prefix' => false]); ?>">
@@ -150,7 +163,7 @@
               </li>
               <li class="menu-dropdown classic-menu-dropdown ">
                 <a href="<?= $this->Url->build(['controller' => 'Forums', 'action' => 'index', 'prefix' => false]); ?>">
-                          Forum
+                  Forum
                   <span class="arrow"></span>
                 </a>
                 <ul class="dropdown-menu pull-left">
