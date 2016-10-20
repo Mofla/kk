@@ -128,16 +128,16 @@
         $('.count').load('/tchat/tchats/counttchat');
     }, 500);
     setInterval(function () {
-        if ($('.count p').attr('data') != $('.hjh').attr('hjh')) {
+
+        var countay = $('.count p');
+        var countay_message = $('.countay_message');
+        if (countay.attr('data') != countay_message.attr('countay_message')) {
 
 
             $('.row_tchat').load('/tchat');
-
-            tchat = $('.tchat');
-            tchat.scrollTop(tchat[0].scrollHeight);
             $('.in').val('');
 
-        } else if ($('.count p').attr('data') == $('.hjh').attr('hjh')) {
+        } else if (countay.attr('data') == countay_message.attr('hjh')) {
             return false;
         }
     }, 700);
