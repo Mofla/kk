@@ -1,8 +1,8 @@
 
         <?php
 
-                foreach ($actions[$id] as $option => $key)  {
-                echo "<option>".$actions[$option]."</option>";
+                foreach ($actions as $key => $value)  {
+                echo "<option>".$actions[$key]."</option>";
                 }
 
         ?>

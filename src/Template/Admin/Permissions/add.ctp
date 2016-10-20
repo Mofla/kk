@@ -28,6 +28,7 @@
                   <div class="form-group">
                     <label class="label-control">Module : </label><br>
                       <select name="controller" required="required" id="controller" class="bs-select form-control">
+                          <option value="" selected="selected">---</option>
                         <?php foreach ($controller as $c) : ?>
                           <option value="<?= $c ?>"><?= $c ?></option>
                         <?php endforeach ?>
@@ -44,7 +45,7 @@
                       </select>
                   </div>
                     <div class="form-group">
-                        <label>Controller : </label>
+                        <label>Actions : </label>
                         <select name="function"id="actions" class="bs-select form-control">
                         </select>
                     </div>
@@ -86,12 +87,11 @@
   });
   $('#function').change(function(){
       $.ajax({
-          type: 'POST',
+          method: "POST",
           url: '<?= $this->Url->build(['controller' => 'Connectors','action' => 'ajaxgetactionlist']); ?>',
-          data  : "id="+$('#function').find('option:selected').text(),
-          success: function (data) {
-              $('#actions').html(data);
-          }
+          data: { module: $('#controller').find('option:selected').text(), controller: $('#function').find('option:selected').text() }
+      }).done(function( data ) {
+          $('#actions').html(data);
       });
   });
 </script>

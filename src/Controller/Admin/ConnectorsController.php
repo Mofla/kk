@@ -81,8 +81,9 @@ class ConnectorsController extends AppController
 
     public function ajaxgetactionlist(){
         if ($this->request->is('ajax')) {
-            $id = $this->request->data('id');
-            $actions = $this->Common->getActions($id);
+            $module = $this->request->data('module');
+            $controller = $this->request->data('controller');
+            $actions = $this->Common->getActions($module,$controller);
         }
 
         $this->set(compact('actions'));
