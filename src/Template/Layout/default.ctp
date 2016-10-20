@@ -242,6 +242,8 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 <!--<?= $this->Html->script('../build/jquery.datetimepicker.full.min.js') ?>-->
 <!--<?= $this->Html->css('../css/jquery.datetimepicker.css') ?>-->
 
+
+
 </body>
 
 <!-- END THEME LAYOUT SCRIPTS -->
