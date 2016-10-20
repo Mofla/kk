@@ -77,4 +77,44 @@ class TchatsController extends AppController
         $this->set(compact('tchat','list_message','user','id','time_2','count_message'));
         $this->set('_serialize', ['tchat']);
     }
+    public function history(){
+
+        $date_fin = $this->request->data('datefin');
+        $date_debut = $this->request->data('datedebut');
+        $user = '2';
+
+        if (empty($date_fin)&&empty($date_debut)){
+
+            $list_message = $this->Tchats->find('all')->contain('Users');
+        }
+
+        if (!empty($date_debut)&&empty($date_fin)){
+
+            $date_debut = $this->request->data('datedebut');
+            $date_fin = "";
+            $list_message = $this->Tchats->find('all')->contain('Users')->where(['date >'=>$date_debut]);
+
+
+        }
+        if (!empty($date_fin)&&empty($date_debut)){
+
+            $date_fin = $this->request->data('datefin');
+            $date_debut = "";
+            $list_message = $this->Tchats->find('all')->contain('Users')->where(['date <'=>$date_fin]);
+
+        }
+        if (!empty($date_fin)&&!empty($date_debut)){
+
+            $date_debut = $this->request->data('datedebut');
+            $date_fin = $this->request->data('datefin');
+            $list_message = $this->Tchats->find('all')->contain('Users')->where(['date BETWEEN'=>$date_debut])->andWhere(['"'.$date_fin.'"']);
+
+        }
+        $empty = "";
+        if($list_message->isEmpty()) {
+            $empty = "Il y a pas de message avec votre critere de recherche";
+        }
+
+        $this->set(compact('list_message','date_fin','date_debut','empty'));
+}
 }
