@@ -122,3 +122,10 @@ Router::prefix('utilisateur', function($routes) {
     $routes->connect('/profil/*', ['controller' => 'Users','action' => 'view'], ['routeClass' => 'InflectedRoute']);
     $routes->fallbacks(DashedRoute::class);
 });
+Router::prefix('promotions', function ($routes){
+    $routes->connect('/', ['controller' => 'Promotions','action' => 'index'], ['routeClass' => 'InflectedRoute']);
+    $routes->fallbacks(DashedRoute::class);
+
+
+
+});
