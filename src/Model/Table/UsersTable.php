@@ -50,7 +50,11 @@ class UsersTable extends Table
         $this->hasMany('Diaries', [
             'foreignKey' => 'user_id'
         ]);
-
+        $this->belongsToMany('Portfolios', [
+            'foreignKey' => 'user_id',
+            'targetForeignKey' => 'project_id',
+            'joinTable' => 'portfolios_users'
+        ]);
         $this->belongsToMany('Projects', [
             'foreignKey' => 'user_id',
             'targetForeignKey' => 'project_id',

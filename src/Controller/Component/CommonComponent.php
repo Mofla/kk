@@ -61,7 +61,7 @@ class CommonComponent extends Component
         $class = new ReflectionClass($path);
         $actions = $class->getMethods(ReflectionMethod::IS_PUBLIC);
         $ignoreList = ['beforeFilter', 'afterFilter', 'initialize'];
-        $functions = [];
+        $functions = [''];
         foreach($actions as $action)
         {
             if($action->class == $path &&!in_array($action->name,$ignoreList))
