@@ -97,8 +97,9 @@
                     Dashboard
                   </a>
                 </li>
-                <li class="menu-dropdown classic-menu-dropdown active">
-                  <a href="">Gérer utilisateurs</a>
+                <li class="menu-dropdown classic-menu-dropdown">
+                  <a href="<?= $this->Url->build(['controller' => 'Users', 'action' => 'index', 'prefix'=> 'admin']) ?>">
+                    Gérer utilisateurs</a>
                     <ul class="dropdown-menu pull-left">
                       <?php foreach ($perm as $p) : ?>
                         <?php foreach ($p->connectors as $conn): ?>
@@ -123,7 +124,8 @@
               <?php foreach ($role as $r) : ?>
               <?php if ($r->role_id == 1): ?>
                 <li class="menu-dropdown classic-menu-dropdown">
-                  <a href="">Gérer permissions</a>
+                  <a href="<?= $this->Url->build(['controller' => 'Permissions', 'action' => 'index', 'prefix'=> 'admin']) ?>">
+                    Gérer permissions</a>
                   <ul class="dropdown-menu pull-left">
                     <?php foreach ($gererPerm as $gp) : ?>
                       <?php foreach ($gp->connectors as $conn): ?>
@@ -143,6 +145,10 @@
                     </a>
                   </li>
               <?php endif; ?>
+              <li>
+                <a href="<?= $this->Url->build(['controller' => 'Portfolios', 'action' => 'index' , 'prefix'=>'portfolios']) ?>" >
+                  Portfolios </a>
+              </li>
               <li class="menu-dropdown classic-menu-dropdown ">
                 <a href="<?= $this->Url->build(['controller' => 'Forums', 'action' => 'index', 'prefix' => false]); ?>">
                           Forum

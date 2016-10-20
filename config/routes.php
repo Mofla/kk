@@ -95,30 +95,25 @@ Router::prefix('admin', function ($routes) {
     $routes->connect('/portfolios/editer/*', ['controller' => 'Portfolios', 'action' => 'edit']);
     $routes->fallbacks(DashedRoute::class);
 });
-
 Router::prefix('portfolios', function($routes) {
     $routes->connect('/', ['controller' => 'Portfolios','action' => 'index'], ['routeClass' => 'InflectedRoute']);
     $routes->connect('/:id', ['controller' => 'Portfolios','action' => 'index'],['id' => '[0-9]+','pass'=>['id']], ['routeClass' => 'InflectedRoute']);
     $routes->connect('/voir/*', ['controller' => 'Portfolios','action' => 'view'], ['routeClass' => 'InflectedRoute']);
     $routes->fallbacks(DashedRoute::class);
 });
-
 Router::prefix('Tchat', function($routes) {
     $routes->connect('/', ['controller' => 'Tchats','action' => 'index'], ['routeClass' => 'InflectedRoute']);
     $routes->connect('/add', ['controller' => 'Tchats','action' => 'add'], ['routeClass' => 'InflectedRoute']);
     $routes->fallbacks(DashedRoute::class);
 });
-
 Router::prefix('forums', function($routes) {
     $routes->connect('/', ['controller' => 'Forums','action' => 'index'], ['routeClass' => 'InflectedRoute']);
     $routes->fallbacks(DashedRoute::class);
 });
-
 Router::prefix('dashboard', function($routes) {
     $routes->connect('/', ['controller' => 'Projects','action' => 'index'], ['routeClass' => 'InflectedRoute']);
     $routes->fallbacks(DashedRoute::class);
 });
-
 Router::prefix('utilisateur', function($routes) {
     $routes->connect('/', ['controller' => 'Users','action' => 'index'], ['routeClass' => 'InflectedRoute']);
     $routes->connect('/connexion', ['controller' => 'Users','action' => 'login'], ['routeClass' => 'InflectedRoute']);
