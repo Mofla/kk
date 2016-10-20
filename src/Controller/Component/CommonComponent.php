@@ -34,6 +34,10 @@ class CommonComponent extends Component
                 {
                     if (!in_array($temp, $ignore) && !in_array($dir,$ignore))
                     {
+                        if(!array_key_exists($dir,$files))
+                        {
+                            $files[$dir][] = '--';
+                        }
                         $temp = explode('.',$temp)[0];
                         $files[$dir][] = $temp;
                     }
