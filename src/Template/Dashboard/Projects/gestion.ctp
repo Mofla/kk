@@ -1,3 +1,10 @@
+<?= $this->Html->script('../js/jquery.js') ?>
+
+<?= $this->Html->css('../assets/global/plugins/jquery-ui/jquery-ui.min.css') ?>
+<?= $this->Html->script('../assets/global/plugins/jquery-ui/jquery-ui.min.js') ?>
+<?= $this->Html->script('../assets/global/plugins/bootstrap/js/bootstrap.min.js') ?>
+
+
 <div class="task-modal-base">
     <div class="task-modal-cont"></div>
 </div>
@@ -5,6 +12,14 @@
 <div class="row">
     <div class="col-md-1 col-sm-1 col-xs-1">
         <ul class="nav nav-tabs-right">
+            <li>
+                <button class="btn btn-info btn-lg" id="add-task"><span
+                        class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                </button>
+            </li>
+            <br>
+            <br>
+            <br>
             <li>
                 <button class="btn btn-default btn-lg" href="#tab_1" data-toggle="tab" id="btn_1"><span
                         class="glyphicon glyphicon-list" aria-hidden="true"></span>
@@ -20,23 +35,16 @@
                         class="glyphicon glyphicon-tree-deciduous" aria-hidden="true"></span>
                 </button>
             </li>
-            <li>
-                <button class="btn btn-default btn-lg" href="#tab_3" data-toggle="tab" id="add-task"><span
-                        class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                </button>
-            </li>
         </ul>
     </div>
     <div class="col-md-11 col-sm-11 col-xs-11">
-        <div class="tabbable-line">
-            <h4>Projet : <?= $project->name ?></h4>
 
             <div class="tab-content">
                 <div class="tab-pane active" id="tab_1"></div>
                 <div class="tab-pane" id="tab_2"></div>
                 <div class="tab-pane" id="tab_3"></div>
             </div>
-        </div>
+
     </div>
 </div>
 
@@ -69,11 +77,11 @@
 
 
     //task add modal
-    $(document).on('click', '.add-task', function (event) {
+    $('#add-task').on('click', function (event) {
         event.preventDefault();
         var id = $(this).attr('id').split('-');
 
-        var url = '<?= $this->Url->build(['controller' => 'Tasks', 'action' => 'addtask']); ?>' + '/' + id[1];
+        var url = '<?= $this->Url->build(['controller' => 'Tasks', 'action' => 'addtask']); ?>' + '/' + <?= $project->id ?>;
 
 
         $('.task-modal-cont').load(url, function (result) {
@@ -86,7 +94,7 @@
         event.preventDefault();
         var id = $(this).attr('id').split('-');
 
-        var url = '<?= $this->Url->build(['controller' => 'Tasks', 'action' => 'edittask']); ?>' + '/' + id[1];
+        var url = '<?= $this->Url->build(['controller' => 'Tasks', 'action' => 'edittask']); ?>' + '/' + <?= $project->id ?>;
 
 
         $('.task-modal-cont').load(url, function (result) {
