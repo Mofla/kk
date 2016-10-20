@@ -59,9 +59,8 @@ class PermissionsController extends AppController
             $permission = $this->Permissions->patchEntity($permission, $this->request->data);
             if ($this->Permissions->save($permission)) {
                 $id = $permission->id;
-                $connector->controller = 'controller';
-                $connector->function = 'function';
-                $connector->permission_id= $id;
+                $this->request->data['controller'] = str_replace('Controller','',$this->request->data['controller']);
+                $this->request->data['permission_id'] = $id;
                 $connector = $this->Connectors->patchEntity($connector, $this->request->data);
                 if ($this->Connectors->save($connector)) {
                     $this->Flash->success(__('The permission has been saved.'));
@@ -87,15 +86,21 @@ class PermissionsController extends AppController
      */
     public function edit($id = null)
     {
+        $controller = $this->Common->getControllers();
+        $this->loadModel('Connectors');
+
         $permission = $this->Permissions->get($id, [
             'contain' => ['Roles']
         ]);
+        $connector = $this->Connectors->find('all')
+            ->contain('Permissions')
+            ->where(['permission_id =' => $id]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $permission = $this->Permissions->patchEntity($permission, $this->request->data);
             if ($this->Permissions->save($permission)) {
-                $this->Flash->success(__('The permission has been saved.'));
+                    $this->Flash->success(__('The permission has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                    return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__('The permission could not be saved. Please, try again.'));
             }

@@ -16,33 +16,21 @@
               <li class="droddown dropdown-separator">
                 <span class="separator"></span>
               </li>
-              <li class="dropdown dropdown-extended dropdown-inbox dropdown-dark" id="header_inbox_bar">
-                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"
-                   data-hover="dropdown" data-close-others="true">
-                  <span class="circle">0</span>
-                  <span class="corner"></span>
-                </a>
-                <ul class="dropdown-menu">
-                  <li class="external">
-                    <h3>You have
-                      <strong>0 New</strong> Messages</h3>
-                    <a href="app_inbox.html">view all</a>
-                  </li>
-                </ul>
-              </li>
               <li class="dropdown dropdown-user dropdown-dark">
                 <?php $Ses=$this->request->session()->read('Auth');
                 if(isset($Ses)): ?>
                 <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"
                       data-hover="dropdown" data-close-others="true">
-                  <?= $this->Html->image('../assets/layouts/layout3/img/avatar9.jpg',['class'=>'img-circle']) ?>
-                  <span class="username username-hide-mobile">Nick</span>
+                  <?php foreach ($user as $u): ?>
+                  <?= $this->Html->image('../uploads/user/'.$u->picture_url,['class'=>'img-circle']) ?>
+                  <span class="username username-hide-mobile"><?= $u->username ?></span>
+                  <?php endforeach; ?>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-default">
                   <?php foreach ($role as $r) : ?>
                     <?php if ($r->role_id == 1): ?>
                   <li>
-                    <a href="<?= $this->Url->build(['controller' => 'users', 'action' => 'edit', $i , 'prefix'=>'admin']) ?>" >
+                    <a href="<?= $this->Url->build(['controller' => 'users', 'action' => 'view', $i , 'prefix'=>'admin']) ?>" >
                       <i class="icon-user"></i> Profil </a>
                   </li>
                     <?php else: ?>
@@ -107,11 +95,11 @@
                             <?php foreach ($role as $r) : ?>
                               <?php if ($r->role_id == 1): ?>
                                 <?= $this->Url->build(['controller' => $conn->controller, 'action' => $conn->function, 'prefix'=> 'admin']) ?>">
-                            <?= $p->name ?>
-                            <?php else: ?>
-                              <?= $this->Url->build(['controller' => $conn->controller, 'action' => $conn->function, 'prefix'=> false]) ?>">
-                              <?= $p->name ?>
-                            <?php endif ; ?>
+                                <?= $p->name ?>
+                              <?php else: ?>
+                                <?= $this->Url->build(['controller' => $conn->controller, 'action' => $conn->function, 'prefix'=> false]) ?>">
+                                <?= $p->name ?>
+                              <?php endif ; ?>
                             <?php endforeach; ?>
                             </a>
                           </li>

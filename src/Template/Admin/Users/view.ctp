@@ -1,5 +1,5 @@
 <?= $this->Html->link('Accueil',['controller' => 'Pages','action' => '/','prefix' => false]) ?> /
-<?= $this->Html->link($this->request->params['controller'],['action' => 'index','prefix' => false]) ?> /
+<?= $this->Html->link($this->request->params['controller'],['action' => 'index']) ?> /
 <?= $user->firstname.$user->lastname ?>
 <div class="page-title">
   <h1><?php echo $user->firstname ?> <?= $user->lastname ?>

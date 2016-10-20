@@ -1,3 +1,8 @@
+<?= $this->Html->css('../assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css') ?>
+<?= $this->Html->script('../assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js') ?>
+<?= $this->Html->link('Accueil',['controller' => 'Pages','action' => '/','prefix' => false]) ?> /
+<?= $this->Html->link($this->request->params['controller'],['action' => 'index']) ?> /
+<?= $user->firstname.$user->lastname ?>
 <div class="page-content">
   <div class="container">
     <div class="page-content-inner">
@@ -33,10 +38,6 @@
                                     <div class="form-group">
                                       <label class="label-control">Rôle: </label>
                                       <?= $this->Form->input('role_id', ['options' => $roles, 'label' => false, 'class' => 'form-control']); ?>
-                                    </div>
-                                    <div class="form-group">
-                                      <label class="label-control"> Promotion: </label>
-                                      <?= $this->Form->input('promotion', ['label' => false, 'class' => 'form-control']); ?>
                                     </div>
                                     <div class="form-group">
                                       <label class="label-control">Pseudo: </label>
@@ -104,27 +105,26 @@
                 </div>
               </div>
               <div id="tab_2-2" class="tab-pane">
-                <p> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
-                    terry richardson ad squid. 3 wolf moon officia aute, non cupidatat
-                    skateboard dolor brunch. Food truck quinoa
-                    nesciunt laborum eiusmod.
-                </p>
+                <fieldset>
+                  <legend><?= __('Changez votre avatar') ?></legend>
+                </fieldset>
                   <?= $this->Form->create($user,['enctype' => 'multipart/form-data']) ?>
-                  <div class="fileinput fileinput-new" data-provides="fileinput">
-                    <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
-                      <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="" />
-                    </div>
-                    <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"> </div>
-                    <div>
-                      <span class="btn default btn-file">
-                        <span class="fileinput-new"> Select image </span>
-                        <span class="fileinput-exists"> Change </span>
-                        <input type="file" name="picture">
-                      </span>
-                      <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput"> Remove </a>
-                    </div>
+
+                <div class="fileinput fileinput-new" data-provides="fileinput">
+                  <div class="fileinput-new thumbnail" style="width: 300px; height: 300px;">
                   </div>
-                  <?= $this->Form->button(__('Submit'),['class' => 'btn btn-sm btn-primary']) ?>
+                  <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 300px; max-height: 300px;"> </div>
+                  <div>
+                    <span class="btn default btn-file">
+                      <span class="fileinput-new"> Selectionner une image </span>
+                      <span class="fileinput-exists"> Modifier </span>
+                      <input type="file" name="picture">
+                    </span>
+                    <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput"> Retirer </a>
+                  </div>
+                </div><br>
+
+                <?= $this->Form->button(__('Submit'),['class' => 'btn btn-sm green']) ?>
                 <?= $this->Form->end() ?>
               </div>
             </div>

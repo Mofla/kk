@@ -1,3 +1,5 @@
+<?= $this->Html->link('Accueil',['controller' => 'Pages','action' => '/','prefix' => false]) ?> /
+<?= $this->Html->link($this->request->params['controller'],['action' => 'index']) ?> /
 <div class="profile">
   <div class="tab-pane" id="tab_1_3">
     <div class="row profile-account">
