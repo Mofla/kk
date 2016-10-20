@@ -33,7 +33,7 @@ class FromToTasksTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('from_to_tasks');
+        $this->table('dashboard_from_to_tasks');
         $this->displayField('id');
         $this->primaryKey('id');
 

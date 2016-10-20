@@ -34,7 +34,7 @@ class DiariesTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('diaries');
+        $this->table('dashboard_diaries');
         $this->displayField('id');
         $this->primaryKey('id');
 
