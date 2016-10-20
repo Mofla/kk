@@ -49,7 +49,10 @@ class ThreadsTable extends Table
         $this->hasMany('Posts', [
         'foreignKey' => 'thread_id'
     ]);
-
+        $this->belongsTo('Subscriptions', [
+            'foreignKey' => 'thread_id',
+            'joinType' => 'INNER'
+        ]);
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id',
             'joinType' => 'INNER'

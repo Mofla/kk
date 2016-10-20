@@ -46,6 +46,7 @@ class PostsTable extends Table
             'foreignKey' => 'user_id',
             'joinType' => 'INNER'
         ]);
+
         $this->belongsTo('Threads', [
             'foreignKey' => 'thread_id',
             'joinType' => 'INNER'

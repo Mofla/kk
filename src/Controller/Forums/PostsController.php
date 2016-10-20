@@ -5,6 +5,7 @@ use App\Controller\AppController;
 use Cake\ORM\TableRegistry;
 use Cake\I18n\Time;
 Time::setToStringFormat('yyyy/MM/dd HH:mm');
+use Cake\Mailer\Email;
 
 /**
  * Posts Controller
@@ -30,13 +31,7 @@ class PostsController extends AppController
         $this->set('_serialize', ['posts']);
     }
 
-    /**
-     * View method
-     *
-     * @param string|null $id Post id.
-     * @return \Cake\Network\Response|null
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
+
     public function view($id = null)
     {
         $post = $this->Posts->get($id, [
@@ -47,15 +42,23 @@ class PostsController extends AppController
         $this->set('_serialize', ['post']);
     }
 
-    /**
-     * Add method
-     *
-     * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
-     */
+
     public function add($id = null, $quote=null)
     {
         $time = Time::now();
         $user = $this->Auth->user('id');
+
+        $sub = $this->Posts->Threads->Subscriptions->find()
+            ->contain('Users')
+            ->select('Users.email')
+            ->where(['thread_id' => $id]);
+
+        $username = $this->Posts->Users->find()
+            ->select('username')
+            ->where(['id' => $user])
+            ->first();
+
+
         if($quote) {
             if ($quote !== 'quotetopic') {
                 $pastquote = $this->Posts->get($quote);
@@ -100,6 +103,22 @@ else{
             $this->request->data['thread_id'] = $id;
             $post = $this->Posts->patchEntity($post, $this->request->data);
             if ($this->Posts->save($post)) {
+                #envoyer un mail aux abonnés
+                if($sub){
+                    $data = [$username->username , $id];
+                    foreach ($sub as $item) {
+                        if($item->has('Users')) {
+                            $email = new Email('default');
+                            $email->viewVars(['data' => $data]);
+                            $email->template('default', 'default')
+                                ->emailFormat('html');
+                            $email->to($item->Users->email)
+                                ->subject('Suivi du sujet : '.$this->request->data['title'].'')
+                                ->send($this->request->data['message']);
+                        }
+                    }
+                }
+
                 $this->Flash->success(__('The post has been saved.'));
                 $query = $this->Posts->Threads->forums->query();
                 $query->update()
@@ -121,7 +140,7 @@ else{
             }
         }
 
-        $this->set(compact('post','forumid','pastquote'));
+        $this->set(compact('post','forumid','pastquote','add','sub'));
         $this->set('_serialize', ['post']);
     }
 
