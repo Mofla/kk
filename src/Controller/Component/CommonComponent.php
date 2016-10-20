@@ -55,6 +55,24 @@ class CommonComponent extends Component
         return $files[$id];
     }
 
+    public function getActions($module,$controller)
+    {
+        $path = 'App\\Controller\\'.$module.'\\'.$controller;
+        $class = new ReflectionClass($path);
+        $actions = $class->getMethods(ReflectionMethod::IS_PUBLIC);
+        $ignoreList = ['beforeFilter', 'afterFilter', 'initialize'];
+        $functions = [];
+        foreach($actions as $action)
+        {
+            if($action->class == $path &&!in_array($action->name,$ignoreList))
+            {
+                array_push($functions,$action->name);
+            }
+        }
+        return $functions;
+    }
+
+
 //    public function getControllers()
 //    {
 //        $files = scandir('./src/Controller');
@@ -78,21 +96,21 @@ class CommonComponent extends Component
 //        return $files;
 //    }
 
-    public function getActions($controllerName)
-    {
-        $className = 'App\\Controller\\'.$controllerName;
-        $class = new ReflectionClass($className);
-        $actions = $class->getMethods(ReflectionMethod::IS_PUBLIC);
-
-        $results = [$controllerName => []];
-        $ignoreList = ['beforeFilter', 'afterFilter', 'initialize'];
-        foreach($actions as $action){
-            if($action->class == $className && !in_array($action->name, $ignoreList)){
-                array_push($results[$controllerName], $action->name);
-            }
-        }
-        return $results;
-    }
+//    public function getActions($controllerName)
+//    {
+//        $className = 'App\\Controller\\'.$controllerName;
+//        $class = new ReflectionClass($className);
+//        $actions = $class->getMethods(ReflectionMethod::IS_PUBLIC);
+//
+//        $results = [$controllerName => []];
+//        $ignoreList = ['beforeFilter', 'afterFilter', 'initialize'];
+//        foreach($actions as $action){
+//            if($action->class == $className && !in_array($action->name, $ignoreList)){
+//                array_push($results[$controllerName], $action->name);
+//            }
+//        }
+//        return $results;
+//    }
 
 //    public function getControllerActions($controllerName)
 //    {
