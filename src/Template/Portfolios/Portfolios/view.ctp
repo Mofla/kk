@@ -35,4 +35,10 @@
         'class' => 'btn btn-lg btn-info',
         'escape' => false
     ]) ?>
+    <?php if($is_authorized): ?>
+        <?= $this->Html->link('<span class="glyphicon glyphicon-pencil"></span> Editer le projet',['action' => 'edit',$portfolio->id],[
+            'class' => 'btn btn-lg btn-warning',
+            'escape' => false
+        ]) ?>
+    <?php endif; ?>
 </div>

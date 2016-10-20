@@ -36,7 +36,7 @@ class PortfoliosUsersTable extends Table
         $this->table('projects_users');
         $this->displayField('user_id');
 
-        $this->belongsTo('Projects', [
+        $this->belongsTo('Portfolios', [
             'foreignKey' => 'project_id',
             'joinType' => 'INNER'
         ]);
@@ -55,7 +55,7 @@ class PortfoliosUsersTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['project_id'], 'Projects'));
+        $rules->add($rules->existsIn(['project_id'], 'Portfolios'));
         $rules->add($rules->existsIn(['user_id'], 'Users'));
 
         return $rules;
