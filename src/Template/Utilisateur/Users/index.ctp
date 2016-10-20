@@ -124,14 +124,14 @@ License: You must have a valid license purchased only from themeforest(the above
                                             <?php endforeach; ?>
                                         </div>
                                         <br>
-                                        <div class="paginator">
+                                        <!--<div class="paginator">
                                             <ul class="pagination">
                                                 <?= $this->Paginator->prev('< ' . __('previous')) ?>
                                                 <?= $this->Paginator->numbers() ?>
                                                 <?= $this->Paginator->next(__('next') . ' >') ?>
                                             </ul>
                                             <p><?= $this->Paginator->counter() ?></p>
-                                        </div>
+                                        </div>-->
                                     </div>
                                 </div>
                                 <!-- END PAGE CONTENT INNER -->
