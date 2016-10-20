@@ -40,14 +40,13 @@ class MenuCell extends Cell
             ->contain('Connectors', 'Roles', 'Users')
             ->where(['menu' => 1])
             ->matching('Roles')->where(['Roles.id =' => $role])
-            ->matching('Connectors')->where(['Connectors.controller LIKE'=>'%sers%']);
-        
+            ->matching('Connectors')->where(['Connectors.controller LIKE'=>'users']);
 
         $gererPerm = $this->Permissions->find('all')
             ->contain('Connectors', 'Roles', 'Users')
             ->where(['menu' => 1])
             ->matching('Roles')->where(['Roles.id =' => $role])
-            ->matching('Connectors')->where(['Connectors.controller LIKE'=>'%ermission%']);
+            ->matching('Connectors')->where(['Connectors.controller LIKE'=>'permission%']);
         
         $this->set('_serialize', ['permission']);
         $this->set(compact('perm','i','gererPerm','role', 'user'));

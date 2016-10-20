@@ -81,7 +81,7 @@ class UsersController extends AppController
     public function edit($id = null)
     {
         $user = $this->Users->get($id, [
-            'contain' => ['Roles']
+            'contain' => []
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             if(!empty($this->request->data['picture']['name'])) {
@@ -90,7 +90,6 @@ class UsersController extends AppController
             }
             $user = $this->Users->patchEntity($user, $this->request->data);
             if ($this->Users->save($user)) {
-                $this->Users->save($user);
                 $this->Flash->success(__('The user has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
@@ -99,8 +98,10 @@ class UsersController extends AppController
             }
         }
         $roles = $this->Users->Roles->find('list', ['limit' => 200]);
-        $this->set(compact('user', 'roles'));
+        $this->set(compact('user'));
+        $this->set('roles', $roles);
         $this->set('_serialize', ['user']);
+    
     }
 
     /**
