@@ -92,9 +92,24 @@
     //task edit modal
     $(document).on('click', '.edittask', function (event) {
         event.preventDefault();
+
         var id = $(this).attr('id').split('-');
 
-        var url = '<?= $this->Url->build(['controller' => 'Tasks', 'action' => 'edittask']); ?>' + '/' + <?= $project->id ?>;
+        var url = '<?= $this->Url->build(['controller' => 'Tasks', 'action' => 'edittask']); ?>' + '/' + id[1];
+
+
+        $('.task-modal-cont').load(url, function (result) {
+            $('#taskModal').modal({show: true});
+        });
+    });
+
+    //task view modal
+    $(document).on('click', '.view-task', function (event) {
+        event.preventDefault();
+
+        var id = $(this).attr('id').split('-');
+
+        var url = '<?= $this->Url->build(['controller' => 'Tasks', 'action' => 'viewajax']); ?>' + '/' + id[1];
 
 
         $('.task-modal-cont').load(url, function (result) {

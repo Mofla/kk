@@ -10,60 +10,60 @@
                     <fieldset>
                         <legend><?= __('Editer la tâche') ?></legend>
                         <div class="form-group">
-                        <?php
-                        echo $this->Form->input('name', ['class' => 'form-control']);
-                        echo $this->Form->input('description', ['class' => 'form-control']);
-                        echo $this->Form->input('start_date', ['type' => 'text', 'id' => 'start', 'class' => 'form-control', 'dateFormat' => 'YMD']);
-                        echo $this->Form->input('end_date', ['type' => 'text', 'id' => 'end', 'class' => 'form-control']);
-                        echo $this->Form->input('users._ids', ['options' => $users, 'class' => 'multi-select']);
-                        ?>
+                            <?php
+                            echo $this->Form->input('name', ['class' => 'form-control']);
+                            echo $this->Form->input('description', ['class' => 'form-control']);
+                            echo $this->Form->input('start_date', ['type' => 'text', 'id' => 'start', 'class' => 'form-control', 'dateFormat' => 'YMD']);
+                            echo $this->Form->input('end_date', ['type' => 'text', 'id' => 'end', 'class' => 'form-control']);
+                            echo $this->Form->input('users._ids', ['options' => $users, 'class' => 'multi-select']);
+                            ?>
                         </div>
                     </fieldset>
                     <?= $this->Form->button(__('Valider les changements'), ['class' => 'btn btn-default']) ?>
                     <?= $this->Form->end() ?>
                 </div>
-               <!-- <div class="modal-footer">
-                    <button class="btn" data-dismiss="modal">Annuler</button>
-                </div>-->
+                <!-- <div class="modal-footer">
+                     <button class="btn" data-dismiss="modal">Annuler</button>
+                 </div>-->
             </div>
         </div>
     </div>
-    <?= $this->Html->css('../assets/global/plugins/jquery-ui/jquery-ui.min.css') ?>
-    <?= $this->Html->script('../assets/global/plugins/jquery-ui/jquery-ui.min.js') ?>
-    <?= $this->Html->script('jquery.datetimepicker.full.min.js') ?>
-    <?= $this->Html->css('jquery.datetimepicker.css') ?>
+</div>
+<?= $this->Html->css('../assets/global/plugins/jquery-ui/jquery-ui.min.css') ?>
+<?= $this->Html->script('../assets/global/plugins/jquery-ui/jquery-ui.min.js') ?>
+<?= $this->Html->script('jquery.datetimepicker.full.min.js') ?>
+<?= $this->Html->css('jquery.datetimepicker.css') ?>
 
 
 
-    <?= $this->Html->script('jquery.multi-select.js') ?>
+<?= $this->Html->script('jquery.multi-select.js') ?>
 
 
+<script>
+    $('.multi-select').multiSelect();
 
-    <script>
-        $('.multi-select').multiSelect();
+    var startDate = $('#start').val().split('/');
+    $('#start').val('20' + startDate[2] + '-' + startDate[0] + '-' + startDate[1]);
 
-        var startDate = $('#start').val().split('/');
-        $('#start').val('20' + startDate[2] + '-' + startDate[0] + '-' + startDate[1]);
+    var endDate = $('#end').val().split('/');
+    $('#end').val('20' + endDate[2] + '-' + endDate[0] + '-' + endDate[1]);
 
-        var endDate = $('#end').val().split('/');
-        $('#end').val('20' + endDate[2] + '-' + endDate[0] + '-' + endDate[1]);
-
-    </script>
-
-
-    <script>
+</script>
 
 
-        //datetimepicker on date fields
-        //todo: fix startdate
-        $('#start').datetimepicker({
-            timepicker:false,
-            format: "Y-m-d"
-        });
+<script>
 
-        $('#end').datetimepicker({
-            timepicker:false,
-            format: "Y-m-d"
-        });
 
-    </script>
+    //datetimepicker on date fields
+    //todo: fix startdate
+    $('#start').datetimepicker({
+        timepicker: false,
+        format: "Y-m-d"
+    });
+
+    $('#end').datetimepicker({
+        timepicker: false,
+        format: "Y-m-d"
+    });
+
+</script>
