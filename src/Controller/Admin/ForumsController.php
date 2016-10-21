@@ -89,7 +89,40 @@ class ForumsController extends AppController
             $this->Flash->error(__('The forum could not be deleted. Please, try again.'));
         }
 
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect($this->referer());
+    }
+
+    public function ajaxeditforum()
+    {
+        $this->autoRender = false ;
+        $table = $this->Forums;
+        if ($this->request->is(['post'])) {
+            $id = $this->request->data['id'];
+            $category = $this->Forums->find()
+                ->where(['id' => $id])->first();
+            $categories = $this->request->data['title'];
+            $category->name = $categories;
+            $table->save($category);
+        }
+    }
+    public function saveorderforum()
+    {
+        $this->autoRender = false;
+
+        if ($this->request->data) {
+            $order = $this->request->data['id'];
+            $exp = explode(",", $order);
+            $number = null ;
+            foreach ($exp as $item){
+                $number++ ;
+                $query = $this->Forums->query();
+                $query->update()
+                    ->set(['sort' => $number])
+                    ->where(['id' => $item])
+                    ->execute();
+            }
+        }
+        $this->set(compact('order'));
     }
 //---------------------------------------------------------------------------------------------CATEGORIES
     public function listcategory()

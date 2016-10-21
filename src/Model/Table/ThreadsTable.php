@@ -62,6 +62,11 @@ class ThreadsTable extends Table
             'className' => 'Users',
             'foreignKey' => 'lastuser',
         ]);
+        $this->belongsToMany('Files', [
+            'foreignKey' => 'post_id',
+            'targetForeignKey' => 'file_id',
+            'joinTable' => 'posts_files'
+        ]);
     }
 
 

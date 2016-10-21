@@ -1,13 +1,13 @@
 <?php
 namespace App\Test\TestCase\Controller;
 
-use App\Controller\CategoriesController;
+use App\Controller\ThreadsFilesController;
 use Cake\TestSuite\IntegrationTestCase;
 
 /**
- * App\Controller\CategoriesController Test Case
+ * App\Controller\ThreadsFilesController Test Case
  */
-class CategoriesControllerTest extends IntegrationTestCase
+class ThreadsFilesControllerTest extends IntegrationTestCase
 {
 
     /**
@@ -16,8 +16,10 @@ class CategoriesControllerTest extends IntegrationTestCase
      * @var array
      */
     public $fixtures = [
-        'app.categories',
+        'app.threads_files',
+        'app.threads',
         'app.forums',
+        'app.categories',
         'app.users',
         'app.roles',
         'app.permissions',
@@ -35,9 +37,8 @@ class CategoriesControllerTest extends IntegrationTestCase
         'app.portfolios_users',
         'app.entries',
         'app.lasttopicuser',
-        'app.threads',
-        'app.posts',
         'app.files',
+        'app.posts',
         'app.posts_files',
         'app.subscriptions'
     ];

@@ -74,6 +74,24 @@ class ThreadsController extends AppController
             $this->request->data['forum_id'] = $id;
             $thread = $this->Threads->patchEntity($thread, $this->request->data);
             if ($this->Threads->save($thread)) {
+#upload de fichier
+                $picture = $this->Upload->getFile($this->request->data['upload'],'files');
+                $this->request->data['upload'] = $picture;
+                $file = $this->Threads->Files->newEntity();
+                $this->request->data['name'] = $picture ;
+                $this->request->data['post_id'] = $thread->id ;
+                $file = $this->Threads->Files->patchEntity($file, $this->request->data);
+                $this->Threads->Files->save($file);
+                $data = [
+                    'thread_id' => $thread->id
+                    ,
+                    'file_id' => $file->id
+
+                ];
+                $fp = TableRegistry::get('threads_files');
+                $postsFiles = $fp->newEntity();
+                $postsFiles = $fp->patchEntity($postsFiles,$data);
+                $fp->save($postsFiles);
 
                 $query = $this->Threads->Forums->query();
                 $query->update()

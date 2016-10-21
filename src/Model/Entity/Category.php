@@ -8,6 +8,7 @@ use Cake\ORM\Entity;
  *
  * @property int $id
  * @property string $name
+ * @property int $sort
  *
  * @property \App\Model\Entity\Forum[] $forums
  */
