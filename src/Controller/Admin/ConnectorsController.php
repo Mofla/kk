@@ -11,8 +11,6 @@ use App\Controller\AppController;
 class ConnectorsController extends AppController
 {
 
-
-
     public function initialize()
     {
         parent::initialize();
@@ -65,7 +63,7 @@ class ConnectorsController extends AppController
         }
         $permissions = $this->Connectors->Permissions->find('list', ['limit' => 200]);
 
-        $getcontrol = $this->Common->getControllers();
+        $getcontrol = $this->Common->getModules();
         $this->set(compact('connector', 'permissions','getcontrol'));
         $this->set('_serialize', ['connector']);
     }
@@ -73,7 +71,7 @@ class ConnectorsController extends AppController
     public function ajaxgetfunctionlist(){
         if ($this->request->is('ajax')) {
             $id = $this->request->data('id');
-            $list_actions_controller = $this->Common->getControllerActions($id);
+            $list_actions_controller = $this->Common->getControllers($id);
         }
 
         $this->set(compact('list_actions_controller'));

@@ -50,7 +50,7 @@ class PermissionsController extends AppController
      */
     public function add()
     {
-        $controller = $this->Common->getControllers();
+        $controller = $this->Common->getModules();
         $this->loadModel('Connectors');
 
         $permission = $this->Permissions->newEntity();
@@ -138,5 +138,19 @@ class PermissionsController extends AppController
           
         }
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function addd()
+    {
+//        $permissions = $this->Permissions->Connectors->find('all',[
+//            'contain' => [
+//                'Permissions','Permissions.Roles'
+//            ]
+//        ]);
+        $permissions = $this->Common->listPermissions();
+
+        $roles = $this->Permissions->Roles->find();
+
+        $this->set(compact('permissions','roles'));
     }
 }
