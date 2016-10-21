@@ -9,8 +9,8 @@ use Cake\Validation\Validator;
 /**
  * Files Model
  *
- * @property \Cake\ORM\Association\BelongsTo $Posts
  * @property \Cake\ORM\Association\BelongsToMany $Posts
+ * @property \Cake\ORM\Association\BelongsToMany $Threads
  *
  * @method \App\Model\Entity\File get($primaryKey, $options = [])
  * @method \App\Model\Entity\File newEntity($data = null, array $options = [])
@@ -37,14 +37,15 @@ class FilesTable extends Table
         $this->displayField('name');
         $this->primaryKey('id');
 
-        $this->belongsTo('Posts', [
-            'foreignKey' => 'post_id',
-            'joinType' => 'INNER'
-        ]);
         $this->belongsToMany('Posts', [
             'foreignKey' => 'file_id',
             'targetForeignKey' => 'post_id',
             'joinTable' => 'posts_files'
+        ]);
+        $this->belongsToMany('Threads', [
+            'foreignKey' => 'file_id',
+            'targetForeignKey' => 'thread_id',
+            'joinTable' => 'threads_files'
         ]);
     }
 
@@ -65,19 +66,5 @@ class FilesTable extends Table
             ->notEmpty('name');
 
         return $validator;
-    }
-
-    /**
-     * Returns a rules checker object that will be used for validating
-     * application integrity.
-     *
-     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
-     * @return \Cake\ORM\RulesChecker
-     */
-    public function buildRules(RulesChecker $rules)
-    {
-        $rules->add($rules->existsIn(['post_id'], 'Posts'));
-
-        return $rules;
     }
 }

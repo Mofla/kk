@@ -34,7 +34,7 @@ class FilesController extends AppController
     public function view($id = null)
     {
         $file = $this->Files->get($id, [
-            'contain' => ['Posts', 'Lasttopicuser']
+            'contain' => ['Posts', 'Threads', 'Lasttopicuser']
         ]);
 
         $this->set('file', $file);
@@ -60,8 +60,9 @@ class FilesController extends AppController
             }
         }
         $posts = $this->Files->Posts->find('list', ['limit' => 200]);
+        $threads = $this->Files->Threads->find('list', ['limit' => 200]);
         $lasttopicuser = $this->Files->Lasttopicuser->find('list', ['limit' => 200]);
-        $this->set(compact('file', 'posts', 'lasttopicuser'));
+        $this->set(compact('file', 'posts', 'threads', 'lasttopicuser'));
         $this->set('_serialize', ['file']);
     }
 
@@ -75,7 +76,7 @@ class FilesController extends AppController
     public function edit($id = null)
     {
         $file = $this->Files->get($id, [
-            'contain' => ['Posts', 'Lasttopicuser']
+            'contain' => ['Posts', 'Threads', 'Lasttopicuser']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $file = $this->Files->patchEntity($file, $this->request->data);
@@ -88,8 +89,9 @@ class FilesController extends AppController
             }
         }
         $posts = $this->Files->Posts->find('list', ['limit' => 200]);
+        $threads = $this->Files->Threads->find('list', ['limit' => 200]);
         $lasttopicuser = $this->Files->Lasttopicuser->find('list', ['limit' => 200]);
-        $this->set(compact('file', 'posts', 'lasttopicuser'));
+        $this->set(compact('file', 'posts', 'threads', 'lasttopicuser'));
         $this->set('_serialize', ['file']);
     }
 

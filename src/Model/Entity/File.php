@@ -8,9 +8,9 @@ use Cake\ORM\Entity;
  *
  * @property int $id
  * @property string $name
- * @property int $post_id
  *
  * @property \App\Model\Entity\Post[] $posts
+ * @property \App\Model\Entity\Thread[] $threads
  */
 class File extends Entity
 {

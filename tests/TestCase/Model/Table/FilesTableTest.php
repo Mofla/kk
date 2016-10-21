@@ -33,18 +33,22 @@ class FilesTableTest extends TestCase
         'app.permissions_roles',
         'app.diaries',
         'app.projects',
+        'app.from_to_tasks',
         'app.tasks',
         'app.states',
-        'app.from_to_tasks',
         'app.tasks_users',
-        'app.projects_users',
-        'app.entries',
         'app.threads',
         'app.forums',
         'app.categories',
         'app.lasttopicuser',
         'app.posts_files',
-        'app.lastuserthread'
+        'app.subscriptions',
+        'app.lastuserthread',
+        'app.portfolios',
+        'app.projects_users',
+        'app.portfolios_users',
+        'app.threads_files',
+        'app.entries'
     ];
 
     /**
@@ -87,6 +91,16 @@ class FilesTableTest extends TestCase
      * @return void
      */
     public function testValidationDefault()
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+
+    /**
+     * Test buildRules method
+     *
+     * @return void
+     */
+    public function testBuildRules()
     {
         $this->markTestIncomplete('Not implemented yet.');
     }

@@ -4,6 +4,8 @@
         <li><?= $this->Html->link(__('New File'), ['action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Posts'), ['controller' => 'Posts', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Post'), ['controller' => 'Posts', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Threads'), ['controller' => 'Threads', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Thread'), ['controller' => 'Threads', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="files index large-9 medium-8 columns content">
@@ -13,7 +15,6 @@
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('name') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('post_id') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -22,7 +23,6 @@
             <tr>
                 <td><?= $this->Number->format($file->id) ?></td>
                 <td><?= h($file->name) ?></td>
-                <td><?= $this->Number->format($file->post_id) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $file->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $file->id]) ?>
