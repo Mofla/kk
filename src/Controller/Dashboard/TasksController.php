@@ -63,6 +63,16 @@ class TasksController extends AppController
         $this->set('_serialize', ['task']);
     }
 
+    public function viewajax($id = null)
+    {
+        $task = $this->Tasks->get($id, [
+            'contain' => ['States', 'Projects', 'Users']
+        ]);
+
+        $this->set('task', $task);
+        $this->set('_serialize', ['task']);
+    }
+
     /**
      * Add method
      *
@@ -127,7 +137,7 @@ class TasksController extends AppController
             if ($this->Tasks->save($task)) {
                 $this->Flash->success(__('The task has been saved.'));
 
-                return $this->redirect(['controller' => 'projects', 'action' => 'view', $id]);
+                return $this->redirect($this->referer());
             } else {
                 $this->Flash->error(__('The task could not be saved. Please, try again.'));
             }

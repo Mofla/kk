@@ -1,3 +1,5 @@
+<?= $this->Html->script('../assets/global/plugins/bootstrap/js/bootstrap.min.js') ?>
+
 <div class="col-md-12 col-sm-12 col-xs-12">
 
 
@@ -15,42 +17,32 @@
                 <div id="colum-1" class="colum">
                     <?php foreach ($project->tasks as $task): ?>
                         <?php if ($task->state->name === 'todo'): ?>
-                            <div id="task-<?= $task->id ?>"
-                                 class="mt-list-container list-simple ext-1 group portle">
-                                <a class="list-toggle-container portlet-header"
-                                   data-toggle="collapse"
-                                   href="#pending-simple<?= $task->id ?>"
-                                   aria-expanded="false">
-
-                                    <div
-                                        class="list-toggle uppercase"> <?= $task->name ?>
-
+                            <div class="portlet box blue-chambray" id="task-<?= $task->id ?>" style="margin: 1px">
+                                <div class="portlet-title">
+                                    <div class="caption"><?= $task->name ?></div>
+                                    <div class="actions">
+                                        <div class="btn-group">
+                                            <?= $this->Html->link('<i class="glyphicon glyphicon-eye-open"></i>', ['controller' => 'Tasks', 'action' => 'viewajax', $task->id], ['id' => 'task-' . $task->id, 'class'=> 'btn btn-default btn-sm view-task', 'escape' => false]) ?>
+                                        </div>
+                                        <div class="btn-group">
+                                            <a class="btn btn-default btn-sm" href="javascript:;" data-toggle="dropdown">
+                                                <i class="icon-wrench"></i>
+                                                <i class="fa fa-angle-down"></i>
+                                            </a>
+                                            <ul class="dropdown-menu pull-right">
+                                                <li>
+                                                    <?= $this->Html->link('<i class="fa fa-pencil"></i> Edit ', ['controller' => 'Tasks', 'action' => 'edit', $task->id], ['id' => 'task-' . $task->id, 'class' => 'edittask', 'escape' => false]) ?>
+                                                </li>
+                                                <li>
+                                                    <?= $this->Form->postLink('<i class="glyphicon glyphicon-trash"></i> Delete', ['controller' => 'Tasks', 'action' => 'delete', $task->id], ['escape' => false], ['confirm' => __('Are you sure you want to delete # {0}?', $task->id)]) ?>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
-
-                                </a>
-                                <div class="panel-collapse collapse"
-                                     id="pending-simple<?= $task->id ?>"
-                                     aria-expanded="false">
-                                    <ul>
-                                        <li class="mt-list-item">
-                                            <div class="list-icon-container pull-right">
-                                                <?= $this->Form->postLink('<i class="glyphicon glyphicon-trash"></i>', ['controller' => 'Tasks', 'action' => 'delete', $task->id], ['class' => 'btn', 'escape' => false], ['confirm' => __('Are you sure you want to delete # {0}?', $task->id)]) ?>
-                                            </div>
-                                            <div class="list-icon-container pull-right">
-                                                <?= $this->Html->link('<i class="glyphicon glyphicon-pencil"></i>', ['controller' => 'Tasks', 'action' => 'edit', $task->id], ['id' => 'task-' . $task->id, 'class' => 'btn edittask', 'escape' => false]) ?>
-                                            </div>
-
-                                            <div class="list-item-content">
-                                                <p><?= $task->description ?></p>
-                                                <div
-                                                    class="list-datetime"> <?= $task->start_date ?>
-                                                    au <?= $task->end_date ?></div>
-
-                                            </div>
-                                        </li>
-                                    </ul>
                                 </div>
+
                             </div>
+
                         <?php endif; ?>
                     <?php endforeach; ?>
                     <div class="portlet portlet-sortable-empty"></div>
@@ -169,7 +161,7 @@
     $("#colum-1, #colum-2, #colum-3").sortable({
 
         connectWith: ".colum",
-        handle: ".portlet-header",
+        handle: ".portlet-title",
         cancel: ".portlet-toggle",
         placeholder: "ui-state-highlight",
         receive: function (event, ui) {
@@ -196,4 +188,7 @@
         icon.toggleClass("ui-icon-minusthick ui-icon-plusthick");
         icon.closest(".portlet").find(".portlet-content").toggle();
     });
+
+
+
 </script>
