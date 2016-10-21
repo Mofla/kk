@@ -55,7 +55,7 @@ class PromotionsController extends AppController
         if ($this->request->is('post')) {
             $promotion = $this->Promotions->patchEntity($promotion, $this->request->data);
             if ($this->Promotions->save($promotion)) {
-                $picture = $this->Upload->getPicture($this->request->data['picture'],'promotion',$promotion->id, 450, 450, false);
+                $picture = $this->Upload->getPicture($this->request->data['picture'],'promotion',$promotion->id, 1000, 600, false);
                 $this->request->data['picture_url'] = $picture;
                 $promotion = $this->Promotions->patchEntity($promotion, $this->request->data);
                 $this->Promotions->save($promotion);
@@ -84,7 +84,7 @@ class PromotionsController extends AppController
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             if(!empty($this->request->data['picture']['name'])) {
-                $picture = $this->Upload->getPicture($this->request->data['picture'], 'promotion', $promotion->id, 300, 300, false);
+                $picture = $this->Upload->getPicture($this->request->data['picture'], 'promotion', $promotion->id, 1000, 600, false);
                 $this->request->data['picture_url'] = $picture;
             }
             $promotion = $this->Promotions->patchEntity($promotion, $this->request->data);
