@@ -101,10 +101,90 @@
             <?php if($posts->files) : ?>
             <tr class="sscategory">
                 <td> <u>Fichier Joint :</u> <br>
+<!--pour chaque fichier-->
                 <?php foreach($posts->files as $files) : ?>
+<!--recuperer l'extension-->
+                    <?php $extension = explode(".",$files->name); ?>
+<!--si fichier texte-->
+                    <?php if ($extension[1] == 'txt') : ?>
+                    <?= $this->Html->link(
+                    $this->Html->image("../uploads/icons/ext/txt.png", ["alt" => "Fichier texte",'class'=>'joint']),
+                    "../uploads/files/".$files->name,
+                    ['escape' => false, 'download' => true]
+                    );  ?>
 
-                <?= $files->name ; ?>
+<!--si fichier zip-->
+                    <?php elseif  ($extension[1] == 'zip') : ?>
+                    <?= $this->Html->link(
+                    $this->Html->image("../uploads/icons/ext/zip.png", ["alt" => "Fichier texte",'class'=>'joint']),
+                    "../uploads/files/".$files->name,
+                    ['escape' => false, 'download' => true]
+                    );  ?>
 
+<!--si fichier rar-->
+                    <?php elseif  ($extension[1] == 'rar') : ?>
+                    <?= $this->Html->link(
+                    $this->Html->image("../uploads/icons/ext/rar.png", ["alt" => "Fichier texte",'class'=>'joint']),
+                    "../uploads/files/".$files->name,
+                    ['escape' => false, 'download' => true]
+                    );  ?>
+
+<!--si fichier log-->
+                    <?php elseif  ($extension[1] == 'log') : ?>
+                    <?= $this->Html->link(
+                    $this->Html->image("../uploads/icons/ext/log.png", ["alt" => "Fichier texte",'class'=>'joint']),
+                    "../uploads/files/".$files->name,
+                    ['escape' => false, 'download' => true]
+                    );  ?>
+
+<!--si fichier pdf-->
+                    <?php elseif  ($extension[1] == 'pdf') : ?>
+                    <?= $this->Html->link(
+                    $this->Html->image("../uploads/icons/ext/pdf.png", ["alt" => "Fichier texte",'class'=>'joint']),
+                    "../uploads/files/".$files->name,
+                    ['escape' => false, 'download' => true]
+                    );  ?>
+
+<!--si fichier css-->
+                    <?php elseif  ($extension[1] == 'css') : ?>
+                    <?= $this->Html->link(
+                    $this->Html->image("../uploads/icons/ext/css.png", ["alt" => "Fichier texte",'class'=>'joint']),
+                    "../uploads/files/".$files->name,
+                    ['escape' => false, 'download' => true]
+                    );  ?>
+
+<!--si fichier php-->
+                    <?php elseif  ($extension[1] == 'php') : ?>
+                    <?= $this->Html->link(
+                    $this->Html->image("../uploads/icons/ext/php.png", ["alt" => "Fichier texte",'class'=>'joint']),
+                    "../uploads/files/".$files->name,
+                    ['escape' => false, 'download' => true]
+                    );  ?>
+
+<!--si fichier html-->
+                    <?php elseif  ($extension[1] == 'html') : ?>
+                    <?= $this->Html->link(
+                    $this->Html->image("../uploads/icons/ext/html.png", ["alt" => "Fichier texte",'class'=>'joint']),
+                    "../uploads/files/".$files->name,
+                    ['escape' => false, 'download' => true]
+                    );  ?>
+
+<!--si fichier img-->
+                    <?php elseif  ($extension[1] == 'png' || $extension[1] == 'jpg' || $extension[1] == 'jpeg' || $extension[1] == 'gif' ) : ?>
+                    <?= $this->Html->link(
+                    $this->Html->image("../uploads//files/".$files->name, ["alt" => "Fichier texte",'class'=>'joint']),
+                    "../uploads/files/".$files->name,
+                    ['escape' => false, 'download' => true]
+                    );  ?>
+
+<!--si fichier inconnu-->
+                    <?php else : ?>
+                    <?= $this->Html->link(
+                    $this->Html->image("../uploads/icons/ext/default.png", ["alt" => "Fichier texte",'class'=>'joint']),
+                    "../uploads/files/".$files->name,
+                    ['escape' => false, 'download' => true]
+                    );  ?>
+                    <?php endif ?>
                 <?php endforeach ?>
                 </td>
             </tr>
