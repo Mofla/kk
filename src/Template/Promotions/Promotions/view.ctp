@@ -141,30 +141,14 @@
                 </div>
                 <!--tab_1_2-->
                 <div class="tab-pane" id="tab_1_3">
-                    <div class="promotions view large-9 medium-8 columns content">
+                    <div class="promotions view large-12 medium-8 columns content" style="background-color: red">
+                        <img src="../../uploads/promotion/<?= $promotion->picture_url?>" style="width: 100%; height: 600px">
+                    </div>
+                    <div class="promotions view large-12 medium-8 columns content" style="background-color: yellow">
                         <h2 class="text-center" style="font-size: 40px; font-weight: 900"><?= h($promotion->name) ?></h2>
-                        <table class="vertical-table">
-                            <tr>
-                                <th scope="row"><?= __('Name') ?></th>
-                                <td><?= h($promotion->name) ?></td>
-                            </tr>
-                            <tr>
-                                <th scope="row"><?= __('Picture Url') ?></th>
-                                <td><?= h($promotion->picture_url) ?></td>
-                            </tr>
-                            <tr>
-                                <th scope="row"><?= __('Id') ?></th>
-                                <td><?= $this->Number->format($promotion->id) ?></td>
-                            </tr>
-                            <tr>
-                                <th scope="row"><?= __('Year') ?></th>
-                                <td><?= $this->Number->format($promotion->year) ?></td>
-                            </tr>
-                        </table>
-                        <div class="row">
-                            <h4><?= __('Description') ?></h4>
+                                <!--<?=$this->Html->image('../../uploads/promotion/'.$promotion->picture_url )?>-->
+                            <h3 class="text-center" style="font-weight: 900"><?= __('Description') ?></h3>
                             <?= $this->Text->autoParagraph(h($promotion->description)); ?>
-                        </div>
                     </div>
 
 
