@@ -56,6 +56,9 @@ class TasksTable extends Table
             'targetForeignKey' => 'user_id',
             'joinTable' => 'tasks_users'
         ]);
+        $this->hasOne('Threads', [
+            'foreignKey' => 'thread_id'
+        ]);
     }
 
     /**

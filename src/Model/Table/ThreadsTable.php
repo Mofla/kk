@@ -62,6 +62,10 @@ class ThreadsTable extends Table
             'className' => 'Users',
             'foreignKey' => 'lastuser',
         ]);
+        $this->belongsTo('Tasks', [
+            'foreignKey' => 'thread_id',
+            'joinType' => 'INNER'
+        ]);
     }
 
 
