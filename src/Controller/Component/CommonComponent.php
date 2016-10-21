@@ -12,125 +12,70 @@ class CommonComponent extends Component
 {
     public $components = ['Auth'];
 
-
-    function loadControllerAndActions()
+    public function scanEverything()
     {
         $path = './src/Controller';
-        $dirs = scandir($path);
+        $directories = scandir($path);
+        // all things to ignore :
+        $ignoreDirectories = ['Component'];
+        $ignoreControllers = ['.', '..', 'empty'];
+        $ignoreClasses = ['beforeFilter', 'afterFilter', 'initialize'];
+        // end ignore
+        // array declaration :
         $files = [];
-        $ignore = [
-            '.',
-            '..',
-            'empty',
-            'Component'
-        ];
-        foreach ($dirs as $dir)
+        // end declaration
+        foreach($directories as $directory)
         {
-            if ($dir === '.' or $dir === '..') continue;
-            if(is_dir($path . '/' . $dir))
+            if ($directory === '.' or $directory === '..') continue;
+
+            if(is_dir($path . '/' . $directory) && !in_array($directory,$ignoreDirectories))
             {
-                $temp_file = scandir($path . '/' . $dir);
-                foreach ($temp_file as $temp)
+                if(!array_key_exists($directory,$files))
                 {
-                    if (!in_array($temp, $ignore) && !in_array($dir,$ignore))
-                    {
-                        if(!array_key_exists($dir,$files))
-                        {
-                            $files[$dir][] = '--';
-                        }
-                        $temp = explode('.',$temp)[0];
-                        $files[$dir][] = $temp;
-                    }
+                    $files[$directory] = [];
                 }
+                $controllers = scandir($path . '/' . $directory);
+                foreach ($controllers as $controller)
+                {
+                    if(!in_array($controller,$ignoreControllers))
+                    {
+                        $controller_renamed = str_replace('Controller.php','',$controller);
+                        if(!array_key_exists($controller_renamed,$files[$directory]))
+                        {
+                            $files[$directory][$controller_renamed] = [];
+                        }
+                        $className = 'App\\Controller\\'.$directory.'\\'.$controller_renamed.'Controller';
+                        $class = new ReflectionClass($className);
+                        $actions = $class->getMethods(ReflectionMethod::IS_PUBLIC);
+                        foreach($actions as $action){
+                            if($action->class == $className && !in_array($action->name, $ignoreClasses)){
+                                $files[$directory][$controller_renamed][] = $action->name;
+                            }
+                        }
+
+                    }
+
+                }
+
             }
         }
         return $files;
     }
 
-    public function getControllers()
+    public function getModules()
     {
-        $files = $this->loadControllerAndActions();
-        return array_keys($files);
+        return array_keys($this->scanEverything());
     }
 
-    public function getControllerActions($id)
+    public function getControllers($module)
     {
-        $files = $this->loadControllerAndActions();
-        return $files[$id];
+        return array_keys($this->scanEverything()[$module]);
     }
 
     public function getActions($module,$controller)
     {
-        $path = 'App\\Controller\\'.$module.'\\'.$controller;
-        $class = new ReflectionClass($path);
-        $actions = $class->getMethods(ReflectionMethod::IS_PUBLIC);
-        $ignoreList = ['beforeFilter', 'afterFilter', 'initialize'];
-        $functions = [''];
-        foreach($actions as $action)
-        {
-            if($action->class == $path &&!in_array($action->name,$ignoreList))
-            {
-                array_push($functions,$action->name);
-            }
-        }
-        return $functions;
+        return $this->scanEverything()[$module][$controller];
     }
-
-
-//    public function getControllers()
-//    {
-//        $files = scandir('./src/Controller');
-//        $files = $this->listFolderFiles();
-//        $results = [];
-//        $ignoreList = [
-//            '.',
-//            '..',
-//            'Component',
-//            'PagesController.php',
-//            'AppController.php',
-//            'ErrorController.php',
-//        ];
-//        foreach($files as $file){
-//            if(!in_array($file, $ignoreList)) {
-//                $controller = explode('.', $file)[0];
-//                //array_push($results, str_replace('Controller', '', $controller));
-//                array_push($results, $controller);
-//            }
-//        }
-//        return $files;
-//    }
-
-//    public function getActions($controllerName)
-//    {
-//        $className = 'App\\Controller\\'.$controllerName;
-//        $class = new ReflectionClass($className);
-//        $actions = $class->getMethods(ReflectionMethod::IS_PUBLIC);
-//
-//        $results = [$controllerName => []];
-//        $ignoreList = ['beforeFilter', 'afterFilter', 'initialize'];
-//        foreach($actions as $action){
-//            if($action->class == $className && !in_array($action->name, $ignoreList)){
-//                array_push($results[$controllerName], $action->name);
-//            }
-//        }
-//        return $results;
-//    }
-
-//    public function getControllerActions($controllerName)
-//    {
-//        $className = 'App\\Controller\\'.$controllerName;
-//        $class = new ReflectionClass($className);
-//        $actions = $class->getMethods(ReflectionMethod::IS_PUBLIC);
-//
-//        $results = [];
-//        $ignoreList = ['beforeFilter', 'afterFilter', 'initialize'];
-//        foreach($actions as $action){
-//            if($action->class == $className && !in_array($action->name, $ignoreList)){
-//                array_push($results, $action->name);
-//            }
-//        }
-//        return $results;
-//    }
 
 
     //Return Front And Admin Controller => actions list
@@ -200,5 +145,41 @@ class CommonComponent extends Component
         {
             return false;
         }
+    }
+
+    public function listPermissions()
+    {
+        $table = TableRegistry::get('Roles');
+        $roles = $table->find('all');
+        $all_permissions = [];
+        $registered_permissions = [];
+        $results = [];
+
+        foreach($roles as $role)
+        {
+            $all_permissions[$role->name] = $this->scanEverything();
+        }
+
+        $roles= $table->find('all',[
+            'contain' => ['Permissions','Permissions.Connectors']
+        ]);
+        foreach($roles as $role)
+        {
+            $registered_permissions[$role->name] = [];
+            foreach($role->permissions as $permission)
+            {
+                foreach ($permission->connectors as $connector)
+                {
+                    $registered_permissions[$role->name][$connector->module][$connector->controller][] = $connector->function;
+                }
+            }
+        }
+        foreach($all_permissions as $all_permission)
+        {
+
+        }
+
+
+        return $registered_permissions;
     }
 }

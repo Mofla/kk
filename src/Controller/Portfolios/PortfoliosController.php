@@ -123,4 +123,16 @@ class PortfoliosController extends AppController
         $this->set('_serialize', ['portfolio']);
     }
 
+    public function test()
+    {
+        $test = $this->Common->scanEverything();
+        $modules = $this->Common->getModules();
+        $controllers = $this->Common->getControllers('Admin');
+        $actions = $this->Common->getActions('Admin','Users');
+        $this->set('test',$test);
+        $this->set('modules',$modules);
+        $this->set('controllers',$controllers);
+        $this->set('actions',$actions);
+    }
+
 }
