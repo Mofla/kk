@@ -121,6 +121,6 @@
                 </div>
 
                 <script>
-                    var url = '<?= $this->Url->build(['controller' => 'Forums/Threads', 'action' => 'view', 'prefix' => false]); ?>' + '/' + 34;
+                    var url = '<?= $this->Url->build(['controller' => 'Forums/Threads', 'action' => 'view', $task->thread_id, 'prefix' => false]); ?>';
                     $('#forum').load(url);
                 </script>

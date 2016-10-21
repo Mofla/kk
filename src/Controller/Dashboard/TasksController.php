@@ -82,6 +82,7 @@ class TasksController extends AppController
      */
     public function add()
     {
+
         $task = $this->Tasks->newEntity();
         if ($this->request->is('post')) {
             $task = $this->Tasks->patchEntity($task, $this->request->data);
@@ -131,7 +132,6 @@ class TasksController extends AppController
 
     public function edittask($id = null)
     {
-        $this->Order->eventManager()->on(new TasksEventListener());
         $task = $this->Tasks->get($id, [
             'contain' => ['Users']
         ]);
@@ -158,14 +158,37 @@ class TasksController extends AppController
 
     public function addtask($id = null) {
 
+        $thread = $this->Tasks->Threads->newEntity();
+
+        $uid = $this->Auth->user('id');
+
+        $name = $this->request->data('name');
+
+
+        $project = $this->Tasks->Projects->get($id);
+
 
         $task = $this->Tasks->newEntity();
         if ($this->request->is('post')) {
-            $task = $this->Tasks->patchEntity($task, $this->request->data);
-            $task->project_id = $id;
-            $task->state_id = 1;
-            if ($this->Tasks->save($task)) {
+            $thread = $this->Tasks->Threads->patchEntity($thread, $this->request->data);
+            $thread->forum_id = $project->forum_id;
+            $thread->user_id = $uid;
+            $thread->subject = $name;
+            $thread->text = 'Fil de discussion de la tâche : ' . $name . 'du projet : ' . $project->name;
+            if ($this->Tasks->Threads->save($thread)) {
                 $this->Flash->success(__('The task has been saved.'));
+
+                $task = $this->Tasks->patchEntity($task, $this->request->data);
+                $task->thread_id = $thread->id;
+                $task->project_id = $id;
+                $task->state_id = 1;
+                if ($this->Tasks->save($task)) {
+                    $this->Flash->success(__('The task has been saved.'));
+
+                    return $this->redirect($this->referer());
+                } else {
+                    $this->Flash->error(__('The task could not be saved. Please, try again.'));
+                }
 
                 return $this->redirect(['controller' => 'projects', 'action' => 'gestion', $id]);
             } else {
@@ -196,8 +219,12 @@ class TasksController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $task = $this->Tasks->get($id);
+
+        $thread = $this->Tasks->Threads->get($task->thread_id);
+
         if ($this->Tasks->delete($task)) {
             $this->Flash->success(__('The task has been deleted.'));
+            $this->Tasks->Threads->delete($thread);
         } else {
             $this->Flash->error(__('The task could not be deleted. Please, try again.'));
         }
