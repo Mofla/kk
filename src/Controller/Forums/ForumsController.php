@@ -15,6 +15,7 @@ class ForumsController extends AppController
         ->contain(['Forums.Lasttopicuser','Forums.Users', 'Forums' => function($q) {
             return $q->order(['Forums.sort' => 'ASC']);
         }])
+            ->where(['id !=' => 16])
         ->order(['Categories.sort' => 'ASC']);
 
         $this->set(compact('cat'));
