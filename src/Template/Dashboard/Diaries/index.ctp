@@ -1,6 +1,6 @@
 
     <h3><?= __('Mes journaux') ?></h3><hr>
-    <div class="page-content-inner">
+    <div class="container">
     <div class="row">
         <div class="col-md-4">
             <?php foreach ($diaries as $diary): ?>

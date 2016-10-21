@@ -2,6 +2,7 @@
 namespace App\Controller\Dashboard;
 
 use App\Controller\AppController;
+use Cake\I18n\Time;
 
 /**
  * Entries Controller
@@ -27,6 +28,17 @@ class EntriesController extends AppController
         $this->set('_serialize', ['entries']);
     }
 
+    public function list()
+    {
+
+        $this->paginate = [
+            'contain' => ['Diaries']
+        ];
+        $entries = $this->paginate($this->Entries);
+
+        $this->set(compact('entries'));
+        $this->set('_serialize', ['entries']);
+    }
     /**
      * View method
      *
@@ -76,15 +88,16 @@ class EntriesController extends AppController
      */
     public function edit($id = null)
     {
+        $this->autoRender = false;
         $entry = $this->Entries->get($id, [
             'contain' => []
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $entry = $this->Entries->patchEntity($entry, $this->request->data);
+            $entry->date = Time::now();
             if ($this->Entries->save($entry)) {
                 $this->Flash->success(__('The entry has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__('The entry could not be saved. Please, try again.'));
             }
