@@ -126,6 +126,7 @@ Router::prefix('promotions', function ($routes){
     $routes->connect('/', ['controller' => 'Promotions','action' => 'index'], ['routeClass' => 'InflectedRoute']);
     $routes->connect('/profil/*', ['controller' => 'Promotions','action' => 'view'], ['routeClass' => 'InflectedRoute']);
     $routes->connect('/ajouter', ['controller' => 'Promotions','action' => 'add'], ['routeClass' => 'InflectedRoute']);
+    $routes->connect('/editer/*',['controller' => 'Promotions','action' => 'edit'], ['routeClass' => 'InflectedRoute']);
     $routes->fallbacks(DashedRoute::class);
 
 
