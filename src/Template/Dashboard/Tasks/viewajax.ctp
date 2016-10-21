@@ -102,9 +102,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="portlet-body">
-                                                        <div id="forum"></div>
-                                                    </div>
+                                                    <div id="forum"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -122,8 +120,16 @@
 
                 <script>
                     //loads the forum
-                    var url = '<?= $this->Url->build(['controller' => 'Forums/Threads', 'action' => 'view', $task->thread_id, 'prefix' => false]); ?>';
-                    $('#forum').load(url);
+                    function getThread() {
+                        var url = '<?= $this->Url->build(['controller' => 'Forums/Threads', 'action' => 'view', $task->thread_id, 'prefix' => false]); ?>';
+                        $('#forum').load(url, function () {
+                            //hides shit
+                            $('.dash-hide').hide();
+                        });
+                    }
+                   getThread();
+
+
 
                     $(document).on('click', 'a', function (event) {
                         event.preventDefault();
