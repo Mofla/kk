@@ -1,5 +1,5 @@
 <?php
-namespace App\Controller\forums;
+namespace App\Controller\Forums;
 
 use App\Controller\AppController;
 use Cake\ORM\TableRegistry;
@@ -12,8 +12,10 @@ class ForumsController extends AppController
     public function index()
     {
         $cat = $this->Forums->Categories->find('all')
-        ->contain(['Forums.Lasttopicuser','Forums.Users'])
-        ->order(['sort' => 'ASC']);
+        ->contain(['Forums.Lasttopicuser','Forums.Users', 'Forums' => function($q) {
+            return $q->order(['Forums.sort' => 'ASC']);
+        }])
+        ->order(['Categories.sort' => 'ASC']);
 
         $this->set(compact('cat'));
     }

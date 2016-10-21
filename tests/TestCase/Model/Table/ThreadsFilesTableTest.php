@@ -1,22 +1,22 @@
 <?php
 namespace App\Test\TestCase\Model\Table;
 
-use App\Model\Table\CategoriesTable;
+use App\Model\Table\ThreadsFilesTable;
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
 
 /**
- * App\Model\Table\CategoriesTable Test Case
+ * App\Model\Table\ThreadsFilesTable Test Case
  */
-class CategoriesTableTest extends TestCase
+class ThreadsFilesTableTest extends TestCase
 {
 
     /**
      * Test subject
      *
-     * @var \App\Model\Table\CategoriesTable
+     * @var \App\Model\Table\ThreadsFilesTable
      */
-    public $Categories;
+    public $ThreadsFiles;
 
     /**
      * Fixtures
@@ -24,8 +24,10 @@ class CategoriesTableTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'app.categories',
+        'app.threads_files',
+        'app.threads',
         'app.forums',
+        'app.categories',
         'app.users',
         'app.roles',
         'app.permissions',
@@ -42,9 +44,8 @@ class CategoriesTableTest extends TestCase
         'app.portfolios',
         'app.portfolios_users',
         'app.lasttopicuser',
-        'app.threads',
-        'app.posts',
         'app.files',
+        'app.posts',
         'app.posts_files',
         'app.subscriptions',
         'app.lastuserthread'
@@ -58,8 +59,8 @@ class CategoriesTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableRegistry::exists('Categories') ? [] : ['className' => 'App\Model\Table\CategoriesTable'];
-        $this->Categories = TableRegistry::get('Categories', $config);
+        $config = TableRegistry::exists('ThreadsFiles') ? [] : ['className' => 'App\Model\Table\ThreadsFilesTable'];
+        $this->ThreadsFiles = TableRegistry::get('ThreadsFiles', $config);
     }
 
     /**
@@ -69,7 +70,7 @@ class CategoriesTableTest extends TestCase
      */
     public function tearDown()
     {
-        unset($this->Categories);
+        unset($this->ThreadsFiles);
 
         parent::tearDown();
     }
@@ -85,11 +86,11 @@ class CategoriesTableTest extends TestCase
     }
 
     /**
-     * Test validationDefault method
+     * Test buildRules method
      *
      * @return void
      */
-    public function testValidationDefault()
+    public function testBuildRules()
     {
         $this->markTestIncomplete('Not implemented yet.');
     }

@@ -1,3 +1,4 @@
+
 <div class="col-md-12">
     <?= $thread->has('forum') ? $this->Html->link($thread->forum->name, ['controller' => 'Forums', 'action' => 'view',
     $thread->forum->id]) : '' ?>
@@ -36,8 +37,7 @@
         <tr class="sscategory">
             <td >
                 <div class="username">
-                    <?= $thread->has('user') ? $this->Html->link($thread->user->username, ['controller' => 'Users',
-                    'action' => 'view', $thread->user->id]) : '' ?>
+                    <?= $thread->has('user') ? $this->Html->link($thread->user->username, 'utilisateur/profil/'.$thread->user->id.'') : '' ?>
                 </div>
                 <div class="avatardiv">
                     <?= $this->Html->image('../uploads/user/'.$thread->user->picture_url ,['class'=>'avatar']); ?>
@@ -84,8 +84,8 @@
 
                 <td width="120px" <?php if($posts->files) { echo 'rowspan="2"';} ?> >
                     <div class="username">
-                        <?= $this->Html->link($posts->user->username, ['controller' => 'Users', 'action' => 'view',
-                        $posts->user_id]) ?>
+                        <?= $thread->has('user') ? $this->Html->link($posts->user->username, 'utilisateur/profil/'.$posts->user->id.'') : '' ?>
+
                     </div>
                     <div class="avatardiv">
                         <?= $this->Html->image('../uploads/user/'.$posts->user->picture_url ,['class'=>'avatar']); ?>
@@ -110,7 +110,7 @@
                     <?= $this->Html->link(
                     $this->Html->image("../uploads/icons/ext/txt.png", ["alt" => "Fichier texte",'class'=>'joint']),
                     "../uploads/files/".$files->name,
-                    ['escape' => false, 'download' => true]
+                    ['escape' => false, 'target' => '_blank']
                     );  ?>
 
 <!--si fichier zip-->
@@ -118,7 +118,7 @@
                     <?= $this->Html->link(
                     $this->Html->image("../uploads/icons/ext/zip.png", ["alt" => "Fichier texte",'class'=>'joint']),
                     "../uploads/files/".$files->name,
-                    ['escape' => false, 'download' => true]
+                    ['escape' => false, 'target' => '_blank']
                     );  ?>
 
 <!--si fichier rar-->
@@ -126,7 +126,7 @@
                     <?= $this->Html->link(
                     $this->Html->image("../uploads/icons/ext/rar.png", ["alt" => "Fichier texte",'class'=>'joint']),
                     "../uploads/files/".$files->name,
-                    ['escape' => false, 'download' => true]
+                    ['escape' => false, 'target' => '_blank']
                     );  ?>
 
 <!--si fichier log-->
@@ -134,7 +134,7 @@
                     <?= $this->Html->link(
                     $this->Html->image("../uploads/icons/ext/log.png", ["alt" => "Fichier texte",'class'=>'joint']),
                     "../uploads/files/".$files->name,
-                    ['escape' => false, 'download' => true]
+                    ['escape' => false, 'target' => '_blank']
                     );  ?>
 
 <!--si fichier pdf-->
@@ -142,7 +142,7 @@
                     <?= $this->Html->link(
                     $this->Html->image("../uploads/icons/ext/pdf.png", ["alt" => "Fichier texte",'class'=>'joint']),
                     "../uploads/files/".$files->name,
-                    ['escape' => false, 'download' => true]
+                    ['escape' => false, 'target' => '_blank']
                     );  ?>
 
 <!--si fichier css-->
@@ -150,7 +150,7 @@
                     <?= $this->Html->link(
                     $this->Html->image("../uploads/icons/ext/css.png", ["alt" => "Fichier texte",'class'=>'joint']),
                     "../uploads/files/".$files->name,
-                    ['escape' => false, 'download' => true]
+                    ['escape' => false, 'target' => '_blank']
                     );  ?>
 
 <!--si fichier php-->
@@ -158,7 +158,7 @@
                     <?= $this->Html->link(
                     $this->Html->image("../uploads/icons/ext/php.png", ["alt" => "Fichier texte",'class'=>'joint']),
                     "../uploads/files/".$files->name,
-                    ['escape' => false, 'download' => true]
+                    ['escape' => false, 'target' => '_blank']
                     );  ?>
 
 <!--si fichier html-->
@@ -166,7 +166,7 @@
                     <?= $this->Html->link(
                     $this->Html->image("../uploads/icons/ext/html.png", ["alt" => "Fichier texte",'class'=>'joint']),
                     "../uploads/files/".$files->name,
-                    ['escape' => false, 'download' => true]
+                    ['escape' => false, 'target' => '_blank']
                     );  ?>
 
 <!--si fichier img-->
@@ -174,7 +174,7 @@
                     <?= $this->Html->link(
                     $this->Html->image("../uploads//files/".$files->name, ["alt" => "Fichier texte",'class'=>'joint']),
                     "../uploads/files/".$files->name,
-                    ['escape' => false, 'download' => true]
+                    ['escape' => false, 'target' => '_blank']
                     );  ?>
 
 <!--si fichier inconnu-->
@@ -182,7 +182,7 @@
                     <?= $this->Html->link(
                     $this->Html->image("../uploads/icons/ext/default.png", ["alt" => "Fichier texte",'class'=>'joint']),
                     "../uploads/files/".$files->name,
-                    ['escape' => false, 'download' => true]
+                    ['escape' => false, 'target' => '_blank']
                     );  ?>
                     <?php endif ?>
                 <?php endforeach ?>
