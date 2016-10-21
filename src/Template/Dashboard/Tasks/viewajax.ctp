@@ -121,6 +121,16 @@
                 </div>
 
                 <script>
+                    //loads the forum
                     var url = '<?= $this->Url->build(['controller' => 'Forums/Threads', 'action' => 'view', $task->thread_id, 'prefix' => false]); ?>';
                     $('#forum').load(url);
+
+                    $(document).on('click', 'a', function (event) {
+                        event.preventDefault();
+                        var link = $(this).attr('href');
+                        var hashedLink = link.split('/');
+
+                        console.log(hashedLink);
+
+                    })
                 </script>
