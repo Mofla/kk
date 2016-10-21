@@ -1,14 +1,14 @@
 <div class="row">
     <div class="row_tchat"><?= $this->Html->image('Preloader_3.gif',['class'=>'lod']) ?></div>
 </div>
-<div class="count"></div>
+<div class="countay"></div>
 <hr>
 <div class="row">
     <div class="container">
         <?= $this->Form->create($tchat) ?>
         <fieldset>
             <?= $this->Form->input('message', ['type' => 'text', 'class' => 'col-md-11 in', 'label' => false, 'placeholder' => 'Message', 'id' => 'mess']) ?>
-            <div class="col-md-1 btn btn-primary" id="but">Envoyer</div>
+            <div class="col-md-1 btn btn yellow" id="but">Envoyer</div>
         </fieldset>
         <?= $this->Form->end() ?>
     </div>
@@ -113,6 +113,43 @@
     $('.in').removeAttr('required');
     $(function () {
         $("#but").on('click', function () {
+
+            var blacklist_word_array = ['anal','anus','cul','cul','ballsack','Connard','chienne','biatch','sanglant','pipe','pétasse','connasse','salaud','con','fils de pute','batard'
+                ,'pipe','bollock','Bollók','gaffe','nichon','salaud','clochard','bout','buttplug','clitoris','coq','nègre','merde','chatte','Zut','connard','conard','ta gueul','tagueul'
+                ,'queue','godemiché','digue','pédé','feck','Feck','fellation','fellations','Tétée','Merde','fudgepacker','fudge packer','kk','caca','fck','negro','naigro','negros','naigros'
+                ,'bride','fichu','God damn','enfer','homo','secousse','sperme','knobend','labia','lmao','lmfao','manchon','nègre','nigga','OMG','pénis''face de pete','putain','putin','put1n'
+                ,'pisse','pute','chatte','pédé','pd','scrotum','sexe','merde','s hit','sh1t','salope','smegma','cran','mésange','tosser','merde','chatte','vagin'
+                ,'branlette','putain','wtf','anal', 'anus', 'arse', 'ass', 'ballsack', 'bastard', 'bitch', 'biatch', 'bloody', 'blowjob', 'blow job', 'bollock',
+                'bollok', 'boner', 'boob', 'bugger', 'bum', 'butt', 'buttplug', 'clitoris', 'cock', 'coon', 'crap', 'cunt', 'damn', 'dick', 'dildo', 'dyke', 'fag', 'feck',
+                'fellate', 'fellatio', 'felching', 'fuck','f u c k','fudgepacker', 'fudge packer', 'flange', 'Goddamn', 'God damn', 'hell', 'homo', 'jerk', 'jizz', 'knobend',
+                'knob end', 'labia', 'lmao', 'lmfao', 'muff', 'nigger', 'nigga', 'omg', 'penis', 'piss', 'poop', 'prick', 'pube', 'pussy', 'queer', 'scrotum', 'sex', 'shit',
+                's hit','sh1t', 'slut', 'smegma', 'spunk', 'tit', 'tosser', 'turd', 'twat', 'vagina', 'wank', 'whore','Baltringue', 'Crétin','Abruti','Connard','Fils De Pute','Couillon','Tête De Noeud'
+                ,'Enfoiré','Empaffé','Gros Naze','Grosse Truie Violette'
+                ,'Tafiole','Tarlouze','Loboto','Mange Merde','Suce Boules','Enculé','Tête De Chibre','Bite Molle','Face De Cul','Sale Pute','Pétasse','Raclure De Chiotte','Pourriture'
+                ,'Tête De Con','Con','Radasse','Pouffiasse','Faquin','Débile','Geudin','Crétin Des Alpes','Chinois De Paravent','Fils De Con',"Fesse D'huitre",'Pendard','Pétassoïde Conassiforme'
+                ,'Couille De Moineau','Conchieur','Tartignole','Foutriquet','Décérébré','Résidu De Fausse Couche',"Pine D'huitre",'Pinailleur','Connasse','Boudin','Avorton','Paltoquet','Fiente','étron'
+                ,'Merde Molle','Minable'
+                ,'Minus','Moins Que Rien','Va Nu Pieds','Clitosaure De Brontoris','Infame Raie De Cul','Dugland','Baraki','Enculeur De Mouches','Grosse Merde Puante','Pute Borgne','Chiure De Pigeon'
+                ,'Petite Merde','Gougnafier','Merdasse','Bachibouzouk','Ducon','Hurluberlu','Salope','Zonard','Bubon Puant','Chien Galeux','Ordure Purulente','Jobastre','Jobard','Barjot'
+                ,'Putréfaction','Suintance','Kroumir','Wisigoth','Lèche-cul','Putain ','Zazou','Bougre De Conne','Yéti Baveux','Fion','Couille Molle','Moudlabite','Cinglé','Frapadingue','Zéro'
+                ,'Pouacre','Pouacreux','Piètre','Peine à Jouir','Mal Baisé','Microcéphale','Enfant De Salauds','Face De Pet','Grognasse','Raclure De Bidet','Chien Maudit'
+                ,'Crétin Goîtreux','Balai De Chiottes','Mérule','Gogol','Pétochard'
+                ,'Planqué','Faignasse','Branleur','Branlotin','Merdophile','Nain De Jardin','Nunuche','Clown','Cocu','Caribou','Saligaud','Nounouille','Coprophage','Cornichon','Salaud','Salopiaud'
+                ,'Naze','Malotru','Sodomite','Pédale','Tantouze','Cave','Loquedu','Fripouille','Canaille','Maraud','Mécréant',"Chien D'infidèle",'Morue','Blaireau','Bande Mou','Sombre Conne'
+                ,'Psychorigide','Gros Con','Vieux Con','Sombre Crétin','Nigaud','Catin','Andouille','Conne',"Scaphandrier D'eau De Vaiselle",'Sous Merde','Fesses Molles','Hérétique','Corniaud'
+                ,'Vieille Taupe','Zigomar','Caprinophile','Anachorète'];
+            var input_message = $("#mess").val();
+            var input_message_array = input_message.split(' ');
+
+            for (var a = 0; a < blacklist_word_array.length; a++) {
+
+                for (var b = 0; b < input_message_array.length; b++) {
+
+                if ( input_message_array[b].toUpperCase() == blacklist_word_array[a].toUpperCase() ){
+
+                    return alert('pas de gros mot !');
+                }
+            }}
             $.ajax({
                 url: "<?= $this->Url->build(['controller' => 'Tchats', 'action' => 'add'])?>",
                 data: {message: $("#mess").val()},
@@ -120,16 +157,16 @@
                 type: 'post'
             });
             tchat = $('.tchat');
-            $('.count').load('/tchat/tchats/counttchat');
+            $('.countay').load('/tchat/tchats/counttchat');
             tchat.scrollTop(tchat[0].scrollHeight);
         });
     });
     setInterval(function () {
-        $('.count').load('/tchat/tchats/counttchat');
+        $('.countay').load('/tchat/tchats/counttchat');
     }, 500);
     setInterval(function () {
 
-        var countay = $('.count p');
+        var countay = $('.countay p');
         var countay_message = $('.countay_message');
         if (countay.attr('data') != countay_message.attr('countay_message')) {
 

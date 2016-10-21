@@ -3,15 +3,12 @@
     <hr>
     <p class="countay_message" countay_message="<?= $count_message ?>"></p>
     <div class="tchat col-md-12">
-        <?php $i = 0;
-        foreach ($list_message as $tchats): $i++ ?>
+        <?php $i = 0; foreach ($list_message as $tchats): $i++ ?>
             <div class="<?= $i ?> pad" id="<?= $tchats->user_id ?>" date="<?= $tchats->date->toUnixString(); ?>">
                 <p class="message"><?= $tchats->message ?></p>
-                <p class="users"><?= $tchats->has('user') ? $this->Html->link($tchats->user->username, ['controller' => 'Users', 'action' => 'view', $tchats->user->id, 'prefix'=> false], ['value' => $tchats->user->id, 'class' => 'hh']) : '' ?>
-                    <?= $tchats->date ?></p>
+                <p class="users"><?= $tchats->has('user') ? $this->Html->link($tchats->user->username, ['controller' => 'Users', 'action' => 'view', $tchats->user->id, 'prefix'=> false], ['value' => $tchats->user->id, 'class' => 'hh']) : '' ?> <?= $tchats->date ?></p>
             </div>
             <script>
-
                 if ($('.<?= $i ?>').attr('date') < <?= $time_2->toUnixString(); ?>) {
 
                     $('.<?= $i ?>').addClass('hidden');
