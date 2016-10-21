@@ -1,15 +1,22 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: dass
- * Date: 21/10/2016
- * Time: 10:48
- */
-
 namespace App\Event;
 
+use Cake\Event\EventListenerInterface;
 
-class TasksEventListener
+
+class TasksEventListener implements EventListenerInterface
 {
+    public function implementedEvents()
+    {
+        return [
+            'Model.Tasks.edittask' => 'editentries',
+        ];
+    }
+    public function editentries($event, $order )
+    {
+        debug($event);
+        debug($order);
+        die();
 
+    }
 }
