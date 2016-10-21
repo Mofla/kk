@@ -67,9 +67,9 @@ class ThreadsTable extends Table
             'joinType' => 'INNER'
         ]);
         $this->belongsToMany('Files', [
-            'foreignKey' => 'post_id',
+            'foreignKey' => 'thread_id',
             'targetForeignKey' => 'file_id',
-            'joinTable' => 'posts_files'
+            'joinTable' => 'threads_files'
         ]);
     }
 
