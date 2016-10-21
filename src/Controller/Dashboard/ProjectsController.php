@@ -106,14 +106,25 @@ class ProjectsController extends AppController
      */
     public function add()
     {
+        $forum = $this->Projects->Forums->newEntity();
 
         $project = $this->Projects->newEntity();
         if ($this->request->is('post')) {
-            $project = $this->Projects->patchEntity($project, $this->request->data);
-            if ($this->Projects->save($project)) {
+            $forum = $this->Projects->Forums->patchEntity($forum, $this->request->data);
+            $forum->category_id = 16;
+            if ($this->Projects->Forums->save($forum)) {
                 $this->Flash->success(__('The project has been saved.'));
+                $project = $this->Projects->patchEntity($project, $this->request->data);
+                $project->forum_id = $forum->id;
+                if ($this->Projects->save($project)) {
+                    $this->Flash->success(__('The project has been saved.'));
 
-                return $this->redirect(['action' => 'index', '#' => 'tab_'.$project->id]);
+                    return $this->redirect(['action' => 'index']);
+                } else {
+                    $this->Flash->error(__('The project could not be saved. Please, try again.'));
+                }
+
+                return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__('The project could not be saved. Please, try again.'));
             }

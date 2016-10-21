@@ -53,6 +53,10 @@ class ForumsTable extends Table
         $this->hasMany('Threads', [
             'foreignKey' => 'forum_id'
         ]);
+
+        $this->belongsTo('Projects', [
+            'foreignKey' => 'forum_id'
+        ]);
     }
 
     /**
