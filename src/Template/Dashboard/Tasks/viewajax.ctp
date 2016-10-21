@@ -119,24 +119,33 @@
                 </div>
 
                 <script>
-                    //loads the forum
+                    //loads the forum and changed its behaviour
                     function getThread() {
+                        //thread url
                         var url = '<?= $this->Url->build(['controller' => 'Forums/Threads', 'action' => 'view', $task->thread_id, 'prefix' => false]); ?>';
+                        //loads the forum
                         $('#forum').load(url, function () {
+
                             //hides shit
                             $('.dash-hide').hide();
+
+                            //listener on post button
+                            $('.dash-post').on('click', function (event) {
+                                event.preventDefault();
+                                var postUrl = $(this).attr('href').split('/');
+                                var loadUrl = '<?= $this->Url->build(['controller' => 'Forums/Posts', 'action' => 'add', 'prefix' => false]); ?>' + '/' + postUrl[4];
+
+                                $('#forum').load(loadUrl, function (event) {
+                                   /* $('.dash-posted').on('click', function () {
+                                        console.log('bite');
+                                    })*/
+
+
+
+                                });
+                            })
                         });
                     }
                    getThread();
 
-
-
-                    $(document).on('click', 'a', function (event) {
-                        event.preventDefault();
-                        var link = $(this).attr('href');
-                        var hashedLink = link.split('/');
-
-                        console.log(hashedLink);
-
-                    })
                 </script>
