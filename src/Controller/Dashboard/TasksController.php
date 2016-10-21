@@ -2,6 +2,8 @@
 namespace App\Controller\Dashboard;
 
 use App\Controller\AppController;
+use Cake\Event\EventManager;
+use Cake\Event\EventListenerInterface;
 
 /**
  * Tasks Controller
@@ -129,6 +131,7 @@ class TasksController extends AppController
 
     public function edittask($id = null)
     {
+        $this->Order->eventManager()->on(new TasksEventListener());
         $task = $this->Tasks->get($id, [
             'contain' => ['Users']
         ]);

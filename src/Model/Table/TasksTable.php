@@ -105,4 +105,22 @@ class TasksTable extends Table
 
         return $rules;
     }
+
+    public function afteredit($states){
+            if ($states) {
+                $event = new Event('Model.Tasks.edittask', $this);
+                $this->eventManager()->dispatch($event);
+                return true;
+            }
+            return false;
+        }
+
+    public function afteradd($states){
+        if ($states) {
+            $event = new Event('Model.Tasks.add', $this);
+            $this->eventManager()->dispatch($event);
+            return true;
+        }
+        return false;
+    }
 }
