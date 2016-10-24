@@ -2,7 +2,8 @@
 namespace App\Controller\Dashboard;
 
 use App\Controller\AppController;
-
+use Cake\Event\EventManager;
+use App\Event\ProjectsEventListener;
 /**
  * Projects Controller
  *
@@ -26,9 +27,7 @@ class ProjectsController extends AppController
         ]);
 
 
-
-
-        $this->set(compact('projects'));
+        $this->set(compact('projects','$firstEvent'));
         $this->set('_serialize', ['projects']);
     }
 
@@ -106,10 +105,14 @@ class ProjectsController extends AppController
      */
     public function add()
     {
+        $data = new ProjectsEventListener();
+        $this->Projects->eventManager()->on($data);
         $forum = $this->Projects->Forums->newEntity();
 
         $project = $this->Projects->newEntity();
+
         if ($this->request->is('post')) {
+
             $forum = $this->Projects->Forums->patchEntity($forum, $this->request->data);
             $forum->category_id = 16;
             if ($this->Projects->Forums->save($forum)) {

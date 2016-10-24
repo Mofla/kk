@@ -3,7 +3,7 @@
 namespace App\Event;
 
 use Cake\Event\EventListenerInterface;
-
+use Cake\Event\EventManager;
 
 class ProjectsEventListener implements EventListenerInterface
 {
@@ -13,10 +13,9 @@ class ProjectsEventListener implements EventListenerInterface
             'Model.ProjectsTable.add' => 'addproject',
         ];
     }
-    public function addproject($event, $projects )
+    public function addproject($event)
     {
-        debug($event);
-        debug($projects);
+        var_dump($event);
         die();
     }
 }
