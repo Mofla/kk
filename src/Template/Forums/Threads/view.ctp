@@ -1,4 +1,4 @@
-
+<?= $this->element('Forum/search-forum') ?>
 <div class="col-md-12 dash-hide">
     <?= $thread->has('forum') ? $this->Html->link($thread->forum->name, ['controller' => 'Forums', 'action' => 'view',
     $thread->forum->id]) : '' ?>

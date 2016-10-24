@@ -1,3 +1,4 @@
+<?= $this->element('Forum/search-forum') ?>
 <div class="col-md-12">
     <?= $this->Html->link($forum->name, ['controller' => 'Forums', 'action' => 'view', $forum->id])  ?>
 </div>

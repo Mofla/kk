@@ -38,9 +38,10 @@ class ForumsController extends AppController
             $array = [];
             if (!empty($this->request->data['query'])) {
                 $push = $this->request->data['query'];
-                $pushall = "subject LIKE '%$push%'";
+                $pushall = "subject LIKE '%$push%' OR text LIKE '%$push%'";
                 array_push($array, $pushall);
             }
+
 
             $results = $this->Forums->Threads->find('all', [
                 'contain' => ['Users','Posts','Lastuserthread']
