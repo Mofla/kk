@@ -1,5 +1,5 @@
 <?= $this->Html->link('Accueil',['controller' => 'Pages','action' => '/','prefix' => false]) ?> /
-<?= $this->Html->link($this->request->params['controller'],['action' => 'index','prefix' => false]) ?> /
+<?= $this->Html->link($this->request->params['controller'],['action' => 'index']) ?> /
 <?= $permission->name ?>
 <div class="profile">
   <div class="tab-pane" id="tab_1_3">
@@ -27,7 +27,7 @@
                   </div>
                   <div class="form-group">
                     <label class="label-control">Module : </label><br>
-                      <select name="" required="required" id="controller" class="bs-select form-control">
+                      <select name="module" required="required" id="controller" class="bs-select form-control">
                           <option value="" selected="selected">---</option>
                         <?php foreach ($controller as $c) : ?>
                           <option value="<?= $c ?>"><?= $c ?></option>
@@ -37,11 +37,6 @@
                   <div class="form-group">
                     <label>Controller : </label>
                       <select name="controller"id="function" class="bs-select form-control">
-                      <?php
-                      foreach ($list_actions_controller as $option => $key)  {
-                          echo "<option>".$list_actions_controller[$option][$key]."</option>";
-                      }
-                      ?>
                       </select>
                   </div>
                     <div class="form-group">

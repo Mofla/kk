@@ -21,6 +21,7 @@ class ConnectorsFixture extends TestFixture
         'controller' => ['type' => 'string', 'length' => 100, 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'function' => ['type' => 'string', 'length' => 100, 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'permission_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
+        'module' => ['type' => 'string', 'length' => 90, 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         '_indexes' => [
             'permission_id' => ['type' => 'index', 'columns' => ['permission_id'], 'length' => []],
         ],
@@ -45,7 +46,8 @@ class ConnectorsFixture extends TestFixture
             'id' => 1,
             'controller' => 'Lorem ipsum dolor sit amet',
             'function' => 'Lorem ipsum dolor sit amet',
-            'permission_id' => 1
+            'permission_id' => 1,
+            'module' => 'Lorem ipsum dolor sit amet'
         ],
     ];
 }

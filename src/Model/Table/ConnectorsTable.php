@@ -62,6 +62,10 @@ class ConnectorsTable extends Table
             ->requirePresence('function', 'create')
             ->notEmpty('function');
 
+        $validator
+            ->requirePresence('module', 'create')
+            ->notEmpty('module');
+
         return $validator;
     }
 
