@@ -3,19 +3,21 @@
 namespace App\Event;
 
 use Cake\Event\EventListenerInterface;
-use Cake\Event\EventManager;
+use Cake\Log\Log;
 
 class ProjectsEventListener implements EventListenerInterface
 {
     public function implementedEvents()
     {
         return [
-            'Model.ProjectsTable.add' => 'addproject',
+            'Model.Project.add' => 'addproject',
         ];
     }
-    public function addproject($event)
+    public function addproject( $event)
     {
-        var_dump($event);
+        Log::write('info',$event);
+        debug.log($event);
+        var_dump($event.log);
         die();
     }
 }
