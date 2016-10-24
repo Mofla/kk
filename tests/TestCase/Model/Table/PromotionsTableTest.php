@@ -37,7 +37,9 @@ class PromotionsTableTest extends TestCase
         'app.states',
         'app.tasks_users',
         'app.projects_users',
-        'app.entries'
+        'app.entries',
+        'app.portfolios',
+        'app.portfolios_users'
     ];
 
     /**
@@ -80,6 +82,16 @@ class PromotionsTableTest extends TestCase
      * @return void
      */
     public function testValidationDefault()
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+
+    /**
+     * Test buildRules method
+     *
+     * @return void
+     */
+    public function testBuildRules()
     {
         $this->markTestIncomplete('Not implemented yet.');
     }

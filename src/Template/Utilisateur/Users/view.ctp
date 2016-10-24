@@ -42,6 +42,15 @@
                                                 <i class="fa fa-mobile"></i> <?= $user->cellphone ?><br>
                                                 <i class="fa fa-at"></i> <?= $user->email ?><br>
                                                 <i class="fa fa-user"></i> <?= $user->role->name ?>
+                                                <a href="<?= $user->facebook_link?>"
+                                                   class="btn green uppercase ">Facebook</a>
+                                                <a href="<?= $user->twitter_link?>"
+                                                   class="btn green uppercase ">Twitter</a>
+                                                <a href="<?= $user->linkedin_link?>"
+                                                   class="btn green uppercase ">Linkedin</a>
+                                                <a href="<?= $user->cv_url?>"
+                                                   class="btn green uppercase ">CV</a>
+
                                             </div>
                                             <?php if (!empty($user->github_username)): ?>
                                                 <a href="https://github.com/<?= $user->github_username ?>"><?= $user->github_username ?></a>

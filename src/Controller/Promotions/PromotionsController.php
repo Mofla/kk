@@ -18,6 +18,9 @@ class PromotionsController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'contain' => ['Users']
+        ];
         $promotions = $this->paginate($this->Promotions);
 
         $this->set(compact('promotions'));
@@ -36,12 +39,9 @@ class PromotionsController extends AppController
         $promotion = $this->Promotions->get($id, [
             'contain' => ['Users']
         ]);
-        //$users = $this->Promotions->Users;
-        //$users = $this->paginate($users);
 
-        $this->set(compact('users'));
         $this->set('promotion', $promotion);
-        $this->set('_serialize', ['promotion','users']);
+        $this->set('_serialize', ['promotion']);
     }
 
     /**
@@ -53,12 +53,9 @@ class PromotionsController extends AppController
     {
         $promotion = $this->Promotions->newEntity();
         if ($this->request->is('post')) {
+            $this->request->data['user_id'] = $this->Auth->User('id');
             $promotion = $this->Promotions->patchEntity($promotion, $this->request->data);
             if ($this->Promotions->save($promotion)) {
-                $picture = $this->Upload->getPicture($this->request->data['picture'],'promotion',$promotion->id, 1000, 600, false);
-                $this->request->data['picture_url'] = $picture;
-                $promotion = $this->Promotions->patchEntity($promotion, $this->request->data);
-                $this->Promotions->save($promotion);
                 $this->Flash->success(__('The promotion has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
@@ -66,7 +63,8 @@ class PromotionsController extends AppController
                 $this->Flash->error(__('The promotion could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('promotion'));
+        $users = $this->Promotions->Users->find('list', ['limit' => 200]);
+        $this->set(compact('promotion', 'users'));
         $this->set('_serialize', ['promotion']);
     }
 
@@ -83,10 +81,6 @@ class PromotionsController extends AppController
             'contain' => []
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            if(!empty($this->request->data['picture']['name'])) {
-                $picture = $this->Upload->getPicture($this->request->data['picture'], 'promotion', $promotion->id, 1000, 600, false);
-                $this->request->data['picture_url'] = $picture;
-            }
             $promotion = $this->Promotions->patchEntity($promotion, $this->request->data);
             if ($this->Promotions->save($promotion)) {
                 $this->Flash->success(__('The promotion has been saved.'));
@@ -96,7 +90,8 @@ class PromotionsController extends AppController
                 $this->Flash->error(__('The promotion could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('promotion'));
+        $users = $this->Promotions->Users->find('list', ['limit' => 200]);
+        $this->set(compact('promotion', 'users'));
         $this->set('_serialize', ['promotion']);
     }
 

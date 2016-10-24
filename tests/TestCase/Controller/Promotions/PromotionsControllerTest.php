@@ -29,6 +29,8 @@ class PromotionsControllerTest extends IntegrationTestCase
         'app.states',
         'app.tasks_users',
         'app.projects_users',
+        'app.portfolios',
+        'app.portfolios_users',
         'app.entries'
     ];
 
