@@ -1,14 +1,16 @@
 <?php
 namespace App\View\Cell;
 
+use App\Model\Entity\Connector;
 use Cake\View\Cell;
+use App\Controller\Component\CommonComponent;
 
 /**
  * Menu cell
  */
 class MenuCell extends Cell
 {
-
+    public $components= ['Common'];
     /**
      * List of valid options that can be passed into this
      * cell's constructor.
@@ -22,8 +24,48 @@ class MenuCell extends Cell
      *
      * @return void
      */
+    function loadControllerAndActions()
+    {
+        $path = './src/Controller';
+        $dirs = scandir($path);
+        $files = [];
+        $ignore = [
+            '.',
+            '..',
+            'empty',
+            'Component'
+        ];
+        foreach ($dirs as $dir)
+        {
+            if ($dir === '.' or $dir === '..') continue;
+            if(is_dir($path . '/' . $dir))
+            {
+                $temp_file = scandir($path . '/' . $dir);
+                foreach ($temp_file as $temp)
+                {
+                    if (!in_array($temp, $ignore) && !in_array($dir,$ignore))
+                    {
+                        if(!array_key_exists($dir,$files))
+                        {
+                            $files[$dir][] = '--';
+                        }
+                        $temp = explode('.',$temp)[0];
+                        $files[$dir][] = $temp;
+                    }
+                }
+            }
+        }
+        return $files;
+    }
+
+    public function getControllers()
+    {
+        $files = $this->loadControllerAndActions();
+        return array_keys($files);
+    }
     public function display($id)
     {
+
         $i= $id;
         $this->loadModel('Permissions');
         $this->loadModel('Roles');
@@ -36,19 +78,20 @@ class MenuCell extends Cell
             ->select('role_id')
             ->where(['id'=> $id]);
         //on affiche les permissions selon le rôle et si on a demandé qu'il soit afficher dans le menu
-        $perm = $this->Permissions->find('all')
-            ->contain('Connectors', 'Roles', 'Users')
-            ->where(['menu' => 1])
-            ->matching('Roles')->where(['Roles.id =' => $role])
-            ->matching('Connectors')->where(['Connectors.controller LIKE'=>'users']);
+        $module = $this->getControllers();
 
-        $gererPerm = $this->Permissions->find('all')
-            ->contain('Connectors', 'Roles', 'Users')
-            ->where(['menu' => 1])
-            ->matching('Roles')->where(['Roles.id =' => $role])
-            ->matching('Connectors')->where(['Connectors.controller LIKE'=>'permission%']);
-        
+        $query = $this->Permissions->find('all')->contain([
+            'Connectors' => function ($q) {
+                return $q->select(['module', 'controller','function','permission_id']);
+            },
+             'Roles'
+        ])
+             ->where(['menu'=> 1])
+            ->matching('Roles')->where(['Roles.id =' => $role]);
+
         $this->set('_serialize', ['permission']);
-        $this->set(compact('perm','i','gererPerm','role', 'user'));
+        $this->set(compact('i','role', 'user','query'));
     }
+
+
 }

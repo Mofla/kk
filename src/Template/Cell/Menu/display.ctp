@@ -6,7 +6,7 @@
           <!-- BEGIN LOGO -->
           <div class="page-logo">
             <a href="/">
-              <?= $this->Html->image('../assets/layouts/layout3/img/logo-default.jpg',['class'=>'logo-default']) ?>
+              <?= $this->Html->image('../img/Simplon.png',['class'=>'logo-default','width'=>150, 'height'=>50]) ?>
             </a>
           </div>
           <!-- END LOGO -->
@@ -19,8 +19,7 @@
               <li class="dropdown dropdown-user dropdown-dark">
                 <?php $Ses=$this->request->session()->read('Auth');
                 if(isset($Ses)): ?>
-                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"
-                      data-hover="dropdown" data-close-others="true">
+                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                   <?php foreach ($user as $u): ?>
                   <?= $this->Html->image('../uploads/user/'.$u->picture_url,['class'=>'img-circle']) ?>
                   <span class="username username-hide-mobile"><?= $u->username ?></span>
@@ -79,51 +78,65 @@
             <ul class="nav navbar-nav">
               <?php $Ses=$this->request->session()->read('Auth');
               if(isset($Ses)): ?>
-                <li class="menu-dropdown classic-menu-dropdown ">
-                  <a href="<?= $this->Url->build(['controller' => 'dashboard', 'action' => 'index', 'prefix' => false]); ?>">
+                <?php foreach ($query as $p): ?>
+                  <?php foreach ($p->connectors as $c):?>
+                    <li class="menu-dropdown classic-menu-dropdown ">
+                      <a href="">
+                        <?= $c->module?>
+                      </a>
+                      <ul class="dropdown-menu pull-left">
+                        <li class=" ">
+                          <a href="<?= $this->Url->build(['controller' => $c->controller, 'action' => $c->function, 'prefix'=> strtolower($c->module)]) ?>"><?= $p->name?></a>
+                        </li>
+                      </ul>
+                    </li>
+                    <?php endforeach; ?>
+                <?php endforeach;?>
+<!--                <li class="menu-dropdown classic-menu-dropdown ">
+                  <a href="<?/*= $this->Url->build(['controller' => 'dashboard', 'action' => 'index', 'prefix' => false]); */?>">
                     Dashboard
                   </a>
                 </li>
                 <li class="menu-dropdown classic-menu-dropdown">
-                  <a href="<?= $this->Url->build(['controller' => 'Users', 'action' => 'index', 'prefix'=> 'admin']) ?>">
+                  <a href="<?/*= $this->Url->build(['controller' => 'Users', 'action' => 'index', 'prefix'=> 'admin']) */?>">
                     Gérer utilisateurs</a>
                     <ul class="dropdown-menu pull-left">
-                      <?php foreach ($perm as $p) : ?>
-                        <?php foreach ($p->connectors as $conn): ?>
+                      <?php /*foreach ($perm as $p) : */?>
+                        <?php /*foreach ($p->connectors as $conn): */?>
                           <li class=" ">
                             <a href="
-                            <?php foreach ($role as $r) : ?>
-                              <?php if ($r->role_id == 1): ?>
-                                <?= $this->Url->build(['controller' => $conn->controller, 'action' => $conn->function, 'prefix'=> 'admin']) ?>">
-                                <?= $p->name ?>
-                              <?php else: ?>
-                                <?= $this->Url->build(['controller' => $conn->controller, 'action' => $conn->function, 'prefix'=> false]) ?>">
-                                <?= $p->name ?>
-                              <?php endif ; ?>
-                            <?php endforeach; ?>
+                            <?php /*foreach ($role as $r) : */?>
+                              <?php /*if ($r->role_id == 1): */?>
+                                <?/*= $this->Url->build(['controller' => $conn->controller, 'action' => $conn->function, 'prefix'=> 'admin']) */?>">
+                                <?/*= $p->name */?>
+                              <?php /*else: */?>
+                                <?/*= $this->Url->build(['controller' => $conn->controller, 'action' => $conn->function, 'prefix'=> false]) */?>">
+                                <?/*= $p->name */?>
+                              <?php /*endif ; */?>
+                            <?php /*endforeach; */?>
                             </a>
                           </li>
-                        <?php endforeach; ?>
-                      <?php endforeach; ?>
+                        <?php /*endforeach; */?>
+                      <?php /*endforeach; */?>
                     </ul>
                 </li>
-                <?php foreach ($role as $r) : ?>
-                <?php if ($r->role_id == 1): ?>
+                <?php /*foreach ($role as $r) : */?>
+                <?php /*if ($r->role_id == 1): */?>
                 <li class="menu-dropdown classic-menu-dropdown">
-                  <a href="<?= $this->Url->build(['controller' => 'Permissions', 'action' => 'index', 'prefix'=> 'admin']) ?>">
+                  <a href="<?/*= $this->Url->build(['controller' => 'Permissions', 'action' => 'index', 'prefix'=> 'admin']) */?>">
                     Gérer permissions</a>
                   <ul class="dropdown-menu pull-left">
-                    <?php foreach ($gererPerm as $gp) : ?>
-                      <?php foreach ($gp->connectors as $conn): ?>
+                    <?php /*foreach ($gererPerm as $gp) : */?>
+                      <?php /*foreach ($gp->connectors as $conn): */?>
                         <li class=" ">
-                          <a href="<?= $this->Url->build(['controller' => $conn->controller, 'action' => $conn->function, 'prefix'=> 'admin']) ?>"><?= $gp->name ?></a>
+                          <a href="<?/*= $this->Url->build(['controller' => $conn->controller, 'action' => $conn->function, 'prefix'=> 'admin']) */?>"><?/*= $gp->name */?></a>
                         </li>
-                      <?php endforeach; ?>
-                    <?php endforeach; ?>
+                      <?php /*endforeach; */?>
+                    <?php /*endforeach; */?>
                   </ul>
                 </li>
-                 <?php endif; ?>
-                <?php endforeach; ?>
+                 <?php /*endif; */?>
+                <?php /*endforeach; */?> -->
                 <li class="menu-dropdown classic-menu-dropdown ">
                   <a href="<?= $this->Url->build(['controller' => 'Tchat', 'action' => 'add', 'prefix' => false]); ?>">
                     Tchat
