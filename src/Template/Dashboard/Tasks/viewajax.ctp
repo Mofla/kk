@@ -119,8 +119,20 @@
                 </div>
 
                 <script>
+
+                    var action = "";
                     //loads the forum and changed its behaviour
-                    function getThread() {
+                    function getThread(action) {
+
+                        //scrolls to bottom after adding a post
+                        //todo: fixit
+                        if (action == 'add') {
+
+                            $('html, body').animate({
+                                scrollTop: $(document).height()
+                            });
+                        }
+
                         //thread url
                         var url = '<?= $this->Url->build(['controller' => 'Forums/Threads', 'action' => 'view', $task->thread_id, 'prefix' => false]); ?>';
                         //loads the forum
@@ -135,13 +147,29 @@
                                 var postUrl = $(this).attr('href').split('/');
                                 var loadUrl = '<?= $this->Url->build(['controller' => 'Forums/Posts', 'action' => 'add', 'prefix' => false]); ?>' + '/' + postUrl[4];
 
-                                $('#forum').load(loadUrl, function (event) {
-                                   /* $('.dash-posted').on('click', function () {
-                                        console.log('bite');
-                                    })*/
 
+                                $('#forum').load(loadUrl, function () {
+                                    $('.dash-hide').hide();
+                                    $('.dash-posted').on('click', function () {
+                                        event.preventDefault();
 
+                                        var preUrl = $('.form-post').attr('action').split('/');
+                                        var postedUrl = '<?= $this->Url->build(['controller' => 'Forums/Posts', 'action' => 'add', 'prefix' => false]); ?>' + '/' + preUrl[4];
 
+                                        var data = {
+                                            title: $('.dash-title').val(),
+                                            message: $('.note-editable').text(),
+
+                                        };
+                                        $.ajax({
+                                            type: 'post',
+                                            data: data,
+                                            url: postedUrl,
+                                            success: function () {
+                                                getThread('add');
+                                            }
+                                        })
+                                    })
                                 });
                             })
                         });

@@ -9,9 +9,9 @@
 
 <div class="right" id="right">
     <?php if($subscription) : ?>
-    <button id="issub" class="btn btn-danger" role="button" aria-pressed="true"> <i class="fa fa-times"></i> SE DESABONNER DU SUJET</button>
+    <button id="issub" class="btn btn-danger dash-hide" role="button" aria-pressed="true"> <i class="fa fa-times"></i> SE DESABONNER DU SUJET</button>
     <?php else: ?>
-    <button id="sub" class="btn btn-warning " role="button" aria-pressed="true"> <i class="fa fa-thumb-tack"></i> S'ABONNER A CE SUJET</button>
+    <button id="sub" class="btn btn-warning dash-hide" role="button" aria-pressed="true"> <i class="fa fa-thumb-tack"></i> S'ABONNER A CE SUJET</button>
     <?php endif ?>
 
     <a href="<?= $this->Url->build([ 'controller' => 'Posts', 'action' => 'add' , $thread->id]); ?>"
@@ -22,7 +22,7 @@
 <div class="table-responsive voffset2">
     <table class="table">
         <thead class="category">
-        <tr>
+        <tr class="dash-hide">
             <th colspan="2" scope="row">
                 <div><?= h($thread->subject) ?></div>
 
@@ -146,13 +146,13 @@
             <td><?= h($thread->created) ?></td>
             <td>
                 <div class="left">MP</div>
-                <div class="right">
+                <div class="right dash-hide">
                     <a href="<?= $this->Url->build([ 'controller' => 'Posts', 'action' => 'add' , $thread->id, $check]); ?>"
-                       class="btn btn-sm blue" role="button" aria-pressed="true"><i class="fa fa-quote-right dash-cite"></i> CITER</a>
+                       class="btn btn-sm blue dash-cite" role="button" aria-pressed="true"><i class="fa fa-quote-right "></i> CITER</a>
                     <a href="<?= $this->Url->build([ 'controller' => 'Threads', 'action' => 'edit' , $thread->id]); ?>"
-                       class="btn btn-sm purple" role="button" aria-pressed="true"><i class="fa fa-pencil dash-edit"></i> EDITER</a>
+                       class="btn btn-sm purple dash-edit" role="button" aria-pressed="true"><i class="fa fa-pencil "></i> EDITER</a>
                     <?= $this->Form->postLink(__('<i class="fa fa-times"></i>'),[ 'controller' => 'Threads'
-                    , 'action' => 'delete' , $thread->id],['escape'=>false , 'class'=>'btn btn-sm btn-danger dash-delete']); ?>
+                    , 'action' => 'delete' , $thread->id],['escape'=>false , 'class'=>'btn btn-sm btn-danger dash-delete dash-hide']); ?>
 
                 </div>
 
@@ -287,7 +287,7 @@
         <td><?= h($posts->created) ?></td>
         <td>
             <div class="left">MP</div>
-            <div class="right">
+            <div class="right dash-hide">
                 <a href="<?= $this->Url->build([ 'controller' => 'Posts', 'action' => 'add' , $thread->id, $posts->id]); ?>"
                    class="btn btn-sm blue" role="button" aria-pressed="true"><i class="fa fa-quote-right"></i> CITER</a>
                 <a href="<?= $this->Url->build([ 'controller' => 'Posts', 'action' => 'edit' , $posts->id]); ?>"

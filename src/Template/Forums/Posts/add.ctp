@@ -16,10 +16,10 @@
         </tr>
         </thead>
         <tbody>
-        <?= $this->Form->create($post, ['enctype' =>'multipart/form-data']) ?>
+        <?= $this->Form->create($post, ['enctype' =>'multipart/form-data', 'class' => 'form-post']) ?>
             <tr class="hidden">
                 <td width="20%" > Titre du sujet </td>
-                <td width="80%">   <?= $this->Form->input('title' , ['label' => false , 'class' => 'form-control' ,'value'=>$forumid->subject]); ?> </td>
+                <td width="80%">   <?= $this->Form->input('title' , ['label' => false , 'class' => 'form-control dash-title' ,'value'=>$forumid->subject]); ?> </td>
             </tr>
             <tr>
                 <td width="20%"> Votre message </td>
@@ -46,8 +46,8 @@
                 </td>
             </tr>
         <tr>
-        <td width="20%"> Options </td>
-        <td width="80%">
+        <td width="20%" class="dash-hide"> Options </td>
+        <td width="80%" class="dash-hide">
             <div class="fileinput fileinput-new" data-provides="fileinput">
                 <div class="input-group input-large">
                     <div class="form-control uneditable-input input-fixed input-medium" data-trigger="fileinput">
@@ -64,7 +64,7 @@
         </tr>
         <tr>
             <td colspan="2" class=" text-center">
-                <?= $this->Form->button('POSTER LA REPONSE',['class'=>'btn btn-success']) ?>
+                <?= $this->Form->button('POSTER LA REPONSE',['class'=>'btn btn-success dash-posted']) ?>
                 <?= $this->Form->end() ?>
             </td>
         </tr>
