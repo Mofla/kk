@@ -139,6 +139,10 @@
         height: 3em;
         line-height: 1.2em;
     }
+    .portlet-title {
+        cursor: all-scroll;
+
+    }
 </style>
 <script>
 
