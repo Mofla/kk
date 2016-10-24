@@ -7,12 +7,23 @@ use Cake\ORM\Entity;
  * Promotion Entity
  *
  * @property int $id
- * @property string $name
- * @property string $picture_url
+ * @property int $user_id
  * @property string $description
- * @property int $year
+ * @property string $facebook_link
+ * @property string $twitter_link
+ * @property string $linkedin_link
+ * @property string $cv_url
+ * @property bool $language_html
+ * @property bool $language_css
+ * @property bool $language_javascript
+ * @property bool $language_jquery
+ * @property bool $language_php
+ * @property bool $language_sql
+ * @property bool $language_cakephp
+ * @property bool $language_bootstrap
+ * @property string $web_site
  *
- * @property \App\Model\Entity\User[] $users
+ * @property \App\Model\Entity\User $user
  */
 class Promotion extends Entity
 {

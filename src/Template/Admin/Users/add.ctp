@@ -86,6 +86,22 @@
                       <label class="label-control">Date de naissance : </label>
                       <?= $this->Form->input('birthday', ['type' => 'text','label'=>false, 'class'=>'form-control', 'id' => 'datepicker']); ?>
                     </div>
+                    <div class="form-group">
+                      <label class="label-control">Facebook: </label>
+                      <?= $this->Form->input('facebook_link',['label'=>false, 'class'=>'form-control']); ?>
+                    </div>
+                    <div class="form-group">
+                      <label class="label-control">Twitter : </label>
+                      <?= $this->Form->input('twitter_link',['label'=>false, 'class'=>'form-control']); ?>
+                    </div>
+                    <div class="form-group">
+                      <label class="label-control">Linkedin : </label>
+                      <?= $this->Form->input('linkedin_link',['label'=>false, 'class'=>'form-control']); ?>
+                    </div>
+                    <div class="form-group">
+                      <label class="label-control">CV : </label>
+                      <?= $this->Form->input('cv_url',['label'=>false, 'class'=>'form-control']); ?>
+                    </div>
 
                   </div>
                 </fieldset>

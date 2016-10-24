@@ -1,28 +1,36 @@
 <div class="promotions index large-9 medium-8 columns content">
-    <h2 class="text-center" style="font-weight: 900; font-size: 40px"><?= __('Promotions Simplon') ?></h2>
-            <?php foreach ($promotions as $promotion): ?>
-                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                    <div style="border: 1px solid black">
-                        <div class="portlet-body">
-                            <div class="mt-element-overlay">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="mt-overlay-2">
-                                            <img src="../../uploads/promotion/<?=$promotion->picture_url ?>" />
-                                            <div class="mt-overlay">
-                                                <h2><?= h($promotion->name) ?></h2>
-                                                <a href="<?= $this->Url->build(['action' => 'view', $promotion->id]); ?>"
-                                                   class="mt-info btn green">Détails</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <h3 class="text-center" style="font-weight: 900"><?= $promotion->year?></h3>
-                </div>
-            <?php endforeach; ?>
+    <h3 class="text-center"><?= __('Promotions') ?></h3>
+
+    <?php foreach ($promotions as $promotion): ?>
+        <div class="col-md-3 text-center well" style="background-color: white">
+            <?= $this->Html->image('../../uploads/user/' . $promotion->user->picture_url, ['style' => 'width:200px']); ?>
+            <br>
+            <?= ($promotion->user->firstname) ?> <?= ($promotion->user->lastname) ?>
+            <br>
+            <?php if ($promotion->facebook_link != '') { ?>
+                <a href="<?= ($promotion->facebook_link) ?>" class="btn btn-primary uppercase">Facebook</a>
+            <?php } ?>
+            <?php if ($promotion->twitter_link != '') { ?>
+                <a href="<?= ($promotion->twitter_link) ?>" class="btn btn-primary uppercase">Twitter</a>
+            <?php } ?>
+            <?php if ($promotion->linkedin_link != '') { ?>
+                <a href="<?= ($promotion->linkedin_link) ?>" class="btn btn-primary uppercase">Linkedin</a>
+            <?php } ?>
+            <?php if ($promotion->user->github_username != '') { ?>
+                <a href="<?= ($promotion->user->github_username) ?>" class="btn btn-primary uppercase">Github</a>
+            <?php } ?>
+            <p style="font-weight: 500"><i class="glyphicon glyphicon-envelope"></i> <?= ($promotion->user->email) ?>
+                <br></p>
+            <span class="label label-default"><?= ($promotion->language_html) ? 'HTML' : '' ?></span>
+            <span class="label label-default"><?= ($promotion->language_css) ? 'CSS' : '' ?></span>
+            <span class="label label-default"><?= ($promotion->language_javascript) ? 'JAVASCRIPT' : '' ?></span>
+            <span class="label label-default"><?= ($promotion->language_jquery) ? 'JQUERY' : '' ?></span>
+            <span class="label label-default"><?= ($promotion->language_php) ? 'PHP' : '' ?></span>
+            <span class="label label-default"><?= ($promotion->language_sql) ? 'SQL' : '' ?></span>
+            <span class="label label-default"><?= ($promotion->language_cakephp) ? 'CAKEPHP' : '' ?></span>
+            <span class="label label-default"><?= ($promotion->language_bootstrap) ? 'BOOTSTRAP' : '' ?></span>
+        </div>
+    <?php endforeach; ?>
     <div class="paginator">
         <ul class="pagination">
             <?= $this->Paginator->prev('< ' . __('previous')) ?>
