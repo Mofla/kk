@@ -132,6 +132,7 @@ class ProjectsController extends AppController
                 $this->Flash->error(__('The project could not be saved. Please, try again.'));
             }
         }
+
         $users = $this->Projects->Users->find('list', [
             'keyField' => 'id',
             'valueField' => function($q){
