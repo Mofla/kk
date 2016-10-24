@@ -23,8 +23,8 @@
 
     .vis-item.red {
         color: white;
-        background-color: red;
-        border-color: darkred;
+        background-color: #3598DC;
+        border-color: darkblue;
     }
 
     .vis-item.orange {

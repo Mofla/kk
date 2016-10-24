@@ -23,7 +23,7 @@ class ProjectsController extends AppController
     {
         $this->viewBuilder()->layout('dashboard');
         $projects = $this->Projects->find('all', [
-            'contain' => ['Tasks.Users', 'Tasks.States']
+            'contain' => ['Users', 'Tasks.Users', 'Tasks.States']
         ]);
 
 
