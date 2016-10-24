@@ -1,6 +1,8 @@
 <?php
 namespace App\Model\Table;
 
+use Cake\Event\Event;
+use Cake\Event\EventManager;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
@@ -105,4 +107,14 @@ class ProjectsTable extends Table
 
         return $validator;
     }
+
+    public function afteradd($created){
+        if ($created) {
+            $event = new Event('Model.ProjectsTable.add', $this);
+            $this->eventManager()->dispatch($event);
+            return true;
+        }
+        return false;
+    }
+
 }

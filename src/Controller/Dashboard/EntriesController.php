@@ -61,6 +61,25 @@ class EntriesController extends AppController
      *
      * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
      */
+
+    public function autoadd()
+    {
+        $entry = $this->Entries->newEntity();
+        if ($this->request->is('post')) {
+            $entry = $this->Entries->patchEntity($entry, $this->request->data);
+            if ($this->Entries->save($entry)) {
+                $this->Flash->success(__('The entry has been saved.'));
+
+                return $this->redirect(['action' => 'index']);
+            } else {
+                $this->Flash->error(__('The entry could not be saved. Please, try again.'));
+            }
+        }
+        $diaries = $this->Entries->Diaries->find('list', ['limit' => 200]);
+        $this->set(compact('entry', 'diaries'));
+        $this->set('_serialize', ['entry']);
+    }
+
     public function add()
     {
         $entry = $this->Entries->newEntity();
