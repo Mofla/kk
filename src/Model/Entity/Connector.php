@@ -10,6 +10,7 @@ use Cake\ORM\Entity;
  * @property string $controller
  * @property string $function
  * @property int $permission_id
+ * @property string $module
  *
  * @property \App\Model\Entity\Permission $permission
  */
