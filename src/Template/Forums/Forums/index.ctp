@@ -6,8 +6,8 @@
         <!--<li><?= $this->Html->link(__('New Thread'), ['controller' => 'Threads', 'action' => 'add']) ?></li>-->
     <!--</ul>-->
 <!--</nav>-->
-    <?php $cell = $this->cell('Searchforum') ?>
-    <?= $cell ?>
+
+    <?= $this->element('Forum/search-forum') ?>
 
 
 <div class="col-md-12">
