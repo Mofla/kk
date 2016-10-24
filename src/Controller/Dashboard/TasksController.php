@@ -29,7 +29,8 @@ class TasksController extends AppController
         $this->set('_serialize', ['tasks']);
     }
 
-    public function editation($id = null) {
+    public function editation($id = null)
+    {
         $this->autoRender = false;
 
 
@@ -135,6 +136,7 @@ class TasksController extends AppController
         $task = $this->Tasks->get($id, [
             'contain' => ['Users']
         ]);
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             $task = $this->Tasks->patchEntity($task, $this->request->data);
             if ($this->Tasks->save($task)) {
@@ -146,17 +148,24 @@ class TasksController extends AppController
             }
         }
 
+
+        $project = $task->project_id;
         $users = $this->Tasks->Users->find('list', [
             'keyField' => 'id',
-            'valueField' => function($q){
-                return $q['firstname'].' '.$q['lastname'];
+            'valueField' => function ($q) {
+                return $q['firstname'] . ' ' . $q['lastname'];
             }
-        ]);
+        ])->matching('Projects',
+            function ($q) use ($project) {
+                return $q->where(['project_id' => $project]);
+            });
+
         $this->set(compact('task', 'users'));
         $this->set('_serialize', ['task']);
     }
 
-    public function addtask($id = null) {
+    public function addtask($id = null)
+    {
 
         $thread = $this->Tasks->Threads->newEntity();
 
@@ -196,12 +205,17 @@ class TasksController extends AppController
             }
         }
         $states = $this->Tasks->States->find('list', ['limit' => 200]);
+
         $users = $this->Tasks->Users->find('list', [
             'keyField' => 'id',
-            'valueField' => function($q){
-                return $q['firstname'].' '.$q['lastname'];
+            'valueField' => function ($q) {
+                return $q['firstname'] . ' ' . $q['lastname'];
             }
-        ]);
+        ])->matching('Projects',
+            function ($q) use ($project) {
+                return $q->where(['project_id' => $project->id]);
+            });
+
         $this->set(compact('task', 'states', 'projects', 'users'));
         $this->set('_serialize', ['task']);
 

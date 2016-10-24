@@ -1,5 +1,5 @@
 
-<div class="col-md-12">
+<div class="col-md-12 dash-hide">
     <?= $thread->has('forum') ? $this->Html->link($thread->forum->name, ['controller' => 'Forums', 'action' => 'view',
     $thread->forum->id]) : '' ?>
 </div>
@@ -15,7 +15,7 @@
     <?php endif ?>
 
     <a href="<?= $this->Url->build([ 'controller' => 'Posts', 'action' => 'add' , $thread->id]); ?>"
-       class="btn btn-success "  role="button" aria-pressed="true"> <i class="fa fa-comments-o"></i> REPONDRE</a>
+       class="btn btn-success dash-post"  role="button" aria-pressed="true"> <i class="fa fa-comments-o"></i> REPONDRE</a>
 </div>
 
 <div class="row"></div>
@@ -148,11 +148,11 @@
                 <div class="left">MP</div>
                 <div class="right">
                     <a href="<?= $this->Url->build([ 'controller' => 'Posts', 'action' => 'add' , $thread->id, $check]); ?>"
-                       class="btn btn-sm blue" role="button" aria-pressed="true"><i class="fa fa-quote-right"></i> CITER</a>
+                       class="btn btn-sm blue" role="button" aria-pressed="true"><i class="fa fa-quote-right dash-cite"></i> CITER</a>
                     <a href="<?= $this->Url->build([ 'controller' => 'Threads', 'action' => 'edit' , $thread->id]); ?>"
-                       class="btn btn-sm purple" role="button" aria-pressed="true"><i class="fa fa-pencil"></i> EDITER</a>
+                       class="btn btn-sm purple" role="button" aria-pressed="true"><i class="fa fa-pencil dash-edit"></i> EDITER</a>
                     <?= $this->Form->postLink(__('<i class="fa fa-times"></i>'),[ 'controller' => 'Threads'
-                    , 'action' => 'delete' , $thread->id],['escape'=>false , 'class'=>'btn btn-sm btn-danger']); ?>
+                    , 'action' => 'delete' , $thread->id],['escape'=>false , 'class'=>'btn btn-sm btn-danger dash-delete']); ?>
 
                 </div>
 
@@ -318,7 +318,7 @@
 
 <div class="right">
     <a href="<?= $this->Url->build([ 'controller' => 'Posts', 'action' => 'add' , $thread->id]); ?>"
-       class="btn btn-success " role="button" aria-pressed="true"> <i class="fa fa-comments-o"></i> REPONDRE</a>
+       class="btn btn-success dash-post" role="button" aria-pressed="true"> <i class="fa fa-comments-o"></i> REPONDRE</a>
 </div>
 
 </div>
