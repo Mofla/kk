@@ -5,7 +5,7 @@ namespace App\Event;
 use Cake\Event\EventListenerInterface;
 use Cake\Log\Log;
 
-class PostListener implements EventListenerInterface
+class ProjectListener implements EventListenerInterface
 {
     public function implementedEvents()
     {
