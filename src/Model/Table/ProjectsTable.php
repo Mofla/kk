@@ -2,6 +2,7 @@
 namespace App\Model\Table;
 
 use App\Event\ProjectListener;
+use Cake\Event\EventListenerInterface;
 use Cake\Event\Event;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
@@ -109,11 +110,12 @@ class ProjectsTable extends Table
         return $validator;
     }
 
-    public function afteradd($created){
+    public function afterSave($created, $event){
         if ($created) {
-            $info= $this->eventManager()->dispatch(new ProjectListener('Model.Project.add',$this));
-            debug($info);
+            debug($event);
             die();
+            $project = new Event('Model.Project.add', $this);
+            $this->eventManager()->dispatch($project);
             return true;
         }
         return false;

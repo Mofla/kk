@@ -7,7 +7,6 @@ use Cake\Event\EventManager;
 use Cake\Event\Event;
 use Cake\Event\EventList;
 
-
 /**
  * Projects Controller
  *
@@ -109,12 +108,10 @@ class ProjectsController extends AppController
      */
     public function add()
     {
-
+        $this->Projects->eventManager()->on(new ProjectListener());
 
         $forum = $this->Projects->Forums->newEntity();
         $project = $this->Projects->newEntity();
-
-
 
         if ($this->request->is('post')) {
 
@@ -127,13 +124,7 @@ class ProjectsController extends AppController
                 if ($this->Projects->save($project)) {
                     $this->Flash->success(__('The project has been saved.'));
 //                    return $this->redirect(['action' => 'index']);
-                    $data = new ProjectListener();
-                    EventManager::instance()->setEventList(new EventList());
-                    $eventsFired=EventManager::instance()->getEventList();
-                    $firstEvent = $eventsFired[0];
 
-debug($firstEvent);
-                    die();
                 } else {
                     $this->Flash->error(__('The project could not be saved. Please, try again.'));
                 }
