@@ -3,6 +3,7 @@
 namespace App\Event;
 
 use Cake\Event\EventListenerInterface;
+use Cake\Event\EventManager;
 use Cake\Log\Log;
 
 class ProjectListener implements EventListenerInterface

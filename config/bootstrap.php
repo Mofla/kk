@@ -70,7 +70,9 @@ use Cake\Utility\Inflector;
 use Cake\Utility\Security;
 use Cake\Event\EventList;
 use App\Event\ProjectsEventListener;
+
 /*
+ *
  * Read configuration file and inject configuration into various
  * CakePHP classes.
  *
@@ -230,11 +232,11 @@ Plugin::load('Migrations');
 
 //gestion events
 
-use App\Event\PostListener;
+use App\Event\ProjectListener;
 use Cake\Event\EventManager;
 use Cake\Event\Event;
 
 
-
-//      $data = new PostListener();
-//    $this->Projects->eventManager()->on($data);
+//
+//     $ProjectListener = new ProjectListener();
+//   $this->Projects->eventManager()->on($ProjectListener);

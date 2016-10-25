@@ -108,7 +108,7 @@ class ProjectsTable extends Table
     }
 
     public function afteradd($project){
-        if ($this->save($project)) {
+        if ($this->newEntity($project)) {
             $event = new Event('Model.Project.add', $this ,[
             'projects' => $project
             ]);
@@ -117,5 +117,4 @@ class ProjectsTable extends Table
         }
         return false;
     }
-
 }

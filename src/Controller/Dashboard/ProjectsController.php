@@ -3,6 +3,7 @@ namespace App\Controller\Dashboard;
 
 use App\Controller\AppController;
 use App\Event\ProjectListener;
+use Cake\Event\EventManager;
 
 
 /**
@@ -106,11 +107,13 @@ class ProjectsController extends AppController
      */
     public function add()
     {
-        $data = new ProjectListener();
-       $this->Projects->eventManager()->on($data);
+
 
         $forum = $this->Projects->Forums->newEntity();
         $project = $this->Projects->newEntity();
+
+        $data = new ProjectListener();
+        $this->Projects->eventManager()->on($data);
 
         if ($this->request->is('post')) {
 
