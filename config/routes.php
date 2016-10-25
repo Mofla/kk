@@ -106,8 +106,48 @@ Router::prefix('Tchat', function($routes) {
     $routes->connect('/add/*', ['controller' => 'Tchats','action' => 'add'], ['routeClass' => 'InflectedRoute']);
     $routes->fallbacks(DashedRoute::class);
 });
-Router::prefix('forums', function($routes) {
+Router::prefix('Forums', function($routes) {
     $routes->connect('/', ['controller' => 'Forums','action' => 'index'], ['routeClass' => 'InflectedRoute']);
+    $routes->connect(
+        '/:id-:slug',
+        ['controller' => 'Forums', 'action' => 'view'],
+        [
+            'pass' => ['slug', 'id'],
+            'id' => '[0-9]+',
+        ]
+    );
+    $routes->connect(
+        '/:id-:slug/creer-un-sujet',
+        ['controller' => 'Threads', 'action' => 'add'],
+        [
+            'pass' => ['slug', 'id'],
+            'id' => '[0-9]+',
+        ]
+    );
+    $routes->connect(
+        '/:fid-:forum/:id-:slug',
+        ['controller' => 'Threads', 'action' => 'view'],
+        [
+            'pass' => ['fid', 'forum', 'slug', 'id'],
+            'id' => '[0-9]+',
+        ]
+    );
+    $routes->connect(
+        '/:fid-:forum/:id-:slug/poster-une-reponse',
+        ['controller' => 'Posts', 'action' => 'add'],
+        [
+            'pass' => ['fid', 'forum', 'slug', 'id'],
+            'id' => '[0-9]+',
+        ]
+    );
+    $routes->connect(
+        '/:fid-:forum/:id-:slug/poster-une-reponse/:quote',
+        ['controller' => 'Posts', 'action' => 'addquote'],
+        [
+            'pass' => ['fid', 'forum', 'slug', 'id', 'quote'],
+            'id' => '[0-9]+',
+        ]
+    );
     $routes->fallbacks(DashedRoute::class);
 });
 Router::prefix('dashboard', function($routes) {

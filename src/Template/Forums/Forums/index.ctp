@@ -10,9 +10,8 @@
     <?= $this->element('Forum/search-forum') ?>
 
 
-<div class="col-md-12">
+<div class="col-md-12 voffset3">
 <div class="table-responsive">
-    <h3><?= __('Forums') ?></h3>
 
             <?php foreach ($cat as $forum): ?>
     <table class="table">
@@ -36,7 +35,8 @@
                     <?= $this->Html->image("../uploads/icons/defaut.png" , ['class' => 'forum-icon'])?>
                     <?php endif ?>
                 </td>
-                <td width="60%"> <?= $this->Html->link(__($section->name), ['action' => 'view', $section->id]) ?>
+
+                <td width="60%"> <?= $this->Html->link(__($section->name), ['action' => 'view', 'slug' => strtolower(str_replace(' ', '-', $section->name)), 'id' => $section->id]) ?>
                     <br>
                     <?= $section->description ?></td>
                 <td class="hidden-xs" width="7%"><span class="hidden-s stat"><i class="fa fa-comment-o fa"><?= $section->countthread ?></i></span></td>
@@ -67,14 +67,11 @@ $id = $section->id ;
 <!--__________________________________________________________________________________________________stats du forum-->
 
     <table class="table">
-        <thead class="category">
+        <thead class="statforum">
         <tr>
             <th colspan="2" scope="col"><span class="h4">Statistiques du forum</span></th>
         </tr>
         </thead>
-        <tr class="ssthead">
-            <th colspan="2" scope="col" >Statistiques du forum</th>
-        </tr>
         <tbody>
 
         <tr class="sscategory">

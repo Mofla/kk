@@ -32,7 +32,7 @@ class PostsController extends AppController
     }
 
 
-    public function view($id = null)
+    public function view( $id = null)
     {
         $post = $this->Posts->get($id, [
             'contain' => ['Users', 'Threads', 'Files']
@@ -43,7 +43,7 @@ class PostsController extends AppController
     }
 
 
-    public function add($id = null, $quote=null)
+    public function add($fid = null, $forum = null, $slug = null, $id = null)
     {
         $time = Time::now();
         $user = $this->Auth->user('id');
@@ -53,27 +53,23 @@ class PostsController extends AppController
             ->select('Users.email')
             ->where(['thread_id' => $id]);
 
+$pastquote = null;
+
         $username = $this->Posts->Users->find()
             ->select('username')
             ->where(['id' => $user])
             ->first();
 
-
-        if($quote) {
-            if ($quote !== 'quotetopic') {
-                $pastquote = $this->Posts->get($quote);
-            }
-            if ($quote == 'quotetopic') {
-                $pastquote = $this->Posts->Threads->get($id);
-            }
-        }
-else{
-    $pastquote = NULL;
-}
         $forumid = $this->Posts->Threads->find()
             ->select(['forum_id','subject'])
             ->where(['id' => $id])
             ->first();
+
+        $forumname = $this->Posts->Threads->Forums->find()
+            ->select(['name'])
+            ->where(['id' => $forumid->forum_id])
+            ->first();
+
         $post = $this->Posts->newEntity();
         if ($this->request->is('post')) {
             $this->request->data['user_id'] = $user;
@@ -131,23 +127,118 @@ else{
                     ->where(['id' => $id])
                     ->execute();
 
-                return $this->redirect(['controller'=>'Threads','action' => 'view' ,$id ]);
+                return $this->redirect(['controller'=>'Threads','action' => 'view' , 'fid' => $forumid->forum_id, 'forum' => strtolower(str_replace(' ', '-', $forumname->name)), 'slug' => strtolower(str_replace(' ', '-', $forumid->subject)), 'id' => $id ]);
             } else {
                 $this->Flash->error(__('The post could not be saved. Please, try again.'));
             }
         }
 
-        $this->set(compact('post','forumid','pastquote','add','sub'));
+        $this->set(compact('post','forum','forumid','pastquote','add','sub','quote'));
         $this->set('_serialize', ['post']);
     }
 
-    /**
-     * Edit method
-     *
-     * @param string|null $id Post id.
-     * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
+    public function addquote($fid = null, $forum = null, $slug = null, $id = null, $quote = null)
+    {
+        $time = Time::now();
+        $user = $this->Auth->user('id');
+
+        $sub = $this->Posts->Threads->Subscriptions->find()
+            ->contain('Users')
+            ->select('Users.email')
+            ->where(['thread_id' => $id]);
+
+        if($quote) {
+            if ($quote !== 'quotetopic') {
+                $pastquote = $this->Posts->get($quote);
+            }
+            if ($quote == 'quotetopic') {
+                $pastquote = $this->Posts->Threads->get($id);
+            }
+        }
+
+        $username = $this->Posts->Users->find()
+            ->select('username')
+            ->where(['id' => $user])
+            ->first();
+
+        $forumid = $this->Posts->Threads->find()
+            ->select(['forum_id','subject'])
+            ->where(['id' => $id])
+            ->first();
+
+        $forumname = $this->Posts->Threads->Forums->find()
+            ->select(['name'])
+            ->where(['id' => $forumid->forum_id])
+            ->first();
+
+        $post = $this->Posts->newEntity();
+        if ($this->request->is('post')) {
+            $this->request->data['user_id'] = $user;
+            $this->request->data['thread_id'] = $id;
+            $post = $this->Posts->patchEntity($post, $this->request->data);
+            if ($this->Posts->save($post)) {
+
+                #upload de fichier
+                $picture = $this->Upload->getFile($this->request->data['upload'],'files');
+                $this->request->data['upload'] = $picture;
+                $file = $this->Posts->Files->newEntity();
+                $this->request->data['name'] = $picture ;
+                $this->request->data['post_id'] = $post->id ;
+                $file = $this->Posts->Files->patchEntity($file, $this->request->data);
+                $this->Posts->Files->save($file);
+                $data = [
+                    'post_id' => $post->id
+                    ,
+                    'file_id' => $file->id
+
+                ];
+                $fp = TableRegistry::get('posts_files');
+                $postsFiles = $fp->newEntity();
+                $postsFiles = $fp->patchEntity($postsFiles,$data);
+                $fp->save($postsFiles);
+
+                #envoyer un mail aux abonnés
+                if($sub){
+                    $data = [$username->username , $id];
+                    foreach ($sub as $item) {
+                        if($item->has('Users')) {
+                            $email = new Email('default');
+                            $email->viewVars(['data' => $data]);
+                            $email->template('default', 'default')
+                                ->emailFormat('html');
+                            $email->to($item->Users->email)
+                                ->subject('Suivi du sujet : '.$this->request->data['title'].'')
+                                ->send($this->request->data['message']);
+                        }
+                    }
+                }
+
+                $this->Flash->success(__('The post has been saved.'));
+                $query = $this->Posts->Threads->forums->query();
+                $query->update()
+                    ->set([$query->newExpr('countpost = countpost + 1'),'lastuser' => $user ,
+                        'lasttopic' => $post->id ])
+                    ->where(['id' => $forumid->forum_id])
+                    ->execute();
+
+                $threadlast = $this->Posts->Threads->query();
+                $threadlast->update()
+                    ->set(['lastuser' => $user ,
+                        'lastpost' => $time ])
+                    ->where(['id' => $id])
+                    ->execute();
+
+                return $this->redirect(['controller'=>'Threads','action' => 'view' , 'fid' => $forumid->forum_id, 'forum' => strtolower(str_replace(' ', '-', $forumname->name)), 'slug' => strtolower(str_replace(' ', '-', $forumid->subject)), 'id' => $id ]);
+            } else {
+                $this->Flash->error(__('The post could not be saved. Please, try again.'));
+            }
+        }
+
+
+        $this->set(compact('post','forum','forumid','pastquote','add','sub','quote'));
+        $this->set('_serialize', ['post']);
+    }
+
     public function edit($id = null)
     {
         $post = $this->Posts->get($id, [

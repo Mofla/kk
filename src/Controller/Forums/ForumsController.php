@@ -7,6 +7,7 @@ use Cake\I18n\Time;
 use Cake\ORM\Query;
 
 
+
 class ForumsController extends AppController
 {
 
@@ -33,7 +34,7 @@ class ForumsController extends AppController
         $this->set(compact('cat','countpost','countthread','countuser','lastuser'));
     }
 
-    public function view($id = null)
+    public function view($slug = null, $id = null)
     {
         $forum = $this->Forums->get($id, [
             'contain' => ['Threads.Users','Threads.Posts','Threads.Lastuserthread']
