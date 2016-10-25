@@ -1,5 +1,8 @@
 <?= $this->Html->script('../assets/global/plugins/bootstrap/js/bootstrap.min.js') ?>
 
+<?= $this->Html->css('sweetalert.css') ?>
+<?= $this->Html->script('sweetalert.min.js') ?>
+
 <div class="col-md-12 col-sm-12 col-xs-12">
 
 
@@ -22,22 +25,16 @@
                                     <div class="caption"><?= $task->name ?></div>
                                     <div class="actions">
                                         <div class="btn-group">
-                                            <?= $this->Html->link('<i class="glyphicon glyphicon-eye-open"></i>', ['controller' => 'Tasks', 'action' => 'viewajax', $task->id], ['id' => 'task-' . $task->id, 'class'=> 'btn btn-default btn-sm view-task', 'escape' => false]) ?>
+                                            <?= $this->Html->link('<i class="glyphicon glyphicon-eye-open"></i>', ['controller' => 'Tasks', 'action' => 'viewajax', $task->id], ['id' => 'task-' . $task->id, 'class' => 'btn btn-default btn-sm view-task', 'escape' => false]) ?>
                                         </div>
                                         <div class="btn-group">
-                                            <a class="btn btn-default btn-sm" href="javascript:;" data-toggle="dropdown">
-                                                <i class="icon-wrench"></i>
-                                                <i class="fa fa-angle-down"></i>
-                                            </a>
-                                            <ul class="dropdown-menu pull-right">
-                                                <li>
-                                                    <?= $this->Html->link('<i class="fa fa-pencil"></i> Edit ', ['controller' => 'Tasks', 'action' => 'edit', $task->id], ['id' => 'task-' . $task->id, 'class' => 'edittask', 'escape' => false]) ?>
-                                                </li>
-                                                <li>
-                                                    <?= $this->Form->postLink('<i class="glyphicon glyphicon-trash"></i> Delete', ['controller' => 'Tasks', 'action' => 'delete', $task->id], ['escape' => false], ['confirm' => __('Are you sure you want to delete # {0}?', $task->id)]) ?>
-                                                </li>
-                                            </ul>
+                                            <?= $this->Html->link('<i class="glyphicon glyphicon-pencil"></i>', ['controller' => 'Tasks', 'action' => 'edit', $task->id], ['id' => 'task-' . $task->id, 'class' => 'edittask btn btn-default btn-sm', 'escape' => false]) ?>
                                         </div>
+                                        <div class="btn-group">
+                                            <a id="task-delete-<?= $task->id ?>" class="btn btn-default btn-sm delete-task"><i
+                                                    class="glyphicon glyphicon-trash"></i> </a>
+                                        </div>
+
                                     </div>
                                 </div>
 
@@ -63,21 +60,14 @@
                                     <div class="caption"><?= $task->name ?></div>
                                     <div class="actions">
                                         <div class="btn-group">
-                                            <?= $this->Html->link('<i class="glyphicon glyphicon-eye-open"></i>', ['controller' => 'Tasks', 'action' => 'viewajax', $task->id], ['id' => 'task-' . $task->id, 'class'=> 'btn btn-default btn-sm view-task', 'escape' => false]) ?>
+                                            <?= $this->Html->link('<i class="glyphicon glyphicon-eye-open"></i>', ['controller' => 'Tasks', 'action' => 'viewajax', $task->id], ['id' => 'task-' . $task->id, 'class' => 'btn btn-default btn-sm view-task', 'escape' => false]) ?>
                                         </div>
                                         <div class="btn-group">
-                                            <a class="btn btn-default btn-sm" href="javascript:;" data-toggle="dropdown">
-                                                <i class="icon-wrench"></i>
-                                                <i class="fa fa-angle-down"></i>
-                                            </a>
-                                            <ul class="dropdown-menu pull-right">
-                                                <li>
-                                                    <?= $this->Html->link('<i class="fa fa-pencil"></i> Edit ', ['controller' => 'Tasks', 'action' => 'edit', $task->id], ['id' => 'task-' . $task->id, 'class' => 'edittask', 'escape' => false]) ?>
-                                                </li>
-                                                <li>
-                                                    <?= $this->Form->postLink('<i class="glyphicon glyphicon-trash"></i> Delete', ['controller' => 'Tasks', 'action' => 'delete', $task->id], ['escape' => false], ['confirm' => __('Are you sure you want to delete # {0}?', $task->id)]) ?>
-                                                </li>
-                                            </ul>
+                                            <?= $this->Html->link('<i class="glyphicon glyphicon-pencil"></i>', ['controller' => 'Tasks', 'action' => 'edit', $task->id], ['id' => 'task-' . $task->id, 'class' => 'edittask btn btn-default btn-sm', 'escape' => false]) ?>
+                                        </div>
+                                        <div class="btn-group">
+                                            <a id="task-delete-<?= $task->id ?>" class="btn btn-default btn-sm delete-task"><i
+                                                    class="glyphicon glyphicon-trash"></i> </a>
                                         </div>
                                     </div>
                                 </div>
@@ -102,21 +92,14 @@
                                     <div class="caption"><?= $task->name ?></div>
                                     <div class="actions">
                                         <div class="btn-group">
-                                            <?= $this->Html->link('<i class="glyphicon glyphicon-eye-open"></i>', ['controller' => 'Tasks', 'action' => 'viewajax', $task->id], ['id' => 'task-' . $task->id, 'class'=> 'btn btn-default btn-sm view-task', 'escape' => false]) ?>
+                                            <?= $this->Html->link('<i class="glyphicon glyphicon-eye-open"></i>', ['controller' => 'Tasks', 'action' => 'viewajax', $task->id], ['id' => 'task-' . $task->id, 'class' => 'btn btn-default btn-sm view-task', 'escape' => false]) ?>
                                         </div>
                                         <div class="btn-group">
-                                            <a class="btn btn-default btn-sm" href="javascript:;" data-toggle="dropdown">
-                                                <i class="icon-wrench"></i>
-                                                <i class="fa fa-angle-down"></i>
-                                            </a>
-                                            <ul class="dropdown-menu pull-right">
-                                                <li>
-                                                    <?= $this->Html->link('<i class="fa fa-pencil"></i> Edit ', ['controller' => 'Tasks', 'action' => 'edit', $task->id], ['id' => 'task-' . $task->id, 'class' => 'edittask', 'escape' => false]) ?>
-                                                </li>
-                                                <li>
-                                                    <?= $this->Form->postLink('<i class="glyphicon glyphicon-trash"></i> Delete', ['controller' => 'Tasks', 'action' => 'delete', $task->id], ['escape' => false], ['confirm' => __('Are you sure you want to delete # {0}?', $task->id)]) ?>
-                                                </li>
-                                            </ul>
+                                            <?= $this->Html->link('<i class="glyphicon glyphicon-pencil"></i>', ['controller' => 'Tasks', 'action' => 'edit', $task->id], ['id' => 'task-' . $task->id, 'class' => 'edittask btn btn-default btn-sm', 'escape' => false]) ?>
+                                        </div>
+                                        <div class="btn-group">
+                                            <a id="task-delete-<?= $task->id ?>" class="btn btn-default btn-sm delete-task"><i
+                                                    class="glyphicon glyphicon-trash"></i> </a>
                                         </div>
                                     </div>
                                 </div>
@@ -139,6 +122,7 @@
         height: 3em;
         line-height: 1.2em;
     }
+
     .portlet-title {
         cursor: all-scroll;
 
@@ -178,6 +162,36 @@
         icon.closest(".portlet").find(".portlet-content").toggle();
     });
 
+
+    $('.delete-task').on('click', function (item) {
+        var thisItem = $(this).closest('.portlet');
+
+        swal({
+                title: "Are you sure?",
+                text: "You will not be able to recover this imaginary file!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, delete it!",
+                closeOnConfirm: false
+            },
+            function () {
+
+                var taskId = item.currentTarget.id.split('-');
+
+                var url = '<?= $this->Url->build(["controller" => "Tasks", "action" => "delete"]); ?>' + '/' + taskId[2];
+
+                $.ajax({
+                    type: 'post',
+                    url: url,
+                    success: function () {
+                        thisItem.hide();
+                        swal("Deleted!", "Your imaginary file has been deleted.", "success");
+
+                    }
+                });
+            });
+    });
 
 
 </script>
