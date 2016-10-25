@@ -1,6 +1,4 @@
 <div class="container">
-    <h3><?= __('Wellcom <b>' . $user . '</b> to Tchats') ?></h3>
-    <hr>
     <p class="countay_message" countay_message="<?= $count_message ?>"></p>
     <div class="tchat col-md-12">
         <?php $i = 0; foreach ($list_message as $tchats): $i++ ?>

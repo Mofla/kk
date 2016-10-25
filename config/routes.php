@@ -85,7 +85,7 @@ Router::prefix('admin', function ($routes) {
 // Parce que vous êtes dans le scope admin, vous n'avez pas besoin
 // d'inclure le prefix /admin ou l'élément de route admin.
     $routes->connect('/utilisateur', ['controller' => 'Users', 'action' => 'index']);
-    $routes->connect('/utilisateur/voir/*', ['controller' => 'Users', 'action' => 'view']);
+    $routes->connect('/utilisateur/profil/*', ['controller' => 'Users', 'action' => 'view']);
     $routes->connect('/utilisateur/ajouter', ['controller' => 'Users', 'action' => 'add']);
     $routes->connect('/utilisateur/editer/*', ['controller' => 'Users', 'action' => 'edit']);
     $routes->connect('/utilisateur/permission', ['controller' => 'Permissions', 'action' => 'index']);
@@ -102,8 +102,8 @@ Router::prefix('portfolios', function($routes) {
     $routes->fallbacks(DashedRoute::class);
 });
 Router::prefix('Tchat', function($routes) {
-    $routes->connect('/', ['controller' => 'Tchats','action' => 'index'], ['routeClass' => 'InflectedRoute']);
-    $routes->connect('/add', ['controller' => 'Tchats','action' => 'add'], ['routeClass' => 'InflectedRoute']);
+    $routes->connect('/*', ['controller' => 'Tchats','action' => 'index'], ['routeClass' => 'InflectedRoute']);
+    $routes->connect('/add/*', ['controller' => 'Tchats','action' => 'add'], ['routeClass' => 'InflectedRoute']);
     $routes->fallbacks(DashedRoute::class);
 });
 Router::prefix('forums', function($routes) {

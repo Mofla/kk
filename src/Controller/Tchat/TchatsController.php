@@ -16,7 +16,7 @@ class TchatsController extends AppController
      *
      * @return \Cake\Network\Response|null
      */
-    public function index()
+    public function index($id_room = NULL)
     {
         $user = $this->Auth->User('username');
         $id = $this->Auth->User('id');
@@ -29,7 +29,7 @@ class TchatsController extends AppController
         $time_2->i18nFormat('Ymdhms');
         $time_2->modify('-1 weeks');
 
-        $list_message = $this->Tchats->find('all')->contain('Users')->order('date');
+        $list_message = $this->Tchats->find('all')->contain('Users')->where(['room_id'=>$id_room])->order('date');
         $count_message = $this->Tchats->find('all')->count();
 
         $this->set(compact('tchat','list_message','user','id','time_2','count_message'));
@@ -43,11 +43,13 @@ class TchatsController extends AppController
         $this->set(compact('nombre_message'));
     }
 
-    public function add()
+    public function add($id_room = NULL)
     {
-
+        $users = $this->Auth->User('id');
+        $this->loadModel('Rooms');
+        $id_rooms = $id_room ;
         $user = $this->Auth->User('username');
-        $id = $this->Auth->User('id');
+        $id_user = $this->Auth->User('id');
         $time = Time::now();
         $time->timezone = 'Europe/Paris';
         $time->i18nFormat('Y-m-d h:m:s');
@@ -57,24 +59,24 @@ class TchatsController extends AppController
         $time_2->i18nFormat('Ymdhms');
         $time_2->modify('-1 weeks');
 
-        $list_message = $this->Tchats->find('all')->contain('Users')->order('date');
-
         $tchat = $this->Tchats->newEntity();
 
         if ($this->request->is('ajax')) {
 
             $tchat = $this->Tchats->patchEntity($tchat, $this->request->data);
 
-            $tchat->user_id = $this->Auth->User('id');
+/*            $tchat->room_id = $id_room ;*/
+
+            $tchat->user_id = $users ;
 
             $tchat->date = $time;
 
              $this->Tchats->save($tchat);
         }
+        $name_rooms = $this->Rooms->find('all')->contain('Users')->where(['id'=>$id_rooms]);
+        $count_message = $this->Tchats->find('all')->where(['room_id'=>$id_rooms])->count();
 
-        $count_message = $this->Tchats->find('all')->count();
-
-        $this->set(compact('tchat','list_message','user','id','time_2','count_message'));
+        $this->set(compact('tchat','user','id_user','time_2','count_message','id_rooms','name_rooms','users'));
         $this->set('_serialize', ['tchat']);
     }
     public function history(){
@@ -117,4 +119,6 @@ class TchatsController extends AppController
 
         $this->set(compact('list_message','date_fin','date_debut','empty'));
 }
+
+public function autorize(){}
 }
