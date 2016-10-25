@@ -147,10 +147,18 @@ class PermissionsController extends AppController
 //                'Permissions','Permissions.Roles'
 //            ]
 //        ]);
+
+
         $permissions = $this->Common->listPermissions();
 
-        $roles = $this->Permissions->Roles->find();
+        $this->set(compact('permissions'));
+    }
 
-        $this->set(compact('permissions','roles'));
+    public function ddd()
+    {
+        if($this->request->is('post'))
+        {
+            $this->set('data',$this->request->data);
+        }
     }
 }
