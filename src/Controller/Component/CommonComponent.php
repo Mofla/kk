@@ -12,7 +12,7 @@ class CommonComponent extends Component
 {
     public $components = ['Auth'];
 
-    public function scanEverything()
+    public function scanEverything($table = false)
     {
         $path = './src/Controller';
         $directories = scandir($path);
@@ -49,7 +49,25 @@ class CommonComponent extends Component
                         $actions = $class->getMethods(ReflectionMethod::IS_PUBLIC);
                         foreach($actions as $action){
                             if($action->class == $className && !in_array($action->name, $ignoreClasses)){
-                                $files[$directory][$controller_renamed][] = $action->name;
+                                // if we want actions as keys or not
+                                if(!$table)
+                                {
+                                    $files[$directory][$controller_renamed][] = $action->name;
+                                }
+                                else
+                                {
+                                    $table = TableRegistry::get('Connectors');
+                                    $permissions = $table->find('all',[
+                                        'contain' => 'Permissions',
+                                        'conditions' => [
+                                            'module' => $directory,
+                                            'controller' => $controller_renamed,
+                                            'function' => $action->name
+                                        ]
+                                    ])->first();
+                                    ($permissions) ? $id = ['id' => $permissions->permission->id, 'name' => $permissions->permission->name, 'description' => $permissions->permission->description, 'menu' => $permissions->permission->menu] : $id = false;
+                                    $files[$directory][$controller_renamed][$action->name] = ["permissions"=>$id,"value"=>false];
+                                }
                             }
                         }
 
@@ -150,36 +168,39 @@ class CommonComponent extends Component
     public function listPermissions()
     {
         $table = TableRegistry::get('Roles');
-        $roles = $table->find('all');
+        $roles= $table->find('all',[
+            'contain' => ['Permissions','Permissions.Connectors']
+        ]);
         $all_permissions = [];
         $registered_permissions = [];
         $results = [];
 
+        // get all existing modules->controllers->function for each roles
         foreach($roles as $role)
         {
             $all_permissions[$role->name] = $this->scanEverything();
         }
 
-        $roles= $table->find('all',[
-            'contain' => ['Permissions','Permissions.Connectors']
-        ]);
+        // get all permissions listed in the db for each role
         foreach($roles as $role)
         {
-            $registered_permissions[$role->name] = [];
+            //$registered_permissions[$role->name] = [];
+            $registered_permissions[$role->name] = $this->scanEverything();
+            $users_permissions[$role->name] = $this->scanEverything(true);
+
             foreach($role->permissions as $permission)
             {
                 foreach ($permission->connectors as $connector)
                 {
-                    $registered_permissions[$role->name][$connector->module][$connector->controller][] = $connector->function;
+                    if(in_array($connector->function,$registered_permissions[$role->name][$connector->module][$connector->controller]))
+                    {
+                        // change array with permission_id and true;
+                        $users_permissions[$role->name][$connector->module][$connector->controller][$connector->function]['value'] = true;
+                    }
+                    //$registered_permissions[$role->name][$connector->module][$connector->controller][] = $connector->function;
                 }
             }
         }
-        foreach($all_permissions as $all_permission)
-        {
-
-        }
-
-
-        return $registered_permissions;
+        return $users_permissions;
     }
 }
