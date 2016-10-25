@@ -10,6 +10,22 @@
 <?= $this->Html->css('../assets/vis/vis.css') ?>
 
 
+<?php
+function custom_echo($x, $length)
+{
+    if(strlen($x)<=$length)
+    {
+        echo $x;
+    }
+    else
+    {
+        $y=substr($x,0,$length) . '...';
+        echo $y;
+    }
+}
+?>
+
+
 
 <div class="task-modal-base" xmlns="http://www.w3.org/1999/html">
     <div class="task-modal-cont"></div>
@@ -48,7 +64,7 @@
                             <div class="portlet box  blue-chambray">
                                 <div class="portlet-title">
                                     <div class="caption">
-                                        Projet : <?= $project->name ?>
+                                        Projet : <?= custom_echo($project->name, 20) ?>
                                     </div>
                                     <div class="actions">
                                         <div class="btn-group">

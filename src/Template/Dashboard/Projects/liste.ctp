@@ -3,11 +3,25 @@
 <?= $this->Html->css('sweetalert.css') ?>
 <?= $this->Html->script('sweetalert.min.js') ?>
 
+
+<?php
+function custom_echo($x, $length)
+{
+    if(strlen($x)<=$length)
+    {
+        echo $x;
+    }
+    else
+    {
+        $y=substr($x,0,$length) . '...';
+        echo $y;
+    }
+}
+?>
+
+
 <div class="col-md-12 col-sm-12 col-xs-12">
-
-
     <div class="portlet-body">
-
         <div class="mt-element-list">
             <div class="col-md-4 col-sm-4 col-xs-4 colum">
                 <div class="mt-list-head list-simple ext-1 font-white bg-blue">
@@ -22,7 +36,7 @@
                         <?php if ($task->state->name === 'todo'): ?>
                             <div class="portlet box blue-chambray" id="task-<?= $task->id ?>" style="margin: 1px">
                                 <div class="portlet-title">
-                                    <div class="caption"><?= $task->name ?></div>
+                                    <div class="caption"><?= custom_echo($task->name, 30) ?></div>
                                     <div class="actions">
                                         <div class="btn-group">
                                             <?= $this->Html->link('<i class="glyphicon glyphicon-eye-open"></i>', ['controller' => 'Tasks', 'action' => 'viewajax', $task->id], ['id' => 'task-' . $task->id, 'class' => 'btn btn-default btn-sm view-task', 'escape' => false]) ?>
@@ -34,12 +48,9 @@
                                             <a id="task-delete-<?= $task->id ?>" class="btn btn-default btn-sm delete-task"><i
                                                     class="glyphicon glyphicon-trash"></i> </a>
                                         </div>
-
                                     </div>
                                 </div>
-
                             </div>
-
                         <?php endif; ?>
                     <?php endforeach; ?>
                     <div class="portlet portlet-sortable-empty"></div>
@@ -57,7 +68,7 @@
                         <?php if ($task->state->name === 'doing'): ?>
                             <div class="portlet box blue-chambray" id="task-<?= $task->id ?>" style="margin: 1px">
                                 <div class="portlet-title">
-                                    <div class="caption"><?= $task->name ?></div>
+                                    <div class="caption"><?= custom_echo($task->name, 30) ?></div>
                                     <div class="actions">
                                         <div class="btn-group">
                                             <?= $this->Html->link('<i class="glyphicon glyphicon-eye-open"></i>', ['controller' => 'Tasks', 'action' => 'viewajax', $task->id], ['id' => 'task-' . $task->id, 'class' => 'btn btn-default btn-sm view-task', 'escape' => false]) ?>
@@ -71,7 +82,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         <?php endif; ?>
                     <?php endforeach; ?>
@@ -89,7 +99,7 @@
                         <?php if ($task->state->name === 'done'): ?>
                             <div class="portlet box blue-chambray" id="task-<?= $task->id ?>" style="margin: 1px">
                                 <div class="portlet-title">
-                                    <div class="caption"><?= $task->name ?></div>
+                                    <div class="caption"><?= custom_echo($task->name, 30) ?></div>
                                     <div class="actions">
                                         <div class="btn-group">
                                             <?= $this->Html->link('<i class="glyphicon glyphicon-eye-open"></i>', ['controller' => 'Tasks', 'action' => 'viewajax', $task->id], ['id' => 'task-' . $task->id, 'class' => 'btn btn-default btn-sm view-task', 'escape' => false]) ?>
@@ -103,12 +113,10 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         <?php endif; ?>
                     <?php endforeach; ?>
                     <div class="portlet-sortable-empty ui-state-disabled"></div>
-
                 </div>
             </div>
         </div>
