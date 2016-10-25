@@ -40,22 +40,21 @@ class UsersController extends AppController
      */
     public function view($id = null)
     {
-        $this->loadModel('Portfolios_users');
+        $this->loadModel('promotions');
         $user = $this->Users->get($id, [
-            'contain' => ['Roles']
+            'contain' => ['Roles','Projects']
         ]);
-        if($id==$this->Auth->User('id') OR $this->Auth->User('role_id')==1) {
-            $autoriser= true;
-        }
-        else{
-            $autoriser=false;
-        }
+
+        $promotions = $this->promotions->find('all',[
+            'conditions' => ['promotions.user_id' => $id],
+        ]);
+
 
         $roles = $this->Users->Roles->find('list', ['limit' => 200]);
 
         $this->set('user', $user);
         $this->set('roles', $roles);
-        $this->set('autoriser',$autoriser);
+        $this->set(compact('promotions'));
         $this->set('_serialize', ['user']);
     }
 
