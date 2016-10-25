@@ -13,20 +13,18 @@
 <?php
 function custom_echo($x, $length)
 {
-    if(strlen($x)<=$length)
-    {
+    if (strlen($x) <= $length) {
         echo $x;
-    }
-    else
-    {
-        $y=substr($x,0,$length) . '...';
+    } else {
+        $y = substr($x, 0, $length) . '...';
         echo $y;
     }
 }
+
 ?>
 
 
-<div class="task-modal-base" xmlns="http://www.w3.org/1999/html">
+<div class="task-modal-base">
     <div class="task-modal-cont"></div>
 </div>
 
@@ -57,52 +55,53 @@ function custom_echo($x, $length)
     <div class="col-md-11 col-sm-11 col-xs-11">
         <div class="tab-content">
             <div class="tab-pane active" id="tab_1">
-                <?php $rows = 0;
-                if ($rows % 3) :
-                ?>
-                <div class="row">
+                <?php
+                $rows = 0;
+                foreach ($projects as $project): ?>
+                    <?php $rows++ ?>
+                    <?php if ($rows % 3 == 0) : ?>
+                        <div class="row">
                     <?php endif; ?>
-                    <?php foreach ($projects as $project): ?>
-                        <?php ?>
-                        <div class="col-md-4 col-sm-4 col-xs-4">
-                            <div class="portlet box  blue-chambray">
-                                <div class="portlet-title">
-                                    <div class="caption">
-                                        <span class="glyphicon glyphicon-file fa-md"></span> <?= custom_echo($project->name, 20) ?>
-                                    </div>
-                                    <div class="actions">
-                                        <div class="btn-group">
-                                            <?= $this->Html->link('<i class="glyphicon glyphicon-eye-open"></i>', ['action' => 'gestion', $project->id], ['class' => 'btn btn-default btn-sm', 'escape' => false]) ?>
-                                        </div>
-                                        <div class="btn-group">
-                                            <?= $this->Html->link('<i class="glyphicon glyphicon-pencil"></i>', ['action' => 'edit', $project->id], ['id' => 'project-' . $project->id, 'class' => 'edit-project btn btn-default btn-sm', 'escape' => false]) ?>
-                                        </div>
-                                        <div class="btn-group">
-                                            <a id="project-<?= $project->id ?>"
-                                               class="btn btn-default btn-sm delete-project"><i
-                                                    class="glyphicon glyphicon-trash"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="portlet-body">
-                                    <div class="panel-body">
-                                            <?= $project->description ?>
-                                    </div>
 
+                    <div class="col-md-4 col-sm-4 col-xs-4">
+                        <div class="portlet box  blue-chambray">
+                            <div class="portlet-title">
+                                <div class="caption">
+                                        <span
+                                            class="glyphicon glyphicon-file fa-md"></span> <?= custom_echo($project->name, 20) ?>
                                 </div>
-                                <div class="portlet-footer" style="color: white">
-                                     <i class="glyphicon glyphicon-user"></i> <?= count($project->users) ?> sur <?= $project->users_number ?>
-                                    <br>
-                                     <i class="glyphicon glyphicon-calendar"></i> Du <?= $project->start_date ?> Au <?= $project->end_date ?>
+                                <div class="actions">
+                                    <div class="btn-group">
+                                        <?= $this->Html->link('<i class="glyphicon glyphicon-eye-open"></i>', ['action' => 'gestion', $project->id], ['class' => 'btn btn-default btn-sm', 'escape' => false]) ?>
+                                    </div>
+                                    <div class="btn-group">
+                                        <?= $this->Html->link('<i class="glyphicon glyphicon-pencil"></i>', ['action' => 'edit', $project->id], ['id' => 'project-' . $project->id, 'class' => 'edit-project btn btn-default btn-sm', 'escape' => false]) ?>
+                                    </div>
+                                    <div class="btn-group">
+                                        <a id="project-<?= $project->id ?>"
+                                           class="btn btn-default btn-sm delete-project"><i
+                                                class="glyphicon glyphicon-trash"></i></a>
+                                    </div>
                                 </div>
                             </div>
+                            <div class="portlet-body">
+                                <div class="panel-body">
+                                    <?= $project->description ?>
+                                </div>
+                            </div>
+                            <div class="portlet-footer" style="color: white">
+                                <i class="glyphicon glyphicon-user"></i> <?= count($project->users) ?>
+                                sur <?= $project->users_number ?>
+                                <br>
+                                <i class="glyphicon glyphicon-calendar"></i> Du <?= $project->start_date ?>
+                                Au <?= $project->end_date ?>
+                            </div>
                         </div>
-
-
-                    <?php endforeach; ?>
-                    <?php if ($rows % 3) : ?>
-                </div>
-                <?php endif; ?>
+                    </div>
+                    <?php if ($rows % 3 == 0) : ?>
+                        </div>
+                    <?php endif; ?>
+                <?php endforeach; ?>
             </div>
             <div class="tab-pane" id="tab_2">
                 <div class="row">
@@ -119,7 +118,6 @@ function custom_echo($x, $length)
         </div>
     </div>
 </div>
-
 
 
 <?= $this->Html->script('../assets/global/plugins/jquery-ui/jquery-ui.min.js') ?>
