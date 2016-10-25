@@ -27,7 +27,7 @@ function custom_echo($x, $length)
                 <div class="mt-list-head list-simple ext-1 font-white bg-blue">
                     <div class="list-head-title-container">
                         <h4 class="list-title">
-                            TODO
+                            <i class="fa fa-calendar"></i> TODO
                         </h4>
                     </div>
                 </div>
@@ -59,7 +59,7 @@ function custom_echo($x, $length)
             <div class="col-md-4 col-sm-4 col-xs-4">
                 <div class="mt-list-head list-simple ext-1 font-white bg-yellow-soft">
                     <div class="list-head-title-container">
-                        <h4 class="list-title">DOING</h4>
+                        <h4 class="list-title"><i class="fa fa-wrench"></i> DOING</h4>
                     </div>
                 </div>
 
@@ -91,7 +91,7 @@ function custom_echo($x, $length)
             <div class="col-md-4 col-sm-4 col-xs-4">
                 <div class="mt-list-head list-simple ext-1 font-white bg-green-jungle">
                     <div class="list-head-title-container">
-                        <h4 class="list-title">DONE</h4>
+                        <h4 class="list-title"><i class="fa fa-check-circle"></i> DONE</h4>
                     </div>
                 </div>
                 <div id="colum-3" class="colum">

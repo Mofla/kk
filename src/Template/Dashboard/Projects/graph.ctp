@@ -1,14 +1,13 @@
-
-<input type="button" id="btn-UD" value="Up-Down" class="btn btn-default">
-<input type="button" id="btn-DU" value="Down-Up" class="btn btn-default">
-<input type="button" id="btn-LR" value="Left-Right" class="btn btn-default">
-<input type="button" id="btn-RL" value="Right-Left" class="btn btn-default">
+<button type="button" id="btn-UD" class="btn btn-default"><span class="glyphicon glyphicon-chevron-down"></span> </button>
+<button type="button" id="btn-DU" value="Down-Up" class="btn btn-default"><span class="glyphicon glyphicon-chevron-up"></span> </button>
+<button type="button" id="btn-LR" value="Left-Right" class="btn btn-default"><span class="glyphicon glyphicon-chevron-right"></span> </button>
+<button type="button" id="btn-RL" value="Right-Left" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span> </button>
 <input type="hidden" id='direction' value="UD">
 <select id="layout" class="form-control">
-    <option value="directed-true">directed</option>
-    <option value="hubsize-true">hubsize</option>
-    <option value="directed-false">none</option>
+    <option value="hubsize-true">Vue hiérarchique</option>
+    <option value="directed-false">Vue en cercle</option>
 </select>
+
 
 <div id="network-popUp">
     <span id="operation">node</span> <br>
@@ -133,7 +132,7 @@
         draw();
     };
 
-    var layoutMethod = "directed";
+    var layoutMethod = "hubsize";
     var layoutBool = true;
 
     //may be useful someday
@@ -191,7 +190,7 @@
         var edges = new vis.DataSet([
             <?php foreach ($endPoints as $endPoint) : ?>
 
-            {from: <?= $endPoint->id ?>, to: 'end', dashes: true},
+            {from: <?= $endPoint->id ?>, to: 'end'},
             <?php endforeach; ?>
 
             <?php foreach ($project->from_to_tasks as $fromto) : ?>
@@ -310,13 +309,12 @@
                             project_id: <?= $project->id ?>,
                             from_id: data.from,
                             to_id: data.to
-                        }
+                        };
                         var ajax = $.ajax({
                             type: "POST",
                             data: datAjax,
                             url: '<?= $this->Url->build(["controller" => "FromToTasks", "action" => "add"]); ?>'
                         });
-
 
                         callback(data);
                     }
@@ -335,18 +333,14 @@
                                 project_id: <?= $project->id ?>,
                                 from_id: array[i].from,
                                 to_id: array[i].to
-                            }
+                            };
                             var ajax = $.ajax({
                                 type: "POST",
                                 data: datAjax,
                                 url: '<?= $this->Url->build(["controller" => "FromToTasks", "action" => "deleteajax"]); ?>'
                             });
-
-
                         }
                     }
-
-
                     callback(data);
                 }
             }
@@ -357,9 +351,15 @@
         // add event listeners
 
 
-        network.on("click", function (params) {
-            console.log(params.nodes[0]);
+        network.on("doubleClick", function (params) {
 
+            var id = params.nodes[0];
+
+            var url = '<?= $this->Url->build(['controller' => 'Tasks', 'action' => 'viewajax']); ?>' + '/' + id;
+
+            $('.task-modal-cont').load(url, function (result) {
+                $('#taskModal').modal({show: true});
+            });
         });
     }
 

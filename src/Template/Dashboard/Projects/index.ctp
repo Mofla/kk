@@ -68,7 +68,7 @@ function custom_echo($x, $length)
                             <div class="portlet box  blue-chambray">
                                 <div class="portlet-title">
                                     <div class="caption">
-                                        Projet : <?= custom_echo($project->name, 20) ?>
+                                        <span class="glyphicon glyphicon-file fa-md"></span> <?= custom_echo($project->name, 20) ?>
                                     </div>
                                     <div class="actions">
                                         <div class="btn-group">
@@ -91,9 +91,9 @@ function custom_echo($x, $length)
 
                                 </div>
                                 <div class="portlet-footer" style="color: white">
-                                    Participants : <?= count($project->users) ?> sur <?= $project->users_number ?>
+                                     <i class="glyphicon glyphicon-user"></i> <?= count($project->users) ?> sur <?= $project->users_number ?>
                                     <br>
-                                    Du <?= $project->start_date ?> Au <?= $project->end_date ?>
+                                     <i class="glyphicon glyphicon-calendar"></i> Du <?= $project->start_date ?> Au <?= $project->end_date ?>
                                 </div>
                             </div>
                         </div>
