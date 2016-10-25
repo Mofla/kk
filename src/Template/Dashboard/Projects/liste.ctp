@@ -33,7 +33,6 @@
                                         <div class="btn-group">
                                             <a id="task-delete-<?= $task->id ?>" class="btn btn-default btn-sm delete-task"><i
                                                     class="glyphicon glyphicon-trash"></i> </a>
-
                                         </div>
 
                                     </div>
@@ -64,19 +63,11 @@
                                             <?= $this->Html->link('<i class="glyphicon glyphicon-eye-open"></i>', ['controller' => 'Tasks', 'action' => 'viewajax', $task->id], ['id' => 'task-' . $task->id, 'class' => 'btn btn-default btn-sm view-task', 'escape' => false]) ?>
                                         </div>
                                         <div class="btn-group">
-                                            <a class="btn btn-default btn-sm" href="javascript:;"
-                                               data-toggle="dropdown">
-                                                <i class="icon-wrench"></i>
-                                                <i class="fa fa-angle-down"></i>
-                                            </a>
-                                            <ul class="dropdown-menu pull-right">
-                                                <li>
-                                                    <?= $this->Html->link('<i class="fa fa-pencil"></i> Edit ', ['controller' => 'Tasks', 'action' => 'edit', $task->id], ['id' => 'task-' . $task->id, 'class' => 'edittask', 'escape' => false]) ?>
-                                                </li>
-                                                <li>
-                                                    <?= $this->Form->postLink('<i class="glyphicon glyphicon-trash"></i> Delete', ['controller' => 'Tasks', 'action' => 'delete', $task->id], ['escape' => false], ['confirm' => __('Are you sure you want to delete # {0}?', $task->id)]) ?>
-                                                </li>
-                                            </ul>
+                                            <?= $this->Html->link('<i class="glyphicon glyphicon-pencil"></i>', ['controller' => 'Tasks', 'action' => 'edit', $task->id], ['id' => 'task-' . $task->id, 'class' => 'edittask btn btn-default btn-sm', 'escape' => false]) ?>
+                                        </div>
+                                        <div class="btn-group">
+                                            <a id="task-delete-<?= $task->id ?>" class="btn btn-default btn-sm delete-task"><i
+                                                    class="glyphicon glyphicon-trash"></i> </a>
                                         </div>
                                     </div>
                                 </div>
@@ -104,19 +95,11 @@
                                             <?= $this->Html->link('<i class="glyphicon glyphicon-eye-open"></i>', ['controller' => 'Tasks', 'action' => 'viewajax', $task->id], ['id' => 'task-' . $task->id, 'class' => 'btn btn-default btn-sm view-task', 'escape' => false]) ?>
                                         </div>
                                         <div class="btn-group">
-                                            <a class="btn btn-default btn-sm" href="javascript:;"
-                                               data-toggle="dropdown">
-                                                <i class="icon-wrench"></i>
-                                                <i class="fa fa-angle-down"></i>
-                                            </a>
-                                            <ul class="dropdown-menu pull-right">
-                                                <li>
-                                                    <?= $this->Html->link('<i class="fa fa-pencil"></i> Edit ', ['controller' => 'Tasks', 'action' => 'edit', $task->id], ['id' => 'task-' . $task->id, 'class' => 'edittask', 'escape' => false]) ?>
-                                                </li>
-                                                <li>
-                                                    <?= $this->Form->postLink('<i class="glyphicon glyphicon-trash"></i> Delete', ['controller' => 'Tasks', 'action' => 'delete', $task->id], ['escape' => false], ['confirm' => __('Are you sure you want to delete # {0}?', $task->id)]) ?>
-                                                </li>
-                                            </ul>
+                                            <?= $this->Html->link('<i class="glyphicon glyphicon-pencil"></i>', ['controller' => 'Tasks', 'action' => 'edit', $task->id], ['id' => 'task-' . $task->id, 'class' => 'edittask btn btn-default btn-sm', 'escape' => false]) ?>
+                                        </div>
+                                        <div class="btn-group">
+                                            <a id="task-delete-<?= $task->id ?>" class="btn btn-default btn-sm delete-task"><i
+                                                    class="glyphicon glyphicon-trash"></i> </a>
                                         </div>
                                     </div>
                                 </div>
