@@ -13,9 +13,12 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-/*
+/*use Cake\Event\EventManager;
  * You can remove this if you are confident that your PHP version is sufficient.
  */
+
+
+
 if (version_compare(PHP_VERSION, '5.5.9') < 0) {
     trigger_error('Your PHP version must be equal or higher than 5.5.9 to use CakePHP.', E_USER_ERROR);
 }
@@ -65,7 +68,8 @@ use Cake\Mailer\Email;
 use Cake\Network\Request;
 use Cake\Utility\Inflector;
 use Cake\Utility\Security;
-
+use Cake\Event\EventList;
+use App\Event\ProjectsEventListener;
 /*
  * Read configuration file and inject configuration into various
  * CakePHP classes.
@@ -223,3 +227,14 @@ if (Configure::read('debug')) {
 }
 
 Plugin::load('Migrations');
+
+//gestion events
+
+use App\Event\PostListener;
+use Cake\Event\EventManager;
+use Cake\Event\Event;
+
+
+
+//      $data = new PostListener();
+//    $this->Projects->eventManager()->on($data);
