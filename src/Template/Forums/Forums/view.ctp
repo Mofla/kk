@@ -26,14 +26,18 @@
         <?php foreach ($forum->threads as $threads): ?>
         <tr class="sscategory">
             <td width="50%"><?= $this->Html->link(__($threads->subject), ['controller' => 'Threads','action' => 'view', $threads->id]) ?>
-            <br> par <?= h($threads->user->username) ?></td>
+            <br> par
+                <?= $this->Html->link($threads->user->username, 'utilisateur/profil/'.$threads->user->id.'') ?>
+            </td>
             <td width="10%"><?= count($threads->posts) ?></td>
             <td width="10%" ><?= $threads->countview ?></td>
             <td width="25%">
 
             <?php if ($threads->lastpost) : ?>
             le <?= $threads->lastpost->i18nformat('dd/MM/YY à HH:mm', 'Europe/Paris') ?>
-                <br> par <?= $threads->lastuserthread->username ?> </br>
+                <br> par
+                    <?= $this->Html->link($threads->lastuserthread->username, 'utilisateur/profil/'.$threads->lastuserthread->id.'') ?>
+                </br>
 
             <?php else: ?>
             Aucun Message

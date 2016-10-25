@@ -56,7 +56,8 @@ class ForumsController extends AppController
     public function listforum()
     {
         $cat = $this->Forums->Categories->find('all')
-        ->contain('Forums');
+        ->contain('Forums')
+            ->where(['id !=' => 16]);
 
         $this->set(compact('cat'));
     }
@@ -127,7 +128,7 @@ class ForumsController extends AppController
 //---------------------------------------------------------------------------------------------CATEGORIES
     public function listcategory()
     {
-        $categories = $this->Forums->Categories->find('all');
+        $categories = $this->Forums->Categories->find('all')->where(['id !=' => 16]);
         $category = $this->Forums->Categories->newEntity();
 
         $this->set(compact('categories','category'));
