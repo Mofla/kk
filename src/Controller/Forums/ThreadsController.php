@@ -34,7 +34,7 @@ class ThreadsController extends AppController
      * @return \Cake\Network\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($id = null)
+    public function view($fid = null, $forum = null, $slug = null, $id = null)
     {
         $sub = $this->Threads->Subscriptions;
         $user = $this->Auth->user('id');
@@ -63,7 +63,7 @@ class ThreadsController extends AppController
      *
      * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
      */
-    public function add($id = null)
+    public function add($slug = null, $id = null)
     {
         $user = $this->Auth->user('id');
 

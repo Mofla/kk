@@ -1,11 +1,9 @@
 <?= $this->element('Forum/search-forum') ?>
-<div class="col-md-12">
-    <?= $this->Html->link($forum->name, ['controller' => 'Forums', 'action' => 'view', $forum->id])  ?>
-</div>
+
 <div class="col-md-12 voffset2">
 
 <div class="right">
-    <a href="<?= $this->Url->build([ 'controller' => 'Threads', 'action' => 'add' , $forum->id]); ?>"
+    <a href="<?= $this->Url->build([ 'controller' => 'Threads', 'action' => 'add' , 'slug' => strtolower(str_replace(' ', '-', $forum->name)), 'id' => $forum->id]) ?>"
        class="btn btn-success " role="button" aria-pressed="true"> <i class="fa fa-plus"></i> CREER UN SUJET</a>
 </div>
 
@@ -25,7 +23,7 @@
         </tr>
         <?php foreach ($forum->threads as $threads): ?>
         <tr class="sscategory">
-            <td width="50%"><?= $this->Html->link(__($threads->subject), ['controller' => 'Threads','action' => 'view', $threads->id]) ?>
+            <td width="50%"><?= $this->Html->link(__($threads->subject), ['controller' => 'Threads','action' => 'view', 'fid' => $forum->id, 'forum' => strtolower(str_replace(' ', '-', $forum->name)), 'slug' => strtolower(str_replace(' ', '-', $threads->subject)), 'id' => $threads->id]) ?>
             <br> par
                 <?= $this->Html->link($threads->user->username, 'utilisateur/profil/'.$threads->user->id.'') ?>
             </td>

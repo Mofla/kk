@@ -1,8 +1,5 @@
 <?= $this->element('Forum/search-forum') ?>
-<div class="col-md-12 dash-hide">
-    <?= $thread->has('forum') ? $this->Html->link($thread->forum->name, ['controller' => 'Forums', 'action' => 'view',
-    $thread->forum->id]) : '' ?>
-</div>
+
 <div class="col-md-12 voffset2">
 
 <?php $check = 'quotetopic' ; ?>
@@ -14,7 +11,11 @@
     <button id="sub" class="btn btn-warning dash-hide" role="button" aria-pressed="true"> <i class="fa fa-thumb-tack"></i> S'ABONNER A CE SUJET</button>
     <?php endif ?>
 
-    <a href="<?= $this->Url->build([ 'controller' => 'Posts', 'action' => 'add' , $thread->id]); ?>"
+    <a href="<?= $this->Url->build(['controller' => 'Posts', 'action' => 'add' ,
+    'fid' => $thread->forum->id,
+    'forum' => strtolower(str_replace(' ', '-', $thread->forum->name)),
+    'slug' => strtolower(str_replace(' ', '-', $thread->subject)),
+     'id' => $thread->id]) ?>"
        class="btn btn-success dash-post"  role="button" aria-pressed="true"> <i class="fa fa-comments-o"></i> REPONDRE</a>
 </div>
 
@@ -147,8 +148,14 @@
             <td>
                 <div class="left">MP</div>
                 <div class="right dash-hide">
-                    <a href="<?= $this->Url->build([ 'controller' => 'Posts', 'action' => 'add' , $thread->id, $check]); ?>"
-                       class="btn btn-sm blue dash-cite" role="button" aria-pressed="true"><i class="fa fa-quote-right "></i> CITER</a>
+                    <a href="<?= $this->Url->build([ 'controller' => 'Posts', 'action' => 'addquote' ,
+    'fid' => $thread->forum->id,
+    'forum' => strtolower(str_replace(' ', '-', $thread->forum->name)),
+    'slug' => strtolower(str_replace(' ', '-', $thread->subject)),
+     'id' => $thread->id,
+          'quote' => $check
+     ]); ?>"
+                       class="btn btn-sm blue" role="button" aria-pressed="true"><i class="fa fa-quote-right"></i> CITER</a>
                     <a href="<?= $this->Url->build([ 'controller' => 'Threads', 'action' => 'edit' , $thread->id]); ?>"
                        class="btn btn-sm purple dash-edit" role="button" aria-pressed="true"><i class="fa fa-pencil "></i> EDITER</a>
                     <?= $this->Form->postLink(__('<i class="fa fa-times"></i>'),[ 'controller' => 'Threads'
@@ -288,7 +295,13 @@
         <td>
             <div class="left">MP</div>
             <div class="right dash-hide">
-                <a href="<?= $this->Url->build([ 'controller' => 'Posts', 'action' => 'add' , $thread->id, $posts->id]); ?>"
+                <a href="<?= $this->Url->build([ 'controller' => 'Posts', 'action' => 'addquote' ,
+    'fid' => $thread->forum->id,
+    'forum' => strtolower(str_replace(' ', '-', $thread->forum->name)),
+    'slug' => strtolower(str_replace(' ', '-', $thread->subject)),
+     'id' => $thread->id,
+          'quote' => $posts->id
+     ]); ?>"
                    class="btn btn-sm blue" role="button" aria-pressed="true"><i class="fa fa-quote-right"></i> CITER</a>
                 <a href="<?= $this->Url->build([ 'controller' => 'Posts', 'action' => 'edit' , $posts->id]); ?>"
                    class="btn btn-sm purple" role="button" aria-pressed="true"><i class="fa fa-pencil"></i> EDITER</a>
@@ -317,8 +330,12 @@
 <?php endif; ?>
 
 <div class="right">
-    <a href="<?= $this->Url->build([ 'controller' => 'Posts', 'action' => 'add' , $thread->id]); ?>"
-       class="btn btn-success dash-post" role="button" aria-pressed="true"> <i class="fa fa-comments-o"></i> REPONDRE</a>
+    <a href="<?= $this->Url->build(['controller' => 'Posts', 'action' => 'add' ,
+    'fid' => $thread->forum->id,
+    'forum' => strtolower(str_replace(' ', '-', $thread->forum->name)),
+    'slug' => strtolower(str_replace(' ', '-', $thread->subject)),
+     'id' => $thread->id]) ?>"
+       class="btn btn-success dash-post"  role="button" aria-pressed="true"> <i class="fa fa-comments-o"></i> REPONDRE</a>
 </div>
 
 </div>
