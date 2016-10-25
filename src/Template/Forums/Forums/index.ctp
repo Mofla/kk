@@ -48,7 +48,9 @@
                     <?php echo "le ".$section->lasttopicuser->created->i18nformat('dd/MM/YY à HH:mm', 'Europe/Paris') ; ?> <br>
                     <?php endif ?>
                     <?php if ($section->user) : ?>
-                    <?php echo "par ".$section->user->username ; ?></td>
+                    par
+                    <?= $this->Html->link($section->user->username, 'utilisateur/profil/'.$section->user->id.'') ?>
+                </td>
                 <?php else: ?>
                 Aucun Topic
                 <?php endif ?>
@@ -62,6 +64,35 @@ $id = $section->id ;
         </tbody>
     </table>
     <?php endforeach; ?>
+<!--__________________________________________________________________________________________________stats du forum-->
+
+    <table class="table">
+        <thead class="category">
+        <tr>
+            <th colspan="2" scope="col"><span class="h4">Statistiques du forum</span></th>
+        </tr>
+        </thead>
+        <tr class="ssthead">
+            <th colspan="2" scope="col" >Statistiques du forum</th>
+        </tr>
+        <tbody>
+
+        <tr class="sscategory">
+            <td width="6%">
+
+                <?= $this->Html->image("../uploads/icons/stat.png" , ['class' => 'forum-icon'])?>
+
+            </td>
+            <td width="94%">
+                Nos membres ont créé un total de <?= $countpost ?> messages dans <?= $countthread ?> sujets.<br>
+                Nous avons actuellement <?= $countuser ?> membres enregistrés.<br>
+                Bienvenue à notre nouveau membre, <?= $this->Html->link($lastuser->username, 'utilisateur/profil/'.$lastuser->id.'') ?>
+            </td>
+
+
+        </tbody>
+    </table>
+
 </div>
 </div>
 

@@ -19,7 +19,18 @@ class ForumsController extends AppController
             ->where(['id !=' => 16])
         ->order(['Categories.sort' => 'ASC']);
 
-        $this->set(compact('cat'));
+        $countpost = $this->Forums->Threads->Posts->find('all')
+            ->contain(['Threads.Forums.Categories'])
+            ->where(['Categories.id !=' => 16])->count();
+        $countthread = $this->Forums->Threads->find('all')
+            ->contain(['Forums.Categories'])
+            ->where(['Categories.id !=' => 16])->count();
+        $countuser = $this->Forums->Users->find('all')->count();
+        $lastuser = $this->Forums->Users->find('all')
+            ->select(['id','username'])
+            ->order(['Users.created' => 'DESC'])->first();
+
+        $this->set(compact('cat','countpost','countthread','countuser','lastuser'));
     }
 
     public function view($id = null)
