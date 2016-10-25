@@ -112,9 +112,9 @@ class ProjectsTable extends Table
 
     public function afterSave($created, $event){
         if ($created) {
-            debug($event);
-            die();
-            $project = new Event('Model.Project.add', $this);
+            $project = new Event('Model.Project.add', $this,[
+                'event' =>$event
+            ]);
             $this->eventManager()->dispatch($project);
             return true;
         }
