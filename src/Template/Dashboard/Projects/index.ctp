@@ -26,7 +26,6 @@ function custom_echo($x, $length)
 ?>
 
 
-
 <div class="task-modal-base" xmlns="http://www.w3.org/1999/html">
     <div class="task-modal-cont"></div>
 </div>
@@ -44,12 +43,12 @@ function custom_echo($x, $length)
             <br>
             <br>
             <li>
-                <button class="btn btn-default btn-lg" href="#tab_1" data-toggle="tab" id="btn_1"><span
+                <button class="btn blue btn-lg active" href="#tab_1" data-toggle="tab" id="btn_1"><span
                         class="glyphicon glyphicon-list" aria-hidden="true"></span>
                 </button>
             </li>
             <li>
-                <button class="btn btn-default btn-lg" href="#tab_2" data-toggle="tab" id="btn_2"><span
+                <button class="btn blue btn-lg" href="#tab_2" data-toggle="tab" id="btn_2"><span
                         class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
                 </button>
             </li>
@@ -58,8 +57,13 @@ function custom_echo($x, $length)
     <div class="col-md-11 col-sm-11 col-xs-11">
         <div class="tab-content">
             <div class="tab-pane active" id="tab_1">
+                <?php $rows = 0;
+                if ($rows % 3) :
+                ?>
                 <div class="row">
+                    <?php endif; ?>
                     <?php foreach ($projects as $project): ?>
+                        <?php ?>
                         <div class="col-md-4 col-sm-4 col-xs-4">
                             <div class="portlet box  blue-chambray">
                                 <div class="portlet-title">
@@ -71,7 +75,7 @@ function custom_echo($x, $length)
                                             <?= $this->Html->link('<i class="glyphicon glyphicon-eye-open"></i>', ['action' => 'gestion', $project->id], ['class' => 'btn btn-default btn-sm', 'escape' => false]) ?>
                                         </div>
                                         <div class="btn-group">
-                                            <?= $this->Html->link('<i class="glyphicon glyphicon-pencil"></i>', ['action' => 'edit', $project->id], ['id' => 'task-' . $project->id, 'class' => 'edittask btn btn-default btn-sm', 'escape' => false]) ?>
+                                            <?= $this->Html->link('<i class="glyphicon glyphicon-pencil"></i>', ['action' => 'edit', $project->id], ['id' => 'project-' . $project->id, 'class' => 'edit-project btn btn-default btn-sm', 'escape' => false]) ?>
                                         </div>
                                         <div class="btn-group">
                                             <a id="project-<?= $project->id ?>"
@@ -82,12 +86,7 @@ function custom_echo($x, $length)
                                 </div>
                                 <div class="portlet-body">
                                     <div class="panel-body">
-                                        <div class="row">
                                             <?= $project->description ?>
-                                        </div>
-                                        <div class="row">
-
-                                        </div>
                                     </div>
 
                                 </div>
@@ -101,7 +100,9 @@ function custom_echo($x, $length)
 
 
                     <?php endforeach; ?>
+                    <?php if ($rows % 3) : ?>
                 </div>
+                <?php endif; ?>
             </div>
             <div class="tab-pane" id="tab_2">
                 <div class="row">
@@ -151,6 +152,14 @@ function custom_echo($x, $length)
 
 <script>
 
+    //active links
+    var buttonsNav = $('#btn_1,#btn_2');
+
+    buttonsNav.on('click', function () {
+        buttonsNav.removeClass('active');
+        $(this).addClass('active');
+    });
+
 
     //project add modal
     $('#project-add').on('click', function (event) {
@@ -158,17 +167,22 @@ function custom_echo($x, $length)
 
         var url = '<?= $this->Url->build(['controller' => 'Projects', 'action' => 'add']); ?>';
 
-
         $('.task-modal-cont').load(url, function (result) {
             $('#taskModal').modal({show: true});
         });
     });
 
-    //sweet confirm for delete
-    function prettyConfirm(title, text, callback) {
+    //project edit modal
+    $('.edit-project').on('click', function (event) {
+        event.preventDefault();
+        var projectId = $(this).attr('id').split('-');
 
-    }
+        var url = '<?= $this->Url->build(['controller' => 'Projects', 'action' => 'edit']); ?>' + '/' + projectId[1];
 
+        $('.task-modal-cont').load(url, function (result) {
+            $('#taskModal').modal({show: true});
+        });
+    });
 
     $('.delete-project').on('click', function (item) {
         var thisItem = $(this).closest('.portlet');
@@ -194,13 +208,9 @@ function custom_echo($x, $length)
                     success: function () {
                         thisItem.hide();
                         swal("Deleted!", "Your imaginary file has been deleted.", "success");
-
                     }
                 });
-
             });
-
-
     });
 
 
