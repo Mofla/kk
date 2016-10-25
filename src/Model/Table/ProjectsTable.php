@@ -1,11 +1,13 @@
 <?php
 namespace App\Model\Table;
 
+use App\Event\ProjectListener;
 use Cake\Event\Event;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Cake\Event\EventManager;
 
 /**
  * Projects Model
@@ -107,12 +109,11 @@ class ProjectsTable extends Table
         return $validator;
     }
 
-    public function afteradd($project){
-        if ($this->newEntity($project)) {
-            $event = new Event('Model.Project.add', $this ,[
-            'projects' => $project
-            ]);
-            $this->eventManager()->dispatch($event);
+    public function afteradd($created){
+        if ($created) {
+            $info= $this->eventManager()->dispatch(new ProjectListener('Model.Project.add',$this));
+            debug($info);
+            die();
             return true;
         }
         return false;

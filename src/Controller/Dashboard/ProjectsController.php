@@ -4,6 +4,8 @@ namespace App\Controller\Dashboard;
 use App\Controller\AppController;
 use App\Event\ProjectListener;
 use Cake\Event\EventManager;
+use Cake\Event\Event;
+use Cake\Event\EventList;
 
 
 /**
@@ -112,8 +114,7 @@ class ProjectsController extends AppController
         $forum = $this->Projects->Forums->newEntity();
         $project = $this->Projects->newEntity();
 
-        $data = new ProjectListener();
-        $this->Projects->eventManager()->on($data);
+
 
         if ($this->request->is('post')) {
 
@@ -125,7 +126,14 @@ class ProjectsController extends AppController
                 $project->forum_id = $forum->id;
                 if ($this->Projects->save($project)) {
                     $this->Flash->success(__('The project has been saved.'));
-                    return $this->redirect(['action' => 'index']);
+//                    return $this->redirect(['action' => 'index']);
+                    $data = new ProjectListener();
+                    EventManager::instance()->setEventList(new EventList());
+                    $eventsFired=EventManager::instance()->getEventList();
+                    $firstEvent = $eventsFired[0];
+
+debug($firstEvent);
+                    die();
                 } else {
                     $this->Flash->error(__('The project could not be saved. Please, try again.'));
                 }
