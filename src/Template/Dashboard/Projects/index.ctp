@@ -4,66 +4,87 @@
 <?= $this->Html->script('../assets/global/plugins/jquery-ui/jquery-ui.min.js') ?>
 <?= $this->Html->script('../assets/global/plugins/bootstrap/js/bootstrap.min.js') ?>
 
+<?= $this->Html->css('sweetalert.css') ?>
+<?= $this->Html->script('sweetalert.min.js') ?>
 
-<div class="task-modal-base">
+<style>
+    .glyphicon.glyphicon-plus {
+        font-size: 50px;
+    }
+    #project-add {
+        text-align: center;
+    }
+</style>
+
+
+
+<div class="task-modal-base" xmlns="http://www.w3.org/1999/html">
     <div class="task-modal-cont"></div>
 </div>
 
 
-<div class="container-fluid">
-    <button class="btn btn-default" id="project-add">Ajouter un projet</button>
-    <br>
+<div class="container">
+    <ul class="nav nav-tabs-right">
     <div class="row">
-        <?php foreach ($projects as $project): ?>
         <div class="col-md-4 col-sm-4 col-xs-4">
+            <a id="project-add">
             <div class="portlet box  blue-chambray">
                 <div class="portlet-title">
                     <div class="caption">
-                        Projet : <?= $project->name ?>
-                    </div>
-                    <div class="actions">
-                        <div class="btn-group">
-                            <?= $this->Html->link('<i class="glyphicon glyphicon-eye-open"></i>', ['action' => 'gestion', $project->id], ['class' => 'btn btn-default btn-sm', 'escape' => false]) ?>
-
-                        </div>
-                        <div class="btn-group">
-                            <a class="btn btn-default btn-sm" href="javascript:;"
-                               data-toggle="dropdown">
-                                <i class="icon-wrench"></i>
-                                <i class="fa fa-angle-down"></i>
-                            </a>
-                            <ul class="dropdown-menu pull-right">
-                                <li>
-                                    <?= $this->Html->link('<i class="fa fa-pen"></i> Editer ', ['action' => 'edit', $project->id], ['id' => 'task-' . $project->id, 'class' => 'edittask', 'escape' => false]) ?>
-                                </li>
-                                <li>
-                                    <?= $this->Form->postLink('<i class="glyphicon glyphicon-trash"></i>', ['action' => 'delete', $project->id], ['escape' => false], ['confirm' => __('Are you sure you want to delete # {0}?', $project->id)]) ?>
-                                </li>
-                            </ul>
-                        </div>
+                       AJOUTER UN PROJET
                     </div>
                 </div>
                 <div class="portlet-body">
-                    <div class="panel-body">
-                        <div class="row">
-                            <?= $project->description ?>
-                        </div>
-                        <div class="row">
-
-                        </div>
-                    </div>
+                    <br>
+                   <i class="glyphicon glyphicon-plus"></i>
 
                 </div>
                 <div class="portlet-footer" style="color: white">
-                    Participants : <?= count($project->users) ?> sur <?= $project->users_number?>
-                    <br>
-                    Du <?= $project->start_date ?> Au <?= $project->end_date ?>
                 </div>
             </div>
+            </a>
         </div>
+        <?php foreach ($projects as $project): ?>
+            <div class="col-md-4 col-sm-4 col-xs-4">
+                <div class="portlet box  blue-chambray">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            Projet : <?= $project->name ?>
+                        </div>
+                        <div class="actions">
+                            <div class="btn-group">
+                                <?= $this->Html->link('<i class="glyphicon glyphicon-eye-open"></i>', ['action' => 'gestion', $project->id], ['class' => 'btn btn-default btn-sm', 'escape' => false]) ?>
+                            </div>
+                            <div class="btn-group">
+                                <?= $this->Html->link('<i class="glyphicon glyphicon-pencil"></i>', ['action' => 'edit', $project->id], ['id' => 'task-' . $project->id, 'class' => 'edittask btn btn-default btn-sm', 'escape' => false]) ?>
+                            </div>
+                            <div class="btn-group">
+                                <a id="project-<?= $project->id ?>" class="btn btn-default btn-sm delete-project"><i
+                                        class="glyphicon glyphicon-trash"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <div class="panel-body">
+                            <div class="row">
+                                <?= $project->description ?>
+                            </div>
+                            <div class="row">
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="portlet-footer" style="color: white">
+                        Participants : <?= count($project->users) ?> sur <?= $project->users_number ?>
+                        <br>
+                        Du <?= $project->start_date ?> Au <?= $project->end_date ?>
+                    </div>
+                </div>
+            </div>
 
 
-<?php endforeach; ?>
+        <?php endforeach; ?>
     </div>
 </div>
 
@@ -123,6 +144,45 @@
         $('.task-modal-cont').load(url, function (result) {
             $('#taskModal').modal({show: true});
         });
+    });
+
+    //sweet confirm for delete
+    function prettyConfirm(title, text, callback) {
+
+    }
+
+
+    $('.delete-project').on('click', function (item) {
+        var thisItem = $(this).closest('.portlet');
+
+        swal({
+                title: "Are you sure?",
+                text: "You will not be able to recover this imaginary file!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, delete it!",
+                closeOnConfirm: false
+            },
+            function () {
+
+                var projectId = item.currentTarget.id.split('-');
+
+                var url = '<?= $this->Url->build(["controller" => "Projects", "action" => "delete"]); ?>' + '/' + projectId[1];
+
+                $.ajax({
+                    type: 'post',
+                    url: url,
+                    success: function () {
+                        thisItem.hide();
+                        swal("Deleted!", "Your imaginary file has been deleted.", "success");
+
+                    }
+                });
+
+            });
+
+
     });
 
 
