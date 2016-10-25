@@ -6,6 +6,7 @@ use App\Event\ProjectListener;
 use Cake\Event\EventManager;
 use Cake\Event\Event;
 use Cake\Event\EventList;
+use Cake\ORM\TableRegistry;
 
 /**
  * Projects Controller
@@ -33,6 +34,38 @@ class ProjectsController extends AppController
         $this->set(compact('projects'));
         $this->set('_serialize', ['projects']);
     }
+
+    public function medias($id = null)
+    {
+
+
+        $project = $this->Projects->get($id, [
+            'contain' => 'Files'
+        ]);
+
+
+        $file = $this->Projects->Files->newEntity();
+
+        if ($this->request->is('post')) {
+            #upload de fichier
+            $picture = $this->Upload->getFile($this->request->data['upload'],'files');
+            $this->request->data['upload'] = $picture;
+
+            $file = $this->Projects->Files->patchEntity($file, $this->request->data);
+            $file->name = $picture;
+            $file->forum_id = $id;
+            if ($this->Projects->Files->save($file)) {
+                return $this->redirect(['action' => 'gestion', $project->id ]);
+            }
+        }
+
+
+
+
+        $this->set(compact('project', 'file'));
+        $this->set('_serialize', ['file']);
+    }
+
 
     /**
      * View method

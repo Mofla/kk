@@ -60,6 +60,9 @@ class ProjectsTable extends Table
         $this->hasOne('Forums', [
             'foreignKey' => 'forum_id'
         ]);
+        $this->hasMany('Files', [
+            'foreignKey' => 'project_id'
+        ]);
     }
 
     /**

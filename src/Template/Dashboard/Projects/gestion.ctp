@@ -35,6 +35,11 @@
                         class="glyphicon glyphicon-tree-deciduous" aria-hidden="true"></span>
                 </button>
             </li>
+            <li>
+                <button class="btn blue btn-lg" href="#tab_4" data-toggle="tab" id="btn_4"><span
+                        class="glyphicon glyphicon-file" aria-hidden="true"></span>
+                </button>
+            </li>
         </ul>
     </div>
     <div class="col-md-11 col-sm-11 col-xs-11">
@@ -43,6 +48,8 @@
                 <div class="tab-pane active" id="tab_1"></div>
                 <div class="tab-pane" id="tab_2"></div>
                 <div class="tab-pane" id="tab_3"></div>
+                <div class="tab-pane" id="tab_4"></div>
+
             </div>
 
     </div>
@@ -51,7 +58,7 @@
 <script>
 
     //active links
-    var buttonsNav = $('#btn_1,#btn_2,#btn_3');
+    var buttonsNav = $('#btn_1,#btn_2,#btn_3,#btn_4');
 
     buttonsNav.on('click', function () {
         buttonsNav.removeClass('active');
@@ -80,6 +87,10 @@
     $('#btn_3').on('click', function () {
         var url = '<?= $this->Url->build(['controller' => 'Projects', 'action' => 'graph', $project->id]); ?>';
         $('#tab_3').load(url);
+    });
+    $('#btn_4').on('click', function () {
+        var url = '<?= $this->Url->build(['controller' => 'Projects', 'action' => 'medias', $project->id]); ?>';
+        $('#tab_4').load(url);
     });
 
 
