@@ -134,7 +134,7 @@ function custom_echo($x, $length)
         <?php foreach ($projects as $project): ?>
         {
             id: <?= $project->id ?>,
-            content: '<?= $project->name?>',
+            content: '<?= h($project->name)?>',
             start: '<?= $project->start_date?>',
             end: '<?= $project->end_date?>'
         },
