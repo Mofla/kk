@@ -47,6 +47,10 @@ class FilesTable extends Table
             'targetForeignKey' => 'thread_id',
             'joinTable' => 'threads_files'
         ]);
+
+        $this->hasOne('Projects', [
+            'foreignKey' => 'project_id'
+        ]);
     }
 
     /**
