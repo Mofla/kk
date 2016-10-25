@@ -21,17 +21,17 @@
             <br>
             <br>
             <li>
-                <button class="btn btn-default btn-lg" href="#tab_1" data-toggle="tab" id="btn_1"><span
+                <button class="btn blue btn-lg active" href="#tab_1" data-toggle="tab" id="btn_1"><span
                         class="glyphicon glyphicon-list" aria-hidden="true"></span>
                 </button>
             </li>
             <li>
-                <button class="btn btn-default btn-lg" href="#tab_2" data-toggle="tab" id="btn_2"><span
+                <button class="btn blue btn-lg" href="#tab_2" data-toggle="tab" id="btn_2"><span
                         class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
                 </button>
             </li>
             <li>
-                <button class="btn btn-default btn-lg" href="#tab_3" data-toggle="tab" id="btn_3"><span
+                <button class="btn blue btn-lg" href="#tab_3" data-toggle="tab" id="btn_3"><span
                         class="glyphicon glyphicon-tree-deciduous" aria-hidden="true"></span>
                 </button>
             </li>
@@ -49,6 +49,15 @@
 </div>
 
 <script>
+
+    //active links
+    var buttonsNav = $('#btn_1,#btn_2,#btn_3');
+
+    buttonsNav.on('click', function () {
+        buttonsNav.removeClass('active');
+        $(this).addClass('active');
+    });
+
     //gestion of the different views
 
     //load todolist
