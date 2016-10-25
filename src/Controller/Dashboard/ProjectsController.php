@@ -171,12 +171,18 @@ debug($firstEvent);
             if ($this->Projects->save($project)) {
                 $this->Flash->success(__('The project has been saved.'));
 
-                return $this->redirect(['action' => 'view', $project->id]);
+                return $this->redirect($this->referer());
             } else {
                 $this->Flash->error(__('The project could not be saved. Please, try again.'));
             }
         }
-        $users = $this->Projects->Users->find('list', ['limit' => 200]);
+        $users = $this->Projects->Users->find('list', [
+            'keyField' => 'id',
+            'valueField' => function($q){
+                return $q['firstname'].' '.$q['lastname'];
+            }
+        ]);
+
         $this->set(compact('project', 'users'));
         $this->set('_serialize', ['project']);
     }
