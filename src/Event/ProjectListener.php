@@ -6,6 +6,7 @@ use Cake\Event\EventListenerInterface;
 use Cake\Event\EventManager;
 use Cake\Log\Log;
 use Cake\Event\Event;
+use Cake\ORM\TableRegistry;
 
 class ProjectListener implements EventListenerInterface
 {
@@ -17,12 +18,19 @@ class ProjectListener implements EventListenerInterface
     }
     public function addproject($event)
     {
-        var_dump($event);
-        die();
+//        debug($event->data['event']['users'][0]['_joinData']['project_id']);
+//        die();
+        $subject =  $event->data['event'];
+
 //        Log::write('info',$event);
-//        $eventsFired = EventManager::instance()->getEventList();
-//        $firstEvent = $eventsFired[0];
-//       debug($firstEvent);
-//       ;
+
+        $diariesTable = TableRegistry::get('Diaries');
+        $diarie = $diariesTable->newEntity();
+
+        $diarie->user_id = $subject['users'][0]['id'];
+        $diarie->project_id= $subject['users'][0]['_joinData']['project_id'];
+
+       $diariesTable->save($diarie);
+
     }
 }
