@@ -100,7 +100,7 @@ class ThreadsController extends AppController
                     ->execute();
 
                 $this->Flash->success(__('The thread has been saved.'));
-                return $this->redirect(['action' => 'view', $thread->id ]);
+                return $this->redirect(['controller'=>'Forums','action' => 'view' , 'slug' => strtolower(str_replace(' ', '-', $slug)), 'id' => $id]);
             } else {
                 $this->Flash->error(__('The thread could not be saved. Please, try again.'));
             }
@@ -111,7 +111,7 @@ class ThreadsController extends AppController
 
 
 
-    public function edit($id = null)
+    public function edit($fid = null, $forum = null, $slug = null, $id = null)
     {
         $thread = $this->Threads->get($id, [
             'contain' => []
@@ -121,7 +121,8 @@ class ThreadsController extends AppController
             if ($this->Threads->save($thread)) {
                 $this->Flash->success(__('The thread has been saved.'));
 
-                return $this->redirect(['action' => 'view' , $id]);
+                return $this->redirect(['controller'=>'Threads','action' => 'view' , 'fid' => $fid, 'forum' => strtolower(str_replace(' ', '-', $forum)), 'slug' => strtolower(str_replace(' ', '-', $slug)), 'id' => $id ]);
+
             } else {
                 $this->Flash->error(__('The thread could not be saved. Please, try again.'));
             }

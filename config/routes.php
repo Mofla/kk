@@ -158,6 +158,14 @@ Router::prefix('Forums', function($routes) {
         ]
     );
     $routes->connect(
+        '/:fid-:forum/:id-:slug/editer-topic',
+        ['controller' => 'Threads', 'action' => 'edit'],
+        [
+            'pass' => ['fid', 'forum', 'slug', 'id'],
+            'id' => '[0-9]+',
+        ]
+    );
+    $routes->connect(
         '/rechercher/*',
         ['controller' => 'Forums', 'action' => 'search']
     );

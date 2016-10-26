@@ -43,7 +43,9 @@
                 <td class="hidden-xs" width="7%"><span class="stat"><i class="fa fa-comments-o fa"><?= $section->countpost ?></i></span></td>
                 <td class="hidden-xs" width="20%" style="text-align: right">
                     <?php if ($section->lasttopicuser) : ?>
-                    <?= $this->Html->link(__($section->lasttopicuser->title), ['controller' => 'Threads','action' => 'view', $section->lasttopicuser->thread_id]) ?>
+                    <?= $this->Html->link(__($section->lasttopicuser->title), ['controller' => 'Threads','action' => 'view'
+                    , 'fid' => $section->id, 'forum' => strtolower(str_replace(' ', '-', $section->name)), 'slug' => strtolower(str_replace(' ', '-', $section->lasttopicuser->title)), 'id' => $section->lasttopicuser->thread_id]) ?>
+
                     <br>
                     <?php echo "le ".$section->lasttopicuser->created->i18nformat('dd/MM/YY à HH:mm', 'Europe/Paris') ; ?> <br>
                     <?php endif ?>
@@ -52,7 +54,7 @@
                     <?= $this->Html->link($section->user->username, 'utilisateur/profil/'.$section->user->id.'') ?>
                 </td>
                 <?php else: ?>
-                Aucun Topic
+                Aucun Sujet
                 <?php endif ?>
             </tr>
 <?php
