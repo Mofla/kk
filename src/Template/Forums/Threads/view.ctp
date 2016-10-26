@@ -156,8 +156,15 @@
           'quote' => $check
      ]); ?>"
                        class="btn btn-sm blue" role="button" aria-pressed="true"><i class="fa fa-quote-right"></i> CITER</a>
-                    <a href="<?= $this->Url->build([ 'controller' => 'Threads', 'action' => 'edit' , $thread->id]); ?>"
-                       class="btn btn-sm purple dash-edit" role="button" aria-pressed="true"><i class="fa fa-pencil "></i> EDITER</a>
+
+                    <a href="<?= $this->Url->build([ 'controller' => 'Threads', 'action' => 'edit' ,
+    'fid' => $thread->forum->id,
+    'forum' => strtolower(str_replace(' ', '-', $thread->forum->name)),
+    'slug' => strtolower(str_replace(' ', '-', $thread->subject)),
+     'id' => $thread->id
+     ]); ?>"
+                       class="btn btn-sm purple" role="button" aria-pressed="true"><i class="fa fa-pencil"></i> EDITER</a>
+
                     <?= $this->Form->postLink(__('<i class="fa fa-times"></i>'),[ 'controller' => 'Threads'
                     , 'action' => 'delete' , $thread->id],['escape'=>false , 'class'=>'btn btn-sm btn-danger dash-delete dash-hide']); ?>
 
