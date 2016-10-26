@@ -7,6 +7,7 @@ use Cake\Event\EventManager;
 use Cake\Log\Log;
 use Cake\Event\Event;
 use Cake\ORM\TableRegistry;
+use Cake\I18n\Time;
 
 class ProjectListener implements EventListenerInterface
 {
@@ -18,19 +19,27 @@ class ProjectListener implements EventListenerInterface
     }
     public function addproject($event)
     {
-//        debug($event->data['event']['users'][0]['_joinData']['project_id']);
-//        die();
+//        debug(count($event->data['event']['users']));
+//       die();
         $subject =  $event->data['event'];
 
-//        Log::write('info',$event);
-
         $diariesTable = TableRegistry::get('Diaries');
-        $diarie = $diariesTable->newEntity();
+        $entriesTable = TableRegistry::get('Entries',['contain'=>'Diaries']);
 
-        $diarie->user_id = $subject['users'][0]['id'];
-        $diarie->project_id= $subject['users'][0]['_joinData']['project_id'];
+        for ($i = 0; $i < count($subject['users']); $i++) {
 
-       $diariesTable->save($diarie);
+            $diarie = $diariesTable->newEntity();
+            $diarie->user_id = $subject['users'][$i]['id'];
+            $diarie->project_id= $subject['users'][$i]['_joinData']['project_id'];
+            $diariesTable->save($diarie);
+
+            $entrie = $entriesTable->newEntity();
+            $entrie->diary_id = $diarie->id;
+            $entrie->date = Time::now();
+            $entrie->content = 'le Projet '.$subject['name'].' viens d\'être crée';
+            $entriesTable->save($entrie);
+        }
+
 
     }
 }
