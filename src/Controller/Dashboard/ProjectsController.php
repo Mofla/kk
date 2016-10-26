@@ -6,7 +6,6 @@ use App\Event\ProjectListener;
 use Cake\Event\EventManager;
 use Cake\Event\Event;
 use Cake\Event\EventList;
-use Cake\ORM\TableRegistry;
 
 /**
  * Projects Controller
@@ -38,11 +37,9 @@ class ProjectsController extends AppController
     public function medias($id = null)
     {
 
-
         $project = $this->Projects->get($id, [
             'contain' => 'Files'
         ]);
-
 
         $file = $this->Projects->Files->newEntity();
 
@@ -59,11 +56,26 @@ class ProjectsController extends AppController
             }
         }
 
-
-
-
         $this->set(compact('project', 'file'));
         $this->set('_serialize', ['file']);
+    }
+
+
+    public function deletefile($id = null)
+    {
+        $this->request->allowMethod(['post', 'delete']);
+        $file = $this->Projects->Files->get($id);
+
+        //deletes file
+        $this->Upload->deleteImage('dashboard', $file->name);
+
+        if ($this->Projects->Files->delete($file)) {
+
+            $this->Flash->success(__('The file has been deleted.'));
+        } else {
+            $this->Flash->error(__('The file could not be deleted. Please, try again.'));
+        }
+        return $this->redirect($this->referer());
     }
 
 
