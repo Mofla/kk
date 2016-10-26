@@ -87,8 +87,6 @@ class TasksController extends AppController
     public function add()
     {
 //        new task listener
-        $this->Tasks->eventManager()->on(new TasksListener());
-
         $task = $this->Tasks->newEntity();
         if ($this->request->is('post')) {
             $task = $this->Tasks->patchEntity($task, $this->request->data);
@@ -171,7 +169,7 @@ class TasksController extends AppController
 
     public function addtask($id = null)
     {
-
+        $this->Tasks->eventManager()->on(new TasksListener());
         $thread = $this->Tasks->Threads->newEntity();
 
         $uid = $this->Auth->user('id');
