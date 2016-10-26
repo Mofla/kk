@@ -22,126 +22,117 @@
 <?= $this->Form->button('Valider', ['class' => 'btn btn-success']) ?>
 <?= $this->Form->end() ?>
 
+<div class="row">
+    <!--pour chaque fichier-->
+<?php foreach ($project->files as $files) : ?>
 
-<!--pour chaque fichier-->
-<?php
-$rows = 0;
-foreach ($project->files as $files) : ?>
 
-    <?php $rows++ ?>
-    <?php if ($rows % 6 == 0) : ?>
-        <div class="row">
-    <?php endif; ?>
-
-    <div class="col-md-2 col-sm-2 col-xs-2">
-        <div class="portlet box  blue-chambray">
-            <div class="portlet-title">
-                <div class="caption">
-                    <span class="glyphicon glyphicon-file fa-md"></span>
-                    <?= $files->name ?>
-                </div>
-                <div class="actions">
-                    <div class="btn-group">
-                        <a id="file-<?= $files->id ?>"
-                           class="btn btn-default btn-sm delete-file"><i
-                                class="glyphicon glyphicon-trash"></i></a>
+        <div class="col-md-2 col-sm-2 col-xs-2">
+            <div class="portlet box  blue-chambray">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <span class="glyphicon glyphicon-file fa-md"></span>
+                        <?= $files->name ?>
+                    </div>
+                    <div class="actions">
+                        <div class="btn-group">
+                            <a id="file-<?= $files->id ?>"
+                               class="btn btn-default btn-sm delete-file"><i
+                                    class="glyphicon glyphicon-trash"></i></a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="portlet-body" style="text-align: center">
-                <!--recuperer l'extension-->
+                <div class="portlet-body" style="text-align: center">
+                    <!--recuperer l'extension-->
 
-                <?php $extension = explode(".", $files->name); ?>
-                <!--si fichier texte-->
-                <?php if ($extension[1] == 'txt') : ?>
-                    <?= $this->Html->link(
-                        $this->Html->image("../uploads/icons/ext/txt.png", ["alt" => "Fichier texte", 'class' => 'joint']),
-                        "../uploads/dashboard/" . $files->name,
-                        ['escape' => false, 'target' => '_blank']
-                    ); ?>
+                    <?php $extension = explode(".", $files->name); ?>
+                    <!--si fichier texte-->
+                    <?php if ($extension[1] == 'txt') : ?>
+                        <?= $this->Html->link(
+                            $this->Html->image("../uploads/icons/ext/txt.png", ["alt" => "Fichier texte", 'class' => 'joint']),
+                            "../uploads/dashboard/" . $files->name,
+                            ['escape' => false, 'target' => '_blank']
+                        ); ?>
 
-                    <!--si fichier zip-->
-                <?php elseif ($extension[1] == 'zip') : ?>
-                    <?= $this->Html->link(
-                        $this->Html->image("../uploads/icons/ext/zip.png", ["alt" => "Fichier texte", 'class' => 'joint']),
-                        "../uploads/dashboard/" . $files->name,
-                        ['escape' => false, 'target' => '_blank']
-                    ); ?>
+                        <!--si fichier zip-->
+                    <?php elseif ($extension[1] == 'zip') : ?>
+                        <?= $this->Html->link(
+                            $this->Html->image("../uploads/icons/ext/zip.png", ["alt" => "Fichier texte", 'class' => 'joint']),
+                            "../uploads/dashboard/" . $files->name,
+                            ['escape' => false, 'target' => '_blank']
+                        ); ?>
 
-                    <!--si fichier rar-->
-                <?php elseif ($extension[1] == 'rar') : ?>
-                    <?= $this->Html->link(
-                        $this->Html->image("../uploads/icons/ext/rar.png", ["alt" => "Fichier texte", 'class' => 'joint']),
-                        "../uploads/dashboard/" . $files->name,
-                        ['escape' => false, 'target' => '_blank']
-                    ); ?>
+                        <!--si fichier rar-->
+                    <?php elseif ($extension[1] == 'rar') : ?>
+                        <?= $this->Html->link(
+                            $this->Html->image("../uploads/icons/ext/rar.png", ["alt" => "Fichier texte", 'class' => 'joint']),
+                            "../uploads/dashboard/" . $files->name,
+                            ['escape' => false, 'target' => '_blank']
+                        ); ?>
 
-                    <!--si fichier log-->
-                <?php elseif ($extension[1] == 'log') : ?>
-                    <?= $this->Html->link(
-                        $this->Html->image("../uploads/icons/ext/log.png", ["alt" => "Fichier texte", 'class' => 'joint']),
-                        "../uploads/dashboard/" . $files->name,
-                        ['escape' => false, 'target' => '_blank']
-                    ); ?>
+                        <!--si fichier log-->
+                    <?php elseif ($extension[1] == 'log') : ?>
+                        <?= $this->Html->link(
+                            $this->Html->image("../uploads/icons/ext/log.png", ["alt" => "Fichier texte", 'class' => 'joint']),
+                            "../uploads/dashboard/" . $files->name,
+                            ['escape' => false, 'target' => '_blank']
+                        ); ?>
 
-                    <!--si fichier pdf-->
-                <?php elseif ($extension[1] == 'pdf') : ?>
-                    <?= $this->Html->link(
-                        $this->Html->image("../uploads/icons/ext/pdf.png", ["alt" => "Fichier texte", 'class' => 'joint']),
-                        "../uploads/dashboard/" . $files->name,
-                        ['escape' => false, 'target' => '_blank']
-                    ); ?>
+                        <!--si fichier pdf-->
+                    <?php elseif ($extension[1] == 'pdf') : ?>
+                        <?= $this->Html->link(
+                            $this->Html->image("../uploads/icons/ext/pdf.png", ["alt" => "Fichier texte", 'class' => 'joint']),
+                            "../uploads/dashboard/" . $files->name,
+                            ['escape' => false, 'target' => '_blank']
+                        ); ?>
 
-                    <!--si fichier css-->
-                <?php elseif ($extension[1] == 'css') : ?>
-                    <?= $this->Html->link(
-                        $this->Html->image("../uploads/icons/ext/css.png", ["alt" => "Fichier texte", 'class' => 'joint']),
-                        "../uploads/dashboard/" . $files->name,
-                        ['escape' => false, 'target' => '_blank']
-                    ); ?>
+                        <!--si fichier css-->
+                    <?php elseif ($extension[1] == 'css') : ?>
+                        <?= $this->Html->link(
+                            $this->Html->image("../uploads/icons/ext/css.png", ["alt" => "Fichier texte", 'class' => 'joint']),
+                            "../uploads/dashboard/" . $files->name,
+                            ['escape' => false, 'target' => '_blank']
+                        ); ?>
 
-                    <!--si fichier php-->
-                <?php elseif ($extension[1] == 'php') : ?>
-                    <?= $this->Html->link(
-                        $this->Html->image("../uploads/icons/ext/php.png", ["alt" => "Fichier texte", 'class' => 'joint']),
-                        "../uploads/dashboard/" . $files->name,
-                        ['escape' => false, 'target' => '_blank']
-                    ); ?>
+                        <!--si fichier php-->
+                    <?php elseif ($extension[1] == 'php') : ?>
+                        <?= $this->Html->link(
+                            $this->Html->image("../uploads/icons/ext/php.png", ["alt" => "Fichier texte", 'class' => 'joint']),
+                            "../uploads/dashboard/" . $files->name,
+                            ['escape' => false, 'target' => '_blank']
+                        ); ?>
 
-                    <!--si fichier html-->
-                <?php elseif ($extension[1] == 'html') : ?>
-                    <?= $this->Html->link(
-                        $this->Html->image("../uploads/icons/ext/html.png", ["alt" => "Fichier texte", 'class' => 'joint']),
-                        "../uploads/dashboard/" . $files->name,
-                        ['escape' => false, 'target' => '_blank']
-                    ); ?>
+                        <!--si fichier html-->
+                    <?php elseif ($extension[1] == 'html') : ?>
+                        <?= $this->Html->link(
+                            $this->Html->image("../uploads/icons/ext/html.png", ["alt" => "Fichier texte", 'class' => 'joint']),
+                            "../uploads/dashboard/" . $files->name,
+                            ['escape' => false, 'target' => '_blank']
+                        ); ?>
 
-                    <!--si fichier img-->
-                <?php elseif ($extension[1] == 'png' || $extension[1] == 'jpg' || $extension[1] == 'jpeg' || $extension[1] == 'gif') : ?>
-                    <?= $this->Html->link(
-                        $this->Html->image("../uploads/dashboard/" . $files->name, ["alt" => "Fichier texte", 'class' => 'joint']),
-                        "../uploads/dashboard/" . $files->name,
-                        ['escape' => false, 'target' => '_blank']
-                    ); ?>
+                        <!--si fichier img-->
+                    <?php elseif ($extension[1] == 'png' || $extension[1] == 'jpg' || $extension[1] == 'jpeg' || $extension[1] == 'gif') : ?>
+                        <?= $this->Html->link(
+                            $this->Html->image("../uploads/dashboard/" . $files->name, ["alt" => "Fichier texte", 'class' => 'joint']),
+                            "../uploads/dashboard/" . $files->name,
+                            ['escape' => false, 'target' => '_blank']
+                        ); ?>
 
-                    <!--si fichier inconnu-->
-                <?php else : ?>
-                    <?= $this->Html->link(
-                        $this->Html->image("../uploads/icons/ext/default.png", ["alt" => "Fichier texte", 'class' => 'joint']),
-                        "../uploads/dashboard/" . $files->name,
-                        ['escape' => false, 'target' => '_blank']
-                    ); ?>
-                <?php endif ?>
+                        <!--si fichier inconnu-->
+                    <?php else : ?>
+                        <?= $this->Html->link(
+                            $this->Html->image("../uploads/icons/ext/default.png", ["alt" => "Fichier texte", 'class' => 'joint']),
+                            "../uploads/dashboard/" . $files->name,
+                            ['escape' => false, 'target' => '_blank']
+                        ); ?>
+                    <?php endif ?>
+                </div>
             </div>
         </div>
-    </div>
 
-    <?php if ($rows % 6 == 0) : ?>
-        </div>
-    <?php endif; ?>
 
 <?php endforeach ?>
-
+</div>
 
 <script>
     $('.delete-file').on('click', function (item) {
