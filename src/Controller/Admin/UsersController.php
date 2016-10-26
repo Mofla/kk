@@ -83,11 +83,30 @@ class UsersController extends AppController
         $user = $this->Users->get($id, [
             'contain' => []
         ]);
+
+        $this->loadModel('promotions');
+        $promotion = $this->promotions->find('all',[
+            'conditions' => ['promotions.user_id' => $id],
+        ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
+            $this->request->data['user_id'] = $this->Auth->User('id');
+            $promotion = $this->Promotions->patchEntity($promotion, $this->request->data);
+            if ($this->Promotions->save($promotion)) {
+                $this->Flash->success(__('The user has been saved.'));
+
+            } else {
+                $this->Flash->error(__('The user could not be saved. Please, try again.'));
+            }
+        }
+        
+
+        if ($this->request->is(['patch', 'post', 'put'])) {
+
             if(!empty($this->request->data['picture']['name'])) {
                 $picture = $this->Upload->getPicture($this->request->data['picture'], 'user', $user->id, 300, 300, false);
                 $this->request->data['picture_url'] = $picture;
             }
+
             $user = $this->Users->patchEntity($user, $this->request->data);
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('The user has been saved.'));
@@ -98,9 +117,9 @@ class UsersController extends AppController
             }
         }
         $roles = $this->Users->Roles->find('list', ['limit' => 200]);
-        $this->set(compact('user'));
+        $this->set(compact('user','promotion'));
         $this->set('roles', $roles);
-        $this->set('_serialize', ['user']);
+        $this->set('_serialize', ['user','promotion']);
     
     }
 
