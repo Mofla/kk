@@ -13,8 +13,11 @@
     <div class="col-md-1 col-sm-1 col-xs-1">
         <ul class="nav nav-tabs-right">
             <li>
-                <button class="btn btn-info btn-lg" id="add-task"><span
+                <button class="btn btn-lg blue-chambray" id="add-task"><span
                         class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                </button>
+                <button class="btn btn-info btn-lg blue-chambray" id="add-file" style="display: none"><span
+                        class="glyphicon glyphicon-save-file" aria-hidden="true"></span>
                 </button>
             </li>
             <br>
@@ -67,6 +70,18 @@
 
     //gestion of the different views
 
+
+    //switch buttons
+    function addFileButton() {
+        $('#add-task').hide();
+        $('#add-file').show();
+    }
+    function addTaskButton() {
+        $('#add-task').show();
+        $('#add-file').hide();
+    }
+
+
     //load todolist
     function load1() {
         var url = '<?= $this->Url->build(['controller' => 'Projects', 'action' => 'liste', $project->id]); ?>';
@@ -78,17 +93,21 @@
     });
     // on click events
     $('#btn_1').on('click', function () {
+       addTaskButton();
        load1();
     });
     $('#btn_2').on('click', function () {
+        addTaskButton();
         var url = '<?= $this->Url->build(['controller' => 'Projects', 'action' => 'timeline', $project->id]); ?>';
         $('#tab_2').load(url);
     });
     $('#btn_3').on('click', function () {
+        addTaskButton();
         var url = '<?= $this->Url->build(['controller' => 'Projects', 'action' => 'graph', $project->id]); ?>';
         $('#tab_3').load(url);
     });
     $('#btn_4').on('click', function () {
+        addFileButton();
         var url = '<?= $this->Url->build(['controller' => 'Projects', 'action' => 'medias', $project->id]); ?>';
         $('#tab_4').load(url);
     });
