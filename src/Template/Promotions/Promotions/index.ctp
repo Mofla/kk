@@ -9,7 +9,7 @@
         <h1 class="text-center"><?= __('Promotions') ?></h1>
         <?php foreach ($promotions as $promotion): ?>
             <div class="col-md-3 text-center well"
-                 style="background-color: white;border: 1px solid #444d58; min-height: 500px">
+                 style="background-color: white;border: 1px solid #444d58; min-height: 580px">
                 <img class="img-circle img-responsive" src=" ../../uploads/user/<?= $promotion->user->picture_url ?>">
                 <br>
                 <a href="<?= $this->Url->build(['controller' => 'Users', 'action' => 'view', $promotion->user->id, 'prefix' => 'utilisateur']) ?>">
