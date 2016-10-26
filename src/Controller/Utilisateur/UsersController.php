@@ -65,7 +65,6 @@ class UsersController extends AppController
      */
     public function add()
     {
-
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->data);
@@ -100,6 +99,7 @@ class UsersController extends AppController
         $user = $this->Users->get($id, [
             'contain' => []
         ]);
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             if(!empty($this->request->data['picture']['name'])) {
                 $picture = $this->Upload->getPicture($this->request->data['picture'], 'user', $user->id, 300, 300, false);
