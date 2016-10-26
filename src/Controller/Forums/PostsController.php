@@ -239,17 +239,28 @@ $pastquote = null;
         $this->set('_serialize', ['post']);
     }
 
-    public function edit($id = null)
+    public function edit($fid = null, $forum = null, $slug = null, $id = null)
     {
         $post = $this->Posts->get($id, [
             'contain' => ['Files']
         ]);
+
+        $forumid = $this->Posts->Threads->find()
+            ->select(['forum_id','subject'])
+            ->where(['id' => $post->thread_id])
+            ->first();
+
+        $forumname = $this->Posts->Threads->Forums->find()
+            ->select(['name'])
+            ->where(['id' => $forumid->forum_id])
+            ->first();
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             $post = $this->Posts->patchEntity($post, $this->request->data);
             if ($this->Posts->save($post)) {
                 $this->Flash->success(__('The post has been saved.'));
 
-                return $this->redirect(['controller'=>'Threads' , 'action' => 'view', $post->thread_id]);
+                return $this->redirect(['controller'=>'Threads','action' => 'view' , 'fid' => $forumid->forum_id, 'forum' => strtolower(str_replace(' ', '-', $forumname->name)), 'slug' => strtolower(str_replace(' ', '-', $forumid->subject)), 'id' => $post->thread_id ]);
             } else {
                 $this->Flash->error(__('The post could not be saved. Please, try again.'));
             }

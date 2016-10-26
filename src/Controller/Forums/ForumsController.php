@@ -56,7 +56,7 @@ class ForumsController extends AppController
 
 
             $results = $this->Forums->Threads->find('all', [
-                'contain' => ['Users','Posts','Lastuserthread']
+                'contain' => ['Users','Posts','Lastuserthread','Forums']
             ])
                 ->where(['Threads.id >' => 0, $array]);
 

@@ -106,6 +106,7 @@ Router::prefix('Tchat', function($routes) {
     $routes->connect('/add/*', ['controller' => 'Tchats','action' => 'add'], ['routeClass' => 'InflectedRoute']);
     $routes->fallbacks(DashedRoute::class);
 });
+//---------------------------------------------------------------------------------------------------------DEBUT ROUTES DU FORUM
 Router::prefix('Forums', function($routes) {
     $routes->connect('/', ['controller' => 'Forums','action' => 'index'], ['routeClass' => 'InflectedRoute']);
     $routes->connect(
@@ -148,8 +149,36 @@ Router::prefix('Forums', function($routes) {
             'id' => '[0-9]+',
         ]
     );
+    $routes->connect(
+        '/:fid-:forum/:id-:slug/editer',
+        ['controller' => 'Posts', 'action' => 'edit'],
+        [
+            'pass' => ['fid', 'forum', 'slug', 'id'],
+            'id' => '[0-9]+',
+        ]
+    );
+    $routes->connect(
+        '/rechercher/*',
+        ['controller' => 'Forums', 'action' => 'search']
+    );
     $routes->fallbacks(DashedRoute::class);
 });
+Router::prefix('Admin', function($routes) {
+    $routes->connect(
+        '/forums/categories',
+        ['controller' => 'Forums', 'action' => 'listcategory']
+    );
+    $routes->connect(
+        '/forums/creer',
+        ['controller' => 'Forums', 'action' => 'addforum']
+    );
+    $routes->connect(
+        '/forums/editer',
+        ['controller' => 'Forums', 'action' => 'listforum']
+    );
+    $routes->fallbacks(DashedRoute::class);
+});
+//---------------------------------------------------------------------------------------------------------FIN ROUTES DU FORUM
 Router::prefix('dashboard', function($routes) {
     $routes->connect('/', ['controller' => 'Projects','action' => 'index'], ['routeClass' => 'InflectedRoute']);
     $routes->fallbacks(DashedRoute::class);
