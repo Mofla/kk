@@ -1,39 +1,66 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $promotion->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $promotion->id)]
-            )
-        ?></li>
-        <li><?= $this->Html->link(__('List Promotions'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="promotions form large-9 medium-8 columns content">
-    <?= $this->Form->create($promotion) ?>
-    <fieldset>
-        <legend><?= __('Edit Promotion') ?></legend>
-        <?php
-            echo $this->Form->input('user_id', ['options' => $users]);
-            echo $this->Form->input('description');
-            echo $this->Form->input('facebook_link');
-            echo $this->Form->input('twitter_link');
-            echo $this->Form->input('linkedin_link');
-            echo $this->Form->input('cv_url');
-            echo $this->Form->input('language_html');
-            echo $this->Form->input('language_css');
-            echo $this->Form->input('language_javascript');
-            echo $this->Form->input('language_jquery');
-            echo $this->Form->input('language_php');
-            echo $this->Form->input('language_sql');
-            echo $this->Form->input('language_cakephp');
-            echo $this->Form->input('language_bootstrap');
-            echo $this->Form->input('web_site');
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
+<div class="row profile-account">
+    <div class="col-md-12">
+        <div class="tab-content">
+            <div id="tab_1-1" class="tab-pane active">
+                <?= $this->Form->create($promotion, ['enctype' => 'multipart/form-data']) ?>
+                <fieldset>
+                    <legend><?= __('Editer mon Profil Publique') ?></legend>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="label-control">Description: </label>
+                            <?= $this->Form->input('description',['label' => false]);?>
+                        </div>
+                        <div class="form-group">
+                            <label class="label-control">Facebook: </label>
+                            <?= $this->Form->input('facebook_link',['label' => false]);?>
+                        </div>
+                        <div class="form-group">
+                            <label class="label-control">Twitter: </label>
+                            <?= $this->Form->input('twitter_link',['label' => false]);?>
+                        </div>
+                        <div class="form-group">
+                            <label class="label-control">Linkedin: </label>
+                            <?= $this->Form->input('linkedin_link',['label' => false]);?>
+                        </div>
+                        <div class="form-group">
+                            <label class="label-control">Cv: </label>
+                            <?= $this->Form->input('cv_url',['label' => false]);?>
+                        </div>
+                        <div class="form-group">
+                            <label class="label-control">Site Web: </label>
+                            <?= $this->Form->input('web_site',['label' => false]);?>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <?= $this->Form->input('language_html',['label' => false]);?>html
+                        </div>
+                        <div class="form-group">
+                            <?= $this->Form->input('language_css',['label' => false]);?>css
+                        </div>
+                        <div class="form-group">
+                            <?= $this->Form->input('language_javascript',['label' => false]);?>javascript
+                        </div>
+                        <div class="form-group">
+                            <?= $this->Form->input('language_jquery',['label' => false]);?>jquery
+                        </div>
+                        <div class="form-group">
+                            <?= $this->Form->input('language_php',['label' => false]);?>php
+                        </div>
+                        <div class="form-group">
+                            <?= $this->Form->input('language_sql',['label' => false]);?>sql
+                        </div>
+                        <div class="form-group">
+                            <?= $this->Form->input('language_cakephp',['label' => false]);?>cakephp
+                        </div>
+                        <div class="form-group">
+                            <?= $this->Form->input('language_bootstrap',['label' => false]);?>bootstrap
+                        </div>
+                    </div>
+                </fieldset>
+                <?= $this->Form->button('Envoyer', ['class' => 'btn green']) ?>
+                <?= $this->Form->end() ?>
+            </div>
+        </div>
+    </div>
 </div>
