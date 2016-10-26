@@ -47,7 +47,7 @@ class UploadComponent extends Component
         @unlink($path);
     }
 
-    public function getFile($upload,$directory)
+    public function getFile($upload,$directory,$rename=true)
     {
         $file_extension = explode('.',$upload['name'])[1];
         $ignoreList = [
@@ -55,12 +55,25 @@ class UploadComponent extends Component
         ];
         if(!in_array($file_extension,$ignoreList))
         {
-            $file_newName = $this->renameByTimestamp();
-            $file_newName = $file_newName . '.' . $file_extension;
+
+            if (!$rename) {
+                $file_newName = $upload['name'];
+            }
+            else {
+                $file_newName = $this->renameByTimestamp();
+                $file_newName = $file_newName . '.' . $file_extension;
+            }
+
             $path = WWW_ROOT . '/uploads/'.strtolower($directory).'/' . $file_newName;
             if(move_uploaded_file($upload['tmp_name'], $path))
             {
-                return $file_newName;
+
+                if (!$rename) {
+                    return $upload['name'];
+                }
+                else {
+                    return $file_newName;
+                }
             }
         }
         return '';
