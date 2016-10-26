@@ -48,12 +48,12 @@ class ProjectsController extends AppController
 
         if ($this->request->is('post')) {
             #upload de fichier
-            $picture = $this->Upload->getFile($this->request->data['upload'],'files');
+            $picture = $this->Upload->getFile($this->request->data['upload'],'dashboard', false);
             $this->request->data['upload'] = $picture;
 
             $file = $this->Projects->Files->patchEntity($file, $this->request->data);
             $file->name = $picture;
-            $file->forum_id = $id;
+
             if ($this->Projects->Files->save($file)) {
                 return $this->redirect(['action' => 'gestion', $project->id ]);
             }
