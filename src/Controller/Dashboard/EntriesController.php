@@ -28,9 +28,8 @@ class EntriesController extends AppController
         $this->set('_serialize', ['entries']);
     }
 
-    public function list()
+    public function liste()
     {
-
         $this->paginate = [
             'contain' => ['Diaries']
         ];

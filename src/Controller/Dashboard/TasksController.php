@@ -3,7 +3,10 @@ namespace App\Controller\Dashboard;
 
 use App\Controller\AppController;
 use Cake\Event\EventManager;
-use Cake\Event\EventListenerInterface;
+use Cake\Event\Event;
+use Cake\Event\EventList;
+use Cake\ORM\TableRegistry;
+use App\Event\TasksListener;
 
 /**
  * Tasks Controller
@@ -83,7 +86,9 @@ class TasksController extends AppController
      */
     public function add()
     {
-        $this->Projects->eventManager()->on(new ProjectListener());
+//        new task listener
+        $this->Tasks->eventManager()->on(new TasksListener());
+
         $task = $this->Tasks->newEntity();
         if ($this->request->is('post')) {
             $task = $this->Tasks->patchEntity($task, $this->request->data);
