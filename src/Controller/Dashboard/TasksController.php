@@ -83,7 +83,7 @@ class TasksController extends AppController
      */
     public function add()
     {
-
+        $this->Projects->eventManager()->on(new ProjectListener());
         $task = $this->Tasks->newEntity();
         if ($this->request->is('post')) {
             $task = $this->Tasks->patchEntity($task, $this->request->data);
