@@ -1,5 +1,5 @@
 <?php
-namespace App\Controller;
+namespace App\Controller\Tchat;
 
 use App\Controller\AppController;
 

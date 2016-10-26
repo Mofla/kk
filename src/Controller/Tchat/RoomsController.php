@@ -1,5 +1,5 @@
 <?php
-namespace App\Controller;
+namespace App\Controller\Tchat;
 
 use App\Controller\AppController;
 
@@ -17,7 +17,9 @@ class RoomsController extends AppController
      */
     public function index()
     {
-        $rooms = $this->paginate($this->Rooms);
+        $rooms = $this->paginate($this->Rooms,[
+            'contain' => ['Users', 'Tchats']
+        ]);
 
         $this->set(compact('rooms'));
         $this->set('_serialize', ['rooms']);
@@ -51,14 +53,12 @@ class RoomsController extends AppController
         if ($this->request->is('post')) {
             $room = $this->Rooms->patchEntity($room, $this->request->data);
             if ($this->Rooms->save($room)) {
-                $this->Flash->success(__('The room has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error(__('The room could not be saved. Please, try again.'));
             }
         }
-        $users = $this->Rooms->Users->find('list', ['limit' => 200]);
+        $users = $this->Rooms->Users->find('list', ['valueField' => 'username']);
         $this->set(compact('room', 'users'));
         $this->set('_serialize', ['room']);
     }
@@ -78,14 +78,12 @@ class RoomsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $room = $this->Rooms->patchEntity($room, $this->request->data);
             if ($this->Rooms->save($room)) {
-                $this->Flash->success(__('The room has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error(__('The room could not be saved. Please, try again.'));
             }
         }
-        $users = $this->Rooms->Users->find('list', ['limit' => 200]);
+        $users = $this->Rooms->Users->find('list', ['valueField' => 'username']);
         $this->set(compact('room', 'users'));
         $this->set('_serialize', ['room']);
     }
@@ -102,9 +100,7 @@ class RoomsController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $room = $this->Rooms->get($id);
         if ($this->Rooms->delete($room)) {
-            $this->Flash->success(__('The room has been deleted.'));
         } else {
-            $this->Flash->error(__('The room could not be deleted. Please, try again.'));
         }
 
         return $this->redirect(['action' => 'index']);

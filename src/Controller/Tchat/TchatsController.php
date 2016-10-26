@@ -3,6 +3,7 @@ namespace App\Controller\Tchat;
 
 use App\Controller\AppController;
 use Cake\I18n\Time;
+use Cake\Log\Log;
 
 /**
  * Tchats Controller
@@ -30,15 +31,15 @@ class TchatsController extends AppController
         $time_2->modify('-1 weeks');
 
         $list_message = $this->Tchats->find('all')->contain('Users')->where(['room_id'=>$id_room])->order('date');
-        $count_message = $this->Tchats->find('all')->count();
+        $count_message = $this->Tchats->find('all')->where(['room_id'=>$id_room])->count();
 
         $this->set(compact('tchat','list_message','user','id','time_2','count_message'));
         $this->set('_serialize', ['tchat']);
     }
 
-    public function counttchat()
+    public function counttchat($id_room = NULL)
     {
-        $nombre_message = $this->Tchats->find('all')->count();
+        $nombre_message = $this->Tchats->find('all')->where(['room_id'=>$id_room])->count();
 
         $this->set(compact('nombre_message'));
     }
@@ -59,13 +60,18 @@ class TchatsController extends AppController
         $time_2->i18nFormat('Ymdhms');
         $time_2->modify('-1 weeks');
 
+        if ($this->log('archive') === true) {
+            Log::config('log', function () {
+                return new \Cake\Log\Engine\FileLog(['path' => LOGS, 'file' => 'archive']);
+            });
+        }
+/*        Log::write('archive', 'Quelque chose qui ne fonctionne pas');*/
+
         $tchat = $this->Tchats->newEntity();
 
         if ($this->request->is('ajax')) {
 
             $tchat = $this->Tchats->patchEntity($tchat, $this->request->data);
-
-/*            $tchat->room_id = $id_room ;*/
 
             $tchat->user_id = $users ;
 
@@ -79,22 +85,22 @@ class TchatsController extends AppController
         $this->set(compact('tchat','user','id_user','time_2','count_message','id_rooms','name_rooms','users'));
         $this->set('_serialize', ['tchat']);
     }
-    public function history(){
+    public function history($id_room = NULL){
 
         $date_fin = $this->request->data('datefin');
         $date_debut = $this->request->data('datedebut');
-        $user = '2';
+
 
         if (empty($date_fin)&&empty($date_debut)){
 
-            $list_message = $this->Tchats->find('all')->contain('Users');
+            $list_message = $this->Tchats->find('all')->contain('Users')->where(['room_id'=>$id_room]);
         }
 
         if (!empty($date_debut)&&empty($date_fin)){
 
             $date_debut = $this->request->data('datedebut');
             $date_fin = "";
-            $list_message = $this->Tchats->find('all')->contain('Users')->where(['date >'=>$date_debut]);
+            $list_message = $this->Tchats->find('all')->contain('Users')->where(['date >'=>$date_debut])->where(['room_id'=>$id_room]);
 
 
         }
@@ -102,14 +108,14 @@ class TchatsController extends AppController
 
             $date_fin = $this->request->data('datefin');
             $date_debut = "";
-            $list_message = $this->Tchats->find('all')->contain('Users')->where(['date <'=>$date_fin]);
+            $list_message = $this->Tchats->find('all')->contain('Users')->where(['date <'=>$date_fin])->where(['room_id'=>$id_room]);
 
         }
         if (!empty($date_fin)&&!empty($date_debut)){
 
             $date_debut = $this->request->data('datedebut');
             $date_fin = $this->request->data('datefin');
-            $list_message = $this->Tchats->find('all')->contain('Users')->where(['date BETWEEN'=>$date_debut])->andWhere(['"'.$date_fin.'"']);
+            $list_message = $this->Tchats->find('all')->contain('Users')->where(['date BETWEEN'=>$date_debut])->andWhere(['"'.$date_fin.'"'])->andWhere(['room_id'=>$id_room]);
 
         }
         $empty = "";

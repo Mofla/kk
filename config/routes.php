@@ -104,6 +104,7 @@ Router::prefix('portfolios', function($routes) {
 Router::prefix('Tchat', function($routes) {
     $routes->connect('/*', ['controller' => 'Tchats','action' => 'index'], ['routeClass' => 'InflectedRoute']);
     $routes->connect('/add/*', ['controller' => 'Tchats','action' => 'add'], ['routeClass' => 'InflectedRoute']);
+    $routes->connect('/rooms', ['controller' => 'Rooms','action' => 'index'], ['routeClass' => 'InflectedRoute']);
     $routes->fallbacks(DashedRoute::class);
 });
 //---------------------------------------------------------------------------------------------------------DEBUT ROUTES DU FORUM
