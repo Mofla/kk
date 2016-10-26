@@ -98,3 +98,11 @@
     background-color: #48525e;
     color: #32c5d2;
 }
+
+.pagination{
+    margin : 0!important;
+}
+
+.pagination>.active>a{
+    background-color: #36c6d3;
+}

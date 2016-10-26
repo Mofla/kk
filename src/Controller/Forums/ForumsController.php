@@ -5,11 +5,23 @@ use App\Controller\AppController;
 use Cake\ORM\TableRegistry;
 use Cake\I18n\Time;
 use Cake\ORM\Query;
-
+use Cake\View\Helper\PaginatorHelper;
 
 
 class ForumsController extends AppController
 {
+    public $paginate = [
+        'limit' => 20,
+        'order' => [
+            'Threads.id' => 'desc'
+        ]
+    ];
+    public function initialize()
+    {
+        parent::initialize();
+        $this->loadComponent('Paginator');
+    }
+
 
     public function index()
     {
@@ -36,12 +48,17 @@ class ForumsController extends AppController
 
     public function view($slug = null, $id = null)
     {
-        $forum = $this->Forums->get($id, [
-            'contain' => ['Threads.Users','Threads.Posts','Threads.Lastuserthread']
-        ]);
+        $forum = $this->Forums->Threads->find('all')
+            ->contain(['Users','Posts','Lastuserthread'])
+            ->where(['forum_id' => $id]);
 
-        $this->set('forum', $forum);
-        $this->set('_serialize', ['forum']);
+        $forumname = $this->Forums->find('all')
+            ->select(['name'])
+            ->where(['id' => $id])
+        ->first();
+
+        $this->set(compact('forumname','id'));
+        $this->set('forum', $this->paginate($forum));
     }
 
     public function search()

@@ -1,18 +1,32 @@
-<?= $this->element('Forum/search-forum') ?>
+
 
 <div class="col-md-12 voffset2">
 
+
+    <div class="col-md-12">
+    <div class="pagination left">
+        <?php
+                echo $this->Paginator->prev(__('Prec'), array('tag' => 'li'), null, array('tag' => 'li','class' =>
+                'disabled','disabledTag' => 'a'));
+                echo $this->Paginator->numbers(array('separator' => '','currentTag' => 'a', 'currentClass' =>
+                'active','tag' => 'li','first' => 1));
+                echo $this->Paginator->next(__('Suiv'), array('tag' => 'li','currentClass' => 'disabled'), null,
+                array('tag' => 'li','class' => 'disabled','disabledTag' => 'a'));
+                ?>
+    </div>
+
 <div class="right">
-    <a href="<?= $this->Url->build([ 'controller' => 'Threads', 'action' => 'add' , 'slug' => strtolower(str_replace(' ', '-', $forum->name)), 'id' => $forum->id]) ?>"
+    <a href="<?= $this->Url->build([ 'controller' => 'Threads', 'action' => 'add' , 'slug' => strtolower(str_replace(' ', '-', $forumname->name)), 'id' => $id]) ?>"
        class="btn btn-success " role="button" aria-pressed="true"> <i class="fa fa-plus"></i> CREER UN SUJET</a>
 </div>
+    </div>
 
 <div class="row"></div>
 <div class="table-responsive voffset2">
-    <?php if (!empty($forum->threads)): ?>
+    <?php if (!empty($forum)): ?>
     <table class="table">
         <tr>
-            <th scope="col" class="category" colspan="5"><?= h($forum->name) ?></th>
+            <th scope="col" class="category" colspan="5"><?= h($forumname->name) ?></th>
         </tr>
         <tr class="ssthead">
             <th scope="col" >Sujets / Auteurs</th>
@@ -21,9 +35,9 @@
             <th scope="col" >Derniers messages</th>
             <th scope="col" ></th>
         </tr>
-        <?php foreach ($forum->threads as $threads): ?>
+        <?php foreach ($forum as $threads): ?>
         <tr class="sscategory">
-            <td width="50%"><?= $this->Html->link(__($threads->subject), ['controller' => 'Threads','action' => 'view', 'fid' => $forum->id, 'forum' => strtolower(str_replace(' ', '-', $forum->name)), 'slug' => strtolower(str_replace(' ', '-', $threads->subject)), 'id' => $threads->id]) ?>
+            <td width="50%"><?= $this->Html->link(__($threads->subject), ['controller' => 'Threads','action' => 'view', 'fid' => $id, 'forum' => strtolower(str_replace(' ', '-', $forumname->name)), 'slug' => strtolower(str_replace(' ', '-', $threads->subject)), 'id' => $threads->id]) ?>
             <br> par
                 <?= $this->Html->link($threads->user->username, 'utilisateur/profil/'.$threads->user->id.'') ?>
             </td>
@@ -52,9 +66,22 @@
         <?php endforeach; ?>
     </table>
     <?php endif; ?>
-    <div class="right">
-        <a href="<?= $this->Url->build([ 'controller' => 'Threads', 'action' => 'add' , $forum->id]); ?>"
-           class="btn btn-success " role="button" aria-pressed="true"> <i class="fa fa-plus"></i> CREER UN SUJET</a>
+    <div class="col-md-12">
+        <div class="pagination left">
+            <?php
+                    echo $this->Paginator->prev(__('Prec'), array('tag' => 'li'), null, array('tag' => 'li','class' =>
+                    'disabled','disabledTag' => 'a'));
+                    echo $this->Paginator->numbers(array('separator' => '','currentTag' => 'a', 'currentClass' =>
+                    'active','tag' => 'li','first' => 1));
+                    echo $this->Paginator->next(__('Suiv'), array('tag' => 'li','currentClass' => 'disabled'), null,
+                    array('tag' => 'li','class' => 'disabled','disabledTag' => 'a'));
+                    ?>
+        </div>
+
+        <div class="right">
+            <a href="<?= $this->Url->build([ 'controller' => 'Threads', 'action' => 'add' , 'slug' => strtolower(str_replace(' ', '-', $forumname->name)), 'id' => $id]) ?>"
+               class="btn btn-success " role="button" aria-pressed="true"> <i class="fa fa-plus"></i> CREER UN SUJET</a>
+        </div>
     </div>
 </div>
 </div>
