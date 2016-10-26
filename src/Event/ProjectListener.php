@@ -39,7 +39,5 @@ class ProjectListener implements EventListenerInterface
             $entrie->content = 'le Projet '.$subject['name'].' viens d\'être crée';
             $entriesTable->save($entrie);
         }
-
-
     }
 }

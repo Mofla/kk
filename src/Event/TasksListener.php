@@ -8,15 +8,15 @@ use Cake\Event\Event;
 use Cake\ORM\TableRegistry;
 
 
-class TasksEventListener implements EventListenerInterface
+class TasksListener implements EventListenerInterface
 {
     public function implementedEvents()
     {
         return [
-            'Model.Task.edittask' => 'editentries',
+            'Model.Task.add' => 'addtask',
         ];
     }
-    public function editentries($event)
+    public function addtask($event)
     {
         $subject =  $event->data['event'];
 debug($subject);
