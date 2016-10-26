@@ -5,6 +5,7 @@ use App\Event\TasksListener;
 use Cake\Event\EventListenerInterface;
 use Cake\Event\Event;
 use Cake\ORM\Query;
+use Cake\ORM\Entity;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
@@ -113,25 +114,26 @@ class TasksTable extends Table
         return $rules;
     }
 
-    public function afterSave($created, $event){
+    public function afterSave($created, $event, $entity){
         if ($created) {
+            debug($event);
+            die();
+//            if INSERT
+            if(empty($event['id'])){
+
             $task = new Event('Model.Task.addtask', $this,[
                 'event' =>$event
             ]);
+            }
+//          if UPDATE
+            else{
+                $task = new Event('Model.Task.edit', $this,[
+                    'event' =>$event
+                ]);
+            }
             $this->eventManager()->dispatch($task);
             return true;
         }
         return false;
     }
-
-//    public function afterEdit($created, $event){
-//        if ($created) {
-//            $task = new Event('Model.Task.edit', $this,[
-//                'event' =>$event
-//            ]);
-//            $this->eventManager()->dispatch($task);
-//            return true;
-//        }
-//        return false;
-//    }
 }

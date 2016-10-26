@@ -24,18 +24,17 @@ class TasksListener implements EventListenerInterface
         $diariesTable = TableRegistry::get('Diaries');
         $entriesTable = TableRegistry::get('Entries',['contain'=>'Diaries']);
         $project_id = $task['project_id'];
-//pour chaque utilisateurs
+                                                                                    //pour chaque utilisateurs
             for ($i = 0; $i < count($task['users']); $i++) {
                 $user_id = $task['users'][$i]['id'];
-                //recupération de diaries_id
+                                                                                    //recupération de diaries_id
                 $query = $diariesTable->find()
                     ->select(['id'])
                     ->where([
                         'user_id' => $user_id,
                         'project_id' => $project_id,
                     ]);
-
-    //enregistrement de la nouvelles notes
+                                                                                     //enregistrement de la nouvelles notes
                 $entrie = $entriesTable->newEntity();
                 $entrie->diary_id = $query;
                 $entrie->date = Time::now();
