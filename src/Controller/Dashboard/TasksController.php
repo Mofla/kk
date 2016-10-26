@@ -7,6 +7,8 @@ use Cake\Event\Event;
 use Cake\Event\EventList;
 use Cake\ORM\TableRegistry;
 use App\Event\TasksListener;
+use Cake\I18n\Time;
+Time::setToStringFormat('yyyy/MM/dd HH:mm');
 
 /**
  * Tasks Controller
@@ -132,6 +134,71 @@ class TasksController extends AppController
         $users = $this->Tasks->Users->find('list', ['limit' => 200]);
         $this->set(compact('task', 'states', 'projects', 'users'));
         $this->set('_serialize', ['task']);
+    }
+
+    public function viewforum($id = null)
+    {
+        $sub = $this->Tasks->Threads->Subscriptions;
+        $user = $this->Auth->user('id');
+        $subscription = $sub->find()
+            ->select('id')
+            ->where(['user_id'=> $user , 'thread_id'=> $id])
+            ->first();
+
+        $thread = $this->Tasks->Threads->get($id, [
+            'contain' => ['Files','Posts.Users','Posts.Files','Users', 'Forums', 'Posts' => function($q) {
+                return $q->order(['Posts.id' => 'ASC']);
+            }]
+        ]);
+
+
+        $query = $this->Tasks->Threads->query();
+        $query->update()
+            ->set($query->newExpr('countview = countview + 1'))
+            ->where(['id' => $id])
+            ->execute();
+        $this->set(compact('thread','subscription'));
+    }
+
+    public function addpost($id = null)
+    {
+        $time = Time::now();
+        $user = $this->Auth->user('id');
+
+
+        $forumid = $this->Tasks->Threads->find()
+            ->select(['forum_id','subject'])
+            ->where(['id' => $id])
+            ->first();
+        $post = $this->Tasks->Threads->Posts->newEntity();
+        if ($this->request->is('post')) {
+            $this->request->data['user_id'] = $user;
+            $this->request->data['thread_id'] = $id;
+            $post = $this->Tasks->Threads->Posts->patchEntity($post, $this->request->data);
+            if ($this->Tasks->Threads->Posts->save($post)) {
+
+                $this->Flash->success(__('The post has been saved.'));
+                $query = $this->Tasks->Threads->Forums->query();
+                $query->update()
+                    ->set([$query->newExpr('countpost = countpost + 1'),'lastuser' => $user ,
+                        'lasttopic' => $post->id ])
+                    ->where(['id' => $forumid->forum_id])
+                    ->execute();
+
+                $threadlast = $this->Tasks->Threads->query();
+                $threadlast->update()
+                    ->set(['lastuser' => $user ,
+                        'lastpost' => $time ])
+                    ->where(['id' => $id])
+                    ->execute();
+
+            } else {
+                $this->Flash->error(__('The post could not be saved. Please, try again.'));
+            }
+        }
+
+        $this->set(compact('post','forumid','pastquote','add','sub'));
+        $this->set('_serialize', ['post']);
     }
 
     public function edittask($id = null)
