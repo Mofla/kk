@@ -303,7 +303,15 @@
           'quote' => $posts->id
      ]); ?>"
                    class="btn btn-sm blue" role="button" aria-pressed="true"><i class="fa fa-quote-right"></i> CITER</a>
-                <a href="<?= $this->Url->build([ 'controller' => 'Posts', 'action' => 'edit' , $posts->id]); ?>"
+
+
+
+                <a href="<?= $this->Url->build([ 'controller' => 'Posts', 'action' => 'edit' ,
+    'fid' => $thread->forum->id,
+    'forum' => strtolower(str_replace(' ', '-', $thread->forum->name)),
+    'slug' => strtolower(str_replace(' ', '-', $thread->subject)),
+     'id' => $posts->id
+     ]); ?>"
                    class="btn btn-sm purple" role="button" aria-pressed="true"><i class="fa fa-pencil"></i> EDITER</a>
                 <?= $this->Form->postLink(__('<i class="fa fa-times"></i>'),[ 'controller' => 'Posts'
                 , 'action' => 'delete' , $posts->id],['escape'=>false , 'class'=>'btn btn-sm btn-danger']); ?>
