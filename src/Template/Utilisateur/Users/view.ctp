@@ -4,6 +4,9 @@
     .op:hover {
         opacity: 0.5;
     }
+    ul {
+        list-style: none;
+    }
 </style>
 
 <!-- END PAGE TITLE -->
@@ -100,36 +103,29 @@
                                     <?php foreach ($promotions as $promotion): ?>
                                         <h1 class="font-green sbold uppercase">languages maitrisés</h1>
                                         <ul>
-                                            <?php if ($promotion->language_javascript) { ?>
-                                            <li><span style="background-color: #444d58" class="label">HTML</span></li>
+                                            <?php if ($promotion->language_html) { ?>
+                                            <li><span style="background-color: #444d58;color: white" class="btn">HTML</span></li>
                                             <?php } ?>
-                                            <br>
-                                            <?php if ($promotion->language_javascript) { ?>
-                                            <li><span style="background-color: #444d58" class="label">CSS</span></li>
+                                            <?php if ($promotion->language_css) { ?>
+                                            <li><span style="background-color: #444d58;color: white" class="btn">CSS</span></li>
                                             <?php } ?>
-                                            <br>
                                             <?php if ($promotion->language_javascript) { ?>
-                                            <li><span style="background-color: #444d58" class="label">JAVASCRIPT</span></li>
+                                            <li><span style="background-color: #444d58;color: white" class="btn">JAVASCRIPT</span></li>
                                             <?php } ?>
-                                            <br>
-                                            <?php if ($promotion->language_javascript) { ?>
-                                            <li><span style="background-color: #444d58" class="label">JQUERY</span></li>
+                                            <?php if ($promotion->language_jquery) { ?>
+                                            <li><span style="background-color: #444d58;color: white" class="btn">JQUERY</span></li>
                                             <?php } ?>
-                                            <br>
-                                            <?php if ($promotion->language_javascript) { ?>
-                                            <li><span style="background-color: #444d58" class="label">PHP</span></li>
+                                            <?php if ($promotion->language_php) { ?>
+                                            <li><span style="background-color: #444d58;color: white" class="btn">PHP</span></li>
                                             <?php } ?>
-                                            <br>
-                                            <?php if ($promotion->language_javascript) { ?>
-                                            <li><span style="background-color: #444d58" class="label">SQL</span></li>
+                                            <?php if ($promotion->language_sql) { ?>
+                                            <li><span style="background-color: #444d58;color: white" class="btn">SQL</span></li>
                                             <?php } ?>
-                                            <br>
-                                            <?php if ($promotion->language_javascript) { ?>
-                                            <li><span style="background-color: #444d58" class="label">CAKEPHP</span></li>
+                                            <?php if ($promotion->language_cakephp) { ?>
+                                            <li><span style="background-color: #444d58;color: white" class="btn">CAKEPHP</span></li>
                                             <?php } ?>
-                                            <br>
-                                            <?php if ($promotion->language_javascript) { ?>
-                                            <li><span style="background-color: #444d58" class="label">BOOTSTRAP</span></li>
+                                            <?php if ($promotion->language_bootstrap) { ?>
+                                            <li><span style="background-color: #444d58;color: white" class="btn">BOOTSTRAP</span></li>
                                             <?php } ?>
                                         </ul>
                                     <?php endforeach; ?>
