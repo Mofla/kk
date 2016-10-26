@@ -25,7 +25,7 @@ class MenuCell extends Cell
     public function display($id)
     {
 
-/*        $i= $id;
+        $i= $id;
         $this->loadModel('Permissions');
         $this->loadModel('Connectors');
         $this->loadModel('Roles');
@@ -37,7 +37,7 @@ class MenuCell extends Cell
             ->select('role_id')
             ->where(['id'=> $id]);
 
-        $query = $this->Connectors->find('all')
+        /*$query = $this->Connectors->find('all')
             ->contain(['Permissions','Permissions.Roles'])
             ->matching('Permissions')->where(['menu'=> 1])
             ->matching('Permissions.Roles')->where(['Roles.id =' => $role]);
