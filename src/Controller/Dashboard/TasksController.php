@@ -136,6 +136,7 @@ class TasksController extends AppController
 
     public function edittask($id = null)
     {
+        $this->Tasks->eventManager()->on(new TasksListener());
         $task = $this->Tasks->get($id, [
             'contain' => ['Users']
         ]);
