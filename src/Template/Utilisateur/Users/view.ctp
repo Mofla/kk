@@ -42,30 +42,36 @@
                                                 <i class="fa fa-at"></i> <?= $user->email ?><br>
                                                 <i class="fa fa-user"></i> <?= $user->role->name ?><br>
                                                 <?php foreach ($promotions as $promotion): ?>
-                                                    <div class="social-icons"style="margin-top: 13px">
+                                                    <div class="social-icons" style="margin-top: 13px">
                                                         <?php if ($promotion->facebook_link != '') { ?>
                                                             <a href="<?= ($promotion->facebook_link) ?>">
                                                                 <i class="fa fa-facebook-official op" style="font-size: 45px"></i></a>
+                                                        <?php } else { ?>
+                                                            <i class="fa fa-facebook-official op" style="font-size: 45px;color: grey"></i>
                                                         <?php } ?>
                                                         <?php if ($promotion->twitter_link != '') { ?>
                                                             <a href="<?= ($promotion->twitter_link) ?>">
-                                                                <i class="fa fa-twitter-square op"
-                                                                   style="color: lightskyblue;font-size: 45px"></i></a>
+                                                                <i class="fa fa-twitter-square op" style="color: lightskyblue;font-size: 45px"></i></a>
+                                                        <?php } else { ?>
+                                                            <i class="fa fa-twitter-square op" style="color: grey;font-size: 45px"></i>
                                                         <?php } ?>
                                                         <?php if ($promotion->linkedin_link != '') { ?>
                                                             <a href="<?= ($promotion->linkedin_link) ?>">
-                                                                <i class="fa fa-linkedin-square op"
-                                                                   style="color: blue;font-size: 45px"></i></a>
+                                                                <i class="fa fa-linkedin-square op" style="color: blue;font-size: 45px"></i></a>
+                                                        <?php } else { ?>
+                                                            <i class="fa fa-linkedin-square op" style="color: grey;font-size: 45px"></i>
                                                         <?php } ?>
-                                                        <?php if (!empty($user->github_username)): ?>
+                                                        <?php if ($user->github_username != '') { ?>
                                                             <a href="https://github.com/<?= $user->github_username ?>">
-                                                                <i class="fa fa-github-square op"
-                                                                   style="color: black;font-size: 45px"></i></a>
-                                                        <?php endif; ?>
+                                                                <i class="fa fa-github-square op" style="color: black;font-size: 45px"></i></a>
+                                                        <?php } else { ?>
+                                                            <i class="fa fa-github-square op" style="color: grey;font-size: 45px"></i>
+                                                        <?php } ?>
                                                         <?php if ($promotion->web_site != '') { ?>
                                                             <a href="<?= ($promotion->web_site) ?>">
-                                                                <i class="fa fa-at op"
-                                                                   style="color: red;font-size: 45px"></i></a>
+                                                                <i class="fa fa-at op" style="color: red;font-size: 45px"></i></a>
+                                                        <?php } else { ?>
+                                                            <i class="fa fa-at op" style="color: grey;font-size: 45px"></i>
                                                         <?php } ?>
                                                     </div>
                                                 <?php endforeach; ?>
@@ -76,7 +82,7 @@
                                             <?php foreach ($promotions as $promotion): ?>
                                                 <?php
                                                 // Cut the description if too long
-                                                $description = mb_substr($promotion->description,0,550);
+                                                $description = mb_substr($promotion->description, 0, 550);
                                                 echo $description;
                                                 echo (strlen($description) < strlen($promotion->description)) ? '...' : '';
                                                 ?>
@@ -94,37 +100,37 @@
                                     <?php foreach ($promotions as $promotion): ?>
                                         <h1 class="font-green sbold uppercase">languages maitrisés</h1>
                                         <ul>
-                                            <li><span style="background-color: #444d58"
-                                                      class="label"><?= ($promotion->language_html) ? 'HTML' : '' ?></span>
-                                            </li>
+                                            <?php if ($promotion->language_javascript) { ?>
+                                            <li><span style="background-color: #444d58" class="label">HTML</span></li>
+                                            <?php } ?>
                                             <br>
-                                            <li><span style="background-color: #444d58"
-                                                      class="label"><?= ($promotion->language_css) ? 'CSS' : '' ?></span>
-                                            </li>
+                                            <?php if ($promotion->language_javascript) { ?>
+                                            <li><span style="background-color: #444d58" class="label">CSS</span></li>
+                                            <?php } ?>
                                             <br>
-                                            <li><span style="background-color: #444d58"
-                                                      class="label"><?= ($promotion->language_javascript) ? 'JAVASCRIPT' : '' ?></span>
-                                            </li>
+                                            <?php if ($promotion->language_javascript) { ?>
+                                            <li><span style="background-color: #444d58" class="label">JAVASCRIPT</span></li>
+                                            <?php } ?>
                                             <br>
-                                            <li><span style="background-color: #444d58"
-                                                      class="label"><?= ($promotion->language_jquery) ? 'JQUERY' : '' ?></span>
-                                            </li>
+                                            <?php if ($promotion->language_javascript) { ?>
+                                            <li><span style="background-color: #444d58" class="label">JQUERY</span></li>
+                                            <?php } ?>
                                             <br>
-                                            <li><span style="background-color: #444d58"
-                                                      class="label"><?= ($promotion->language_php) ? 'PHP' : '' ?></span>
-                                            </li>
+                                            <?php if ($promotion->language_javascript) { ?>
+                                            <li><span style="background-color: #444d58" class="label">PHP</span></li>
+                                            <?php } ?>
                                             <br>
-                                            <li><span style="background-color: #444d58"
-                                                      class="label"> <?= ($promotion->language_sql) ? 'SQL' : '' ?></span>
-                                            </li>
+                                            <?php if ($promotion->language_javascript) { ?>
+                                            <li><span style="background-color: #444d58" class="label">SQL</span></li>
+                                            <?php } ?>
                                             <br>
-                                            <li><span style="background-color: #444d58"
-                                                      class="label"> <?= ($promotion->language_cakephp) ? 'CAKEPHP' : '' ?></span>
-                                            </li>
+                                            <?php if ($promotion->language_javascript) { ?>
+                                            <li><span style="background-color: #444d58" class="label">CAKEPHP</span></li>
+                                            <?php } ?>
                                             <br>
-                                            <li><span style="background-color: #444d58"
-                                                      class="label"><?= ($promotion->language_bootstrap) ? 'BOOTSTRAP' : '' ?></span>
-                                            </li>
+                                            <?php if ($promotion->language_javascript) { ?>
+                                            <li><span style="background-color: #444d58" class="label">BOOTSTRAP</span></li>
+                                            <?php } ?>
                                         </ul>
                                     <?php endforeach; ?>
                                 </div>
@@ -132,9 +138,9 @@
                                     <h1 class="font-green sbold uppercase text-center">projets</h1>
                                     <?php foreach ($user->projects as $projects): ?>
                                         <div class="col-md-4 well text-center" style="background-color: white">
-                                            <?= $this->Html->image('../uploads/portfolios/' . $projects->picture_url,['class' => 'img-responsive']) ?>
+                                            <?= $this->Html->image('../uploads/portfolios/' . $projects->picture_url, ['class' => 'img-responsive']) ?>
                                             <h3 style="font-weight: 900"><?= $projects->name ?></h3>
-                                            <a href="<?= $this->Url->build(['controller' => 'Portfolios', 'action' => 'view', $projects->id, 'prefix' => 'portfolios' ]) ?>"
+                                            <a href="<?= $this->Url->build(['controller' => 'Portfolios', 'action' => 'view', $projects->id, 'prefix' => 'portfolios']) ?>"
                                                class="cbp-l-caption-buttonRight btn green uppercase ">Détails</a>
                                         </div>
                                     <?php endforeach; ?>

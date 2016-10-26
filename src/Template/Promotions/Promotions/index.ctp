@@ -38,22 +38,30 @@
                 <p style="font-weight: 500; font-size: 15px"><i
                         class="glyphicon glyphicon-envelope"></i> <?= ($promotion->user->email) ?>
                     <br></p>
-                <span style="background-color: #444d58"
-                      class="label label-default"><?= ($promotion->language_html) ? 'html' : '' ?></span>
-                <span style="background-color: #444d58"
-                      class="label label-default"><?= ($promotion->language_css) ? 'css' : '' ?></span>
-                <span style="background-color: #444d58"
-                      class="label label-default"><?= ($promotion->language_javascript) ? 'javascript' : '' ?></span>
-                <span style="background-color: #444d58"
-                      class="label label-default"><?= ($promotion->language_jquery) ? 'jquery' : '' ?></span>
-                <span style="background-color: #444d58"
-                      class="label label-default"><?= ($promotion->language_php) ? 'php' : '' ?></span>
-                <span style="background-color: #444d58"
-                      class="label label-default"><?= ($promotion->language_sql) ? 'sql' : '' ?></span>
-                <span style="background-color: #444d58"
-                      class="label label-default"><?= ($promotion->language_cakephp) ? 'cakephp' : '' ?></span>
-                <span style="background-color: #444d58"
-                      class="label label-default"><?= ($promotion->language_bootstrap) ? 'bootstrap' : '' ?></span>
+                <?php if ($promotion->language_html) { ?>
+                <div style="background-color: #444d58; color: white;border: 1px solid white" class="btn">html</div>
+                <?php } ?>
+                <?php if ($promotion->language_css) { ?>
+                <div style="background-color: #444d58; color: white;border: 1px solid white" class="btn">css</div>
+                <?php } ?>
+                <?php if ($promotion->language_javascript) { ?>
+                <div style="background-color: #444d58; color: white;border: 1px solid white" class="btn">javascript</div>
+                <?php } ?>
+                <?php if ($promotion->language_jquery) { ?>
+                <div style="background-color: #444d58; color: white;border: 1px solid white" class="btn">jquery</div>
+                <?php } ?>
+                <?php if ($promotion->language_php) { ?>
+                <div style="background-color: #444d58; color: white;border: 1px solid white" class="btn">php</div>
+                <?php } ?>
+                <?php if ($promotion->language_sql) { ?>
+                <div style="background-color: #444d58; color: white;border: 1px solid white" class="btn">sql</div>
+                <?php } ?>
+                <?php if ($promotion->language_cakephp) { ?>
+                <div style="background-color: #444d58; color: white;border: 1px solid white" class="btn">cakephp</div>
+                <?php } ?>
+                <?php if ($promotion->language_bootstrap) { ?>
+                <div style="background-color: #444d58; color: white;border: 1px solid white" class="btn">bootstrap</div>
+                <?php } ?>
             </div>
         <?php endforeach; ?>
     </div>
