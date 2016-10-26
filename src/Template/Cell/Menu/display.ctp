@@ -109,11 +109,15 @@
                   Forum
                   <span class="arrow"></span>
                 </a>
+                <?php foreach ($role as $r) : ?>
+                <?php if ($r->role_id == 1): ?>
                 <ul class="dropdown-menu pull-left">
                   <li class=" ">
-                    <a href="<?= $this->Url->build('/admin/forums/listcategory') ?>">ACP Forum</a>
+                    <a href="<?= $this->Url->build(['controller'=>'Forums', 'action'=>'listcategory', 'prefix'=> 'admin']) ?>">ACP Forum</a>
                   </li>
                 </ul>
+                <?php endif; ?>
+                <?php endforeach; ?>
               </li>
             </ul>
           </div>
