@@ -1,30 +1,51 @@
 <?= $this->Html->css('../assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css') ?>
 <?= $this->Html->script('../assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js') ?>
 
-
-<?= $this->Form->create($file, ['enctype' => 'multipart/form-data']) ?>
-<input name="project_id" type="hidden" value="<?= $project->id ?>">
-<div class="fileinput fileinput-new" data-provides="fileinput">
-    <div class="input-group input-large">
-        <div class="form-control uneditable-input input-fixed input-medium" data-trigger="fileinput">
-            <i class="fa fa-file fileinput-exists"></i>&nbsp;
-            <span class="fileinput-filename"> </span>
-        </div>
-        <span class="input-group-addon btn default btn-file">
+<div class="row" id="file-form" style="display: none">
+    <div class="col-md-5 col-sm-5 col-xs-5">
+        <div class="portlet box blue-chambray">
+            <div class="portlet-title">
+                <div class="caption">
+                    Ajouter un fichier
+                </div>
+                <div class="actions">
+                    <div class="btn-group">
+                        <a id="close-form">
+                            <i class="glyphicon glyphicon-remove"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <?= $this->Form->create($file, ['enctype' => 'multipart/form-data']) ?>
+                <input name="project_id" type="hidden" value="<?= $project->id ?>">
+                <div class="fileinput fileinput-new" data-provides="fileinput">
+                    <div class="input-group input-large">
+                        <div class="form-control uneditable-input input-fixed input-medium" data-trigger="fileinput">
+                            <i class="fa fa-file fileinput-exists"></i>&nbsp;
+                            <span class="fileinput-filename"> </span>
+                        </div>
+                        <span class="input-group-addon btn default btn-file">
                                                                                     <span class="fileinput-new"> Joindre un fichier </span>
                                                                                     <span class="fileinput-exists"> Modifier </span>
                                                                                     <input type="file"
                                                                                            name="upload"> </span>
-        <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput">
-            Retirer </a>
+                        <a href="javascript:;" class="input-group-addon btn red fileinput-exists"
+                           data-dismiss="fileinput">
+                            Retirer </a>
+                    </div>
+                </div>
+                <?= $this->Form->button('VALIDER', ['class' => 'btn blue-chambray']) ?>
+                <?= $this->Form->end() ?>
+            </div>
+        </div>
     </div>
+
 </div>
-<?= $this->Form->button('Valider', ['class' => 'btn btn-success']) ?>
-<?= $this->Form->end() ?>
 
 <div class="row">
     <!--pour chaque fichier-->
-<?php foreach ($project->files as $files) : ?>
+    <?php foreach ($project->files as $files) : ?>
 
 
         <div class="col-md-2 col-sm-2 col-xs-2">
@@ -131,22 +152,36 @@
         </div>
 
 
-<?php endforeach ?>
+    <?php endforeach ?>
 </div>
 
 <script>
-    $('.delete-file').on('click', function (item) {
 
+    //shows and hides file form
+    $('#add-file').on('click', function () {
+        $('#file-form').toggle();
+    });
+    function closeForm() {
+        $('#file-form').hide();
+    }
+    $('#close-form').on('click', function () {
+        closeForm();
+    });
+
+
+    //delete file
+    $('.delete-file').on('click', function (item) {
 
         var thisItem = $(this).closest('.portlet');
 
         swal({
-                title: "Are you sure?",
-                text: "You will not be able to recover this imaginary file!",
+                title: "Etes-vous sur de vouloir supprimer ce fichier ?",
+                text: "La suppression est définitive.",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Yes, delete it!",
+                cancelButtonText: "Annuler",
+                confirmButtonText: "Oui, supprimer.",
                 closeOnConfirm: false
             },
             function () {
@@ -159,8 +194,9 @@
                     type: 'post',
                     url: url,
                     success: function () {
+                        closeForm();
                         thisItem.hide();
-                        swal("Deleted!", "Your imaginary file has been deleted.", "success");
+                        swal("Fichier supprimé !", "Le fichier a été supprimé avec succès.", "success");
                     }
                 });
             });

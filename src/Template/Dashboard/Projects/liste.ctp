@@ -175,12 +175,13 @@ function custom_echo($x, $length)
         var thisItem = $(this).closest('.portlet');
 
         swal({
-                title: "Are you sure?",
-                text: "You will not be able to recover this imaginary file!",
+                title: "Voulez-vous supprimer cette tâche ?",
+                text: "Cette action est définitive",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Yes, delete it!",
+                cancelButtonText: "Annuler",
+                confirmButtonText: "Oui, supprimer.",
                 closeOnConfirm: false
             },
             function () {
@@ -194,7 +195,7 @@ function custom_echo($x, $length)
                     url: url,
                     success: function () {
                         thisItem.hide();
-                        swal("Deleted!", "Your imaginary file has been deleted.", "success");
+                        swal("Tâche supprimée", "La tâche a été supprimée avec succès.", "success");
 
                     }
                 });

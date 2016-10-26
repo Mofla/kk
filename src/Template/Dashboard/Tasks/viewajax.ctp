@@ -40,9 +40,6 @@
                                                         <li>
                                                             <?= $this->Form->postLink('<i class="glyphicon glyphicon-trash"></i> Supprimer', ['controller' => 'Tasks', 'action' => 'delete', $task->id], ['escape' => false], ['confirm' => __('Are you sure you want to delete # {0}?', $task->id)]) ?>
                                                         </li>
-                                                        <li>
-                                                            <a data-dismiss="modal">X Fermer</a>
-                                                        </li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -134,18 +131,20 @@
                         }
 
                         //thread url
-                        var url = '<?= $this->Url->build(['controller' => 'Forums/Threads', 'action' => 'view', $task->thread_id, 'prefix' => false]); ?>';
+                        var url = '<?= $this->Url->build(['action' => 'viewforum', $task->thread_id]); ?>';
                         //loads the forum
                         $('#forum').load(url, function () {
 
                             //hides shit
                             $('.dash-hide').hide();
+                            $('#search-forum-input').hide();
+                            $('#search-forum').hide();
 
                             //listener on post button
                             $('.dash-post').on('click', function (event) {
                                 event.preventDefault();
                                 var postUrl = $(this).attr('href').split('/');
-                                var loadUrl = '<?= $this->Url->build(['controller' => 'Forums/Posts', 'action' => 'add', 'prefix' => false]); ?>' + '/' + postUrl[4];
+                                var loadUrl = '<?= $this->Url->build(['action' => 'addpost']); ?>' + '/' + postUrl[4];
 
 
                                 $('#forum').load(loadUrl, function () {
@@ -154,11 +153,11 @@
                                         event.preventDefault();
 
                                         var preUrl = $('.form-post').attr('action').split('/');
-                                        var postedUrl = '<?= $this->Url->build(['controller' => 'Forums/Posts', 'action' => 'add', 'prefix' => false]); ?>' + '/' + preUrl[4];
+                                        var postedUrl = '<?= $this->Url->build(['action' => 'addpost']); ?>' + '/' + preUrl[4];
 
                                         var data = {
                                             title: $('.dash-title').val(),
-                                            message: $('.note-editable').text(),
+                                            message: $('.note-editable').text()
 
                                         };
                                         $.ajax({
