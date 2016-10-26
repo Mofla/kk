@@ -53,14 +53,20 @@ class PromotionsController extends AppController
     {
         $promotion = $this->Promotions->newEntity();
         if ($this->request->is('post')) {
-            $this->request->data['user_id'] = $this->Auth->User('id');
-            $promotion = $this->Promotions->patchEntity($promotion, $this->request->data);
-            if ($this->Promotions->save($promotion)) {
-                $this->Flash->success(__('The promotion has been saved.'));
+            $exists = $this->Promotions->find()->select(['user_id'])->where(['user_id' => $this->Auth->User('id')])->count();
+            if(!$exists){
+                $this->request->data['user_id'] = $this->Auth->User('id');
+                $promotion = $this->Promotions->patchEntity($promotion, $this->request->data);
+                if ($this->Promotions->save($promotion)) {
+                    $this->Flash->success(__('The promotion has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The promotion could not be saved. Please, try again.'));
+                    return $this->redirect(['action' => 'index']);
+                } else {
+                    $this->Flash->error(__('The promotion could not be saved. Please, try again.'));
+                }
+            }else{
+
+                echo ('Tu as déjà un profil publique !');
             }
         }
         $users = $this->Promotions->Users->find('list', ['limit' => 200]);
