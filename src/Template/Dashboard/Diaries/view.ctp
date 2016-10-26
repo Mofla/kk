@@ -45,7 +45,7 @@
                             <!--start enties list -->
                             <div class="todo-tasklist">
                                 <?php foreach ($diary->entries as $entries): ?>
-                                <div id=<?= $entries->id ?> class="row">
+                                <div id=<?='entrie'.$entries->id ?> class="row">
                                     <div class="col-12">
                                         <div class="todo-tasklist-item todo-tasklist-item-border">
                                             <div class="todo-tasklist-item-text"><?= $entries->content ?>
@@ -98,7 +98,7 @@
                                                 <!-- TASK DESC -->
                                                 <div class="form-group">
                                                     <div class="col-md-12">
-                                                        <?= $this->Form->hidden($entries->id, ['id' => 'id']); ?>
+                                                        <?= $this->Form->hidden($entries->id, ['id' => "id_entrie"]); ?>
                                                         <?= $this->Form->input('content',
                                                             ['label' => false,
                                                                 'class' => 'form-control todo-taskbody-taskdesc',
@@ -106,7 +106,7 @@
 
                                                             ]); ?>
 
-                                                        <form action="#" class="form-horizontal form-bordered">
+                                                        <form id="content" action="#" class="form-horizontal form-bordered">
                                                             <div class="form-body">
 
                                                             </div>

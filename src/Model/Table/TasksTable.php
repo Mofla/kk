@@ -1,10 +1,14 @@
 <?php
 namespace App\Model\Table;
 
+use App\Event\TasksListener;
+use Cake\Event\EventListenerInterface;
+use Cake\Event\Event;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Cake\Event\EventManager;
 
 /**
  * Tasks Model
@@ -111,23 +115,23 @@ class TasksTable extends Table
 
     public function afterSave($created, $event){
         if ($created) {
-            $project = new Event('Model.Task.add', $this,[
+            $task = new Event('Model.Task.addtask', $this,[
                 'event' =>$event
             ]);
-            $this->eventManager()->dispatch($project);
+            $this->eventManager()->dispatch($task);
             return true;
         }
         return false;
     }
 
-    public function afterEdit($created, $event){
-        if ($created) {
-            $project = new Event('Model.Task.edit', $this,[
-                'event' =>$event
-            ]);
-            $this->eventManager()->dispatch($project);
-            return true;
-        }
-        return false;
-    }
+//    public function afterEdit($created, $event){
+//        if ($created) {
+//            $task = new Event('Model.Task.edit', $this,[
+//                'event' =>$event
+//            ]);
+//            $this->eventManager()->dispatch($task);
+//            return true;
+//        }
+//        return false;
+//    }
 }
