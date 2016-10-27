@@ -46,19 +46,14 @@ class TasksListener implements EventListenerInterface
 
     public function edittask($event , $entity)
     {
-//        debug($event);
-//        die();
+        $original_task = $entity->extractOriginalChanged($entity->visibleProperties());
         $task = $event->data['event'];
 //     ON VERIFIE SI DE NOUVEAUX USER SONT AJOUTE A LA TACHE
-
-        $nbr_original_users = count($entity->extractOriginalChanged($entity->visibleProperties())['users']);
-        $nbr_actual_users = count($event->data['event']['users']);
         $list_original_users = array();
         $list_actual_users = array();
-
 //creation tableau user d'origine
-        for ($i = 0; $i < count($entity->extractOriginalChanged($entity->visibleProperties())['users']); $i++){
-            $list_original_users[]= $entity->extractOriginalChanged($entity->visibleProperties())['users'][$i]['username'];
+        for ($i = 0; $i < count($original_task['users']); $i++){
+            $list_original_users[]= $original_task['users'][$i]['username'];
         }
 //creation tableau user actuel
         for ($i = 0; $i < count($task['users']); $i++){
@@ -73,16 +68,29 @@ class TasksListener implements EventListenerInterface
 //        ECRITURE DE LA NOTE
         //si SEULEMENT l'état de la tache à été edité
         if (isset($task['state_id'])){
-            $new_task_content .='La tache: '.$entity->extractOriginalChanged($entity->visibleProperties())['name'];
-            $new_task_content .= '\nSon statut passe de: '.$entity->extractOriginalChanged($entity->visibleProperties())['state_id'] . $task->state->name.' à  '.$task['state_id'];
+
+            $statesTable = TableRegistry::get('States');
+
+            $original_task_state = $statesTable->find()
+                ->select(['name'])
+                ->where([
+                    'id' => $original_task['state_id'],
+                ]);
+            $task_state = $statesTable->find()
+                ->select(['name'])
+                ->where([
+                    'id' => $task['state_id'],
+                ]);
+            $new_task_content .='La tache: ' . $task['name'];
+            $new_task_content .= '\nSon statut passe de '. $original_task_state->first()->name . ' à  ' . $task_state->first()->name;
         }
         else{
             //si le nom de tache à été edité
         if (isset($task['name'])){
-            $new_task_content .= 'La tache '.$entity->extractOriginalChanged($entity->visibleProperties())['name'].' deviens: '.$task['name'];
+            $new_task_content .= 'La tache ' . $original_task['name'] . ' deviens: '. $task['name'];
         }
         else{
-            $new_task_content .='La tache: '.$entity->extractOriginalChanged($entity->visibleProperties())['name'];
+            $new_task_content .='La tache: ' . $original_task['name'];
         }
 //si un nouvelle user est assigné à une tache
         if (!empty($result)){
@@ -93,7 +101,7 @@ class TasksListener implements EventListenerInterface
         }
 //si la description de la tache à été edité
         if (isset($task['description'])){
-            $new_task_content .= '\nLa description '.$entity->extractOriginalChanged($entity->visibleProperties())['description']  . ' deviens: '.$task['description'];
+            $new_task_content .= '\nLa description '.$original_task['description']  . ' deviens: '.$task['description'];
         }
         }
 
