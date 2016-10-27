@@ -37,8 +37,7 @@ use Cake\Validation\Validator;
         $this->primaryKey('id');
 
         $this->hasMany('Tchats', [
-            'foreignKey' => 'room_id',
-            'dependent'=> true
+            'foreignKey' => 'room_id'
         ]);
         $this->belongsToMany('Users', [
             'foreignKey' => 'room_id',
@@ -59,6 +58,8 @@ use Cake\Validation\Validator;
             ->integer('id')            ->allowEmpty('id', 'create');
         $validator
             ->requirePresence('name', 'create')            ->notEmpty('name');
+        $validator
+            ->integer('creator')            ->allowEmpty('creator');
         return $validator;
     }
 }

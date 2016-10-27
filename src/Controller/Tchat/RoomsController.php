@@ -17,11 +17,13 @@ class RoomsController extends AppController
      */
     public function index()
     {
+        $id = $this->Auth->User('id');
+
         $rooms = $this->paginate($this->Rooms,[
             'contain' => ['Users', 'Tchats']
         ]);
 
-        $this->set(compact('rooms'));
+        $this->set(compact('rooms','id'));
         $this->set('_serialize', ['rooms']);
     }
 
@@ -49,6 +51,7 @@ class RoomsController extends AppController
      */
     public function add()
     {
+        $id = $this->Auth->User('id');
         $room = $this->Rooms->newEntity();
         if ($this->request->is('post')) {
             $room = $this->Rooms->patchEntity($room, $this->request->data);
@@ -59,7 +62,7 @@ class RoomsController extends AppController
             }
         }
         $users = $this->Rooms->Users->find('list', ['valueField' => 'username']);
-        $this->set(compact('room', 'users'));
+        $this->set(compact('room', 'users','id'));
         $this->set('_serialize', ['room']);
     }
 

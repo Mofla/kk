@@ -393,13 +393,13 @@ endforeach;
                 $('.in').val('');
             });
         });
-            function loop() {
+            function boucle_reload_coutay() {
             $('.countay').load('/tchat/tchats/counttchat/<?= $id_rooms ?>');
 
-                setTimeout(loop, 1000);
+                setTimeout(boucle_reload_coutay, 1000);
             }
 
-        loop();
+        boucle_reload_coutay();
         setInterval(function () {
 
             var countay = $('.countay p');
