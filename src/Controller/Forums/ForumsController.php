@@ -11,7 +11,7 @@ use Cake\View\Helper\PaginatorHelper;
 class ForumsController extends AppController
 {
     public $paginate = [
-        'limit' => 20,
+        'limit' => 12,
         'order' => [
             'Threads.id' => 'desc'
         ]
