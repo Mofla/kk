@@ -390,14 +390,16 @@ endforeach;
                     dataType: 'html',
                     type: 'post'
                 });
-                tchat = $('.tchat');
-                $('.countay').load('/tchat/tchats/counttchat/<?= $id_rooms ?>');
-                tchat.scrollTop(tchat[0].scrollHeight);
+                $('.in').val('');
             });
         });
-        setInterval(function () {
+            function loop() {
             $('.countay').load('/tchat/tchats/counttchat/<?= $id_rooms ?>');
-        }, 500);
+
+                setTimeout(loop, 1000);
+            }
+
+        loop();
         setInterval(function () {
 
             var countay = $('.countay p');
@@ -406,12 +408,12 @@ endforeach;
 
 
                 $('.row_tchat').load('/tchat/tchats/index/<?= $id_rooms ?>');
-                $('.in').val('');
+
 
             } else if (countay.attr('data') == countay_message.attr('hjh')) {
                 return false;
             }
-        }, 700);
+        }, 1000);
     } else {
         $('.page-content-inner').load('/tchat/tchats/autorize');
     }

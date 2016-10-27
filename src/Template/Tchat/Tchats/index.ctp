@@ -52,14 +52,14 @@
         }
 
         .lui {
-            margin-top: 2%;
+            margin-top: 1%;
             left: 10px;
             position: relative;
-            width: 180px;
+            max-width: 300px;
             height: auto;
             padding: 0px;
             background: #0c5eff;
-            border-radius: 10% !important;
+            border-radius: 7% !important;
         }
 
         .lui:after {
@@ -76,14 +76,14 @@
         }
 
         .moi {
-            margin-top: 2%;
+            margin-top: 1%;
             left: 83%;
             position: relative;
-            width: 180px;
+            max-width: 300px;
             height: auto;
             padding: 0px;
             background: #00A000;
-            border-radius: 10px !important;
+            border-radius: 7% !important;
         }
 
         .moi:after {
@@ -95,7 +95,7 @@
             display: block;
             width: 0;
             z-index: 1;
-            right: -12px;
+            right: 0px;
             top: 25px;
         }
 

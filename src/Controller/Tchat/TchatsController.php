@@ -21,9 +21,6 @@ class TchatsController extends AppController
     {
         $user = $this->Auth->User('username');
         $id = $this->Auth->User('id');
-        $time = Time::now();
-        $time->timezone = 'Europe/Paris';
-        $time->i18nFormat('Y-m-d h:m:s');
 
         $time_2 = Time::now();
         $time_2->timezone = 'Europe/Paris';
@@ -50,26 +47,20 @@ class TchatsController extends AppController
         $this->loadModel('Rooms');
         $id_rooms = $id_room ;
         $user = $this->Auth->User('username');
-        $id_user = $this->Auth->User('id');
         $time = Time::now();
         $time->timezone = 'Europe/Paris';
         $time->i18nFormat('Y-m-d h:m:s');
 
-        $time_2 = Time::now();
-        $time_2->timezone = 'Europe/Paris';
-        $time_2->i18nFormat('Ymdhms');
-        $time_2->modify('-1 weeks');
-
-        if ($this->log('archive') === true) {
+/*        if ($this->log('archive') === true) {
             Log::config('log', function () {
                 return new \Cake\Log\Engine\FileLog(['path' => LOGS, 'file' => 'archive']);
             });
-        }
+        }*/
 /*        Log::write('archive', 'Quelque chose qui ne fonctionne pas');*/
 
         $tchat = $this->Tchats->newEntity();
 
-        if ($this->request->is('ajax')) {
+        if ($this->request->is('post')) {
 
             $tchat = $this->Tchats->patchEntity($tchat, $this->request->data);
 
@@ -82,7 +73,7 @@ class TchatsController extends AppController
         $name_rooms = $this->Rooms->find('all')->contain('Users')->where(['id'=>$id_rooms]);
         $count_message = $this->Tchats->find('all')->where(['room_id'=>$id_rooms])->count();
 
-        $this->set(compact('tchat','user','id_user','time_2','count_message','id_rooms','name_rooms','users'));
+        $this->set(compact('tchat','user','time_2','count_message','id_rooms','name_rooms','users'));
         $this->set('_serialize', ['tchat']);
     }
     public function history($id_room = NULL){
