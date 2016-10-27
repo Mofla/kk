@@ -42,7 +42,8 @@ class UsersController extends AppController
     {
         $this->loadModel('promotions');
         $user = $this->Users->get($id, [
-            'contain' => ['Roles','Projects']
+            'contain' => ['Roles','Projects'],
+            'conditions' => ['Projects.finished' => true]
         ]);
 
         $promotions = $this->promotions->find('all',[

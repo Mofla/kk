@@ -86,8 +86,8 @@ class PromotionsController extends AppController
         $promotion = $this->Promotions->get($id, [
             'contain' => []
         ]);
+
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $this->request->data['user_id'] = $this->Auth->User('id');
             $promotion = $this->Promotions->patchEntity($promotion, $this->request->data);
             if ($this->Promotions->save($promotion)) {
                 $this->Flash->success(__('The promotion has been saved.'));
