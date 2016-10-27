@@ -12,6 +12,7 @@
         background-color: #444d58;
         color: white;
         width: 100px;
+        border: 1px solid white;
     }
 </style>
 
@@ -55,7 +56,7 @@
                                                         <?php if ($promotion->facebook_link != '') { ?>
                                                             <a href="<?= ($promotion->facebook_link) ?>">
                                                                 <i class="fa fa-facebook-official op"
-                                                                   style="font-size: 45px"></i></a>
+                                                                   style="font-size: 45px" title="Facebook"></i></a>
                                                         <?php } else { ?>
                                                             <i class="fa fa-facebook-official op"
                                                                style="font-size: 45px;color: grey"></i>
@@ -63,7 +64,7 @@
                                                         <?php if ($promotion->twitter_link != '') { ?>
                                                             <a href="<?= ($promotion->twitter_link) ?>">
                                                                 <i class="fa fa-twitter-square op"
-                                                                   style="color: lightskyblue;font-size: 45px"></i></a>
+                                                                   style="color: lightskyblue;font-size: 45px" title="Twitter"></i></a>
                                                         <?php } else { ?>
                                                             <i class="fa fa-twitter-square op"
                                                                style="color: grey;font-size: 45px"></i>
@@ -71,7 +72,7 @@
                                                         <?php if ($promotion->linkedin_link != '') { ?>
                                                             <a href="<?= ($promotion->linkedin_link) ?>">
                                                                 <i class="fa fa-linkedin-square op"
-                                                                   style="color: blue;font-size: 45px"></i></a>
+                                                                   style="color: blue;font-size: 45px" title="Linkedin"></i></a>
                                                         <?php } else { ?>
                                                             <i class="fa fa-linkedin-square op"
                                                                style="color: grey;font-size: 45px"></i>
@@ -79,7 +80,7 @@
                                                         <?php if ($user->github_username != '') { ?>
                                                             <a href="https://github.com/<?= $user->github_username ?>">
                                                                 <i class="fa fa-github-square op"
-                                                                   style="color: black;font-size: 45px"></i></a>
+                                                                   style="color: black;font-size: 45px" title="Github"></i></a>
                                                         <?php } else { ?>
                                                             <i class="fa fa-github-square op"
                                                                style="color: grey;font-size: 45px"></i>
@@ -87,11 +88,19 @@
                                                         <?php if ($promotion->web_site != '') { ?>
                                                             <a href="<?= ($promotion->web_site) ?>">
                                                                 <i class="fa fa-at op"
-                                                                   style="color: red;font-size: 45px"></i></a>
+                                                                   style="color: red;font-size: 45px" title="Accéder au site web"></i></a>
                                                         <?php } else { ?>
                                                             <i class="fa fa-at op"
                                                                style="color: grey;font-size: 45px"></i>
                                                         <?php } ?>
+                                                            <?php if ($promotion->cv_url != '') { ?>
+                                                                <a href="<?= ($promotion->cv_url) ?>">
+                                                                    <i class="fa fa-file-pdf-o"
+                                                                    style="font-size: 45px" title="Télécharger le CV"></i></a>
+                                                            <?php } else { ?>
+                                                                <i class="fa fa-file-pdf-o"
+                                                                    style="font-size: 45px;color: grey"></i>
+                                                            <?php } ?>
                                                     </div>
                                                 <?php endforeach; ?>
                                             </div>
