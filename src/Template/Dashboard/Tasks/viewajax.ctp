@@ -50,12 +50,6 @@
                                                     <div class="portlet box grey-cascade">
                                                         <div class="portlet-title">
                                                             <div class="caption">Description</div>
-                                                            <div class="actions">
-                                                                <div class="btn-group">
-                                                                    <a class="btn btn-default btn-sm"><i
-                                                                            class="icon-wrench"></i> </a>
-                                                                </div>
-                                                            </div>
                                                         </div>
                                                         <div class="portlet-body">
                                                             <?= $this->Text->autoParagraph(h($task->description)); ?>
@@ -66,12 +60,6 @@
                                                     <div class="portlet box grey-salsa">
                                                         <div class="portlet-title">
                                                             <div class="caption">Utilisateurs</div>
-                                                            <div class="actions">
-                                                                <div class="btn-group">
-                                                                    <a class="btn btn-default btn-sm"><i
-                                                                            class="icon-wrench"></i> </a>
-                                                                </div>
-                                                            </div>
                                                         </div>
                                                         <div class="portlet-body">
                                                             <?php if (!empty($task->users)): ?>
@@ -92,12 +80,6 @@
                                                 <div class="portlet box grey-silver">
                                                     <div class="portlet-title">
                                                         <div class="caption">Fil de discussion</div>
-                                                        <div class="actions">
-                                                            <div class="btn-group">
-                                                                <a class="btn btn-default btn-sm"><i
-                                                                        class="glyphicon glyphicon-eye-open"></i> </a>
-                                                            </div>
-                                                        </div>
                                                     </div>
                                                     <div id="forum"></div>
                                                 </div>

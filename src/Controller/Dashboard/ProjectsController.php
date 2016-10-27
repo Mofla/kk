@@ -208,9 +208,11 @@ class ProjectsController extends AppController
                 $this->Flash->success(__('The project has been saved.'));
 
                 if ($project->finished == 1) {
-
+                    $this->redirect(['controller' => 'portfolios/Portfolios', 'action' => 'edit', $project->id, 'prefix' => false]);
                 }
-                return $this->redirect($this->referer());
+                else {
+                    return $this->redirect($this->referer());
+                }
             } else {
                 $this->Flash->error(__('The project could not be saved. Please, try again.'));
             }

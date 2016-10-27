@@ -10,8 +10,6 @@
             echo $this->Form->input('name',['class' => 'form-control']);
             echo $this->Form->input('description',['class' => 'form-control']);
             echo $this->Form->input('url',['class' => 'form-control']);
-            echo $this->Form->input('start_date', ['type' => 'text', 'id' => 'start', 'class' => 'form-control']);
-            echo $this->Form->input('end_date', ['type' => 'text', 'id' => 'end', 'class' => 'form-control']);
         ?>
         <div class="fileinput fileinput-new" data-provides="fileinput">
             <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
