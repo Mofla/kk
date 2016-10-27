@@ -27,7 +27,7 @@ class ProjectsController extends AppController
         $this->viewBuilder()->layout('dashboard');
         $projects = $this->Projects->find('all', [
             'contain' => ['Users', 'Tasks.Users', 'Tasks.States']
-        ]);
+        ])->where(['finished' => 0]);
 
 
         $this->set(compact('projects'));
@@ -207,6 +207,9 @@ class ProjectsController extends AppController
             if ($this->Projects->save($project)) {
                 $this->Flash->success(__('The project has been saved.'));
 
+                if ($project->finished == 1) {
+
+                }
                 return $this->redirect($this->referer());
             } else {
                 $this->Flash->error(__('The project could not be saved. Please, try again.'));

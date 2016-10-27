@@ -19,7 +19,9 @@
                             echo $this->Form->input('start_date', ['type' => 'text', 'id' => 'start', 'class' => 'form-control', 'label' => 'Date de début']);
                             echo $this->Form->input('end_date', ['type' => 'text', 'id' => 'end', 'class' => 'form-control', 'label' => 'Date de fin']);
                             echo $this->Form->input('users._ids', ['options' => $users, 'class' => 'multi-select', 'label' => 'Inscription des membres du projet']);
+                            echo $this->Form->input('finished', ['class' => 'form-control', 'label' => 'Clore le projet ?'])
                             ?>
+                            <br>
                         </div>
                     </fieldset>
                     <?= $this->Form->button(__('Confirmer'), ['class' => 'btn btn-default']) ?>
