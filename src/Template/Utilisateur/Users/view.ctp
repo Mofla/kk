@@ -133,11 +133,16 @@
                                 <div class="col-md-9">
                                     <h1 class="font-green sbold uppercase text-center">projets</h1>
                                     <?php foreach ($user->projects as $projects): ?>
-                                        <div class="col-md-4 well text-center" style="background-color: white">
+                                        <div class="col-md-4 well text-center" style="background-color: white;min-height: 350px">
+                                            <div style="min-height: 300px">
                                             <?= $this->Html->image('../uploads/portfolios/' . $projects->picture_url, ['class' => 'img-responsive']) ?>
                                             <h3 style="font-weight: 900"><?= $projects->name ?></h3>
+                                            </div>
+
+                                            <div>
                                             <a href="<?= $this->Url->build(['controller' => 'Portfolios', 'action' => 'view', $projects->id, 'prefix' => 'portfolios']) ?>"
-                                               class="cbp-l-caption-buttonRight btn green uppercase ">Détails</a>
+                                               class="cbp-l-caption-buttonRight btn green uppercase "" >Détails</a>
+                                            </div>
                                         </div>
                                     <?php endforeach; ?>
                                 </div>
