@@ -46,6 +46,8 @@ class TasksListener implements EventListenerInterface
 
     public function edittask($event , $entity)
     {
+//        debug($event);
+//        die();
         $task = $event->data['event'];
 //     ON VERIFIE SI DE NOUVEAUX USER SONT AJOUTE A LA TACHE
 
@@ -64,23 +66,36 @@ class TasksListener implements EventListenerInterface
         }
 //comparaison entre les 2 tableaux
         $result =  array_diff($list_actual_users,$list_original_users);
-        $list_result = 'Nouveau(x) utilisateur(s) assigné: ';
+//        creation des variables
+        $new_task_content  = null;
+        $list_result = null;
+
+//        ECRITURE DE LA NOTE
+        //si SEULEMENT l'état de la tache à été edité
+        if (isset($task['state_id'])){
+            $new_task_content .='La tache: '.$entity->extractOriginalChanged($entity->visibleProperties())['name'];
+            $new_task_content .= '\nSon statut passe de: '.$entity->extractOriginalChanged($entity->visibleProperties())['state_id'] . $task->state->name.' à  '.$task['state_id'];
+        }
+        else{
+            //si le nom de tache à été edité
+        if (isset($task['name'])){
+            $new_task_content .= 'La tache '.$entity->extractOriginalChanged($entity->visibleProperties())['name'].' deviens: '.$task['name'];
+        }
+        else{
+            $new_task_content .='La tache: '.$entity->extractOriginalChanged($entity->visibleProperties())['name'];
+        }
 //si un nouvelle user est assigné à une tache
         if (!empty($result)){
             foreach($result as $valeur) {
                 $list_result.=$valeur.' ';
             }
-            $new_task_content = $list_result;
-        }
-//si le nom de tache à été edité
-        if (isset($task['name'])){
-            $new_task_content .= '<br>La tache '.$entity->extractOriginalChanged($entity->visibleProperties())['name'].' deviens: '.$task['name'];
+            $new_task_content .= 'Nouveau(x) utilisateur(s) assigné: '.$list_result;
         }
 //si la description de la tache à été edité
         if (isset($task['description'])){
-            $new_task_content .= '<br>La description '.$entity->extractOriginalChanged($entity->visibleProperties())['description'].' deviens: '.$task['description'];
+            $new_task_content .= '\nLa description '.$entity->extractOriginalChanged($entity->visibleProperties())['description']  . ' deviens: '.$task['description'];
         }
-
+        }
 
         $diariesTable = TableRegistry::get('Diaries');
         $entriesTable = TableRegistry::get('Entries', ['contain' => 'Diaries']);
