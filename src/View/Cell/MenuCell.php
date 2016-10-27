@@ -1,8 +1,11 @@
 <?php
 namespace App\View\Cell;
 
+use Cake\Core\App;
 use App\Model\Entity\Connector;
 use Cake\View\Cell;
+use Cake\Utility\Xml;
+
 /**
  * Menu cell
  */
@@ -61,10 +64,10 @@ class MenuCell extends Cell
                 print_r($registered_module);
             }
         }*/
+        $xmlObject= Xml::build(WWW_ROOT.'menu.xml');
+        $this->set('_serialize', ['permission', 'xmlObject']);
+        $this->set(compact('i','role', 'user','query','modules','xmlObject'));
 
-        $this->set('_serialize', ['permission']);
-        $this->set(compact('i','role', 'user','query','modules'));
     }
-
 
 }

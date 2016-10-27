@@ -9,17 +9,10 @@ The framework source code can be found here: [cakephp/cakephp](https://github.co
 
 ## Installation
 
-1. Download [Composer](http://getcomposer.org/doc/00-intro.md) or update `composer self-update`.
-2. Run `php composer.phar create-project --prefer-dist cakephp/app [app_name]`.
+1. Rajouter la fonction qui suit dans le fichier: /vendor/cakephp/cakephp/src/Utility/Xml.php
 
-If Composer is installed globally, run
-```bash
-composer create-project --prefer-dist cakephp/app [app_name]
-```
-
-You should now be able to visit the path to where you installed the app and see the default home page.
-
-## Configuration
-
-Read and edit `config/app.php` and setup the 'Datasources' and any other
-configuration relevant for your application.
+        public static function xml_attribute($object, $attribute)
+        {
+            if(isset($object[$attribute]))
+                return (string) $object[$attribute];
+        }

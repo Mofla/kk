@@ -1,3 +1,5 @@
+<?php use Cake\Utility\Xml; ?>
+<!-- LOGO ET PANEL USERS -->
 <div class="page-wrapper-row">
   <div class="page-wrapper-top">
     <div class="page-header">
@@ -61,6 +63,7 @@
           </div>
         </div>
       </div>
+      <!-- END LOGO et PANEL USER -->
       <!-- BEGIN HEADER MENU -->
       <div class="page-header-menu">
         <div class="container">
@@ -76,49 +79,38 @@
           </form>
           <div class="hor-menu ">
             <ul class="nav navbar-nav">
-              <?php $Ses=$this->request->session()->read('Auth');
-              if(isset($Ses)):?>
-
-                    <li class="menu-dropdown classic-menu-dropdown ">
-                      <a href="">
-
-                      </a>
-                      <ul class="dropdown-menu pull-left">
-                        <li class=" ">
-                          <a href="
-<!--                          <?//= $this->Url->build(['controller' => $p->controller, 'action' => $p->function, 'prefix'=> strtolower($p->module)]) ?>
-                          ">
-<!--                            --><?//= $p->module?>
-                          </a>
-                        </li>
-                      </ul>
-                    </li>
+              <!-- si l'utilisateur est connecté on affiche ce menu -->
+              <?php foreach ($xmlObject as $xml) :?>
                 <li class="menu-dropdown classic-menu-dropdown ">
-                  <a href="<?= $this->Url->build(['controller' => 'Tchat', 'action' => 'add', 'prefix' => false]); ?>">
-                    Tchat
-                    <span class="arrow"></span>
+                  <a href="<?=$this->Url->build(['controller' => Xml::xml_attribute($xml,'controller') , 'action' =>Xml::xml_attribute($xml,'action'), 'prefix'=> Xml::xml_attribute($xml,'prefix')]) ?>">
+                    <?php echo Xml::xml_attribute($xml,'titre') ?>
                   </a>
+                  <!-- s'il y a des sous-menu -->
+                  <?php if (Xml::xml_attribute($xml->menuItem,'titre') != null) : ?>
+                    <ul class="dropdown-menu pull-left">
+                      <?php foreach ($xml->menuItem as $xmls): ?>
+                        <li class="dropdown-submenu ">
+                          <a href="<?= $this->Url->build(['controller' =>Xml::xml_attribute($xmls,'controller'), 'action' => Xml::xml_attribute($xmls->menuItem,'action'), 'prefix'=>Xml::xml_attribute($xmls,'prefix'), $i]) ?> ">
+                          <?= Xml::xml_attribute($xmls,'titre') ?>
+                          </a>
+                          <!-- S'il y a des sous sous-menu -->
+                          <?php if (Xml::xml_attribute($xmls->menuItem,'titre') != null): ?>
+                          <ul class="dropdown-menu">
+                        <?php foreach ($xmls->menuItem as $xmla): ?>
+                          <li class=" ">
+                            <a href="<?= $this->Url->build(['controller' =>Xml::xml_attribute($xmla,'controller'), 'action' => Xml::xml_attribute($xmla,'action'), 'prefix'=>Xml::xml_attribute($xmla,'prefix'), $i]) ?> ">
+                              <?= Xml::xml_attribute($xmla,'titre') ?>
+                            </a>
+                          </li>
+                          <?php endforeach; ?>
+                          </ul>
+                          <?php endif; ?>
+                        </li>
+                        <?php endforeach; ?>
+                    </ul>
+                  <?php endif; ?>
                 </li>
-              <?php endif; ?>
-              <li>
-                <a href="<?= $this->Url->build(['controller' => 'Portfolios', 'action' => 'index' , 'prefix'=>'portfolios']) ?>" >
-                  Portfolios </a>
-              </li>
-              <li class="menu-dropdown classic-menu-dropdown ">
-                <a href="<?= $this->Url->build(['controller' => 'Forums', 'action' => 'index', 'prefix' => false]); ?>">
-                  Forum
-                  <span class="arrow"></span>
-                </a>
-                <?php foreach ($role as $r) : ?>
-                <?php if ($r->role_id == 1): ?>
-                <ul class="dropdown-menu pull-left">
-                  <li class=" ">
-                    <a href="<?= $this->Url->build(['controller'=>'Forums', 'action'=>'listcategory', 'prefix'=> 'admin']) ?>">ACP Forum</a>
-                  </li>
-                </ul>
-                <?php endif; ?>
-                <?php endforeach; ?>
-              </li>
+              <?php endforeach; ?>
             </ul>
           </div>
         </div>
