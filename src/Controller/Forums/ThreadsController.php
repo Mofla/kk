@@ -3,6 +3,7 @@ namespace App\Controller\Forums;
 
 use App\Controller\AppController;
 use Cake\ORM\TableRegistry;
+use Cake\View\Helper\PaginatorHelper;
 /**
  * Threads Controller
  *
@@ -11,29 +12,18 @@ use Cake\ORM\TableRegistry;
 class ThreadsController extends AppController
 {
 
-    /**
-     * Index method
-     *
-     * @return \Cake\Network\Response|null
-     */
-    public function index()
+    public $paginate = [
+        'limit' => 12,
+        'order' => [
+            'Posts.id' => 'asc'
+        ]
+    ];
+    public function initialize()
     {
-        $this->paginate = [
-            'contain' => ['Users', 'Forums']
-        ];
-        $threads = $this->paginate($this->Threads);
-
-        $this->set(compact('threads'));
-        $this->set('_serialize', ['threads']);
+        parent::initialize();
+        $this->loadComponent('Paginator');
     }
 
-    /**
-     * View method
-     *
-     * @param string|null $id Thread id.
-     * @return \Cake\Network\Response|null
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
     public function view($fid = null, $forum = null, $slug = null, $id = null)
     {
         $sub = $this->Threads->Subscriptions;
@@ -43,26 +33,26 @@ class ThreadsController extends AppController
             ->where(['user_id'=> $user , 'thread_id'=> $id])
             ->first();
 
-        $thread = $this->Threads->get($id, [
-            'contain' => ['Files','Posts.Users','Posts.Files','Users', 'Forums', 'Posts' => function($q) {
-                return $q->order(['Posts.id' => 'ASC']);
-            }]
-        ]);
+        $thread = $this->Threads->find()
+            ->contain(['Files','Users'])
+        ->where(['Threads.id' => $id])
+        ->first();
 
+        $posts = $this->Threads->Posts->find('all')
+           ->contain(['Users','Files'])
+            ->where(['thread_id' => $id]);
 
         $query = $this->Threads->query();
         $query->update()
             ->set($query->newExpr('countview = countview + 1'))
             ->where(['id' => $id])
             ->execute();
-        $this->set(compact('thread','subscription'));
+
+        $this->set(compact('thread','subscription','fid','forum','slug','id'));
+        $this->set('posts', $this->paginate($posts));
     }
 
-    /**
-     * Add method
-     *
-     * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
-     */
+
     public function add($slug = null, $id = null)
     {
         $user = $this->Auth->user('id');
@@ -133,13 +123,7 @@ class ThreadsController extends AppController
         $this->set('_serialize', ['thread']);
     }
 
-    /**
-     * Delete method
-     *
-     * @param string|null $id Thread id.
-     * @return \Cake\Network\Response|null Redirects to index.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
+
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
