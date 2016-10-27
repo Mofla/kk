@@ -65,6 +65,9 @@ class UsersTable extends Table
             'targetForeignKey' => 'task_id',
             'joinTable' => 'tasks_users'
         ]);
+        $this->hasOne('Promotions', [
+            'foreignKey' => 'user_id',
+        ]);
     }
 
     /**

@@ -81,24 +81,9 @@ class UsersController extends AppController
     public function edit($id = null)
     {
         $user = $this->Users->get($id, [
-            'contain' => []
+            'contain' => ['Promotions']
         ]);
 
-        $this->loadModel('promotions');
-        $promotion = $this->promotions->find('all',[
-            'conditions' => ['promotions.user_id' => $id],
-        ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $this->request->data['user_id'] = $this->Auth->User('id');
-            $promotion = $this->Promotions->patchEntity($promotion, $this->request->data);
-            if ($this->Promotions->save($promotion)) {
-                $this->Flash->success(__('The user has been saved.'));
-
-            } else {
-                $this->Flash->error(__('The user could not be saved. Please, try again.'));
-            }
-        }
-        
 
         if ($this->request->is(['patch', 'post', 'put'])) {
 
