@@ -21,8 +21,7 @@ class TasksListener implements EventListenerInterface
     public function addtask($event)
     {
         $task = $event->data['event'];
-//        debug($task);
-//        die();
+
         $diariesTable = TableRegistry::get('Diaries');
         $entriesTable = TableRegistry::get('Entries', ['contain' => 'Diaries']);
         $project_id = $task['project_id'];
@@ -47,31 +46,46 @@ class TasksListener implements EventListenerInterface
 
     public function edittask($event , $entity)
     {
+        $task = $event->data['event'];
+//     ON VERIFIE SI DE NOUVEAUX USER SONT AJOUTE A LA TACHE
 
         $nbr_original_users = count($entity->extractOriginalChanged($entity->visibleProperties())['users']);
         $nbr_actual_users = count($event->data['event']['users']);
         $list_original_users = array();
         $list_actual_users = array();
 
-
+//creation tableau user d'origine
         for ($i = 0; $i < count($entity->extractOriginalChanged($entity->visibleProperties())['users']); $i++){
-            $list_original_users[]= array($entity->extractOriginalChanged($entity->visibleProperties())['users'][$i]['username']);
+            $list_original_users[]= $entity->extractOriginalChanged($entity->visibleProperties())['users'][$i]['username'];
         }
-        debug($list_original_users);
-      die();
+//creation tableau user actuel
+        for ($i = 0; $i < count($task['users']); $i++){
+            $list_actual_users[] = $task['users'][$i]['username'];
+        }
+//comparaison entre les 2 tableaux
+        $result =  array_diff($list_actual_users,$list_original_users);
+        $list_result = 'Nouveau(x) utilisateur(s) assigné: ';
+//si un nouvelle user est assigné à une tache
+        if (!empty($result)){
+            foreach($result as $valeur) {
+                $list_result.=$valeur.' ';
+            }
+            $new_task_content = $list_result;
+        }
+//si le nom de tache à été edité
+        if (isset($task['name'])){
+            $new_task_content .= '<br>La tache '.$entity->extractOriginalChanged($entity->visibleProperties())['name'].' deviens: '.$task['name'];
+        }
+//si la description de la tache à été edité
+        if (isset($task['description'])){
+            $new_task_content .= '<br>La description '.$entity->extractOriginalChanged($entity->visibleProperties())['description'].' deviens: '.$task['description'];
+        }
 
-        foreach ($event->data['event']['users'] as $list_user){
-            $list_actual_users[] = array($list_user['username']);
-        }
-        debug($list_actual_users);
-        die();
-//        $task = $event->data['event'];
-//       debug($task);
-//      die();
+
         $diariesTable = TableRegistry::get('Diaries');
         $entriesTable = TableRegistry::get('Entries', ['contain' => 'Diaries']);
         $project_id = $task['project_id'];
-        //pour chaque utilisateurs
+        //pour chaque utilisateurs assigné à la tache
         for ($i = 0; $i < count($task['users']); $i++) {
             $user_id = $task['users'][$i]['id'];
             //recupération de diaries_id
@@ -85,7 +99,7 @@ class TasksListener implements EventListenerInterface
             $entrie = $entriesTable->newEntity();
             $entrie->diary_id = $query;
             $entrie->date = Time::now();
-            $entrie->content = 'Vous avez été assigné à la nouvelle tache : ' . $task['name'];
+            $entrie->content = $new_task_content;
             $entriesTable->save($entrie);
         }
     }
