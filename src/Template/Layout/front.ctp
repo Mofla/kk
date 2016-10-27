@@ -24,6 +24,7 @@
         <a href="/">
             <?= $this->Html->image('../img/Simplon.png', ['class' => 'logo-default', 'width' => 150, 'height' => 50]) ?>
         </a>
+        <a class="btn btn-default right" href="./utilisateur/connexion">Connection</a>
     </div>
 
     <nav>
@@ -37,13 +38,12 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Brand</a>
+                    <a class="navbar-brand" href="#">Accueil</a>
 
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li><a>accueil</a></li>
-                        <li><a>les histoires</a></li>
+                        <li><?= $this->Html->link('News', ['controller' => 'BlogArticles', 'action' => 'index']);?></li>
                         <li><a>les gens</a></li>
                         <li><a>les projets des gens</a></li>
                         <li><a>les promotions</a></li>
@@ -59,14 +59,35 @@
 
 <!--content-->
 <div class="content">
-    <?= $this->fetch('content') ?>
+    <div class="container">
+        <div class="row">
+            <?= $this->fetch('content') ?>
+        </div>
+    </div>
+
 
 </div>
 
 </body>
 
 <footer>
-<H1>CECI EST UN PODOTEUR</H1>
+    <div class="container">
+        <div class="row">
+            <H1>CECI EST UN PODOTEUR</H1>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                des trucs
+            </div>
+            <div class="col-md-3">
+                qui puent
+            </div>
+            <div class="col-md-3">
+                des pieds
+            </div>
+        </div>
+    </div>
+
 </footer>
 
 <!--JS libraries-->

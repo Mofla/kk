@@ -1,13 +1,13 @@
-CREATE TABLE articles (
+CREATE TABLE blog_articles (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(50),
     body TEXT,
-    category_id INT DEFAULT NULL,
+    blog_category_id INT DEFAULT NULL,
     created DATETIME DEFAULT NULL,
     modified DATETIME DEFAULT NULL
 );
 
-CREATE TABLE categories (
+CREATE TABLE blog_categories (
   id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(50)
 )
