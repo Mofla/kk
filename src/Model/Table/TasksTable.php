@@ -8,8 +8,10 @@ use Cake\ORM\Query;
 use Cake\ORM\Entity;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
+use Cake\ORM\TableRegistry;
 use Cake\Validation\Validator;
 use Cake\Event\EventManager;
+use Cake\Error\Debugger;
 
 /**
  * Tasks Model
@@ -114,20 +116,19 @@ class TasksTable extends Table
         return $rules;
     }
 
-    public function afterSave($created, $event, $entity){
+    public function afterSave($created, $event,$entity){
         if ($created) {
-            debug($event);
-            die();
 //            if INSERT
-            if(empty($event['id'])){
-
+            //$event->isNew() va recupéré dans l'event la ligne " ['new'] " indiquant si l'on effectue un nouvelle enregistrement ou non
+            if($event->isNew()){
             $task = new Event('Model.Task.addtask', $this,[
-                'event' =>$event
+                'event' =>$event,
+                'entity' =>$entity
             ]);
             }
 //          if UPDATE
             else{
-                $task = new Event('Model.Task.edit', $this,[
+                $task = new Event('Model.Task.edittask', $this,[
                     'event' =>$event
                 ]);
             }
