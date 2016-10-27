@@ -36,8 +36,10 @@ class TasksController extends AppController
 
     public function editation($id = null)
     {
+
         $this->autoRender = false;
 
+        $this->Tasks->eventManager()->on(new TasksListener,$this);
 
         $task = $this->Tasks->get($id, [
             'contain' => ['Users']
@@ -203,7 +205,7 @@ class TasksController extends AppController
 
     public function edittask($id = null)
     {
-        $this->Tasks->eventManager()->on(new TasksListener,$this,['isnew' => true]);
+        $this->Tasks->eventManager()->on(new TasksListener,$this);
         $task = $this->Tasks->get($id, [
             'contain' => ['Users']
         ]);
