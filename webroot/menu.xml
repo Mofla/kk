@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menu>
+    <menuItem titre="Dashboard" prefix='dashboard' controller="projects" action="index"></menuItem>
+    <menuItem titre="Admin" prefix="admin" controller="users" action="index">
+        <menuItem titre="Gérer utilisateur" prefix="admin" controller="users" action="index">
+            <menuItem titre="Ajouter" prefix="admin" controller="Users" action="add"></menuItem>
+            <menuItem titre="Editer" prefix="admin" controller="users" action="edit" id=":id"></menuItem>
+            <menuItem titre="Supprimer" prefix="admin" controller="users" action="delete" id=":id"></menuItem>
+        </menuItem>
+        <menuItem titre="Gérer permission" prefix="admin" controller="permissions" action="index">
+            <menuItem titre="Ajouter" prefix="admin" controller="permissions" action="add" ></menuItem>
+            <menuItem titre="Editer" prefix="admin" controller="permissions" action="edit" id=":id"></menuItem>
+            <menuItem titre="Supprimer" prefix="admin" controller="permissions" action="delete" id=":id"></menuItem>
+        </menuItem>
+        <menuItem titre="Gérer forum" prefix="admin" controller="forums" action="listcategory">
+            <menuItem titre="ACP forum" prefix="admin" controller="forums" action="listcategory"></menuItem>
+            <menuItem titre="Créer" prefix="admin" controller="forums" action="addforum"></menuItem>
+            <menuItem titre="Editer" prefix="admin" controller="forums" action="listforum"></menuItem>
+        </menuItem>
+    </menuItem>
+    <menuItem titre="Utilisateur" prefix="utilisateur" controller="users" action="index">
+        <menuItem titre="Mon profil" prefix="utilisateur" controller="users" action="view" id=":id">
+            <menuItem titre="Voir" prefix="utilisateur" controller="users" action="view" id=":id"></menuItem>
+            <menuItem titre="Editer" prefix="utilisateur" controller="users" action="edit" id=":id"></menuItem>
+        </menuItem>
+        <menuItem titre="Gérer promotions" prefix="promotions" controller="promotions" action="view" id=":id">
+            <menuItem titre="Ma promotion" prefix="promotions" controller="promotions" action="view" id=":id">
+                <menuItem titre="Créer" prefix="promotions" controller="promotions" action="add"></menuItem>
+                <menuItem titre="Editer" prefix="promotions" controller="promotions" action="edit" id=":id"></menuItem>
+            </menuItem>
+        </menuItem>
+    </menuItem>
+    <menuItem titre="Portfolios" prefix="portfolios" controller="portfolios" action="index"></menuItem>
+    <menuItem titre="Promotion" prefix="promotions" controller="promotions" action="index"></menuItem>
+    <menuItem titre="Tchat" prefix="tchat" controller="rooms" action="index"></menuItem>
+    <menuItem titre="Forum" prefix="forums" controller="forums" action="index"></menuItem>
+</menu>
+
