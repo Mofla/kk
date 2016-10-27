@@ -33,7 +33,7 @@ class FilesTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('files');
+        $this->table('forum_files');
         $this->displayField('name');
         $this->primaryKey('id');
 

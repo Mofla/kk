@@ -32,7 +32,7 @@ class CategoriesTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('categories');
+        $this->table('forum_categories');
         $this->displayField('name');
         $this->primaryKey('id');
 

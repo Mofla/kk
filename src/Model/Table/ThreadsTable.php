@@ -36,7 +36,7 @@ class ThreadsTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('threads');
+        $this->table('forum_threads');
         $this->displayField('id');
         $this->primaryKey('id');
 

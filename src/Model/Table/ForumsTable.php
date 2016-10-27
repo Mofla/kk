@@ -33,7 +33,7 @@ class ForumsTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('forums');
+        $this->table('forum_forums');
         $this->displayField('name');
         $this->primaryKey('id');
 

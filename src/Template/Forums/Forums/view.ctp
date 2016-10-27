@@ -41,7 +41,7 @@
             <br> par
                 <?= $this->Html->link($threads->user->username, 'utilisateur/profil/'.$threads->user->id.'') ?>
             </td>
-            <td width="10%"><?= count($threads->posts) ?></td>
+            <td width="10%"><?= $threads->countpost ?></td>
             <td width="10%" ><?= $threads->countview ?></td>
             <td width="25%">
 

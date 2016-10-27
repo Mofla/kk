@@ -36,7 +36,7 @@ class PostsTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('posts');
+        $this->table('forum_posts');
         $this->displayField('title');
         $this->primaryKey('id');
 

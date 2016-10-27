@@ -1,11 +1,6 @@
 <?= $this->Html->css('../assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css') ?>
         <?= $this->Html->script('../assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js') ?>
 
-        <!--echo $this->Form->input('title');-->
-            <!--echo $this->Form->input('message');-->
-            <!--echo $this->Form->input('user_id', ['options' => $users]);-->
-            <!--echo $this->Form->input('thread_id', ['options' => $threads]);-->
-            <!--echo $this->Form->input('files._ids', ['options' => $files]);-->
 
 <div class="col-md-12">
 <div class="table-responsive">
