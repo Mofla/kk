@@ -33,7 +33,7 @@ class PostsFilesTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('posts_files');
+        $this->table('forum_posts_files');
         $this->primaryKey('file_id');
 
         $this->belongsTo('Posts', [

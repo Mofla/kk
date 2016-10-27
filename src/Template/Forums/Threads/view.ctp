@@ -346,6 +346,18 @@
     <?php endforeach; ?>
     <?php endif; ?>
 
+
+    <div class="col-md-12">
+        <div class="pagination left">
+            <?php
+                    echo $this->Paginator->prev(__('Prec'), array('tag' => 'li'), null, array('tag' => 'li','class' =>
+                    'disabled','disabledTag' => 'a'));
+                    echo $this->Paginator->numbers(array('separator' => '','currentTag' => 'a', 'currentClass' =>
+                    'active','tag' => 'li','first' => 1));
+                    echo $this->Paginator->next(__('Suiv'), array('tag' => 'li','currentClass' => 'disabled'), null,
+                    array('tag' => 'li','class' => 'disabled','disabledTag' => 'a'));
+                    ?>
+        </div>
     <div class="right">
         <a href="<?= $this->Url->build(['controller' => 'Posts', 'action' => 'add' ,
    'fid' => $fid,
@@ -354,7 +366,7 @@
      'id' => $id
      ]) ?>"
            class="btn btn-success dash-post"  role="button" aria-pressed="true"> <i class="fa fa-comments-o"></i> REPONDRE</a>
-    </div>
+    </div></div>
 
 </div>
         </div>

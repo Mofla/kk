@@ -45,6 +45,8 @@ class PostsController extends AppController
 
     public function add($fid = null, $forum = null, $slug = null, $id = null)
     {
+
+
         $time = Time::now();
         $user = $this->Auth->user('id');
 
@@ -76,8 +78,13 @@ $pastquote = null;
             $this->request->data['thread_id'] = $id;
             $post = $this->Posts->patchEntity($post, $this->request->data);
             if ($this->Posts->save($post)) {
-
-                #upload de fichier
+#mettre a jour le compteur
+                $query = $this->Posts->Threads->query();
+                $query->update()
+                    ->set($query->newExpr('countpost = countpost + 1'))
+                    ->where(['id' => $id])
+                    ->execute();
+#upload de fichier
                 $picture = $this->Upload->getFile($this->request->data['upload'],'files');
                 $this->request->data['upload'] = $picture;
                 $file = $this->Posts->Files->newEntity();
@@ -285,18 +292,14 @@ $pastquote = null;
             ->select('thread_id')
             ->where(['id' => $id])
             ->first();
-        $forumid = $this->Posts->Threads->find()
-            ->select('forum_id')
-            ->where(['id' => $threadid->thread_id])
-            ->first();
         $this->request->allowMethod(['post', 'delete']);
         $post = $this->Posts->get($id);
         if ($this->Posts->delete($post)) {
             $this->Flash->success(__('The post has been deleted.'));
-            $query = $this->Posts->Threads->forums->query();
+            $query = $this->Posts->Threads->query();
             $query->update()
                 ->set($query->newExpr('countpost = countpost - 1'))
-                ->where(['id' => $forumid->forum_id])
+                ->where(['id' => $threadid->thread_id])
                 ->execute();
         } else {
             $this->Flash->error(__('The post could not be deleted. Please, try again.'));

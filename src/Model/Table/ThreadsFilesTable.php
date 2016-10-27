@@ -33,7 +33,7 @@ class ThreadsFilesTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('threads_files');
+        $this->table('forum_threads_files');
         $this->primaryKey('file_id');
 
         $this->belongsTo('Threads', [

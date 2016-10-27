@@ -106,3 +106,7 @@
 .pagination>.active>a{
     background-color: #36c6d3;
 }
+
+.note-insert{
+    display: none;
+}

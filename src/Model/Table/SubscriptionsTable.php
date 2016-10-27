@@ -33,7 +33,7 @@ class SubscriptionsTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('subscriptions');
+        $this->table('forum_subscriptions');
         $this->displayField('id');
         $this->primaryKey('id');
 
