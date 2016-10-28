@@ -10,7 +10,7 @@
                         <div class="form-group">
                             <?php
                             echo $this->Form->hidden('diary_id', ['value' => $id]);
-                            echo $this->Form->input('content');
+                            echo $this->Form->input('content', ['class' => 'form-control', 'label' => 'Contenu de l\'entrée']);
                             ?>
                         </div>
                     </fieldset>
