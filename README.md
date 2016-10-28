@@ -16,3 +16,24 @@ The framework source code can be found here: [cakephp/cakephp](https://github.co
             if(isset($object[$attribute]))
                 return (string) $object[$attribute];
         }
+        
+2. Dans app.php, vers la ligne 175 , remplacer le contenu par 
+
+    'EmailTransport' => [
+        'default' => [
+            'className' => 'Smtp',
+            'host' => 'ssl://smtp.gmail.com',
+            'port' => 465,
+            'username' => 'simplon.co.epinal@gmail.com',
+            'password' => 'jensaisrien',
+        ],
+    ],
+
+    'Email' => [
+        'default' => [
+            'transport' => 'default',
+            'from' => 'you@localhost',
+            //'charset' => 'utf-8',
+            //'headerCharset' => 'utf-8',
+        ],
+    ],
