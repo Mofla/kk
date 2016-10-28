@@ -94,7 +94,7 @@
                                                                style="color: grey;font-size: 45px"></i>
                                                         <?php } ?>
                                                             <?php if ($promotion->cv_url != '') { ?>
-                                                                <a href="<?= ($promotion->cv_url) ?>">
+                                                                <a href="../../uploads/cv/<?= ($promotion->cv_url) ?>">
                                                                     <i class="fa fa-file-pdf-o"
                                                                     style="font-size: 45px" title="Télécharger le CV"></i></a>
                                                             <?php } else { ?>

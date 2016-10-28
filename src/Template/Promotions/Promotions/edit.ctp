@@ -24,7 +24,7 @@
                         </div>
                         <div class="form-group">
                             <label class="label-control">Cv: </label>
-                            <?= $this->Form->input('cv_url',['label' => false]);?>
+                            <?= $this->Form->input('cv',['type' => 'file','label' => false]);?>
                         </div>
                         <div class="form-group">
                             <label class="label-control">Site Web: </label>
