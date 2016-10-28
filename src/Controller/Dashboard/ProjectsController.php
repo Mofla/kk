@@ -168,7 +168,7 @@ class ProjectsController extends AppController
                 $project->forum_id = $forum->id;
                 if ($this->Projects->save($project)) {
                     $this->Flash->success(__('The project has been saved.'));
-//                    return $this->redirect(['action' => 'index']);
+                   return $this->redirect(['action' => 'index']);
 
                 } else {
                     $this->Flash->error(__('The project could not be saved. Please, try again.'));
@@ -199,6 +199,7 @@ class ProjectsController extends AppController
      */
     public function edit($id = null)
     {
+        $this->Projects->eventManager()->on(new ProjectListener());
         $project = $this->Projects->get($id, [
             'contain' => ['Users']
         ]);

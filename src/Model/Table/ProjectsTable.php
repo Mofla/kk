@@ -113,11 +113,24 @@ class ProjectsTable extends Table
         return $validator;
     }
 
-    public function afterSave($created, $event){
+    public function afterSave($created, $event, $entity){
+
         if ($created) {
-            $project = new Event('Model.Project.add', $this,[
-                'event' =>$event
-            ]);
+
+//            if INSERT
+            //$event->isNew() va recupéré dans l'event la ligne " ['new'] " indiquant si l'on effectue un nouvelle enregistrement ou non
+            if($event->isNew()){
+                $project = new Event('Model.Project.add' ,$this,[
+                    'event' =>$event,
+                    'entity' =>$entity
+                ]);
+            }
+//          if UPDATE
+            else{
+                $project = new Event('Model.Project.edit', $this,[
+                    'event' =>$event
+                ]);
+            }
             $this->eventManager()->dispatch($project);
             return true;
         }
