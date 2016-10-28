@@ -21,7 +21,6 @@ class ProjectListener implements EventListenerInterface
     public function addproject($event)
     {
 
-      die();
         $subject =  $event->data['event'];
 
         $diariesTable = TableRegistry::get('Diaries');
