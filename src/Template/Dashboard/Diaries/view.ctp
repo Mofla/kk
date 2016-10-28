@@ -11,32 +11,6 @@
                         <span
                             class="caption-subject font-green-sharp bold uppercase"><?= $diary->project->name ?></span>
                     </div>
-                    <div class="actions">
-                        <div class="btn-group">
-                            <a class="btn green btn-circle btn-sm" href="javascript:;" data-toggle="dropdown"
-                               data-hover="dropdown" data-close-others="true">RECHERCHE
-                                <i class="fa fa-angle-down"></i>
-                            </a>
-                            <ul class="dropdown-menu pull-right">
-                                <li>
-                                    <a href="javascript:;"> To do
-                                        <span class="badge badge-danger"> 3 </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;"> Doing
-                                        <span class="badge badge-success"> 3 </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;"> Done
-                                        <span class="badge badge-warning"> 3 </span>
-                                    </a>
-                                </li>
-                                <li class="divider"></li>
-                            </ul>
-                        </div>
-                    </div>
                 </div>
                 <!-- end PROJECT HEAD -->
                 <div class="portlet-body">
@@ -45,16 +19,14 @@
                             <!--start enties list -->
                             <div class="todo-tasklist">
                                 <?php foreach ($diary->entries as $entries): ?>
-                                <div id=<?='entrie'.$entries->id ?> class="row">
+                                <div id=<?=$entries->id ?> class="row cut">
                                     <div class="col-12">
-                                        <div class="todo-tasklist-item todo-tasklist-item-border">
-                                            <div class="todo-tasklist-item-text"><?= $entries->content ?>
-                                            </div>
+                                        <div class="todo-tasklist-item todo-tasklist-item-border ">
+                                            <div id="entrie<?=$entries->id ?>" class="todo-tasklist-item-text cut"><?= $entries->content ?>
+                                            </div><br>
                                             <div class="todo-tasklist-controls pull-left">
                                                                                     <span class="todo-tasklist-date">
                                                                                         <i class="fa fa-calendar"></i><?= $entries->date ?></span>
-                                                <span
-                                                    class="todo-tasklist-badge badge badge-roundless">Task state</span>
                                             </div>
                                         </div>
                                         </div>
@@ -149,7 +121,7 @@
                             $.ajax({
                                 url: edit,
                                 type: 'post',
-                                data: data;
+                                data: data
                         })
                             ;
                             console.log(edit);
@@ -158,3 +130,14 @@
 
                         });
                     </script>
+
+<script>
+$('.cut').click(function() {
+    var id = $(this).attr('id');
+    var paste = $('#entrie'.concat(id)).text();
+    $('#content').text(paste);
+    $('#id_entrie').attr("name",id);
+    console.log(id);
+//    console.log(paste);
+});
+</script>
