@@ -204,11 +204,11 @@ class PermissionsController extends AppController
             $data = array_merge($data,$this->request->data);
             debug($data);
             // magouiller en rajoutant les infos des permissions dans la request
-            $permissions = $this->Permissions->patchEntity($permissions,$data);
-            if($this->Permissions->save($permissions))
-            {
-                $this->Flash->success('Nice');
-            }
+//            $permissions = $this->Permissions->patchEntity($permissions,$data);
+//            if($this->Permissions->save($permissions))
+//            {
+//                $this->Flash->success('Nice');
+//            }
         }
         $roles = $this->Permissions->Roles->find('list');
         $this->set(compact(['permissions','permissionsRoles','roles']));
