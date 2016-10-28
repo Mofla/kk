@@ -210,3 +210,8 @@ Router::prefix('promotions', function ($routes){
 
 
 });
+
+Router::prefix('connecteursmanager', function($routes) {
+    $routes->connect('/', ['controller' => 'Permissions','action' => 'index'], ['routeClass' => 'InflectedRoute']);
+    $routes->fallbacks(DashedRoute::class);
+});
