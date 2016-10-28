@@ -100,10 +100,49 @@
         var url = '<?= $this->Url->build(['controller' => 'Projects', 'action' => 'liste', $project->id]); ?>';
         $('#tab_1').load(url);
     }
+    function load2() {
+        var url = '<?= $this->Url->build(['controller' => 'Projects', 'action' => 'timeline', $project->id]); ?>';
+        $('#tab_2').load(url);
+    }
+    function load3() {
+        var url = '<?= $this->Url->build(['controller' => 'Projects', 'action' => 'graph', $project->id]); ?>';
+        $('#tab_3').load(url);
+    }
+    function load4() {
+        var url = '<?= $this->Url->build(['controller' => 'Projects', 'action' => 'medias', $project->id]); ?>';
+        $('#tab_4').load(url);
+    }
+    function load5() {
+        var url = '<?= $this->Url->build(['controller' => 'Diaries', 'action' => 'view', $diary['id']]); ?>';
+        $('#tab_5').load(url);
+    }
+
+
     //loads at document ready
+    //manages tabs after redirecting
     $(function () {
-        load1();
+        var url = window.location.href.split('#');
+
+        switch (url[1]) {
+            case 'tab_2':
+                $('#btn_2').trigger('click');
+                break;
+            case 'tab_3':
+                $('#btn_3').trigger('click');
+                break;
+            case 'tab_4':
+                $('#btn_4').trigger('click');
+                break;
+            case 'tab_5':
+                $('#btn_5').trigger('click');
+                break;
+            default:
+                load1();
+                break;
+        }
     });
+
+
     // on click events
     $('#btn_1').on('click', function () {
        showHideButton('task');
@@ -111,23 +150,19 @@
     });
     $('#btn_2').on('click', function () {
         showHideButton('task');
-        var url = '<?= $this->Url->build(['controller' => 'Projects', 'action' => 'timeline', $project->id]); ?>';
-        $('#tab_2').load(url);
+       load2();
     });
     $('#btn_3').on('click', function () {
         showHideButton('task');
-        var url = '<?= $this->Url->build(['controller' => 'Projects', 'action' => 'graph', $project->id]); ?>';
-        $('#tab_3').load(url);
+        load3();
     });
     $('#btn_4').on('click', function () {
         showHideButton('file');
-        var url = '<?= $this->Url->build(['controller' => 'Projects', 'action' => 'medias', $project->id]); ?>';
-        $('#tab_4').load(url);
+        load4();
     });
     $('#btn_5').on('click', function () {
         showHideButton('entry');
-        var url = '<?= $this->Url->build(['controller' => 'Diaries', 'action' => 'view', $diary['id']]); ?>';
-        $('#tab_5').load(url);
+        load5();
     });
 
 

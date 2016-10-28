@@ -52,7 +52,7 @@ class ProjectsController extends AppController
             $file->name = $picture;
 
             if ($this->Projects->Files->save($file)) {
-                return $this->redirect(['action' => 'gestion', $project->id ]);
+                return $this->redirect($this->referer() . '#tab_4');
             }
         }
 

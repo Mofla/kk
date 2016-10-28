@@ -267,7 +267,7 @@ class TasksController extends AppController
                 if ($this->Tasks->save($task)) {
                     $this->Flash->success(__('The task has been saved.'));
 
-                    return $this->redirect($this->referer());
+                    return $this->redirect($this->referer() . '#tab_4');
                 } else {
                     $this->Flash->error(__('The task could not be saved. Please, try again.'));
                 }
