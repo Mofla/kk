@@ -85,24 +85,25 @@ $pastquote = null;
                     ->where(['id' => $id])
                     ->execute();
 #upload de fichier
-                $picture = $this->Upload->getFile($this->request->data['upload'],'files');
-                $this->request->data['upload'] = $picture;
-                $file = $this->Posts->Files->newEntity();
-                $this->request->data['name'] = $picture ;
-                $this->request->data['post_id'] = $post->id ;
-                $file = $this->Posts->Files->patchEntity($file, $this->request->data);
-                $this->Posts->Files->save($file);
-                $data = [
-                    'post_id' => $post->id
-                    ,
-                    'file_id' => $file->id
+                if (!empty($this->request->data['upload']['name'])) {
+                    $picture = $this->Upload->getFile($this->request->data['upload'], 'files');
+                    $this->request->data['upload'] = $picture;
+                    $file = $this->Posts->Files->newEntity();
+                    $this->request->data['name'] = $picture;
+                    $this->request->data['post_id'] = $post->id;
+                    $file = $this->Posts->Files->patchEntity($file, $this->request->data);
+                    $this->Posts->Files->save($file);
+                    $data = [
+                        'post_id' => $post->id
+                        ,
+                        'file_id' => $file->id
 
-                ];
-                $fp = TableRegistry::get('posts_files');
-                $postsFiles = $fp->newEntity();
-                $postsFiles = $fp->patchEntity($postsFiles,$data);
-                $fp->save($postsFiles);
-
+                    ];
+                    $fp = TableRegistry::get('posts_files');
+                    $postsFiles = $fp->newEntity();
+                    $postsFiles = $fp->patchEntity($postsFiles, $data);
+                    $fp->save($postsFiles);
+                }
                 #envoyer un mail aux abonnés
                 if($sub){
                     $data = [$username->username , $id];
@@ -186,23 +187,25 @@ $pastquote = null;
             if ($this->Posts->save($post)) {
 
                 #upload de fichier
-                $picture = $this->Upload->getFile($this->request->data['upload'],'files');
-                $this->request->data['upload'] = $picture;
-                $file = $this->Posts->Files->newEntity();
-                $this->request->data['name'] = $picture ;
-                $this->request->data['post_id'] = $post->id ;
-                $file = $this->Posts->Files->patchEntity($file, $this->request->data);
-                $this->Posts->Files->save($file);
-                $data = [
-                    'post_id' => $post->id
-                    ,
-                    'file_id' => $file->id
+                if (!empty($this->request->data['upload']['name'])) {
+                    $picture = $this->Upload->getFile($this->request->data['upload'], 'files');
+                    $this->request->data['upload'] = $picture;
+                    $file = $this->Posts->Files->newEntity();
+                    $this->request->data['name'] = $picture;
+                    $this->request->data['post_id'] = $post->id;
+                    $file = $this->Posts->Files->patchEntity($file, $this->request->data);
+                    $this->Posts->Files->save($file);
+                    $data = [
+                        'post_id' => $post->id
+                        ,
+                        'file_id' => $file->id
 
-                ];
-                $fp = TableRegistry::get('posts_files');
-                $postsFiles = $fp->newEntity();
-                $postsFiles = $fp->patchEntity($postsFiles,$data);
-                $fp->save($postsFiles);
+                    ];
+                    $fp = TableRegistry::get('posts_files');
+                    $postsFiles = $fp->newEntity();
+                    $postsFiles = $fp->patchEntity($postsFiles, $data);
+                    $fp->save($postsFiles);
+                }
 
                 #envoyer un mail aux abonnés
                 if($sub){
