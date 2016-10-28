@@ -6,11 +6,11 @@
 
 <div class="promotions index large-9 medium-8 columns content">
     <div class="row">
-        <h1 class="text-center"><?= __('Promotions') ?></h1>
+        <h1 class="text-center" style="font-weight: 900"><?= __('Promotion') ?></h1>
         <?php foreach ($promotions as $promotion): ?>
             <div class="col-md-3 text-center well"
                  style="background-color: white;border: 1px solid #444d58; min-height: 520px">
-                <img class="img-circle img-responsive" style="width: 70%; margin: auto" src=" ../../uploads/user/<?= $promotion->user->picture_url ?>">
+                <img class="img-circle img-responsive" style="width: 70%; margin: auto;border: 1px solid black" src=" ../../uploads/user/<?= $promotion->user->picture_url ?>">
                 <br>
                 <a href="<?= $this->Url->build(['controller' => 'Users', 'action' => 'view', $promotion->user->id, 'prefix' => 'utilisateur']) ?>">
                     <h3 style="font-weight: 900"><?= ($promotion->user->firstname) ?> <?= ($promotion->user->lastname) ?></h3>
