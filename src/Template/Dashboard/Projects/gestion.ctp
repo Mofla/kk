@@ -113,7 +113,7 @@
         $('#tab_4').load(url);
     }
     function load5() {
-        var url = '<?= $this->Url->build(['controller' => 'Diaries', 'action' => 'view', $diary['id']]); ?>';
+        var url = '<?= $this->Url->build(['controller' => 'Diaries', 'action' => 'view', $diary->id]); ?>';
         $('#tab_5').load(url);
     }
 

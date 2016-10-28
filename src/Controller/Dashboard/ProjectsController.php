@@ -110,7 +110,7 @@ class ProjectsController extends AppController
 
         $uid = $this->Auth->user('id');
 
-        $diary = $this->Projects->Diaries->find()->where(['project_id' => $id])->where(['user_id' => $uid])->first()->toArray();
+        $diary = $this->Projects->Diaries->find()->where(['project_id' => $id])->where(['user_id' => $uid])->first();
 
 
         $this->set('diary', $diary);

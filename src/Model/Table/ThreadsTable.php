@@ -47,7 +47,9 @@ class ThreadsTable extends Table
             'joinType' => 'INNER'
         ]);
         $this->hasMany('Posts', [
-        'foreignKey' => 'thread_id'
+        'foreignKey' => 'thread_id',
+            'dependent' => true,
+            'cascadeCallbacks' => true
     ]);
         $this->belongsTo('Subscriptions', [
             'foreignKey' => 'thread_id',

@@ -304,7 +304,7 @@ class TasksController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+
         $task = $this->Tasks->get($id);
 
         $thread = $this->Tasks->Threads->get($task->thread_id);
@@ -316,6 +316,5 @@ class TasksController extends AppController
             $this->Flash->error(__('The task could not be deleted. Please, try again.'));
         }
 
-        return $this->redirect($this->referer());
     }
 }
