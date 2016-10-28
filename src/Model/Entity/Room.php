@@ -8,6 +8,7 @@ use Cake\ORM\Entity;
  *
  * @property int $id
  * @property string $name
+ * @property string $description
  * @property int $creator
  *
  * @property \App\Model\Entity\Tchat[] $tchats

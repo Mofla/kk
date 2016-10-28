@@ -17,8 +17,16 @@ class RoomsController extends AppController
      */
     public function index()
     {
-        $id = $this->Auth->User('id');
+        $rooms = $this->paginate($this->Rooms,[
+            'contain' => ['Users', 'Tchats']
+        ]);
 
+        $this->set(compact('rooms','id'));
+        $this->set('_serialize', ['rooms']);
+    }
+
+    public function index2()
+    {
         $rooms = $this->paginate($this->Rooms,[
             'contain' => ['Users', 'Tchats']
         ]);
@@ -36,11 +44,15 @@ class RoomsController extends AppController
      */
     public function view($id = null)
     {
+        $this->loadModel('Users');
         $room = $this->Rooms->get($id, [
             'contain' => ['Users', 'Tchats']
         ]);
 
+        $user = $this->Users->find('all')->where(['id'=>$room->creator]);
+
         $this->set('room', $room);
+        $this->set('user', $user);
         $this->set('_serialize', ['room']);
     }
 
@@ -57,7 +69,7 @@ class RoomsController extends AppController
             $room = $this->Rooms->patchEntity($room, $this->request->data);
             if ($this->Rooms->save($room)) {
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['controller'=>'Tchats','action' => 'add',$room->id]);
             } else {
             }
         }

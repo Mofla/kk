@@ -8,8 +8,10 @@
     </legend>
 
 <h5><b><?= __('Name : ') ?></b></h5><p><?= h($room->name) ?></p>
-<h5><b><?= __('Description : ') ?></b></h5><p>Avenir...</p>
-
+<h5><b><?= __('Description : ') ?></b></h5><p><?= h($room->description) ?></p>
+<?php foreach ($user as $crea):?>
+<h5><b><?= __('Createur : ') ?></b></h5><p><?= h($crea->username) ?></p>
+<?php endforeach; ?>
     <div class="related">
         <legend><?= __('Users Dans Le Chat') ?></legend>
         <?php if (!empty($room->users)): ?>

@@ -59,7 +59,9 @@ use Cake\Validation\Validator;
         $validator
             ->requirePresence('name', 'create')            ->notEmpty('name');
         $validator
-            ->integer('creator')            ->allowEmpty('creator');
+            ->allowEmpty('description');
+        $validator
+            ->integer('creator')            ->requirePresence('creator', 'create')            ->notEmpty('creator');
         return $validator;
     }
 }

@@ -42,10 +42,8 @@
                             <li class="divider"></li>
                             <li><?= $this->Html->link(__('Historyque'), ['controller'=>'Tchats','action' => 'history', $room->id, 'prefix' => 'tchat']) ?></li>
                             <li><?= $this->Html->link(__('Detail'), ['action' => 'view', $room->id]) ?></li>
-                            <?php if ($id === $room->creator):?>
                             <li><?= $this->Html->link(__('Edit'), ['action' => 'edit', $room->id]) ?></li>
                             <li><?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $room->id], ['confirm' => __('Etes-vous sûr que vous voulez supprimer le salon  {0} ?', $room->name)]) ?></li>
-                       <?php endif;?>
                         </ul>
                     </div>
                 </td>

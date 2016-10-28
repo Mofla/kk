@@ -1,18 +1,6 @@
 <h3><?= __('Wellcom <b>' . $user . '</b> to <b>') ?><?php foreach ($name_rooms as $name_room): ?> <?= $name_room->name ?><?php endforeach; ?><?= '</b>' ?></h3>
+<?php foreach ($name_rooms as $name_room): ?> <?php foreach ($name_room->users as $user_room): ?> <span class="label label-default"><?= $user_room->username ?></span><?php endforeach; ?><?php endforeach; ?>
 <hr>
-<?php
-$c = 0 ;
-foreach ($name_rooms as $name_room):
-    foreach ($name_room->users as $user_room):
-
-        if ($user_room->id === $users) {
-
-            $c++ ;
-        }
-
-    endforeach;
-endforeach;
-?>
 <div class="row">
     <div class="row_tchat">
         <div class="wrapper">
@@ -337,8 +325,6 @@ endforeach;
     }
 </style>
 <script>
-    if ((<?= $c ?> > 0))
-    {
         $('.in').removeAttr('required');
         $(function () {
             $("#but").on('click', function () {
@@ -414,7 +400,4 @@ endforeach;
                 return false;
             }
         }, 1000);
-    } else {
-        $('.page-content-inner').load('/tchat/tchats/autorize');
-    }
 </script>

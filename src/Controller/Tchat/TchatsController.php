@@ -73,9 +73,28 @@ class TchatsController extends AppController
         $name_rooms = $this->Rooms->find('all')->contain('Users')->where(['id'=>$id_rooms]);
         $count_message = $this->Tchats->find('all')->where(['room_id'=>$id_rooms])->count();
 
+
+        $c = 0 ;
+        foreach ($name_rooms as $name_room):
+            foreach ($name_room->users as $user_room):
+
+                if ($user_room->id === $users) {
+
+                    $c++ ;
+                }
+
+            endforeach;
+        endforeach;
+
+        if ($c === 0){
+
+            return $this->redirect(['action' => 'autorize']);
+        }
+
         $this->set(compact('tchat','user','time_2','count_message','id_rooms','name_rooms','users'));
         $this->set('_serialize', ['tchat']);
     }
+
     public function history($id_room = NULL){
 
         $date_fin = $this->request->data('datefin');
