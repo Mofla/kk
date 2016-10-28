@@ -107,6 +107,13 @@ class ProjectsController extends AppController
         $project = $this->Projects->get($id, [
             'contain' => ['Users', 'Diaries', 'Tasks.States', 'FromToTasks']
         ]);
+
+        $uid = $this->Auth->user('id');
+
+        $diary = $this->Projects->Diaries->find()->where(['project_id' => $id])->where(['user_id' => $uid])->first()->toArray();
+
+
+        $this->set('diary', $diary);
         $this->set('project', $project);
         $this->set('_serialize', ['project']);
     }

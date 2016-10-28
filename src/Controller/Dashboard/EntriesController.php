@@ -3,6 +3,8 @@ namespace App\Controller\Dashboard;
 
 use App\Controller\AppController;
 use Cake\I18n\Time;
+Time::setToStringFormat('yyyy/MM/dd HH:mm');
+
 
 /**
  * Entries Controller
@@ -79,21 +81,25 @@ class EntriesController extends AppController
         $this->set('_serialize', ['entry']);
     }
 
-    public function add()
+    public function add($id = null)
     {
+
+        $time = Time::now();
         $entry = $this->Entries->newEntity();
         if ($this->request->is('post')) {
             $entry = $this->Entries->patchEntity($entry, $this->request->data);
+            $entry->date = $time;
             if ($this->Entries->save($entry)) {
                 $this->Flash->success(__('The entry has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect($this->referer());
+
             } else {
                 $this->Flash->error(__('The entry could not be saved. Please, try again.'));
             }
         }
-        $diaries = $this->Entries->Diaries->find('list', ['limit' => 200]);
-        $this->set(compact('entry', 'diaries'));
+
+        $this->set(compact('entry', 'id'));
         $this->set('_serialize', ['entry']);
     }
 
