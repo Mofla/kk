@@ -51,13 +51,14 @@ class TchatsController extends AppController
         $time->timezone = 'Europe/Paris';
         $time->i18nFormat('Y-m-d h:m:s');
 
-/*        if ($this->log('archive') === true) {
             Log::config('log', function () {
                 return new \Cake\Log\Engine\FileLog(['path' => LOGS, 'file' => 'archive']);
             });
-        }*/
-/*        Log::write('archive', 'Quelque chose qui ne fonctionne pas');*/
 
+        $message = $this->request->data('message');
+        if ( !empty($message)){
+            $this->log($message);
+        }
         $tchat = $this->Tchats->newEntity();
 
         if ($this->request->is('post')) {
