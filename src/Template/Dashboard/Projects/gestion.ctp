@@ -13,11 +13,14 @@
     <div class="col-md-1 col-sm-1 col-xs-1">
         <ul class="nav nav-tabs-right">
             <li>
-                <button class="btn btn-lg blue-chambray" id="add-task"><span
+                <button class="btn btn-lg blue-chambray add-btn" id="add-task"><span
                         class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                 </button>
-                <button class="btn btn-info btn-lg blue-chambray" id="add-file" style="display: none"><span
+                <button class="btn btn-info btn-lg blue-chambray add-btn" id="add-file" style="display: none"><span
                         class="glyphicon glyphicon-save-file" aria-hidden="true"></span>
+                </button>
+                <button class="btn btn-info btn-lg blue-chambray add-btn" id="add-entry" style="display: none"><span
+                        class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                 </button>
             </li>
             <br>
@@ -43,6 +46,11 @@
                         class="glyphicon glyphicon-file" aria-hidden="true"></span>
                 </button>
             </li>
+            <li>
+                <button class="btn blue btn-lg" href="#tab_5" data-toggle="tab" id="btn_5"><span
+                        class="glyphicon glyphicon-book" aria-hidden="true"></span>
+                </button>
+            </li>
         </ul>
     </div>
     <div class="col-md-11 col-sm-11 col-xs-11">
@@ -52,16 +60,15 @@
                 <div class="tab-pane" id="tab_2"></div>
                 <div class="tab-pane" id="tab_3"></div>
                 <div class="tab-pane" id="tab_4"></div>
-
+                <div class="tab-pane" id="tab_5"></div>
             </div>
-
     </div>
 </div>
 
 <script>
 
     //active links
-    var buttonsNav = $('#btn_1,#btn_2,#btn_3,#btn_4');
+    var buttonsNav = $('#btn_1,#btn_2,#btn_3,#btn_4,#btn_5');
 
     buttonsNav.on('click', function () {
         buttonsNav.removeClass('active');
@@ -72,13 +79,19 @@
 
 
     //switch buttons
-    function addFileButton() {
-        $('#add-task').hide();
-        $('#add-file').show();
-    }
-    function addTaskButton() {
-        $('#add-task').show();
-        $('#add-file').hide();
+    function showHideButton(btn) {
+        $('.add-btn').hide();
+        switch (btn) {
+            case 'task':
+                $('#add-task').show();
+                break;
+            case 'file':
+                $('#add-file').show();
+                break;
+            case 'entry':
+                $('#add-entry').show();
+                break;
+        }
     }
 
 
@@ -93,23 +106,28 @@
     });
     // on click events
     $('#btn_1').on('click', function () {
-       addTaskButton();
+       showHideButton('task');
        load1();
     });
     $('#btn_2').on('click', function () {
-        addTaskButton();
+        showHideButton('task');
         var url = '<?= $this->Url->build(['controller' => 'Projects', 'action' => 'timeline', $project->id]); ?>';
         $('#tab_2').load(url);
     });
     $('#btn_3').on('click', function () {
-        addTaskButton();
+        showHideButton('task');
         var url = '<?= $this->Url->build(['controller' => 'Projects', 'action' => 'graph', $project->id]); ?>';
         $('#tab_3').load(url);
     });
     $('#btn_4').on('click', function () {
-        addFileButton();
+        showHideButton('file');
         var url = '<?= $this->Url->build(['controller' => 'Projects', 'action' => 'medias', $project->id]); ?>';
         $('#tab_4').load(url);
+    });
+    $('#btn_5').on('click', function () {
+        showHideButton('entry');
+        var url = '<?= $this->Url->build(['controller' => 'Diaries', 'action' => 'view', $diary['id']]); ?>';
+        $('#tab_5').load(url);
     });
 
 
@@ -118,10 +136,8 @@
     //task add modal
     $('#add-task').on('click', function (event) {
         event.preventDefault();
-        var id = $(this).attr('id').split('-');
 
         var url = '<?= $this->Url->build(['controller' => 'Tasks', 'action' => 'addtask']); ?>' + '/' + <?= $project->id ?>;
-
 
         $('.task-modal-cont').load(url, function (result) {
             $('#taskModal').modal({show: true});
@@ -156,6 +172,17 @@
         });
     });
 
+
+    //task add entry
+    $('#add-entry').on('click', function (event) {
+
+        var url = '<?= $this->Url->build(['controller' => 'Entries', 'action' => 'add']); ?>' + '/' + <?= $diary['id'] ?>;
+
+
+        $('.task-modal-cont').load(url, function (result) {
+            $('#taskModal').modal({show: true});
+        });
+    });
 
 
 

@@ -23,6 +23,13 @@ function custom_echo($x, $length)
 
 ?>
 
+<style>
+    .caption {
+        cursor: pointer;
+    }
+</style>
+
+
 
 <div class="task-modal-base">
     <div class="task-modal-cont"></div>
@@ -66,7 +73,7 @@ function custom_echo($x, $length)
                     <div class="col-md-4 col-sm-4 col-xs-4">
                         <div class="portlet box  blue-chambray">
                             <div class="portlet-title">
-                                <div class="caption">
+                                <div class="caption" id="project-<?= $project->id?>">
                                         <span
                                             class="glyphicon glyphicon-file fa-md"></span> <?= custom_echo($project->name, 20) ?>
                                 </div>
@@ -146,9 +153,15 @@ function custom_echo($x, $length)
 
     // Create a Timeline
     var timeline = new vis.Timeline(container, items, options);
-</script>
 
-<script>
+
+
+    //portlet titles links
+    $('.caption').on('click', function () {
+        var id = $(this).attr('id').split('-');
+        window.location = '<?= $this->Url->build(['controller' => 'Projects', 'action' => 'gestion']) ?>' + '/' + id[1];
+    });
+
 
     //active links
     var buttonsNav = $('#btn_1,#btn_2');
