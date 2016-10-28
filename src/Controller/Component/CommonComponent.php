@@ -56,17 +56,7 @@ class CommonComponent extends Component
                                 }
                                 else
                                 {
-                                    $table = TableRegistry::get('Connectors');
-                                    $permissions = $table->find('all',[
-                                        'contain' => 'Permissions',
-                                        'conditions' => [
-                                            'module' => $directory,
-                                            'controller' => $controller_renamed,
-                                            'function' => $action->name
-                                        ]
-                                    ])->first();
-                                    ($permissions) ? $id = ['id' => $permissions->permission->id, 'name' => $permissions->permission->name, 'description' => $permissions->permission->description, 'menu' => $permissions->permission->menu] : $id = false;
-                                    $files[$directory][$controller_renamed][$action->name] = ["permissions"=>$id,"value"=>false];
+                                    $files[$directory][$controller_renamed][$action->name] = [];
                                 }
                             }
                         }
