@@ -1,6 +1,9 @@
 <?= $this->Html->css('../assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css') ?>
 <?= $this->Html->script('../assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js') ?>
 
+<?= $this->Html->css('sweetalert.css') ?>
+
+
 <div class="row" id="file-form" style="display: none">
     <div class="col-md-5 col-sm-5 col-xs-5">
         <div class="portlet box blue-chambray">
@@ -154,6 +157,8 @@
 
     <?php endforeach ?>
 </div>
+
+<?= $this->Html->script('sweetalert.min.js') ?>
 
 <script>
 

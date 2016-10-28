@@ -124,16 +124,16 @@
         var url = window.location.href.split('#');
 
         switch (url[1]) {
-            case '2':
+            case 'tab_2':
                 $('#btn_2').trigger('click');
                 break;
-            case '3':
+            case 'tab_3':
                 $('#btn_3').trigger('click');
                 break;
-            case '4':
+            case 'tab_4':
                 $('#btn_4').trigger('click');
                 break;
-            case '5':
+            case 'tab_5':
                 $('#btn_5').trigger('click');
                 break;
             default:
