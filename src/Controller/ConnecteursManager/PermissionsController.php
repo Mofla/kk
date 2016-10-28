@@ -1,5 +1,5 @@
 <?php
-namespace App\Controller\Admin;
+namespace App\Controller\ConnecteursManager;
 
 use App\Controller\AppController;
 use Cake\Network\Response;
