@@ -9,15 +9,7 @@
 .voffset8 { margin-top: 100px; }
 .voffset9 { margin-top: 150px; }
 
-.category {
-    background-color: #ed1450;
-    border-top-left-radius: 5px!important;
-    border-top-right-radius: 5px!important;
-}
 
-.sscategory {
-    background-color: white;
-}
 
 .inputwidth {
     width: 100%;
@@ -35,11 +27,7 @@
     text-align: center;
 }
 
-.ssthead{
-    background-color: #333;
-    color: gainsboro;
-    font-size: 6px!important;
-}
+
 
 .right{
     float: right;
@@ -49,9 +37,6 @@
     float: left;
 }
 
-.grey {
-    background-color: gainsboro;
-}
 
 .mrgtbl{
     margin-bottom: 5px!important;
@@ -78,14 +63,15 @@
 }
 
 .avatar{
-    width: 100px;
+    width: 110px;
     border: 1px solid grey;
     border-radius: 50%!important;
-    margin: 10px;
+    margin: 20px;
 }
 
 .username{
     text-align: center;
+    font-weight: bold;
 }
 
 .joint{
@@ -110,3 +96,63 @@
 .note-insert{
     display: none;
 }
+
+.pb {
+    width: 150px;
+    color: #777777;
+    -moz-box-shadow: inset 0 1px 0 0 #ffffff;
+    -webkit-box-shadow: inset 0 1px 0 0 #ffffff;
+    box-shadow: inset 0 1px 0 0 #ffffff;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f0f0f0', endColorstr='#dfdfdf');
+    background-color: #f0f0f0;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    border: 1px solid #dcdcdc;
+    padding: 6px 10px;
+    text-shadow: 1px 1px 0 #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 12px;
+    text-align: left;
+}
+
+.grey {
+    background-color: #cecccc;
+}
+
+.tblrad{
+    border-radius: 7px!important;
+    border: 1px solid lightgrey;
+    margin-bottom: 0px!important;
+}
+
+
+.ssthead{
+    background-color: #333;
+    color: gainsboro;
+    font-size: 12px!important;
+}
+
+
+.category {
+    background-color: #ed6b75;
+}
+
+.sscategory {
+    background-color: white;
+}
+
+.sujet{
+    font-size: 16px!important;
+}
+
+.create{
+ vertical-align: middle!important;
+    font-size: 12px;
+}
+
+.bgava{
+    background-color: #f9f9f9;
+}
+

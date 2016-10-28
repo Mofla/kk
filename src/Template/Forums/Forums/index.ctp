@@ -11,10 +11,11 @@
 
 
 <div class="col-md-12 voffset3">
-<div class="table-responsive">
+
 
             <?php foreach ($cat as $forum): ?>
-    <table class="table">
+    <div class="table-responsive voffset2 tblrad">
+    <table class="table tblrad">
         <thead class="category">
         <tr>
             <th colspan="2" scope="col"><span class="h4"><?= $forum->name ?></span></th>
@@ -65,10 +66,12 @@ $id = $section->id ;
 
         </tbody>
     </table>
+    </div>
     <?php endforeach; ?>
 <!--__________________________________________________________________________________________________stats du forum-->
 
-    <table class="table">
+    <div class="table-responsive voffset2 tblrad">
+        <table class="table tblrad">
         <thead class="statforum">
         <tr>
             <th colspan="2" scope="col"><span class="h4">Statistiques du forum</span></th>
@@ -91,9 +94,9 @@ $id = $section->id ;
 
         </tbody>
     </table>
+    </div>
 
 
-</div>
 </div>
 
 

@@ -34,28 +34,33 @@
     </div>
 
     <div class="row"></div>
-    <div class="table-responsive voffset2">
-        <table class="table">
+    <div class="table-responsive voffset2 tblrad">
+        <table class="table tblrad">
             <thead class="category">
             <tr class="dash-hide">
-                <th colspan="2" scope="row">
-                    <div><?= h($thread->subject) ?></div>
-
+                <th class="sujet" colspan="2">
+                    <?= h($thread->subject) ?>
                 </th>
-            </tr>
-            <tr class="ssthead">
-                <th width="120px" scope="col">Auteur</th>
-                <th scope="col">Message</th>
             </tr>
             </thead>
             <tbody>
+            <tr>
+            <td class="ssthead" width="170px">Auteur</td>
+                <td class="ssthead">Message</td>
+            </tr>
             <tr class="sscategory">
-                <td width="120px" <?php if($thread->files) { echo 'rowspan="2"';} ?> >
+                <td class="bgava" <?php if($thread->files) { echo 'rowspan="2"';} ?> >
                 <div class="username">
                     <?= $thread->has('user') ? $this->Html->link($thread->user->username, 'utilisateur/profil/'.$thread->user->id.'') : '' ?>
                 </div>
                 <div class="avatardiv">
                     <?= $this->Html->image('../uploads/user/'.$thread->user->picture_url ,['class'=>'avatar']); ?>
+                </div>
+                <div class="pb">
+                    <i class="fa fa-graduation-cap" aria-hidden="true"></i> <?= $thread->user->role->name ?>
+                </div>
+                <div class="pb">
+                    Inscription: <?= $thread->user->created->i18nformat('MMM YYYY', 'Europe/Paris') ?>
                 </div>
             </td>
             <td>
@@ -158,9 +163,11 @@
 
             <tr class="grey">
 
-                <td><?= $thread->created->i18nformat('dd/MM/YY à HH:mm', 'Europe/Paris') ?></td>
+                <td class="text-center create "><span class="create">Créer le <?= $thread->created->i18nformat('dd/MM/YY à HH:mm', 'Europe/Paris') ?></span></td>
                 <td>
-                    <div class="left">MP</div>
+                    <div class="left">
+                        <a href="#" class="btn btn-sm green-meadow" role="button" aria-pressed="true"><i class="fa fa-envelope"></i> MP</a>
+                    </div>
                     <div class="right dash-hide">
                         <a href="<?= $this->Url->build([ 'controller' => 'Posts', 'action' => 'addquote' ,
     'fid' => $fid,
@@ -189,9 +196,8 @@
             </tr>
         </tbody>
     </table>
+</div>
 
-
-    <div class="table-responsive">
 
 
         <?php if (!empty($posts)): ?>
@@ -199,16 +205,21 @@
 
         <?php foreach($posts as $post): ?>
         <?php $messagecount++ ;?>
-
+<div class="table-responsive voffset2 tblrad">
         <table class="table mrgtbl">
             <tr class="sscategory">
-
-                <td width="120px" <?php if($post->files) { echo 'rowspan="2"';} ?> >
+                <td class="bgava" width="120px" <?php if($post->files) { echo 'rowspan="2"';} ?> >
                 <div class="username">
                     <?= $this->Html->link($post->user->username, 'utilisateur/profil/'.$post->user->id.''); ?>
                 </div>
                 <div class="avatardiv">
                     <?= $this->Html->image('../uploads/user/'.$post->user->picture_url ,['class'=>'avatar']); ?>
+                </div>
+                <div class="pb">
+                    <i class="fa fa-graduation-cap" aria-hidden="true"></i> <?= $thread->user->role->name ?>
+                </div>
+                <div class="pb">
+                    Inscription: <?= $post->user->created->i18nformat('MMM YYYY', 'Europe/Paris') ?>
                 </div>
             </td>
             <td>
@@ -313,9 +324,12 @@
 
         <tr class="grey">
 
-            <td><?= $post->created->i18nformat('dd/MM/YY à HH:mm', 'Europe/Paris') ?></td>
+            <td class="text-center create "><span class="create">Créer le <?= $post->created->i18nformat('dd/MM/YY à HH:mm', 'Europe/Paris') ?></td>
             <td>
-                <div class="left">MP</div>
+                <div class="left">
+                    <a href="#" class="btn btn-sm green-meadow" role="button" aria-pressed="true"><i class="fa fa-envelope"></i> MP</a>
+
+                </div>
                 <div class="right dash-hide">
                     <a href="<?= $this->Url->build([ 'controller' => 'Posts', 'action' => 'addquote' ,
    'fid' => $fid,
@@ -343,11 +357,12 @@
         </tr>
 
     </table>
+        </div>
     <?php endforeach; ?>
     <?php endif; ?>
 
 
-    <div class="col-md-12">
+    <div class="col-md-12 voffset2" >
         <div class="pagination left">
             <?php
                     echo $this->Paginator->prev(__('Prec'), array('tag' => 'li'), null, array('tag' => 'li','class' =>
