@@ -32,7 +32,7 @@ class EntriesTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('entries');
+        $this->table('dashboard_entries');
         $this->displayField('id');
         $this->primaryKey('id');
 

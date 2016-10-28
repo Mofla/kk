@@ -47,7 +47,9 @@ class DiariesTable extends Table
             'joinType' => 'INNER'
         ]);
         $this->hasMany('Entries', [
-            'foreignKey' => 'diary_id'
+            'foreignKey' => 'diary_id',
+            'dependent' => true,
+            'cascadeCallbacks' => true
         ]);
     }
 
