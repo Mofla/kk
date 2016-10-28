@@ -22,18 +22,19 @@
     </div>
 
 <div class="row"></div>
-<div class="table-responsive voffset2">
+    <div class="table-responsive voffset2 tblrad">
     <?php if (!empty($forum)): ?>
-    <table class="table">
+
+    <table class="table tblrad">
         <tr>
-            <th scope="col" class="category" colspan="5"><?= h($forumname->name) ?></th>
+            <th scope="col" class="sujet category" colspan="5"><?= h($forumname->name) ?></th>
         </tr>
         <tr class="ssthead">
-            <th scope="col" >Sujets / Auteurs</th>
-            <th scope="col" >Réponses</th>
-            <th scope="col" >Vues</th>
-            <th scope="col" >Derniers messages</th>
-            <th scope="col" ></th>
+            <td class="ssthead">Sujets / Auteurs</td>
+            <td class="ssthead">Réponses</td>
+            <td class="ssthead">Vues</td>
+            <td class="ssthead">Derniers messages</td>
+            <td></td>
         </tr>
         <?php foreach ($forum as $threads): ?>
         <tr class="sscategory">
@@ -65,8 +66,9 @@
         </tr>
         <?php endforeach; ?>
     </table>
+    </div>
     <?php endif; ?>
-    <div class="col-md-12">
+    <div class="col-md-12 voffset2">
         <div class="pagination left">
             <?php
                     echo $this->Paginator->prev(__('Prec'), array('tag' => 'li'), null, array('tag' => 'li','class' =>
@@ -84,5 +86,5 @@
         </div>
     </div>
 </div>
-</div>
+
 

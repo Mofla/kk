@@ -34,12 +34,12 @@ class ThreadsController extends AppController
             ->first();
 
         $thread = $this->Threads->find()
-            ->contain(['Files','Users'])
+            ->contain(['Files','Users.Roles'])
         ->where(['Threads.id' => $id])
         ->first();
 
         $posts = $this->Threads->Posts->find('all')
-           ->contain(['Users','Files'])
+           ->contain(['Users.Roles','Files'])
             ->where(['thread_id' => $id]);
 
         $query = $this->Threads->query();
