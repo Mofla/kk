@@ -58,6 +58,8 @@ class PromotionsController extends AppController
                 $this->request->data['user_id'] = $this->Auth->User('id');
                 $promotion = $this->Promotions->patchEntity($promotion, $this->request->data);
                 if ($this->Promotions->save($promotion)) {
+                    $file = $this->Upload->getFile($this->request->data['cv'],'cv',true);
+                    $this->request->data['cv_url'] = $file;
                     $this->Flash->success(__('The promotion has been saved.'));
 
                     return $this->redirect(['action' => 'index']);
@@ -88,6 +90,10 @@ class PromotionsController extends AppController
         ]);
 
         if ($this->request->is(['patch', 'post', 'put'])) {
+            if(!empty($this->request->data['cv']['name'])) {
+                $file = $this->Upload->getFile($this->request->data['cv'], 'cv', true);
+                $this->request->data['cv_url'] = $file;
+            }
             $promotion = $this->Promotions->patchEntity($promotion, $this->request->data);
             if ($this->Promotions->save($promotion)) {
                 $this->Flash->success(__('The promotion has been saved.'));
