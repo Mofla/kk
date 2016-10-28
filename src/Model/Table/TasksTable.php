@@ -117,7 +117,7 @@ class TasksTable extends Table
     }
 
     public function afterSave($created, $event,$entity){
-        if ($this->Projects->create()) {
+        if ($created) {
 //            if INSERT
             //$event->isNew() va recupéré dans l'event la ligne " ['new'] " indiquant si l'on effectue un nouvelle enregistrement ou non
             if($event->isNew()){

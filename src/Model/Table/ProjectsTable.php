@@ -44,7 +44,9 @@ class ProjectsTable extends Table
         $this->primaryKey('id');
 
         $this->hasMany('Diaries', [
-            'foreignKey' => 'project_id'
+            'foreignKey' => 'project_id',
+            'dependent' => true,
+            'cascadeCallbacks' => true
         ]);
         $this->hasMany('FromToTasks', [
             'foreignKey' => 'project_id'
@@ -86,29 +88,35 @@ class ProjectsTable extends Table
             ->notEmpty('description');
 
         $validator
-            ->integer('users_number')
-            ->requirePresence('users_number', 'create')
-            ->notEmpty('users_number');
+            ->integer('users_number');
 
         $validator
             ->boolean('finished')
             ->allowEmpty('finished');
 
         $validator
-            ->date('start_date')
-            ->requirePresence('start_date', 'create')
-            ->notEmpty('start_date');
+            ->date('start_date');
 
         $validator
-            ->date('end_date')
-            ->requirePresence('end_date', 'create')
-            ->notEmpty('end_date');
+            ->date('end_date');
+
 
         $validator
             ->allowEmpty('picture_url');
 
         $validator
             ->allowEmpty('url');
+
+        $validator
+            ->allowEmpty('start_date');
+
+
+        $validator
+            ->allowEmpty('end_date');
+
+        $validator
+            ->allowEmpty('users_number');
+
 
         return $validator;
     }
