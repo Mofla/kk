@@ -134,10 +134,10 @@
 <script>
 $('.cut').click(function() {
     var id = $(this).attr('id');
-    var paste = $('#entrie'.concat(id)).text();
+    var paste = $('#entrie'+id).text();
     $('#content').text(paste);
     $('#id_entrie').attr("name",id);
     console.log(id);
-//    console.log(paste);
+    console.log(paste);
 });
 </script>
