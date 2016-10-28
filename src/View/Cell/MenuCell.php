@@ -44,29 +44,52 @@ class MenuCell extends Cell
             ->contain(['Permissions','Permissions.Roles'])
             ->matching('Permissions')->where(['menu'=> 1])
             ->matching('Permissions.Roles')->where(['Roles.id =' => $role]);
-
-        foreach($query as $connector) {
+        
+*/
+        /*foreach($query as $connector) {
             $registered_module[$connector->module] = [];
             foreach ($connector->permissions as $permission) {
                 $registered_module[$permission->name][$connector->module][$connector->controller][] = $connector->function;
                 print_r($registered_module);
             }
-        }*/
-        /*$query = $this->Permissions->find('all')
+        } */
+        $query = $this->Permissions->find('all')
             ->contain(['Connectors','Roles'])
-            ->where(['menu'=> 1])
             ->matching('Roles')->where(['Roles.id =' => $role]);
 
+        $registered= [];
         foreach($query as $permission) {
-            $registered_module[$permission->name] = [];
             foreach ($permission->connectors as $connector) {
-                $registered_module[$permission->name][$connector->module][$connector->controller][] = $connector->function;
-                print_r($registered_module);
+                $registered[$connector->module][$connector->controller][] = $connector->function;
             }
-        }*/
+        }
+
         $xmlObject= Xml::build(WWW_ROOT.'menu.xml');
+        $parent= [];
+        $firstChild = [];
+        $secondChild= [];
+        foreach ($xmlObject as $xml) {
+            $parent[Xml::xml_attribute($xml, 'prefix')][Xml::xml_attribute($xml, 'controller')][]= Xml::xml_attribute($xml, 'action');
+            if (Xml::xml_attribute($xml->menuItem, 'prefix') != null) {
+               foreach ($xml->menuItem as $xmls){
+                 $firstChild[Xml::xml_attribute($xmls, 'prefix')][Xml::xml_attribute($xmls, 'controller')][]= Xml::xml_attribute($xmls, 'action');
+                 if (Xml::xml_attribute($xmls->menuItem, 'prefix') != null){
+                     foreach ($xmls->menuItem as $xmla){
+                         $secondChild[Xml::xml_attribute($xmla, 'prefix')][Xml::xml_attribute($xmla, 'controller')][]= Xml::xml_attribute($xmla, 'action');
+                     }
+                 }
+               }
+            }
+        }
+       // echo '<pre>',print_r($parent),'</pre>';
+/*        foreach ($parent as $p){
+            echo '<pre>',print_r($p),'</pre>';
+        }*/
+
+
+
         $this->set('_serialize', ['permission', 'xmlObject']);
-        $this->set(compact('i','role', 'user','query','modules','xmlObject'));
+        $this->set(compact('i','role', 'user','query','xmlObject'));
 
     }
 
