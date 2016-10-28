@@ -51,7 +51,9 @@ class ForumsTable extends Table
             'foreignKey' => 'lasttopic',
         ]);
         $this->hasMany('Threads', [
-            'foreignKey' => 'forum_id'
+            'foreignKey' => 'forum_id',
+            'dependent' => true,
+            'cascadeCallbacks' => true
         ]);
 
         $this->belongsTo('Projects', [
