@@ -10,6 +10,7 @@
     <fieldset>
         <?php
         echo $this->Form->input('name',['class' => 'form-control']);
+        echo  $this->Form->input('description',['class' => 'form-control']);
         echo $this->Form->input('users._ids', ['options' => $users,'id' => 'multiselect','class' => 'form-control']);
         ?>
     </fieldset>
