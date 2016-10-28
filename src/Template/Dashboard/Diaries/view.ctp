@@ -19,10 +19,10 @@
                             <!--start enties list -->
                             <div class="todo-tasklist">
                                 <?php foreach ($diary->entries as $entries): ?>
-                                <div id=<?=$entries->id ?> class="row cut">
+                                <div class="row">
                                     <div class="col-12">
                                         <div class="todo-tasklist-item todo-tasklist-item-border ">
-                                            <div id="entrie<?=$entries->id ?>" class="todo-tasklist-item-text cut"><?= $entries->content ?>
+                                            <div id="<?=$entries->id ?>" class="todo-tasklist-item-text cut"><?= $entries->content ?>
                                             </div><br>
                                             <div class="todo-tasklist-controls pull-left">
                                                                                     <span class="todo-tasklist-date">
@@ -74,8 +74,7 @@
                                                         <?= $this->Form->input('content',
                                                             ['label' => false,
                                                                 'class' => 'form-control todo-taskbody-taskdesc',
-                                                                'rows' => "8",
-
+                                                                'rows' => "8"
                                                             ]); ?>
 
                                                         <form id="content" action="#" class="form-horizontal form-bordered">
@@ -116,7 +115,7 @@
                             e.preventDefault();
                             var data = $(this).serialize();
                             var edit = '<?= $this->Url->build(['controller' => 'Entries', 'action' => 'edit']); ?>';
-                            var list = '<?= $this->Url->build(['controller' => 'Diaries', 'action' => 'view']); ?>?'
+                            var list = '<?= $this->Url->build(['controller' => 'Diaries', 'action' => 'view']); ?>?';
 
                             $.ajax({
                                 url: edit,
@@ -129,15 +128,11 @@
                             $('#list').load(list);
 
                         });
-                    </script>
 
-<script>
 $('.cut').click(function() {
     var id = $(this).attr('id');
-    var paste = $('#entrie'+id).text();
-    $('#content').text(paste);
+    var paste = $(this).text();
     $('#id_entrie').attr("name",id);
-    console.log(id);
-    console.log(paste);
+    $('#content').val(paste);
 });
 </script>
