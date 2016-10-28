@@ -13,8 +13,8 @@ class TasksListener implements EventListenerInterface
     public function implementedEvents()
     {
         return [
-            'Model.Task.addtask' => 'addtask',
-            'Model.Task.edittask' => 'edittask'
+            'Model.Task.add' => 'addtask',
+            'Model.Task.edit' => 'edittask'
         ];
     }
 
