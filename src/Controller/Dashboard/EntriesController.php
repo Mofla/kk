@@ -91,7 +91,7 @@ class EntriesController extends AppController
             $entry->date = $time;
             if ($this->Entries->save($entry)) {
                 $this->Flash->success(__('The entry has been saved.'));
-
+                
                 return $this->redirect($this->referer() . '#tab_5');
 
             } else {
