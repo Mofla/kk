@@ -92,7 +92,7 @@ class EntriesController extends AppController
             if ($this->Entries->save($entry)) {
                 $this->Flash->success(__('The entry has been saved.'));
 
-                return $this->redirect($this->referer());
+                return $this->redirect($this->referer() . '#5');
 
             } else {
                 $this->Flash->error(__('The entry could not be saved. Please, try again.'));

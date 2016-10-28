@@ -168,6 +168,11 @@
         closeForm();
     });
 
+    <?php
+        if (empty($project->files)): ?>
+    $('#file-form').show();
+    <?php endif;?>
+
 
     //delete file
     $('.delete-file').on('click', function (item) {
