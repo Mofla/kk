@@ -26,6 +26,7 @@ class ThreadsController extends AppController
 
     public function view($fid = null, $forum = null, $slug = null, $id = null)
     {
+        $role = $this->Auth->user('role_id');
         $sub = $this->Threads->Subscriptions;
         $user = $this->Auth->user('id');
         $subscription = $sub->find()
@@ -48,7 +49,7 @@ class ThreadsController extends AppController
             ->where(['id' => $id])
             ->execute();
 
-        $this->set(compact('thread','subscription','fid','forum','slug','id'));
+        $this->set(compact('thread','subscription','fid','forum','slug','id','role'));
         $this->set('posts', $this->paginate($posts));
     }
 

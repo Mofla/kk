@@ -49,7 +49,10 @@ class ForumsController extends AppController
         }
 
         $cat = $this->Forums->Categories->find('list');
-        $this->set(compact('forum','cat'));
+
+        $tableroles = $this->loadModel('Roles');
+        $roles = $tableroles->find('list');
+        $this->set(compact('forum','cat','roles'));
         $this->set('_serialize', ['forum']);
     }
 
