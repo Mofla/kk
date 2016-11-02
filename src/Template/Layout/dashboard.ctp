@@ -13,7 +13,7 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-$cakeDescription = 'CakePHP: the rapid development php framework';
+$cakeDescription = 'Simplon Epinal';
 ?>
 <!DOCTYPE html>
 <html>
@@ -35,13 +35,13 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <meta content="#1 selling multi-purpose bootstrap admin theme sold in themeforest marketplace packed with angularjs, material design, rtl support with over thausands of templates and ui elements and plugins to power any type of web applications including saas and admin dashboards. Preview page of Theme #3 for "
+    <meta content="Simplon Epinal numérique dev web développeur developper internet école formation"
           name="description" />
-    <meta content="" name="author" />
+    <meta content="" name="Simplon" />
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
     <?= $this->Html->css('../assets/global/plugins/font-awesome/css/font-awesome.min.css') ?>
-    <?= $this->Html->css('../assets/global/plugins/simple-line-icons/simple-line-icons.min.css') ?>
+    <!--<?= $this->Html->css('../assets/global/plugins/simple-line-icons/simple-line-icons.min.css') ?>--->
     <?= $this->Html->css('../assets/global/plugins/bootstrap/css/bootstrap.min.css') ?>
     <?= $this->Html->css('../assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css') ?>
     <!-- END GLOBAL MANDATORY STYLES -->
@@ -58,7 +58,6 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->html->script('../assets/global/plugins/jquery.min.js') ?>
     <link rel="shortcut icon" href="favicon.ico" />
 </head>
-<body>
 
 
 <body class="page-container-bg-solid">
@@ -85,28 +84,36 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                     <!-- BEGIN PAGE CONTENT BODY -->
                     <div class="page-content">
 
-                        <!-- BEGIN PAGE BREADCRUMBS -->
-                        <!-- END PAGE BREADCRUMBS -->
-                        <!-- BEGIN PAGE CONTENT INNER -->
-                        <div class="page-content-inner">
-                            <?= $this->fetch('content') ?>
-                        </div>
-                        <!-- END PAGE CONTENT INNER -->
+                            <!-- BEGIN PAGE BREADCRUMBS -->
+                            <!-- END PAGE BREADCRUMBS -->
+                            <!-- BEGIN PAGE CONTENT INNER -->
+                            <div class="page-content-inner">
+                                <?= $this->fetch('content') ?>
+                            </div>
+                            <!-- END PAGE CONTENT INNER -->
 
                     </div>
                     <!-- END PAGE CONTENT BODY -->
                     <!-- END CONTENT BODY -->
                 </div>
                 <!-- END CONTENT -->
-                <!-- BEGIN QUICK SIDEBAR -->
 
             </div>
             <!-- END CONTAINER -->
         </div>
     </div>
 
-<!--        <footer>-->
+    <!-- END QUICK NAV -->
+    <!--[if lt IE 9]>
 
+
+
+
+
+
+        <footer>
+            <div class="page-wrapper-row">
+            <div class="page-wrapper-bottom">
                 <!-- BEGIN FOOTER -->
     <!-- BEGIN PRE-FOOTER -->
     <div class="page-prefooter">
@@ -174,74 +181,37 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <!-- END INNER FOOTER -->
     <!-- END FOOTER -->
 </div>
-</div>
-</div>
-<!-- BEGIN QUICK NAV -->
-<!--<nav class="quick-nav">-->
-<!--    <a class="quick-nav-trigger" href="#0">-->
-<!--        <span aria-hidden="true"></span>-->
-<!--    </a>-->
-<!--    <ul>-->
-<!--        <li>-->
-<!--            <a href="https://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes" target="_blank" class="active">-->
-<!--                <span>Purchase Metronic</span>-->
-<!--                <i class="icon-basket"></i>-->
-<!--            </a>-->
-<!--        </li>-->
-<!--        <li>-->
-<!--            <a href="https://themeforest.net/item/metronic-responsive-admin-dashboard-template/reviews/4021469?ref=keenthemes" target="_blank">-->
-<!--                <span>Customer Reviews</span>-->
-<!--                <i class="icon-users"></i>-->
-<!--            </a>-->
-<!--        </li>-->
-<!--        <li>-->
-<!--            <a href="http://keenthemes.com/showcast/" target="_blank">-->
-<!--                <span>Showcase</span>-->
-<!--                <i class="icon-user"></i>-->
-<!--            </a>-->
-<!--        </li>-->
-<!--        <li>-->
-<!--            <a href="http://keenthemes.com/metronic-theme/changelog/" target="_blank">-->
-<!--                <span>Changelog</span>-->
-<!--                <i class="icon-graph"></i>-->
-<!--            </a>-->
-<!--        </li>-->
-<!--    </ul>-->
-<!--    <span aria-hidden="true" class="quick-nav-bg"></span>-->
-<!--</nav>-->
+
+
+
 <div class="quick-nav-overlay"></div>
 </footer>
-<?= $this->html->script('../assets/global/plugins/respond.min.js') ?>
-<?= $this->html->script('../assets/global/plugins/excanvas.min.js') ?>
-<?= $this->html->script('../assets/global/plugins/ie8.fix.min.js') ?>
-<!--[endif]-->
-<!-- BEGIN CORE PLUGINS -->
+<!--<?= $this->html->script('../assets/global/plugins/respond.min.js') ?>-->
+<!--<?= $this->html->script('../assets/global/plugins/excanvas.min.js') ?>-->
+<!--<?= $this->html->script('../assets/global/plugins/ie8.fix.min.js') ?>-->
+<!--&lt;!&ndash;[endif]&ndash;&gt;-->
+<!--&lt;!&ndash; BEGIN CORE PLUGINS &ndash;&gt;-->
 
 <?= $this->html->script('../assets/global/plugins/bootstrap/js/bootstrap.min.js') ?>
-<?= $this->html->script('../assets/global/plugins/js.cookie.min.js') ?>
-<?= $this->html->script('../assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js') ?>
-<?= $this->html->script('../assets/global/plugins/jquery.blockui.min.js') ?>
-<?= $this->html->script('../assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js') ?>
-<!-- END CORE PLUGINS -->
-<!-- BEGIN THEME GLOBAL SCRIPTS -->
-<?= $this->html->script('../assets/global/scripts/app.min.js') ?>
-<!-- END THEME GLOBAL SCRIPTS -->
-<!-- BEGIN THEME LAYOUT SCRIPTS -->
-<?= $this->html->script('../assets/layouts/layout3/scripts/layout.min.js') ?>
-<?= $this->html->script('../assets/layouts/layout3/scripts/demo.min.js') ?>
-<?= $this->html->script('../assets/layouts/global/scripts/quick-sidebar.min.js') ?>
-<?= $this->html->script('../assets/layouts/global/scripts/quick-nav.min.js') ?>
-<?= $this->Html->script('../js/jquery.js') ?>
-<?= $this->Html->script('../build/jquery.datetimepicker.full.min.js') ?>
-<?= $this->Html->css('../css/jquery.datetimepicker.css') ?>
-<script>
+<!--<?= $this->html->script('../assets/global/plugins/js.cookie.min.js') ?>-->
+<!--<?= $this->html->script('../assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js') ?>-->
+<!--<?= $this->html->script('../assets/global/plugins/jquery.blockui.min.js') ?>-->
+<!--<?= $this->html->script('../assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js') ?>-->
+<!--&lt;!&ndash; END CORE PLUGINS &ndash;&gt;-->
+<!--&lt;!&ndash; BEGIN THEME GLOBAL SCRIPTS &ndash;&gt;-->
+<!--<?= $this->html->script('../assets/global/scripts/app.min.js') ?>-->
+<!--&lt;!&ndash; END THEME GLOBAL SCRIPTS &ndash;&gt;-->
+<!--&lt;!&ndash; BEGIN THEME LAYOUT SCRIPTS &ndash;&gt;-->
+<!--<?= $this->html->script('../assets/layouts/layout3/scripts/layout.min.js') ?>-->
+<!--<?= $this->html->script('../assets/layouts/layout3/scripts/demo.min.js') ?>-->
+<!--<?= $this->html->script('../assets/layouts/global/scripts/quick-sidebar.min.js') ?>-->
+<!--<?= $this->html->script('../assets/layouts/global/scripts/quick-nav.min.js') ?>-->
+<!--<?= $this->Html->script('../js/jquery.js') ?>-->
+<!--<?= $this->Html->script('../build/jquery.datetimepicker.full.min.js') ?>-->
+<!--<?= $this->Html->css('../css/jquery.datetimepicker.css') ?>-->
 
-    //datetimepicker on date field
-    $('#datepicker').datetimepicker({
-        timepicker:false,
-        format: "Y-m-d"
-    });
-</script>
+
+
 </body>
 
 <!-- END THEME LAYOUT SCRIPTS -->
