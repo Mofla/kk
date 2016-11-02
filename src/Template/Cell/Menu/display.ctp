@@ -28,20 +28,11 @@
                         <?php endforeach; ?>
                       </a>
                       <ul class="dropdown-menu dropdown-menu-default">
-                        <?php foreach ($role as $r) : ?>
-                          <?php if ($r->role_id == 1): ?>
-                            <li>
-                              <a href="<?= $this->Url->build(['controller' => 'users', 'action' => 'view', $i, 'prefix' => 'admin']) ?>">
-                                <i class="icon-user"></i> Profil </a>
-                            </li>
-                          <?php else: ?>
-                            <li>
-                              <a href="<?= $this->Url->build(['controller' => 'users', 'action' => 'view', $i]) ?>">
-                                <i class="icon-user"></i> Profil </a>
-                            </li>
-                          <?php endif; ?>
-                        <?php endforeach; ?>
                         <li>
+                          <a href="<?= $this->Url->build(['controller' => 'users', 'action' => 'view', $i, 'prefix' => 'admin']) ?>">
+                            <i class="icon-user"></i>Mon Profil </a>
+                        </li>
+<!--                        <li>
                           <a href="app_calendar.html">
                             <i class="icon-calendar"></i> My Calendar </a>
                         </li>
@@ -50,7 +41,7 @@
                             <i class="icon-envelope-open"></i> My Inbox
                             <span class="badge badge-danger"> 0</span>
                           </a>
-                        </li>
+                        </li>-->
                         <li class="divider"></li>
                         <li>
                           <a href="<?php echo $this->Url->build(['controller' => 'users', 'action' => 'logout', 'prefix' => 'utilisateur']); ?>">
@@ -81,39 +72,48 @@
               <ul class="nav navbar-nav">
                 <!-- si l'utilisateur est connecté on affiche ce menu -->
                 <?php foreach ($xmlObject as $xml) : ?>
-                  <li class="menu-dropdown classic-menu-dropdown ">
-                    <a href="<?= $this->Url->build(['controller' =>  Xml::xml_attribute($xml, 'controller'), 'action' => Xml::xml_attribute($xml, 'action'), 'prefix' =>  strtolower(Xml::xml_attribute($xml, 'prefix'))]) ?>">
-                      <?php echo Xml::xml_attribute($xml, 'titre') ?>
-                    </a>
-                      <!-- s'il y a des sous-menu -->
-                    <?php if (Xml::xml_attribute($xml->menuItem, 'titre') != null) : ?>
-                      <ul class="dropdown-menu pull-left">
-                        <?php foreach ($xml->menuItem as $xmls): ?>
-                          <li class="dropdown-submenu ">
-                            <a href="<?= $this->Url->build(['controller' =>  Xml::xml_attribute($xmls, 'controller'), 'action' => Xml::xml_attribute($xmls, 'action'), 'prefix' => strtolower(Xml::xml_attribute($xmls, 'prefix'))]) ?>">
-                              <?= Xml::xml_attribute($xmls, 'titre') ?>
-                            </a>
-                            <!-- S'il y a des sous sous-menu -->
-                            <?php if (Xml::xml_attribute($xmls->menuItem, 'titre') != null): ?>
-                              <ul class="dropdown-menu">
-                                <?php foreach ($xmls->menuItem as $xmla): ?>
-                                  <li class=" ">
-                                    <?php if (Xml::xml_attribute($xmla, 'prefix')== 'Admin') : ?>
-                                    <a href="<?= $this->Url->build(['controller' =>  Xml::xml_attribute($xmla, 'controller'), 'action' => Xml::xml_attribute($xmla, 'action'), 'prefix' => strtolower(Xml::xml_attribute($xmla, 'prefix'))]) ?>">
-                                     <?php else: ?>
-                                      <a href="<?= $this->Url->build(['controller' =>  Xml::xml_attribute($xmla, 'controller'), 'action' => Xml::xml_attribute($xmla, 'action'), 'prefix' => strtolower(Xml::xml_attribute($xmla, 'prefix')),$i])?>">
-                                     <?php endif; ?>
-                                      <?= Xml::xml_attribute($xmla, 'titre') ?>
+                  <?php foreach ($role as $r) : ?>
+                    <?php if ($r->role_id !=1): ?>
+                      <?php if (Xml::xml_attribute($xml,'prefix') == 'Admin'): continue;
+                      else:          ?>
+                        <li class="menu-dropdown classic-menu-dropdown ">
+                          <a href="<?= $this->Url->build(['controller' =>  Xml::xml_attribute($xml, 'controller'), 'action' => Xml::xml_attribute($xml, 'action'), 'prefix' =>  strtolower(Xml::xml_attribute($xml, 'prefix'))]) ?>">
+                            <?php echo Xml::xml_attribute($xml, 'titre') ?>
+                          </a>
+                            <!-- s'il y a des sous-menu -->
+                            <?php if (Xml::xml_attribute($xml->menuItem, 'titre') != null) : ?>
+                              <ul class="dropdown-menu pull-left">
+                                <?php foreach ($xml->menuItem as $xmls): ?>
+                                  <li class="">
+                                    <a href="<?= $this->Url->build(['controller' =>  Xml::xml_attribute($xmls, 'controller'), 'action' => Xml::xml_attribute($xmls, 'action'), 'prefix' => strtolower(Xml::xml_attribute($xmls, 'prefix'))]) ?>">
+                                      <?= Xml::xml_attribute($xmls, 'titre') ?>
                                     </a>
                                   </li>
                                 <?php endforeach; ?>
                               </ul>
                             <?php endif; ?>
-                          </li>
-                        <?php endforeach; ?>
-                      </ul>
+                        </li>
+                      <?php endif; ?>
+                    <?php else: ?>
+                      <li class="menu-dropdown classic-menu-dropdown ">
+                        <a href="<?= $this->Url->build(['controller' =>  Xml::xml_attribute($xml, 'controller'), 'action' => Xml::xml_attribute($xml, 'action'), 'prefix' =>  strtolower(Xml::xml_attribute($xml, 'prefix'))]) ?>">
+                          <?php echo Xml::xml_attribute($xml, 'titre') ?>
+                        </a>
+                        <!-- s'il y a des sous-menu -->
+                        <?php if (Xml::xml_attribute($xml->menuItem, 'titre') != null) : ?>
+                          <ul class="dropdown-menu pull-left">
+                            <?php foreach ($xml->menuItem as $xmls): ?>
+                              <li class="">
+                                <a href="<?= $this->Url->build(['controller' =>  Xml::xml_attribute($xmls, 'controller'), 'action' => Xml::xml_attribute($xmls, 'action'), 'prefix' => strtolower(Xml::xml_attribute($xmls, 'prefix'))]) ?>">
+                                  <?= Xml::xml_attribute($xmls, 'titre') ?>
+                                </a>
+                              </li>
+                            <?php endforeach; ?>
+                          </ul>
+                        <?php endif; ?>
+                      </li>
                     <?php endif; ?>
-                  </li>
+                  <?php endforeach; ?>
                 <?php endforeach; ?>
               </ul>
             </div>
