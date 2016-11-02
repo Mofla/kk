@@ -81,6 +81,7 @@ Router::scope('/', function (RouteBuilder $routes) {
  */
 Plugin::routes();
 
+//---------------------------------------------------------------------------------------------------------DEBUT ROUTES D'ADMIN
 Router::prefix('admin', function ($routes) {
 // Parce que vous êtes dans le scope admin, vous n'avez pas besoin
 // d'inclure le prefix /admin ou l'élément de route admin.
@@ -93,8 +94,12 @@ Router::prefix('admin', function ($routes) {
     $routes->connect('/portfolios/', ['controller' => 'Portfolios', 'action' => 'index']);
     $routes->connect('/portfolios/ajouter', ['controller' => 'Portfolios', 'action' => 'add']);
     $routes->connect('/portfolios/editer/*', ['controller' => 'Portfolios', 'action' => 'edit']);
+    $routes->connect('/forums/categories', ['controller' => 'Forums', 'action' => 'listcategory']);
+    $routes->connect('/forums/creer', ['controller' => 'Forums', 'action' => 'addforum']);
+    $routes->connect('/forums/editer', ['controller' => 'Forums', 'action' => 'listforum']);
     $routes->fallbacks(DashedRoute::class);
 });
+
 Router::prefix('portfolios', function($routes) {
     $routes->connect('/', ['controller' => 'Portfolios','action' => 'index'], ['routeClass' => 'InflectedRoute']);
     $routes->connect('/:id', ['controller' => 'Portfolios','action' => 'index'],['id' => '[0-9]+','pass'=>['id']], ['routeClass' => 'InflectedRoute']);
@@ -110,81 +115,14 @@ Router::prefix('Tchat', function($routes) {
 //---------------------------------------------------------------------------------------------------------DEBUT ROUTES DU FORUM
 Router::prefix('Forums', function($routes) {
     $routes->connect('/', ['controller' => 'Forums','action' => 'index'], ['routeClass' => 'InflectedRoute']);
-    $routes->connect(
-        '/:id-:slug',
-        ['controller' => 'Forums', 'action' => 'view'],
-        [
-            'pass' => ['slug', 'id'],
-            'id' => '[0-9]+',
-        ]
-    );
-    $routes->connect(
-        '/:id-:slug/creer-un-sujet',
-        ['controller' => 'Threads', 'action' => 'add'],
-        [
-            'pass' => ['slug', 'id'],
-            'id' => '[0-9]+',
-        ]
-    );
-    $routes->connect(
-        '/:fid-:forum/:id-:slug',
-        ['controller' => 'Threads', 'action' => 'view'],
-        [
-            'pass' => ['fid', 'forum', 'slug', 'id'],
-            'id' => '[0-9]+',
-        ]
-    );
-    $routes->connect(
-        '/:fid-:forum/:id-:slug/poster-une-reponse',
-        ['controller' => 'Posts', 'action' => 'add'],
-        [
-            'pass' => ['fid', 'forum', 'slug', 'id'],
-            'id' => '[0-9]+',
-        ]
-    );
-    $routes->connect(
-        '/:fid-:forum/:id-:slug/poster-une-reponse/:quote',
-        ['controller' => 'Posts', 'action' => 'addquote'],
-        [
-            'pass' => ['fid', 'forum', 'slug', 'id', 'quote'],
-            'id' => '[0-9]+',
-        ]
-    );
-    $routes->connect(
-        '/:fid-:forum/:id-:slug/editer',
-        ['controller' => 'Posts', 'action' => 'edit'],
-        [
-            'pass' => ['fid', 'forum', 'slug', 'id'],
-            'id' => '[0-9]+',
-        ]
-    );
-    $routes->connect(
-        '/:fid-:forum/:id-:slug/editer-topic',
-        ['controller' => 'Threads', 'action' => 'edit'],
-        [
-            'pass' => ['fid', 'forum', 'slug', 'id'],
-            'id' => '[0-9]+',
-        ]
-    );
-    $routes->connect(
-        '/rechercher/*',
-        ['controller' => 'Forums', 'action' => 'search']
-    );
-    $routes->fallbacks(DashedRoute::class);
-});
-Router::prefix('Admin', function($routes) {
-    $routes->connect(
-        '/forums/categories',
-        ['controller' => 'Forums', 'action' => 'listcategory']
-    );
-    $routes->connect(
-        '/forums/creer',
-        ['controller' => 'Forums', 'action' => 'addforum']
-    );
-    $routes->connect(
-        '/forums/editer',
-        ['controller' => 'Forums', 'action' => 'listforum']
-    );
+    $routes->connect('/:id-:slug', ['controller' => 'Forums', 'action' => 'view'], ['pass' => ['slug', 'id'], 'id' => '[0-9]+',]);
+    $routes->connect('/:id-:slug/creer-un-sujet', ['controller' => 'Threads', 'action' => 'add'], ['pass' => ['slug', 'id'], 'id' => '[0-9]+',]);
+    $routes->connect('/:fid-:forum/:id-:slug', ['controller' => 'Threads', 'action' => 'view'], ['pass' => ['fid', 'forum', 'slug', 'id'], 'id' => '[0-9]+',]);
+    $routes->connect('/:fid-:forum/:id-:slug/poster-une-reponse', ['controller' => 'Posts', 'action' => 'add'], ['pass' => ['fid', 'forum', 'slug', 'id'], 'id' => '[0-9]+',]);
+    $routes->connect('/:fid-:forum/:id-:slug/poster-une-reponse/:quote', ['controller' => 'Posts', 'action' => 'addquote'], ['pass' => ['fid', 'forum', 'slug', 'id', 'quote'], 'id' => '[0-9]+',]);
+    $routes->connect('/:fid-:forum/:id-:slug/editer', ['controller' => 'Posts', 'action' => 'edit'], ['pass' => ['fid', 'forum', 'slug', 'id'], 'id' => '[0-9]+',]);
+    $routes->connect('/:fid-:forum/:id-:slug/editer-topic', ['controller' => 'Threads', 'action' => 'edit'], ['pass' => ['fid', 'forum', 'slug', 'id'], 'id' => '[0-9]+',]);
+    $routes->connect('/rechercher/*', ['controller' => 'Forums', 'action' => 'search']);
     $routes->fallbacks(DashedRoute::class);
 });
 //---------------------------------------------------------------------------------------------------------FIN ROUTES DU FORUM
@@ -206,9 +144,6 @@ Router::prefix('promotions', function ($routes){
     $routes->connect('/ajouter', ['controller' => 'Promotions','action' => 'add'], ['routeClass' => 'InflectedRoute']);
     $routes->connect('/editer/*',['controller' => 'Promotions','action' => 'edit'], ['routeClass' => 'InflectedRoute']);
     $routes->fallbacks(DashedRoute::class);
-
-
-
 });
 
 Router::prefix('connecteursmanager', function($routes) {

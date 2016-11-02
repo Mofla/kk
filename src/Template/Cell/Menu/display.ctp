@@ -53,7 +53,7 @@
                         </li>
                         <li class="divider"></li>
                         <li>
-                          <a href="<?php echo $this->Url->build(['controller' => 'users', 'action' => 'logout', 'prefix' => false]); ?>">
+                          <a href="<?php echo $this->Url->build(['controller' => 'users', 'action' => 'logout', 'prefix' => 'utilisateur']); ?>">
                             <i class="icon-key"></i> Déconnecter </a>
                         </li>
                       </ul>
@@ -98,7 +98,11 @@
                               <ul class="dropdown-menu">
                                 <?php foreach ($xmls->menuItem as $xmla): ?>
                                   <li class=" ">
-                                    <a href="<?= $this->Url->build(['controller' =>  Xml::xml_attribute($xmla, 'controller'), 'action' => Xml::xml_attribute($xmla, 'action'), 'prefix' => strtolower(Xml::xml_attribute($xmla, 'prefix'))]) ?> ">
+                                    <?php if (Xml::xml_attribute($xmla, 'prefix')== 'Admin') : ?>
+                                    <a href="<?= $this->Url->build(['controller' =>  Xml::xml_attribute($xmla, 'controller'), 'action' => Xml::xml_attribute($xmla, 'action'), 'prefix' => strtolower(Xml::xml_attribute($xmla, 'prefix'))]) ?>">
+                                     <?php else: ?>
+                                      <a href="<?= $this->Url->build(['controller' =>  Xml::xml_attribute($xmla, 'controller'), 'action' => Xml::xml_attribute($xmla, 'action'), 'prefix' => strtolower(Xml::xml_attribute($xmla, 'prefix')),$i])?>">
+                                     <?php endif; ?>
                                       <?= Xml::xml_attribute($xmla, 'titre') ?>
                                     </a>
                                   </li>

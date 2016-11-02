@@ -14,11 +14,8 @@
         </menuItem>
         <menuItem titre="Gérer forum" prefix="Admin" controller="Forums" action="listcategory">
             <menuItem titre="ACP forum" prefix="Admin" controller="Forums" action="listcategory"></menuItem>
-            <menuItem titre="Créer" prefix="Admin" controller="Forums" action="addforum"></menuItem>
-            <menuItem titre="Editer" prefix="Admin" controller="Forums" action="listforum"></menuItem>
         </menuItem>
-        <menuItem titre="Gérer Tchat" prefix="Admin" controller="Rooms" action="index">
-            <menuItem titre="Ajouter" prefix="Admin" controller="Rooms" action="add"></menuItem>
+        <menuItem titre="Gérer Tchat" prefix="Tchat" controller="Rooms" action="index">
         </menuItem>
         <menuItem titre="Portfolios" prefix="Admin" controller="Portfolios" action="index">
             <menuItem titre="Ajouter" prefix="Admin" controller="Portfolios" action="add"></menuItem>
@@ -37,8 +34,6 @@
         </menuItem>
     </menuItem>
     <menuItem titre="Portfolios" prefix="Portfolios" controller="Portfolios" action="index">
-        <menuItem titre="Ajouter" prefix="Portfolios" controller="Portfolios" action="add"></menuItem>
-        <menuItem titre="Editer" prefix="Portfolios" controller="Portfolios" action="index"></menuItem>
     </menuItem>
     <menuItem titre="Promotion" prefix="Promotions" controller="Promotions" action="index"></menuItem>
     <menuItem titre="Forum" prefix="Forums" controller="Forums" action="index"></menuItem>
