@@ -1,41 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <menu>
     <menuItem titre="Dashboard" prefix='Dashboard' controller="Projects" action="index"></menuItem>
-    <menuItem titre="Admin" prefix="Admin" controller="Users" action="index">
-        <menuItem titre="Gérer utilisateur" prefix="Admin" controller="Users" action="index">
-            <menuItem titre="Ajouter" prefix="Admin" controller="Users" action="add"></menuItem>
-            <menuItem titre="Editer" prefix="Admin" controller="Users" action="index"></menuItem>
-            <menuItem titre="Supprimer" prefix="Admin" controller="Users" action="index"></menuItem>
-        </menuItem>
-        <menuItem titre="Gérer permission" prefix="Admin" controller="Permissions" action="index">
-            <menuItem titre="Ajouter" prefix="Admin" controller="Permissions" action="add" ></menuItem>
-            <menuItem titre="Editer" prefix="Admin" controller="Permissions" action="index"></menuItem>
-            <menuItem titre="Supprimer" prefix="Admin" controller="Permissions" action="index"></menuItem>
-        </menuItem>
-        <menuItem titre="Gérer forum" prefix="Admin" controller="Forums" action="listcategory">
-            <menuItem titre="ACP forum" prefix="Admin" controller="Forums" action="listcategory"></menuItem>
-        </menuItem>
-        <menuItem titre="Gérer Tchat" prefix="Tchat" controller="Rooms" action="index">
-        </menuItem>
-        <menuItem titre="Portfolios" prefix="Admin" controller="Portfolios" action="index">
-            <menuItem titre="Ajouter" prefix="Admin" controller="Portfolios" action="add"></menuItem>
-            <menuItem titre="Editer" prefix="Admin" controller="Portfolios" action="index"></menuItem>
-        </menuItem>
+    <menuItem titre="Gestion du site" prefix="Admin" controller="Users" action="index">
+        <menuItem titre="Gérer utilisateur" prefix="Admin" controller="Users" action="index"></menuItem>
+        <menuItem titre="Gérer permission" prefix="Admin" controller="Permissions" action="index"></menuItem>
+        <menuItem titre="Gérer forum" prefix="Admin" controller="Forums" action="listcategory"></menuItem>
+        <menuItem titre="Gérer Tchat" prefix="Tchat" controller="Rooms" action="index"></menuItem>
+        <menuItem titre="Portfolios" prefix="Admin" controller="Portfolios" action="index"></menuItem>
     </menuItem>
-    <menuItem titre="Mon compte" prefix="Utilisateur" controller="Users" action="index">
-        <menuItem titre="Mon profil" prefix="Utilisateur" controller="Users" action="view" id=":id">
-            <menuItem titre="Voir" prefix="Utilisateur" controller="Users" action="view" id=":id"></menuItem>
-            <menuItem titre="Editer" prefix="Utilisateur" controller="Users" action="edit" id=":id"></menuItem>
-        </menuItem>
-        <menuItem titre="Tchat" prefix="Tchat" controller="Rooms" action="index2"></menuItem>
-        <menuItem titre="Gérer promotions" prefix="Promotions" controller="Promotions" action="view" id=":id">
-            <menuItem titre="Créer" prefix="Promotions" controller="Promotions" action="add"></menuItem>
-            <menuItem titre="Editer" prefix="Promotions" controller="Promotions" action="edit" id=":id"></menuItem>
-        </menuItem>
-    </menuItem>
-    <menuItem titre="Portfolios" prefix="Portfolios" controller="Portfolios" action="index">
-    </menuItem>
-    <menuItem titre="Promotion" prefix="Promotions" controller="Promotions" action="index"></menuItem>
+    <menuItem titre="Mes Tchat" prefix="Tchat" controller="Rooms" action="index2"></menuItem>
     <menuItem titre="Forum" prefix="Forums" controller="Forums" action="index"></menuItem>
 </menu>
 
