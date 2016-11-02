@@ -41,10 +41,11 @@
                 <?php endforeach; ?>
                 </tbody>
             </table>
-            <div class="panel-heading">
-                <?= $this->Form->submit('Valider',['class' => 'btn btn-info']) ?>
-            </div>
+
         <?php endforeach; ?>
+    </div>
+    <div class="panel-heading text-center">
+        <?= $this->Form->submit('Valider',['class' => 'btn btn-info']) ?>
     </div>
     <?= $this->Form->end() ?>
 </div>

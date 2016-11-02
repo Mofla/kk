@@ -34,10 +34,21 @@ class ConnectorsTableTest extends TestCase
         'app.tasks',
         'app.states',
         'app.tasks_users',
-        'app.projects_users',
-        'app.entries',
+        'app.threads',
+        'app.forums',
+        'app.categories',
+        'app.lasttopicuser',
+        'app.files',
+        'app.posts',
+        'app.posts_files',
+        'app.threads_files',
+        'app.subscriptions',
+        'app.lastuserthread',
         'app.portfolios',
+        'app.projects_users',
         'app.portfolios_users',
+        'app.promotions',
+        'app.entries',
         'app.permissions_roles'
     ];
 

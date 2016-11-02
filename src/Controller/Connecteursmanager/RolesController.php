@@ -27,6 +27,7 @@ class RolesController extends AppController
                     ])
                     ->execute();
             }
+            return $this->redirect(['controller' => 'Permissions','action' => 'index']);
         }
         $roles = $this->Roles->find('list');
         $permissions = $this->Roles->Permissions->find('list');

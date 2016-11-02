@@ -50,9 +50,9 @@ class AppController extends Controller
                 'home'
             ],
             'logoutRedirect' => [
-                'controller' => 'Pages',
-                'action' => 'display',
-                'home'
+                'controller' => 'Users',
+                'action' => 'login',
+                'prefix' => 'utilisateur'
             ],
             'loginAction' => '/utilisateur/connexion', // à cause des prefixes
             'authorize' => 'Controller'
@@ -78,7 +78,8 @@ class AppController extends Controller
 
     public function isAuthorized($user=null)
     {
-        if($this->Common->checkPermissions($this->request->params['controller'],$this->request->params['action']) || $this->Common->isAdmin())
+
+        if($this->Common->checkPermissions(ucfirst($this->request->params['prefix']),ucfirst($this->request->params['controller']),$this->request->params['action']) || $this->Common->isAdmin())
         {
             return true;
         }
