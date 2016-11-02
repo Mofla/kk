@@ -1,18 +1,6 @@
-<div id="visualization"></div>
-
-
-<?= $this->Html->script('../js/jquery.js') ?>
 <?= $this->Html->css('../assets/vis/vis.css') ?>
-<?= $this->Html->script('../assets/vis/vis.js') ?>
-<?= $this->Html->css('../assets/global/plugins/jquery-ui/jquery-ui.min.css') ?>
-<?= $this->Html->script('../assets/global/plugins/jquery-ui/jquery-ui.min.js') ?>
-<?= $this->Html->script('../assets/global/plugins/bootstrap/js/bootstrap.min.js') ?>
-
-
 <?= $this->Html->css('sweetalert.css') ?>
 <?= $this->Html->script('sweetalert.min.js') ?>
-
-
 
 
 <style type="text/css">
@@ -40,6 +28,12 @@
     }
 
 </style>
+
+<div id="visualization"></div>
+
+
+
+<?= $this->Html->script('../assets/vis/vis.js') ?>
 
 <script type="text/javascript">
 
@@ -71,7 +65,10 @@
         <?php endforeach; ?>
     ]);
     var options = {
-        editable: true,
+        editable: {
+            updateTime: true,
+            remove: false
+        },
 
         onMove: function (item, callback) {
             var title = 'Voulez-vous vraiment changer les dates de cette tâche \n' +
@@ -141,16 +138,6 @@
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: "#DD6B55"
-        }, callback);
-    }
-
-    function prettyPrompt(title, text, inputValue, callback) {
-        swal({
-            title: title,
-            text: text,
-            type: 'input',
-            showCancelButton: true,
-            inputValue: inputValue
         }, callback);
     }
 
