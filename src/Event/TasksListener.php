@@ -48,6 +48,8 @@ class TasksListener implements EventListenerInterface
     {
         $original_task = $entity->extractOriginalChanged($entity->visibleProperties());
         $task = $event->data['event'];
+     debug($task['name']);
+        die();
 //     ON VERIFIE SI DE NOUVEAUX USER SONT AJOUTE A LA TACHE
         $list_original_users = array();
         $list_actual_users = array();
@@ -67,8 +69,7 @@ class TasksListener implements EventListenerInterface
 
 //        ECRITURE DE LA NOTE
         //si SEULEMENT l'état de la tache à été edité
-        if (isset($task['state_id'])){
-
+        if (isset($original_task['state_id']))  {
             $statesTable = TableRegistry::get('States');
 
             $original_task_state = $statesTable->find()
