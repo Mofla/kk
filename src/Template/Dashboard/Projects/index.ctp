@@ -1,11 +1,8 @@
-<?= $this->Html->script('../js/jquery.js') ?>
 
-<?= $this->Html->css('../assets/global/plugins/jquery-ui/jquery-ui.min.css') ?>
-<?= $this->Html->script('../assets/global/plugins/jquery-ui/jquery-ui.min.js') ?>
-<?= $this->Html->script('../assets/global/plugins/bootstrap/js/bootstrap.min.js') ?>
+
 
 <?= $this->Html->css('sweetalert.css') ?>
-<?= $this->Html->script('sweetalert.min.js') ?>
+
 
 <?= $this->Html->css('../assets/vis/vis.css') ?>
 
@@ -40,7 +37,7 @@ function custom_echo($x, $length)
     <div class="col-md-1 col-sm-1 col-xs-1">
         <ul class="nav nav-tabs-right">
             <li>
-                <button class="btn btn-info btn-lg" id="project-add"><span
+                <button title="Ajouter un projet" class="btn btn-info btn-lg" id="project-add"><span
                         class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                 </button>
             </li>
@@ -48,12 +45,12 @@ function custom_echo($x, $length)
             <br>
             <br>
             <li>
-                <button class="btn blue btn-lg active" href="#tab_1" data-toggle="tab" id="btn_1"><span
+                <button title="Liste des projets" class="btn blue btn-lg active" href="#tab_1" data-toggle="tab" id="btn_1"><span
                         class="glyphicon glyphicon-list" aria-hidden="true"></span>
                 </button>
             </li>
             <li>
-                <button class="btn blue btn-lg" href="#tab_2" data-toggle="tab" id="btn_2"><span
+                <button title="Timeline des projets" class="btn blue btn-lg" href="#tab_2" data-toggle="tab" id="btn_2"><span
                         class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
                 </button>
             </li>
@@ -126,9 +123,8 @@ function custom_echo($x, $length)
     </div>
 </div>
 
+<?= $this->Html->script('sweetalert.min.js') ?>
 
-<?= $this->Html->script('../assets/global/plugins/jquery-ui/jquery-ui.min.js') ?>
-<?= $this->Html->script('../assets/global/plugins/bootstrap/js/bootstrap.min.js') ?>
 
 <?= $this->Html->script('../assets/vis/vis.js') ?>
 

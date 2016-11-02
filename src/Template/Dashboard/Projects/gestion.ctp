@@ -13,13 +13,13 @@
     <div class="col-md-1 col-sm-1 col-xs-1">
         <ul class="nav nav-tabs-right">
             <li>
-                <button class="btn btn-lg blue-chambray add-btn" id="add-task"><span
+                <button title="Ajouter une tâche" class="btn btn-lg blue-chambray add-btn" id="add-task"><span
                         class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                 </button>
-                <button class="btn btn-info btn-lg blue-chambray add-btn" id="add-file" style="display: none"><span
+                <button title="Ajouter un fichier" class="btn btn-info btn-lg blue-chambray add-btn" id="add-file" style="display: none"><span
                         class="glyphicon glyphicon-save-file" aria-hidden="true"></span>
                 </button>
-                <button class="btn btn-info btn-lg blue-chambray add-btn" id="add-entry" style="display: none"><span
+                <button title="Ajouter une entrée au journal" class="btn btn-info btn-lg blue-chambray add-btn" id="add-entry" style="display: none"><span
                         class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                 </button>
             </li>
@@ -27,27 +27,27 @@
             <br>
             <br>
             <li>
-                <button class="btn blue btn-lg active" href="#tab_1" data-toggle="tab" id="btn_1"><span
+                <button title="Gestion des états de tâches" class="btn blue btn-lg active" href="#tab_1" data-toggle="tab" id="btn_1"><span
                         class="glyphicon glyphicon-list" aria-hidden="true"></span>
                 </button>
             </li>
             <li>
-                <button class="btn blue btn-lg" href="#tab_2" data-toggle="tab" id="btn_2"><span
+                <button title="Calendrier" class="btn blue btn-lg" href="#tab_2" data-toggle="tab" id="btn_2"><span
                         class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
                 </button>
             </li>
             <li>
-                <button class="btn blue btn-lg" href="#tab_3" data-toggle="tab" id="btn_3"><span
+                <button title="Hiérarchisation des tâches" class="btn blue btn-lg" href="#tab_3" data-toggle="tab" id="btn_3"><span
                         class="glyphicon glyphicon-tree-deciduous" aria-hidden="true"></span>
                 </button>
             </li>
             <li>
-                <button class="btn blue btn-lg" href="#tab_4" data-toggle="tab" id="btn_4"><span
+                <button title="Voir/Ajouter des fichiers au projet" class="btn blue btn-lg" href="#tab_4" data-toggle="tab" id="btn_4"><span
                         class="glyphicon glyphicon-file" aria-hidden="true"></span>
                 </button>
             </li>
             <li>
-                <button class="btn blue btn-lg" href="#tab_5" data-toggle="tab" id="btn_5"><span
+                <button title="Journal de bord" class="btn blue btn-lg" href="#tab_5" data-toggle="tab" id="btn_5"><span
                         class="glyphicon glyphicon-book" aria-hidden="true"></span>
                 </button>
             </li>
