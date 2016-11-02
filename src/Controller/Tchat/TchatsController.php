@@ -21,6 +21,13 @@ class TchatsController extends AppController
     {
         $user = $this->Auth->User('username');
         $id = $this->Auth->User('id');
+        $role = $this->Auth->User('role_id');
+
+        if ($role != '1'):
+
+            return $this->redirect(['action' => 'autorize']);
+
+            endif;
 
         $time_2 = Time::now();
         $time_2->timezone = 'Europe/Paris';
@@ -43,6 +50,8 @@ class TchatsController extends AppController
 
     public function add($id_room = NULL)
     {
+
+
         $users = $this->Auth->User('id');
         $this->loadModel('Rooms');
         $id_rooms = $id_room ;
