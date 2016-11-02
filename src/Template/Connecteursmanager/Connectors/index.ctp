@@ -4,6 +4,7 @@
     <?= $this->Html->link($this->request->params['action'],['controller' => $this->request->params['controller'],'action' => $this->request->params['action']]) ?>
 </div>
 <div class="row">
+    <?= $this->Form->create() ?>
     <div class="">
         <?php foreach ($actions as $module => $controllers): ?>
             <table class="table">
@@ -30,7 +31,7 @@
                                         {
                                             $default = 0;
                                         }
-                                        echo $this->Form->input('permission_id',['label' => $value,'name' => implode('-',[$module,$controller,$key]),'options' => $permissions,'empty' => [0 => '--'],'default' => $default,'class' => 'form-control']);
+                                        echo $this->Form->input('permission_id',['label' => $key,'name' => implode('-',[$module,$controller,$key]),'options' => $permissions,'empty' => [0 => '--'],'default' => $default,'class' => 'form-control']);
                                         ?>
                                     </li>
                                 <?php endforeach; ?>
@@ -40,6 +41,10 @@
                 <?php endforeach; ?>
                 </tbody>
             </table>
+            <div class="panel-heading">
+                <?= $this->Form->submit('Valider',['class' => 'btn btn-info']) ?>
+            </div>
         <?php endforeach; ?>
     </div>
+    <?= $this->Form->end() ?>
 </div>
