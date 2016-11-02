@@ -5,10 +5,10 @@
         <menuItem titre="Gérer utilisateur" prefix="Admin" controller="Users" action="index"></menuItem>
         <menuItem titre="Gérer permission" prefix="Admin" controller="Permissions" action="index"></menuItem>
         <menuItem titre="Gérer forum" prefix="Admin" controller="Forums" action="listcategory"></menuItem>
-        <menuItem titre="Gérer Tchat" prefix="Tchat" controller="Rooms" action="index"></menuItem>
+        <menuItem titre="Gérer tchat" prefix="Tchat" controller="Rooms" action="index"></menuItem>
         <menuItem titre="Portfolios" prefix="Admin" controller="Portfolios" action="index"></menuItem>
     </menuItem>
-    <menuItem titre="Mes Tchat" prefix="Tchat" controller="Rooms" action="index2"></menuItem>
+    <menuItem titre="Mes Tchats" prefix="Tchat" controller="Rooms" action="index2"></menuItem>
     <menuItem titre="Forum" prefix="Forums" controller="Forums" action="index"></menuItem>
 </menu>
 
