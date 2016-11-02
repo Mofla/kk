@@ -31,6 +31,7 @@ class ConnectorsController extends AppController
         $permissions = $this->Connectors->Permissions->find('list');
         if($this->request->is(['post','put','patch']))
         {
+            $data = [];
             foreach($this->request->data as $key => $value)
             {
                 // je récupère toutes les permissions choisies et les stocks dans un data
@@ -44,8 +45,11 @@ class ConnectorsController extends AppController
                 $check = $this->Connectors->find()->select('id')->where($options)->first();
                 if($value != 0)
                 {
-                    $data[] = array_merge(['permission_id' => $value,],$options);
-
+                    // add this not exists in db
+                    if(!isset($check->id))
+                    {
+                        $data[] = array_merge(['permission_id' => $value,],$options);
+                    }
                 }
                 else{
                     if($check != null)

@@ -51,7 +51,7 @@
             </table>
 
             <div class="text-center">
-                <?= $this->Html->link('<span class="glyphicon glyphicon-plus"></span> Ajouter',
+                <?= $this->Html->link('<span class="glyphicon glyphicon-plus"></span> Ajouter une permission',
                     ['action' => 'add'],
                     ['escape' => false,'class' => 'btn btn-lg btn-info']
                 ) ?>
@@ -62,6 +62,10 @@
                 <?= $this->Html->link('<span class="glyphicon glyphicon-plus"></span> Définir les roles',
                     ['controller' => 'Roles','action' => 'add'],
                     ['escape' => false,'class' => 'btn btn-lg btn-danger']
+                ) ?>
+                <?= $this->Html->link('<span class="glyphicon glyphicon-plus"></span> Ajouter un role',
+                    ['controller' => 'Roles','action' => 'add','prefix' => 'admin'],
+                    ['escape' => false,'class' => 'btn btn-lg btn-success']
                 ) ?>
                 <hr>
                 <div class="paginator text-center">
