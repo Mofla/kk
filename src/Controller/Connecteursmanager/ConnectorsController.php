@@ -29,6 +29,31 @@ class ConnectorsController extends AppController
             $compare[$connector->module][$connector->controller][$connector->function] = $connector->permission_id;
         }
         $permissions = $this->Connectors->Permissions->find('list');
+        if($this->request->is(['post','put','patch']))
+        {
+            foreach($this->request->data as $key => $value)
+            {
+                // je récupère toutes les permissions choisies et les stocks dans un data
+                // pour les save ensuite
+                if($value != 0)
+                {
+                    $explode = explode('-',$key);
+                    $data[] = [
+                        'permission_id' => $value,
+                        'module' => $explode[0],
+                        'controller' => $explode[1],
+                        'function' => $explode[2]
+                    ];
+                }
+            }
+            $connectors = $this->Connectors->newEntities($data);
+            $connectors = $this->Connectors->patchEntities($connectors,$data);
+            if($this->Connectors->saveMany($connectors))
+            {
+                $this->Flash->success('Braval');
+                return $this->redirect(['controller' => 'Permissions','action' => 'index']);
+            }
+        }
 
         $this->set(compact(['connectors','actions','compare','permissions']));
     }
