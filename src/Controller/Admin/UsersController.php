@@ -40,7 +40,15 @@ class UsersController extends AppController
             'contain' => ['Roles']
         ]);
 
+        if($id==$this->Auth->User('id')) {
+            $autoriser= true;
+        }
+        else{
+            $autoriser=false;
+        }
+
         $this->set('user', $user);
+        $this->set('autoriser',$autoriser);
         $this->set('_serialize', ['user']);
     }
 

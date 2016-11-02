@@ -15,6 +15,11 @@
             <li class="active">
               <a href="#tab_1_1" data-toggle="tab"> Profil </a>
             </li>
+            <?php if($autoriser){?>
+            <li>
+              <a href="#tab_2_2" data-toggle="tab"> Editer mon Profil </a>
+            </li>
+            <?php }?>
           </ul>
           <div class="tab-content">
             <div class="tab-pane active" id="tab_1_1">
@@ -54,6 +59,14 @@
                   </div>
                 </div>
               </div>
+            </div>
+            <div class="tab-pane" id="tab_2_2">
+              <script>
+                var url = '../../../admin/utilisateur/editer/<?= $user->id ?>';
+
+                $('#tab_2_2').load(url, function () {
+                });
+              </script>
             </div>
           </div>
         </div>

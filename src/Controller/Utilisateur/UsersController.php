@@ -51,6 +51,8 @@ class UsersController extends AppController
 
         ]);
 
+
+
         $promotions = $this->promotions->find('all',[
             'conditions' => ['promotions.user_id' => $id],
         ]);
@@ -102,6 +104,12 @@ class UsersController extends AppController
      */
     public function edit($id = null)
     {
+        $this->loadModel('Promotions');
+        $promotion = $this->Promotions->find('all',[
+           'conditions' => ['promotions.user_id' => $id ]
+        ]);
+
+
         $user = $this->Users->get($id, [
             'contain' => []
         ]);
@@ -121,7 +129,7 @@ class UsersController extends AppController
             }
         }
         $roles = $this->Users->Roles->find('list', ['limit' => 200]);
-        $this->set(compact('user'));
+        $this->set(compact('user','promotion'));
         $this->set('roles', $roles);
         $this->set('_serialize', ['user']);
     }
