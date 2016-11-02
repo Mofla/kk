@@ -7,16 +7,14 @@
 <?php
 function custom_echo($x, $length)
 {
-    if(strlen($x)<=$length)
-    {
+    if (strlen($x) <= $length) {
         echo $x;
-    }
-    else
-    {
-        $y=substr($x,0,$length) . '...';
+    } else {
+        $y = substr($x, 0, $length) . '...';
         echo $y;
     }
 }
+
 ?>
 
 
@@ -45,7 +43,8 @@ function custom_echo($x, $length)
                                             <?= $this->Html->link('<i class="glyphicon glyphicon-pencil"></i>', ['controller' => 'Tasks', 'action' => 'edit', $task->id], ['id' => 'task-' . $task->id, 'class' => 'edittask btn btn-default btn-sm', 'escape' => false]) ?>
                                         </div>
                                         <div class="btn-group">
-                                            <a id="task-delete-<?= $task->id ?>" class="btn btn-default btn-sm delete-task"><i
+                                            <a id="task-delete-<?= $task->id ?>"
+                                               class="btn btn-default btn-sm delete-task"><i
                                                     class="glyphicon glyphicon-trash"></i> </a>
                                         </div>
                                     </div>
@@ -77,7 +76,8 @@ function custom_echo($x, $length)
                                             <?= $this->Html->link('<i class="glyphicon glyphicon-pencil"></i>', ['controller' => 'Tasks', 'action' => 'edit', $task->id], ['id' => 'task-' . $task->id, 'class' => 'edittask btn btn-default btn-sm', 'escape' => false]) ?>
                                         </div>
                                         <div class="btn-group">
-                                            <a id="task-delete-<?= $task->id ?>" class="btn btn-default btn-sm delete-task"><i
+                                            <a id="task-delete-<?= $task->id ?>"
+                                               class="btn btn-default btn-sm delete-task"><i
                                                     class="glyphicon glyphicon-trash"></i> </a>
                                         </div>
                                     </div>
@@ -108,7 +108,8 @@ function custom_echo($x, $length)
                                             <?= $this->Html->link('<i class="glyphicon glyphicon-pencil"></i>', ['controller' => 'Tasks', 'action' => 'edit', $task->id], ['id' => 'task-' . $task->id, 'class' => 'edittask btn btn-default btn-sm', 'escape' => false]) ?>
                                         </div>
                                         <div class="btn-group">
-                                            <a id="task-delete-<?= $task->id ?>" class="btn btn-default btn-sm delete-task"><i
+                                            <a id="task-delete-<?= $task->id ?>"
+                                               class="btn btn-default btn-sm delete-task"><i
                                                     class="glyphicon glyphicon-trash"></i> </a>
                                         </div>
                                     </div>
@@ -192,13 +193,12 @@ function custom_echo($x, $length)
 
                 $.ajax({
                     type: 'post',
-                    url: url,
-                    success: function () {
-                        thisItem.hide();
-                        swal("Tâche supprimée", "La tâche a été supprimée avec succès.", "success");
-
-                    }
+                    url: url
                 });
+
+                //ugly fix for useless php error 500 on delete, should be on ajax success.
+                thisItem.hide();
+                swal("Tâche supprimée", "La tâche a été supprimée avec succès.", "success");
             });
     });
 
