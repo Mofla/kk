@@ -20,10 +20,17 @@
                                 <a data-toggle="tab" href="#tab_2-2">
                                     <i class="fa fa-picture-o"></i> Changer Avatar </a>
                             </li>
+                            <?php if($user->promotion != NULL){?>
                             <li>
                                 <a data-toggle="tab" href="#tab_3-3">
                                     <i class="fa fa-picture-o"></i> Profil Publique</a>
                             </li>
+                            <?php } else {?>
+                            <li>
+                                <a data-toggle="tab" href="#tab_4-4">
+                                    <i class="fa fa-picture-o"></i> Profil Publique</a>
+                            </li>
+                            <?php }?>
                         </ul>
                     </div>
                     <div class="col-md-9">
@@ -137,8 +144,26 @@
                                 <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-sm green']) ?>
                                 <?= $this->Form->end() ?>
                             </div>
+
+                            <?php if($user->promotion != NULL){?>
                             <div id="tab_3-3" class="tab-pane">
+                                <script>
+                                    var url = '../../../../../../promotions/editer/<?= $user->promotion->id ?>';
+
+                                    $('#tab_3-3').load(url, function () {
+                                    });
+                                </script>
                             </div>
+                            <?php } else {?>
+                            <div id="tab_4-4" class="tab-pane">
+                                <script>
+                                    var url1 = '../../../../../../promotions/ajouter';
+
+                                    $('#tab_4-4').load(url1, function () {
+                                    });
+                                </script>
+                            </div>
+                            <?php }?>
                         </div>
                     </div>
                 </div>
@@ -157,10 +182,8 @@
         });
 
 
-        var url = '../../../../../../promotions/editer/<?= $user->promotion->id ?>';
 
-        $('#tab_3-3').load(url, function () {
-        });
+
 
 
     </script>
