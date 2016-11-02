@@ -64,9 +64,7 @@ class TasksTable extends Table
             'joinTable' => 'tasks_users'
         ]);
         $this->hasOne('Threads', [
-            'foreignKey' => 'thread_id',
-            'dependent' => true,
-            'cascadeCallbacks' => true
+            'foreignKey' => 'thread_id'
         ]);
     }
 

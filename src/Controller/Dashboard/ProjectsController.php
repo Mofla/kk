@@ -247,7 +247,9 @@ class ProjectsController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $project = $this->Projects->get($id);
+        $forum = $this->Projects->Forums->get($project->forum_id);
         if ($this->Projects->delete($project)) {
+            $this->Projects->Forums->delete($forum);
             $this->Flash->success(__('The project has been deleted.'));
         } else {
             $this->Flash->error(__('The project could not be deleted. Please, try again.'));
