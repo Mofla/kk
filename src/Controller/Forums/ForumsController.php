@@ -34,6 +34,12 @@ class ForumsController extends AppController
         }])
             ->where(['id !=' => 16])
         ->order(['Categories.sort' => 'ASC']);
+            $countpost = $this->Forums->Threads->Posts->find('all')
+                ->contain(['Threads.Forums.Categories'])
+                ->where(['Categories.id !=' => 16])->count();
+            $countthread = $this->Forums->Threads->find('all')
+                ->contain(['Forums.Categories'])
+                ->where(['Categories.id !=' => 16])->count();
         }
 
         if ($role == 3){
@@ -43,23 +49,30 @@ class ForumsController extends AppController
                 }])
                 ->where(['id !=' => 16])
                 ->order(['Categories.sort' => 'ASC']);
+            $countpost = $this->Forums->Threads->Posts->find('all')
+                ->contain(['Threads.Forums.Categories'])
+                ->where(['OR' => ['Categories.id !=' => 16],['Forums.role_id !=' => 1]])->count();
+            $countthread = $this->Forums->Threads->find('all')
+                ->contain(['Forums.Categories'])
+                ->where(['OR' => ['Categories.id !=' => 16],['Categories.id !=' => 18]])->count();
         }
 
-        if ($role == 2 || !empty($role)){
+        if ($role == 2){
             $cat = $this->Forums->Categories->find('all')
                 ->contain(['Forums.Lasttopicuser','Forums.Users', 'Forums' => function($q) {
                     return $q->where(['OR' => ['Forums.role_id !=' => 1],['Forums.role_id !=' => 3]])->order(['Forums.sort' => 'ASC']);
                 }])
                 ->where( ['OR' => ['id !=' => 16],['id !=' => 18]])
                 ->order(['Categories.sort' => 'ASC']);
+            $countpost = $this->Forums->Threads->Posts->find('all')
+                ->contain(['Threads.Forums.Categories'])
+                ->where(['OR' => ['Categories.id !=' => 16],['Categories.id !=' => 18]])->count();
+            $countthread = $this->Forums->Threads->find('all')
+                ->contain(['Forums.Categories'])
+                ->where(['OR' => ['Categories.id !=' => 16],['Categories.id !=' => 18]])->count();
         }
 
-        $countpost = $this->Forums->Threads->Posts->find('all')
-            ->contain(['Threads.Forums.Categories'])
-            ->where(['Categories.id !=' => 16])->count();
-        $countthread = $this->Forums->Threads->find('all')
-            ->contain(['Forums.Categories'])
-            ->where(['Categories.id !=' => 16])->count();
+
         $countuser = $this->Forums->Users->find('all')->count();
         $lastuser = $this->Forums->Users->find('all')
             ->select(['id','username'])
