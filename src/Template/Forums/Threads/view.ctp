@@ -178,6 +178,8 @@
      ]); ?>"
                            class="btn btn-sm blue" role="button" aria-pressed="true"><i class="fa fa-quote-right"></i> CITER</a>
 
+
+                        <?php if ($role !== 2 || empty($role)) : ?>
                         <a href="<?= $this->Url->build([ 'controller' => 'Threads', 'action' => 'edit' ,
      'fid' => $fid,
     'forum' => strtolower(str_replace(' ', '-', $forum)),
@@ -188,7 +190,7 @@
 
                         <?= $this->Form->postLink(__('<i class="fa fa-times"></i>'),[ 'controller' => 'Threads'
                         , 'action' => 'delete' , $thread->id],['escape'=>false , 'class'=>'btn btn-sm btn-danger dash-delete dash-hide']); ?>
-
+                        <?php endif ?>
                     </div>
 
 
@@ -216,7 +218,7 @@
                     <?= $this->Html->image('../uploads/user/'.$post->user->picture_url ,['class'=>'avatar']); ?>
                 </div>
                 <div class="pb">
-                    <i class="fa fa-graduation-cap" aria-hidden="true"></i> <?= $thread->user->role->name ?>
+                    <i class="fa fa-graduation-cap" aria-hidden="true"></i> <?= $post->user->role->name ?>
                 </div>
                 <div class="pb">
                     Inscription: <?= $post->user->created->i18nformat('MMM YYYY', 'Europe/Paris') ?>
@@ -341,7 +343,7 @@
                        class="btn btn-sm blue" role="button" aria-pressed="true"><i class="fa fa-quote-right"></i> CITER</a>
 
 
-
+                    <?php if ($role !== 2 || empty($role)) : ?>
                     <a href="<?= $this->Url->build([ 'controller' => 'Posts', 'action' => 'edit' ,
     'fid' => $fid,
     'forum' => strtolower(str_replace(' ', '-', $forum)),
@@ -351,7 +353,7 @@
                        class="btn btn-sm purple" role="button" aria-pressed="true"><i class="fa fa-pencil"></i> EDITER</a>
                     <?= $this->Form->postLink(__('<i class="fa fa-times"></i>'),[ 'controller' => 'Posts'
                     , 'action' => 'delete' , $post->id],['escape'=>false , 'class'=>'btn btn-sm btn-danger']); ?>
-
+                    <?php endif ?>
                 </div>
             </td>
         </tr>

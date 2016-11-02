@@ -34,7 +34,9 @@
             <td class="ssthead">Réponses</td>
             <td class="ssthead">Vues</td>
             <td class="ssthead">Derniers messages</td>
+            <?php if ($role !== 2 || empty($role)) : ?>
             <td></td>
+            <?php endif ?>
         </tr>
         <?php foreach ($forum as $threads): ?>
         <tr class="sscategory">
@@ -56,10 +58,13 @@
             Aucun Message
             <?php endif ?>
             </td>
+
+            <?php if ($role !== 2 || empty($role)) : ?>
             <td width="5%" class="actions">
                 <?= $this->Form->postLink(__('<i class="fa fa-times"></i>'),[ 'controller' => 'Threads'
                 , 'action' => 'delete' , $threads->id],['escape'=>false , 'class'=>'btn btn-sm btn-danger']); ?>
             </td>
+            <?php endif ?>
 
 
 

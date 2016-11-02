@@ -16,6 +16,10 @@
                 <td width="20%">Catégorie</td>
                 <td width="80%"><?= $this->Form->input('category_id' , ['options' => $cat , 'label' => false ,'class'=>'form-control']); ?></td>
             </tr>
+<tr>
+    <td>Accessible à </td>
+    <td><?= $this->Form->input('role_id' , ['options' => $roles , 'empty' => 'Tous','label' => false ,'class'=>'form-control']); ?></td>
+</tr>
             <tr>
                 <td>Nom</td>
                 <td><?= $this->Form->input('name' , ['label' => false , 'class' => 'form-control']); ?></td>
