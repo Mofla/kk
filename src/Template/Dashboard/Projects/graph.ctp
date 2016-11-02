@@ -1,3 +1,7 @@
+<?= $this->Html->css('../assets/vis/vis.css') ?>
+
+
+
 <button type="button" id="btn-UD" class="btn btn-default"><span class="glyphicon glyphicon-chevron-down"></span> </button>
 <button type="button" id="btn-DU" value="Down-Up" class="btn btn-default"><span class="glyphicon glyphicon-chevron-up"></span> </button>
 <button type="button" id="btn-LR" value="Left-Right" class="btn btn-default"><span class="glyphicon glyphicon-chevron-right"></span> </button>
@@ -30,12 +34,8 @@
 
 
 
-<?= $this->Html->script('../js/jquery.js') ?>
-<?= $this->Html->css('../assets/vis/vis.css') ?>
 <?= $this->Html->script('../assets/vis/vis.js') ?>
-<?= $this->Html->css('../assets/global/plugins/jquery-ui/jquery-ui.min.css') ?>
-<?= $this->Html->script('../assets/global/plugins/jquery-ui/jquery-ui.min.js') ?>
-<?= $this->Html->script('../assets/global/plugins/bootstrap/js/bootstrap.min.js') ?>
+
 
 
 <?= $this->Html->css('sweetalert.css') ?>
@@ -205,10 +205,31 @@
             edges: edges
         };
 
+        var locales = {
+            fr: {
+                edit: 'Editer',
+                del: 'Supprimer la connexion séléctionnée',
+                back: 'Précédent',
+                addNode: 'Add Node',
+                addEdge: 'Ajouter une connexion',
+                editNode: 'Edit Node',
+                editEdge: 'Editer la connexion',
+                addDescription: 'Click in an empty space to place a new node.',
+                edgeDescription: 'Cliquez sur une tâche et drag jusqu\' à la tâche à associer',
+                editEdgeDescription: 'Cliquez sur une tâche et drag jusqu\' à la tâche à associer',
+                createEdgeError: 'Cannot link edges to a cluster.',
+                deleteClusterError: 'Clusters cannot be deleted.',
+                editClusterError: 'Clusters cannot be edited.'
+            }
+        };
+
+
         // create a network
         var container = document.getElementById('mynetwork');
 
         var options = {
+            locale: 'fr',
+            locales: locales,
             groups: {
                 todo: {
                     shape: 'icon',
@@ -279,24 +300,9 @@
             },
 
             manipulation: {
-                addNode: function (data, callback) {
-                    // filling in the popup DOM elements
-                    document.getElementById('operation').innerHTML = "Add Node";
-                    document.getElementById('node-id').value = data.id;
-                    document.getElementById('node-label').value = data.label;
-                    document.getElementById('saveButton').onclick = saveData.bind(this, data, callback);
-                    document.getElementById('cancelButton').onclick = clearPopUp.bind();
-                    document.getElementById('network-popUp').style.display = 'block';
-                },
-                editNode: function (data, callback) {
-                    // filling in the popup DOM elements
-                    document.getElementById('operation').innerHTML = "Edit Node";
-                    document.getElementById('node-id').value = data.id;
-                    document.getElementById('node-label').value = data.label;
-                    document.getElementById('saveButton').onclick = saveData.bind(this, data, callback);
-                    document.getElementById('cancelButton').onclick = cancelEdit.bind(this, callback);
-                    document.getElementById('network-popUp').style.display = 'block';
-                },
+                addNode: false,
+                editNode: false,
+                deleteNode: false,
                 addEdge: function (data, callback) {
                     if (data.from == data.to) {
                         var r = confirm("Do you want to connect the node to itself?");
