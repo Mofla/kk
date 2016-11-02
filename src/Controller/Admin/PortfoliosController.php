@@ -20,7 +20,7 @@ class PortfoliosController extends AppController
     {
         $portfolios = $this->Portfolios->find('all', [
             'contain' => 'Users'
-        ]);
+        ])->where(['finished' => 1]);
         $this->paginate = [
             'limit' => 10
         ];

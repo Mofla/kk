@@ -19,7 +19,7 @@ class PortfoliosController extends AppController
     {
         $portfolios = $this->Portfolios->find('all',[
             'contain' => 'Users'
-        ]);
+        ])->where(['finished' => 1]);
         if($id!=null)
         {
             $portfolios = $portfolios->matching('Users',function($q)use($id){
