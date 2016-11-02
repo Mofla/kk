@@ -35,15 +35,24 @@ class ConnectorsController extends AppController
             {
                 // je récupère toutes les permissions choisies et les stocks dans un data
                 // pour les save ensuite
+                $explode = explode('-',$key);
+                $options = [
+                    'module' => $explode[0],
+                    'controller' => $explode[1],
+                    'function' => $explode[2]
+                ];
+                $check = $this->Connectors->find()->select('id')->where($options)->first();
                 if($value != 0)
                 {
-                    $explode = explode('-',$key);
-                    $data[] = [
-                        'permission_id' => $value,
-                        'module' => $explode[0],
-                        'controller' => $explode[1],
-                        'function' => $explode[2]
-                    ];
+                    $data[] = array_merge(['permission_id' => $value,],$options);
+
+                }
+                else{
+                    if($check != null)
+                    {
+                        $check = $this->Connectors->get($check->id);
+                        $this->Connectors->delete($check);
+                    }
                 }
             }
             $connectors = $this->Connectors->newEntities($data);

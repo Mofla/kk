@@ -60,7 +60,7 @@
                     ['escape' => false,'class' => 'btn btn-lg btn-warning']
                 ) ?>
                 <?= $this->Html->link('<span class="glyphicon glyphicon-plus"></span> Définir les roles',
-                    ['action' => 'role'],
+                    ['controller' => 'Roles','action' => 'add'],
                     ['escape' => false,'class' => 'btn btn-lg btn-danger']
                 ) ?>
                 <hr>

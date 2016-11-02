@@ -113,26 +113,28 @@ class CommonComponent extends Component
         // to do : if no results found -> define as guest
         $rights = $rights->name;
 
-        $connectors = $roles->find()->matching('Permissions.Connectors')->select(['Connectors.controller','Connectors.function'])->where(['Roles.name' => $rights]);
+        $connectors = $roles->find()->matching('Permissions.Connectors')->select(['Connectors.module','Connectors.controller','Connectors.function'])->where(['Roles.name' => $rights]);
         // let's list all authorized functions
         $actions = [];
         foreach($connectors as $connector)
         {
+            // get Module
+            $module = $connector['_matchingData']['Connectors']->module;
             // get Controller
-            $key = str_replace('Controller','',$connector['_matchingData']['Connectors']->controller);
+            $controller = str_replace('Controller','',$connector['_matchingData']['Connectors']->controller);
             // get Action
-            $value = $connector['_matchingData']['Connectors']->function;
+            $action = $connector['_matchingData']['Connectors']->function;
             // Push a table
-            $actions[$key][] = $value;
+            $actions[$module][$controller][$action] = true;
         }
         // Write allowed actions in actual session
         return $actions;
     }
 
-    public function checkPermissions($controller,$action)
+    public function checkPermissions($module,$controller,$action)
     {
         $session = $this->getPermissions();
-        if(array_key_exists($controller,$session) && in_array($action,$session[$controller]))
+        if(isset($session[$module][$controller][$action]) && $session[$module][$controller][$action])
         {
             return true;
         }
@@ -140,6 +142,7 @@ class CommonComponent extends Component
         {
             return false;
         }
+
     }
 
     public function isAdmin()
