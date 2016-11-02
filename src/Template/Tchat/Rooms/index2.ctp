@@ -1,7 +1,19 @@
 <div class="page-content">
     <h3><?= __('Rooms') ?></h3>
     <div class="row">
-        <?php foreach ($rooms as $room): ?>
+        <?php $c = 0 ; foreach ($rooms as $room): ?>
+
+               <?php foreach ($room->users as $user_room):
+
+                if ($user_room->id === $users):
+
+                $c++ ;
+
+               endif;
+
+                endforeach;
+                ?>
+        <?php if ($c != 0):  ?>
             <a href="<?= $this->Url->build(['controller' => 'Tchats', 'action' => 'add', $room->id, 'prefix' => 'tchat']) ?>" class="btn default yellow-stripe col-md-4">
                 <p class="list-group-item list-group-item-warning"><b><?= __('names: ') ?></b><?= h($room->name) ?></p>
 
@@ -18,6 +30,7 @@
                 <p class="list-group-item list-group-item-warning"><b><?=__('Description: ') ?></b><?= h($room->description) ?></p>
                 <br>
             </a>
+            <?php endif; ?>
         <?php endforeach; ?>
     </div>
     <div class="paginator">

@@ -31,7 +31,9 @@ class RoomsController extends AppController
             'contain' => ['Users', 'Tchats']
         ]);
 
-        $this->set(compact('rooms','id'));
+        $users = $this->Auth->User('id');
+
+        $this->set(compact('rooms','id','name_rooms','users'));
         $this->set('_serialize', ['rooms']);
     }
 
