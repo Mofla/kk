@@ -50,9 +50,9 @@ class AppController extends Controller
                 'home'
             ],
             'logoutRedirect' => [
-                'controller' => 'Users',
-                'action' => 'login',
-                'prefix' => 'utilisateur'
+                'controller' => 'Pages',
+                'action' => '/',
+                'prefix' => false
             ],
             'loginAction' => '/utilisateur/connexion', // à cause des prefixes
             'authorize' => 'Controller'
