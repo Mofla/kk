@@ -120,6 +120,7 @@ class EntriesController extends AppController
             $entry = $this->Entries->patchEntity($entry, $this->request->data);
             $entry->date = Time::now();
             if ($this->Entries->save($entry)) {
+                $this->redirect($this->referer() . '#tab_5');
                 $this->Flash->success(__('The entry has been saved.'));
 
             } else {
