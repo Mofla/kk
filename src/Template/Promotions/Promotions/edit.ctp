@@ -4,7 +4,7 @@
             <div id="tab_1-1" class="tab-pane active">
                 <?= $this->Form->create($promotion, ['enctype' => 'multipart/form-data']) ?>
                 <fieldset>
-                    <legend><?= __('Editer mon Profil Publique') ?></legend>
+                    <legend><?= __('Editer mon Profil Public') ?></legend>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="label-control">Description: </label>

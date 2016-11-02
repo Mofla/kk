@@ -23,12 +23,12 @@
                             <?php if($user->promotion != NULL){?>
                             <li>
                                 <a data-toggle="tab" href="#tab_3-3">
-                                    <i class="fa fa-picture-o"></i> Profil Publique</a>
+                                    <i class="fa fa-picture-o"></i> Profil Public</a>
                             </li>
                             <?php } else {?>
                             <li>
                                 <a data-toggle="tab" href="#tab_4-4">
-                                    <i class="fa fa-picture-o"></i> Profil Publique</a>
+                                    <i class="fa fa-picture-o"></i> Profil Public</a>
                             </li>
                             <?php }?>
                         </ul>
@@ -109,7 +109,7 @@
                                                                 </div>
                                                             </div>
                                                         </fieldset>
-                                                        <?= $this->Form->button('Submit', ['class' => 'btn green']) ?>
+                                                        <?= $this->Form->button('Envoyer', ['class' => 'btn green']) ?>
                                                         <?= $this->Form->end() ?>
                                                     </div>
                                                 </div>
@@ -141,7 +141,7 @@
                                 </div>
                                 <br>
 
-                                <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-sm green']) ?>
+                                <?= $this->Form->button(__('Envoyer'), ['class' => 'btn btn-sm green']) ?>
                                 <?= $this->Form->end() ?>
                             </div>
 
