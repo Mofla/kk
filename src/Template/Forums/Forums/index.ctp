@@ -9,7 +9,6 @@
 
     <?= $this->element('Forum/search-forum') ?>
 
-
 <div class="col-md-12 voffset3">
 
 
