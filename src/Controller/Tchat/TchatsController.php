@@ -59,6 +59,10 @@ class TchatsController extends AppController
         $time = Time::now();
         $time->timezone = 'Europe/Paris';
         $time->i18nFormat('Y-m-d h:m:s');
+        $mess = $this->request->data('message');
+
+        $trans = array("<script>" => ":Script:", "</script>" => ":endScript:", "<?php" => ":php:", "?>" => ":endphp:", "<?=" => "echo");
+        $replace = strtr($mess, $trans);
 
             Log::config('log', function () {
                 return new \Cake\Log\Engine\FileLog(['path' => LOGS, 'file' => 'archive']);
@@ -73,6 +77,8 @@ class TchatsController extends AppController
         if ($this->request->is('post')) {
 
             $tchat = $this->Tchats->patchEntity($tchat, $this->request->data);
+
+            $tchat->message = $replace;
 
             $tchat->user_id = $users ;
 
@@ -147,4 +153,18 @@ class TchatsController extends AppController
 }
 
 public function autorize(){}
+
+    public function report($id = null)
+    {
+        $roomsUser = $this->Tchats->get($id, [
+            'contain' => []
+        ]);
+        $report = $roomsUser->report + 1;
+
+            $roomsUser = $this->Tchats->patchEntity($roomsUser, $this->request->data);
+            $roomsUser->report = $report ;
+           if ($this->Tchats->save($roomsUser)){
+               return $this->redirect($this->referer());
+           }
+    }
 }

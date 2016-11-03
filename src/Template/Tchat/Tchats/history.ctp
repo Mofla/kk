@@ -31,20 +31,30 @@
     </thead>
     <tbody>
     <?php foreach ($list_message as $tchats): ?>
-
         <?php if (empty($empty )): ?>
-        <tr>
+        <tr class="list <?= $tchats->id ?>" report="<?= $tchats->report ?>">
             <td><?= $tchats->message ?></td>
             <td><?= $tchats->has('user') ? $this->Html->link($tchats->user->username, ['controller' => 'Users', 'action' => 'view', $tchats->user->id, 'prefix' => false], ['value' => $tchats->user->id]) : '' ?></td>
-            <td><?= $tchats->date ?></td>
+            <td><?= $tchats->date->format('Y/d/m H:i') ?></td>
         </tr>
+            <script>
+                report = $('.<?= $tchats->id ?>');
+
+                if (  report.attr('report') > 0){
+                    report.css('background-color','yellow');
+                }
+
+                if (  report.attr('report') >= 2){
+                    report.css('background-color','orange');
+                }
+
+                if (  report.attr('report') >= 3){
+                    report.css('background-color','red');
+                }
+            </script>
             <?php endif; ?>
     <?php endforeach; ?>
-    <tr>
-    <td><?= $empty ?></td>
-        <td></td>
-        <td></td>
-    </tr>
+    <?='<tr><td>'.$empty.'</td><td></td><td></td></tr>'?>
     </tbody>
 </table>
 

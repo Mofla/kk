@@ -4,7 +4,11 @@
         <?php $i = 0; foreach ($list_message as $tchats): $i++ ?>
             <div class="<?= $i ?> pad" id="<?= $tchats->user_id ?>" date="<?= $tchats->date->toUnixString(); ?>">
                 <p class="message"><?= $tchats->message ?></p>
-                <p class="users"><?= $tchats->has('user') ? $this->Html->link($tchats->user->username, ['controller' => 'Users', 'action' => 'view', $tchats->user->id, 'prefix'=> false], ['value' => $tchats->user->id, 'class' => 'hh']) : '' ?> <?= $tchats->date ?></p>
+                <p class="users">
+                    <?= $tchats->has('user') ? $this->Html->link($tchats->user->username, ['controller' => 'Users', 'action' => 'view', $tchats->user->id, 'prefix'=> false], ['value' => $tchats->user->id, 'class' => 'hh']) : '' ?>
+                    <?= $tchats->date->format('Y/m/d H:i') ?>
+                    <?= $this->Form->postLink(__(''), ['action' => 'report', $tchats->id], ['confirm' => __('Etes-vous sûr de vouloir Signaler ce message ?'),'class'=>'fa fa-flag']) ?>
+                </p>
             </div>
             <script>
                 if ($('.<?= $i ?>').attr('date') < <?= $time_2->toUnixString(); ?>) {

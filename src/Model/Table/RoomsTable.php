@@ -37,7 +37,8 @@ use Cake\Validation\Validator;
         $this->primaryKey('id');
 
         $this->hasMany('Tchats', [
-            'foreignKey' => 'room_id'
+            'foreignKey' => 'room_id',
+            'dependent'=>true
         ]);
         $this->belongsToMany('Users', [
             'foreignKey' => 'room_id',

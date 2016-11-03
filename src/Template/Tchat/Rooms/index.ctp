@@ -38,8 +38,6 @@
                             <i class="fa fa-angle-down"></i>
                         </button>
                         <ul class="dropdown-menu pull-left" role="menu">
-                            <li><?= $this->Html->link(__('Click Me'), ['controller'=>'Tchats','action' => 'add', $room->id, 'prefix' => 'tchat']) ?></li>
-                            <li class="divider"></li>
                             <li><?= $this->Html->link(__('Historyque'), ['controller'=>'Tchats','action' => 'history', $room->id, 'prefix' => 'tchat']) ?></li>
                             <li><?= $this->Html->link(__('Detail'), ['action' => 'view', $room->id]) ?></li>
                             <li><?= $this->Html->link(__('Edit'), ['action' => 'edit', $room->id]) ?></li>
