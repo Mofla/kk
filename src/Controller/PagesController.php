@@ -37,6 +37,21 @@ class PagesController extends AppController
      */
     public function display()
     {
+        $this->loadModel('BlogArticles');
+        $this->loadModel('Portfolios');
+
+
+        $portfolios = $this->Portfolios->find('all', [
+            'conditions' => ['Portfolios.finished' => true]
+        ]);
+
+        $articles = $this->BlogArticles->find('all', [
+            'limit' => 5
+        ]);
+
+        $this->set(compact('articles','portfolios'));
+
+
         $path = func_get_args();
 
         $count = count($path);

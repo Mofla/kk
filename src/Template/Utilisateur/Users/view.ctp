@@ -45,7 +45,6 @@
                                 <div class="col-md-9">
                                     <div class="row">
                                         <div class="col-md-6 profile-info">
-
                                             <h1 class="font-green sbold uppercase"><?= $user->firstname ?> <?= $user->lastname ?></h1>
                                             <div class="list-inline">
                                                 <?php foreach ($promotions as $promotion): ?>
