@@ -113,8 +113,13 @@
         $('#tab_4').load(url);
     }
     function load5() {
+        <?php if (isset($diary->id)): ?>
         var url = '<?= $this->Url->build(['controller' => 'Diaries', 'action' => 'view', $diary->id]); ?>';
         $('#tab_5').load(url);
+        <?php endif; ?>
+        <?php if (!isset($diary->id)) : ?>
+        alert('Attention, vous n\'êtes pas inscrit au projet et n\'avez donc pas accès au journal de bord, veuillez contacter un administrateur ou le créateur du projet.');
+        <?php endif; ?>
     }
 
 
@@ -209,6 +214,7 @@
 
 
     //task add entry
+    <?php if (isset($diary['id'])) : ?>
     $('#add-entry').on('click', function (event) {
 
         var url = '<?= $this->Url->build(['controller' => 'Entries', 'action' => 'add']); ?>' + '/' + <?= $diary['id'] ?>;
@@ -218,6 +224,7 @@
             $('#taskModal').modal({show: true});
         });
     });
+    <?php endif; ?>
 
 
 

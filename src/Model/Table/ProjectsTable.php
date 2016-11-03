@@ -65,6 +65,10 @@ class ProjectsTable extends Table
         $this->hasMany('Files', [
             'foreignKey' => 'project_id'
         ]);
+        $this->hasOne('Creators', [
+            'className' => 'Users',
+            'foreignKey' => 'creator_id'
+        ]);
     }
 
     /**

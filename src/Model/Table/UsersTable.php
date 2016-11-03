@@ -68,6 +68,10 @@ class UsersTable extends Table
         $this->hasOne('Promotions', [
             'foreignKey' => 'user_id',
         ]);
+        $this->belongsToMany('ProjectsCreators', [
+            'className' => 'Projects',
+            'foreignKey' => 'creator_id'
+        ]);
     }
 
     /**

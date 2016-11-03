@@ -301,7 +301,6 @@
 
             manipulation: {
                 addNode: false,
-                editNode: false,
                 deleteNode: false,
                 addEdge: function (data, callback) {
                     if (data.from == data.to) {

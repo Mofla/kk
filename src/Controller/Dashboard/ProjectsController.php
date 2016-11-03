@@ -25,12 +25,25 @@ class ProjectsController extends AppController
     public function index()
     {
         $this->viewBuilder()->layout('dashboard');
+
         $projects = $this->Projects->find('all', [
             'contain' => ['Users', 'Tasks.Users', 'Tasks.States']
         ])->where(['finished' => 0]);
 
+        $uid = $this->Auth->user('id');
 
-        $this->set(compact('projects'));
+        $user = $this->Projects->Users->get($uid, [
+            'contain' => 'Roles'
+        ]);
+
+        if ($user->role->name == 'Administrateur' || $user->role->name == 'Formateur') {
+            $hasRights = 1;
+        } else {
+            $hasRights = 0;
+        }
+
+
+        $this->set(compact('projects', 'hasRights', 'uid'));
         $this->set('_serialize', ['projects']);
     }
 
@@ -110,9 +123,19 @@ class ProjectsController extends AppController
 
         $uid = $this->Auth->user('id');
 
+        $user = $this->Projects->Users->get($uid, [
+            'contain' => 'Roles'
+        ]);
+
+        if ($user->role->name == 'Administrateur' || $user->role->name == 'Formateur') {
+            $hasRights = 1;
+        } else {
+            $hasRights = 0;
+        }
+
         $diary = $this->Projects->Diaries->find()->where(['project_id' => $id])->where(['user_id' => $uid])->first();
 
-
+        $this->set(compact('hasRights', 'uid'));
         $this->set('diary', $diary);
         $this->set('project', $project);
         $this->set('_serialize', ['project']);
@@ -165,6 +188,9 @@ class ProjectsController extends AppController
         $forum = $this->Projects->Forums->newEntity();
         $project = $this->Projects->newEntity();
 
+        $uid = $this->Auth->user('id');
+
+
         if ($this->request->is('post')) {
 
             $forum = $this->Projects->Forums->patchEntity($forum, $this->request->data);
@@ -173,6 +199,7 @@ class ProjectsController extends AppController
                 $this->Flash->success(__('The project has been saved.'));
                 $project = $this->Projects->patchEntity($project, $this->request->data);
                 $project->forum_id = $forum->id;
+                $project->creator_id = $uid;
                 if ($this->Projects->save($project)) {
                     $this->Flash->success(__('The project has been saved.'));
                    return $this->redirect(['action' => 'index']);
@@ -207,9 +234,11 @@ class ProjectsController extends AppController
     public function edit($id = null)
     {
         $this->Projects->eventManager()->on(new ProjectListener());
+
         $project = $this->Projects->get($id, [
             'contain' => ['Users']
         ]);
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             $project = $this->Projects->patchEntity($project, $this->request->data);
             if ($this->Projects->save($project)) {
