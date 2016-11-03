@@ -23,9 +23,9 @@
 <header>
     <div class="page-logo">
         <a href="/">
-            <?= $this->Html->image('../img/Simplon.png', ['class' => 'logo-default', 'width' => 150, 'height' => 50]) ?>
+            <?= $this->Html->image('../img/Simplon.png', ['class' => 'logo-default', 'width' => 150, 'height' => 50, 'img-responsive']) ?>
         </a>
-        <a class="btn btn-default pull-right" href="./utilisateur/connexion">Connexion</a>
+        <a class="btn btn-default pull-right" id="connexion" href="./utilisateur/connexion">Connexion</a>
     </div>
     <nav id="menu">
         <div class="navbar navbar-default">
@@ -46,7 +46,7 @@
                         <li <?php if ($this->request->here == '/promotions'): ?> class="active" <?php endif;?>><?= $this->Html->link('Promotion',['controller' => 'Promotions', 'action' => 'index']);?></li>
                         <li <?php if ($this->request->here == '/portfolios'): ?> class="active" <?php endif;?>><?= $this->Html->link('Projets',['controller' => 'Portfolios', 'action' => 'index']);?></li>
                         <li <?php if ($this->request->here == '/pages/infos'):?> class="active" <?php endif; ?>><a href="pages/infos">Informations</a></li>
-                        <li><a href="/nous-contacter">Nous contacter</a></li>
+                        <li <?php if ($this->request->here == '/nous-contacter'):?> class="active" <?php endif;?>><a href="/nous-contacter">Nous contacter</a></li>
                     </ul>
                 </div>
             </div>
