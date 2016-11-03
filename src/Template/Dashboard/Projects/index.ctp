@@ -1,6 +1,3 @@
-
-
-
 <?= $this->Html->css('sweetalert.css') ?>
 
 
@@ -27,7 +24,6 @@ function custom_echo($x, $length)
 </style>
 
 
-
 <div class="task-modal-base">
     <div class="task-modal-cont"></div>
 </div>
@@ -45,7 +41,8 @@ function custom_echo($x, $length)
             <br>
             <br>
             <li>
-                <button title="Liste des projets" class="btn blue btn-lg active" href="#tab_1" data-toggle="tab" id="btn_1"><span
+                <button title="Liste des projets" class="btn blue btn-lg active" href="#tab_1" data-toggle="tab"
+                        id="btn_1"><span
                         class="glyphicon glyphicon-list" aria-hidden="true"></span>
                 </button>
             </li>
@@ -62,30 +59,47 @@ function custom_echo($x, $length)
                 <?php
                 $rows = 0;
                 foreach ($projects as $project): ?>
-                    <?php $rows++ ?>
+                    <?php $rows++;
+                    $canSee = 0; ?>
                     <?php if ($rows % 3 == 0) : ?>
                         <div class="row">
                     <?php endif; ?>
 
+                    <?php foreach ($project->users as $user) {
+
+                        if ($uid == $user->id) {
+                            $canSee = 1;
+                            break;
+                        }
+                    } ?>
+
                     <div class="col-md-4 col-sm-4 col-xs-4">
                         <div class="portlet box  blue-chambray">
                             <div class="portlet-title">
-                                <div class="caption" id="project-<?= $project->id?>">
+                                <div class="caption" id="project-<?= $project->id ?>">
                                         <span
                                             class="glyphicon glyphicon-file fa-md"></span> <?= custom_echo($project->name, 20) ?>
                                 </div>
                                 <div class="actions">
-                                    <div class="btn-group">
-                                        <?= $this->Html->link('<i class="glyphicon glyphicon-eye-open"></i>', ['action' => 'gestion', $project->id], ['class' => 'btn btn-default btn-sm', 'escape' => false]) ?>
-                                    </div>
-                                    <div class="btn-group">
-                                        <?= $this->Html->link('<i class="glyphicon glyphicon-pencil"></i>', ['action' => 'edit', $project->id], ['id' => 'project-' . $project->id, 'class' => 'edit-project btn btn-default btn-sm', 'escape' => false]) ?>
-                                    </div>
-                                    <div class="btn-group">
-                                        <a id="project-<?= $project->id ?>"
-                                           class="btn btn-default btn-sm delete-project"><i
-                                                class="glyphicon glyphicon-trash"></i></a>
-                                    </div>
+
+                                    <?php if ($hasRights == 1 || $project->creator_id == $uid || $canSee == 1) : ?>
+                                        <div class="btn-group">
+                                            <?= $this->Html->link('<i class="glyphicon glyphicon-eye-open"></i>', ['action' => 'gestion', $project->id], ['class' => 'btn btn-default btn-sm', 'escape' => false]) ?>
+                                        </div>
+                                    <?php endif; ?>
+
+
+
+                                    <?php if ($hasRights == 1 || $project->creator_id == $uid) : ?>
+                                        <div class="btn-group">
+                                            <?= $this->Html->link('<i class="glyphicon glyphicon-pencil"></i>', ['action' => 'edit', $project->id], ['id' => 'project-' . $project->id, 'class' => 'edit-project btn btn-default btn-sm', 'escape' => false]) ?>
+                                        </div>
+                                        <div class="btn-group">
+                                            <a id="project-<?= $project->id ?>"
+                                               class="btn btn-default btn-sm delete-project"><i
+                                                    class="glyphicon glyphicon-trash"></i></a>
+                                        </div>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                             <div class="portlet-body">
@@ -149,7 +163,6 @@ function custom_echo($x, $length)
 
     // Create a Timeline
     var timeline = new vis.Timeline(container, items, options);
-
 
 
     //portlet titles links
