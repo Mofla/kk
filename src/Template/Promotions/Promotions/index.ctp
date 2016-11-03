@@ -15,7 +15,7 @@
                 <br>
                 <a href="<?= $this->Url->build(['controller' => 'Users', 'action' => 'view', $promotion->user->id, 'prefix' => 'utilisateur']) ?>">
                     <h3 style="font-weight: 900"><?= ($promotion->user->firstname) ?> <?= ($promotion->user->lastname) ?></h3>
-                </a><br>
+                </a>
                 <div>
                     <?php if ($promotion->facebook_link != '') { ?>
                         <a href="<?= ($promotion->facebook_link) ?>">
