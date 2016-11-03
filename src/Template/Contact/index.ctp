@@ -25,7 +25,7 @@
                         <div class="c-line-left"></div>
                         <p class="c-font-lowercase">
                             Visitez cette page pour obtenir d'avantages d'informations.</p>
-                        <button class="btn grey-cararra font-dark">Plus d'infos</button>
+                        <a class="btn grey-cararra font-dark" href="/pages/infos">Plus d'infos</a>
                     </div>
                 </div>
                 <div class="c-container bg-grey-steel">
