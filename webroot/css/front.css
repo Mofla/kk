@@ -12,7 +12,7 @@
 
 }
 #menu ul{
-    margin-left: 10%;
+    margin-left: 5%;
 }
 
 #menu a{
@@ -23,4 +23,12 @@
 
 #menu .navbar-brand{
     margin-left: 10%;
+    text-align: center;
+}
+
+#menu .navbar-brand:hover, .navbar-brand.active{
+    background-color: #f28c89;
+}
+#menu .navbar-nav>.active>a {
+    background-color: #f28c89;
 }
