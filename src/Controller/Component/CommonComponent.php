@@ -10,6 +10,11 @@ use Cake\Controller\Component\AuthComponent;
 
 class CommonComponent extends Component
 {
+    // This component is used to:
+    // - know every action for every controllers
+    // - check if an user can access a page
+
+
     public $components = ['Auth'];
 
     public function scanEverything($table = false)
@@ -109,7 +114,13 @@ class CommonComponent extends Component
     {
         $roles = TableRegistry::get('Roles');
         // know user's role
-        $rights = $roles->find()->select(['name'])->where(['id' => $this->request->session()->read('Auth.User.role_id')])->first();
+        if($this->request->session()->read('Auth.User.role_id') != null)
+        {
+            $rights = $roles->find()->select(['name'])->where(['id' => $this->request->session()->read('Auth.User.role_id')])->first();
+        }
+        else{
+            $rights = $roles->find()->select(['name'])->where(['id' => '5'])->first(); // guest's role id
+        }
         // to do : if no results found -> define as guest
         $rights = $rights->name;
 
@@ -195,5 +206,28 @@ class CommonComponent extends Component
             }
         }
         return $users_permissions;
+    }
+    // Guests & logged users default permissions
+    public function guestActions($module,$controller)
+    {
+        $roles = TableRegistry::get('Connectors');
+        $role = $roles->find('all',[
+            'contain' => [
+                'Permissions',
+                'Permissions.Roles' => [
+                    'conditions' => ['id' => 5]
+                ]
+            ],
+            'fields' => [
+                'module' => 'Connectors.module',
+                'controller' => 'Connectors.controller',
+                'action' => 'Connectors.function'
+            ]
+        ]);
+        foreach ($role as $item)
+        {
+            $allow[] = $item->action;
+        }
+        return $allow;
     }
 }

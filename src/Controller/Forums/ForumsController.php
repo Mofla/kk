@@ -6,6 +6,7 @@ use Cake\ORM\TableRegistry;
 use Cake\I18n\Time;
 use Cake\ORM\Query;
 use Cake\View\Helper\PaginatorHelper;
+use Cake\Event\Event;
 
 
 class ForumsController extends AppController
@@ -57,7 +58,7 @@ class ForumsController extends AppController
                 ->where(['OR' => ['Categories.id !=' => 16],['Categories.id !=' => 18]])->count();
         }
 
-        if ($role == 2){
+        if ($role == 2 || !$this->Auth->User('id')){
             $cat = $this->Forums->Categories->find('all')
                 ->contain(['Forums.Lasttopicuser','Forums.Users', 'Forums' => function($q) {
                     return $q->where(['OR' => ['Forums.role_id !=' => 1],['Forums.role_id !=' => 3]])->order(['Forums.sort' => 'ASC']);
@@ -71,7 +72,6 @@ class ForumsController extends AppController
                 ->contain(['Forums.Categories'])
                 ->where(['OR' => ['Categories.id !=' => 16],['Categories.id !=' => 18]])->count();
         }
-
 
         $countuser = $this->Forums->Users->find('all')->count();
         $lastuser = $this->Forums->Users->find('all')
@@ -116,5 +116,12 @@ class ForumsController extends AppController
 
             $this->set(compact('results'));
         }
+    }
+
+    public function beforeFilter(Event $event)
+    {
+        parent::beforeFilter($event);
+        $actions = $this->Common->guestActions($this->params['prefix'],$this->params['controller']);
+        $this->Auth->allow($actions);
     }
 }

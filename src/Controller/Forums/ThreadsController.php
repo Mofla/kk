@@ -4,6 +4,7 @@ namespace App\Controller\Forums;
 use App\Controller\AppController;
 use Cake\ORM\TableRegistry;
 use Cake\View\Helper\PaginatorHelper;
+use Cake\Event\Event;
 /**
  * Threads Controller
  *
@@ -153,5 +154,12 @@ class ThreadsController extends AppController
         }
 
         return $this->redirect($this->referer());
+    }
+
+    public function beforeFilter(Event $event)
+    {
+        parent::beforeFilter($event);
+        $actions = $this->Common->guestActions($this->params['prefix'],$this->params['controller']);
+        $this->Auth->allow($actions);
     }
 }
