@@ -63,6 +63,9 @@ class BlogArticlesTable extends Table
         $validator
             ->allowEmpty('body');
 
+        $validator
+            ->allowEmpty('picture');
+
         return $validator;
     }
 
