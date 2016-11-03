@@ -52,7 +52,6 @@ class UsersController extends AppController
         ]);
 
 
-
         $promotions = $this->promotions->find('all',[
             'conditions' => ['promotions.user_id' => $id],
         ]);
