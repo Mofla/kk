@@ -46,7 +46,7 @@ class PagesController extends AppController
         ]);
 
         $articles = $this->BlogArticles->find('all', [
-            'limit' => 5
+            'limit' => 3
         ]);
 
         $this->set(compact('articles','portfolios'));
