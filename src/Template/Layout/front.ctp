@@ -11,9 +11,10 @@
     <meta content="" name="Simplon"/>
 
     <title>Simplon Epinal</title>
-
+<!-- couleur rose: #ed1450 -->
     <!--CSS styles-->
     <?= $this->Html->css('../assets/global/plugins/bootstrap/css/bootstrap.min.css') ?>
+    <?= $this->Html->css('front.css') ?>
 
     <!--favicon-->
     <link rel="shortcut icon" href="favicon.ico"/>
@@ -24,10 +25,9 @@
         <a href="/">
             <?= $this->Html->image('../img/Simplon.png', ['class' => 'logo-default', 'width' => 150, 'height' => 50]) ?>
         </a>
-        <a class="btn btn-default right" href="./utilisateur/connexion">Connection</a>
+        <a class="btn btn-default pull-right" href="./utilisateur/connexion">Connection</a>
     </div>
-
-    <nav>
+    <nav id="menu">
         <div class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -41,18 +41,18 @@
                     <a class="navbar-brand" href="#">Accueil</a>
 
                 </div>
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <div class="collapse navbar-collapse ribbon" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li><?= $this->Html->link('News', ['controller' => 'BlogArticles', 'action' => 'index']);?></li>
-                        <li><a>les gens</a></li>
-                        <li><a>les projets des gens</a></li>
-                        <li><a>les promotions</a></li>
+                        <li><a href="">C'est quoi Simplon ?</a></li>
+                        <li><a href="">Les promotions</a></li>
+                        <li><a href="">Les projets</a></li>
+                        <li><a href="">Nous contacter</a></li>
                     </ul>
                 </div>
             </div>
         </div>
     </nav>
-
 </header>
 
 <body>

@@ -1,0 +1,26 @@
+.btn-default{
+    background-color: #ed1450;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+}
+#menu li:hover{
+    background-color: #f28c89;
+}
+#menu .navbar{
+    background-color: #ed1450;
+
+}
+#menu ul{
+    margin-left: 10%;
+}
+
+#menu a{
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+}
+
+#menu .navbar-brand{
+    margin-left: 10%;
+}
