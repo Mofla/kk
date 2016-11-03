@@ -71,11 +71,11 @@
 
                         <div class="carousel-inner" role="listbox">
                             <div class="item active">
-                                <img style="width: 100%;height: 350px" class="img-responsive" src="../../uploads/imgs/simplon.JPG">
+                                <img class="img-responsive" src="../../uploads/imgs/simplon.JPG">
                             </div>
                             <?php foreach ($portfolios as $portfolio) { ?>
                                 <div class="item">
-                                    <img style="width: 100%;height: 350px" class="img-responsive" src="../../uploads/portfolios/<?= $portfolio->picture_url ?>">
+                                    <img style="wheight: 350px" class="img-responsive" src="../../uploads/portfolios/<?= $portfolio->picture_url ?>">
                                 </div>
                             <?php } ?>
                         </div>
