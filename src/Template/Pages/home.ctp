@@ -43,7 +43,12 @@
                         <div class="well">
                             <a href="<?= $this->Url->Build(['controller' => 'BlogArticles', 'action' => 'view', $article->id]) ?>">
                                 <h3 class="text-center" style="color: blue"><?= $article->title ?></h3></a>
-                            <p><?= $article->body ?></p>
+                            <?php
+                            // Cut the description if too long
+                            $description = mb_substr($article->body, 0, 200);
+                            echo $description;
+                            echo (strlen($description) < strlen($article->body)) ? '...' : '';
+                            ?>
                         </div>
                     <?php } ?>
                     <div>
