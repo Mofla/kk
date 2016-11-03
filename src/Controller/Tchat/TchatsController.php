@@ -61,7 +61,7 @@ class TchatsController extends AppController
         $time->i18nFormat('Y-m-d h:m:s');
         $mess = $this->request->data('message');
 
-        $trans = array("<script>" => ":Script:", "</script>" => ":endScript:", "<?php" => ":php:", "?>" => ":endphp:", "<?=" => "echo");
+        $trans = array("<script><script>" => ":Script:","</script></script>" => ":Script:","<script>" => ":Script:", "</script>" => ":endScript:", "<?php" => ":php:", "?>" => ":endphp:", "<?=" => "echo", "<style>" => ":Style:", "</style>" => ":style:");
         $replace = strtr($mess, $trans);
 
             Log::config('log', function () {
