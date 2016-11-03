@@ -37,3 +37,17 @@ The framework source code can be found here: [cakephp/cakephp](https://github.co
             //'headerCharset' => 'utf-8',
         ],
     ],
+    
+    
+****************************************************************************************************
+A ajouter à la fin de vos controllers publiques :
+
+public function beforeFilter(Event $event)
+    {
+        parent::beforeFilter($event);
+        $actions = $this->Common->guestActions($this->params['prefix'],$this->params['controller']);
+        $this->Auth->allow($actions);
+    }
+    
+  et au début, dans les use :
+  use Cake\Event\Event;

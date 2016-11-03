@@ -46,8 +46,8 @@ class AppController extends Controller
         $this->loadComponent('Auth', [
             'loginRedirect' => [
                 'controller' => 'Pages',
-                'action' => 'display',
-                'home'
+                'action' => '/',
+                'prefix' => false
             ],
             'logoutRedirect' => [
                 'controller' => 'Pages',
@@ -78,7 +78,11 @@ class AppController extends Controller
 
     public function isAuthorized($user=null)
     {
-
+        // allow public
+        if(empty($this->request->params['prefix']))
+        {
+            return true;
+        }
         if($this->Common->checkPermissions(ucfirst($this->request->params['prefix']),ucfirst($this->request->params['controller']),$this->request->params['action']) || $this->Common->isAdmin())
         {
             return true;
@@ -91,7 +95,7 @@ class AppController extends Controller
 
     public function beforeFilter(Event $event)
     {
-        $this->Auth->allow(['display']);
         parent::beforeFilter($event);
+        $this->Auth->allow('display');
     }
 }
