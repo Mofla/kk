@@ -13,6 +13,7 @@
     <title>Simplon Epinal</title>
 <!-- couleur rose: #ed1450 -->
     <!--CSS styles-->
+    <?= $this->Html->css('../assets/global/plugins/font-awesome/css/font-awesome.min.css') ?>
     <?= $this->Html->css('../assets/global/plugins/bootstrap/css/bootstrap.min.css') ?>
     <?= $this->Html->css('front.css') ?>
 
