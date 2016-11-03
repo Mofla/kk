@@ -1,3 +1,17 @@
+<?php $this->layout = "front" ?>
+<?= $this->Html->css('../assets/global/plugins/font-awesome/css/font-awesome.min.css') ?>
+        <!--<?= $this->Html->css('../assets/global/plugins/simple-line-icons/simple-line-icons.min.css') ?>--->
+        <?= $this->Html->css('../assets/global/plugins/bootstrap/css/bootstrap.min.css') ?>
+        <?= $this->Html->css('../assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css') ?>
+        <!-- END GLOBAL MANDATORY STYLES -->
+        <!-- BEGIN THEME GLOBAL STYLES -->
+        <?= $this->Html->css('../assets/global/css/components.min.css') ?>
+        <?= $this->Html->css('../assets/global/css/plugins.min.css') ?>
+        <!-- END THEME GLOBAL STYLES -->
+        <!-- BEGIN THEME LAYOUT STYLES -->
+        <?= $this->Html->css('../assets/layouts/layout3/css/layout.min.css') ?>
+        <?= $this->Html->css('../assets/layouts/layout3/css/themes/default.min.css') ?>
+        <?= $this->Html->css('../assets/layouts/layout3/css/custom.min.css') ?>
 <?= $this->Html->css('../assets/pages/css/contact.min.css') ?>
 
 <div class="page-content-inner">
@@ -10,24 +24,19 @@
                         <h3 class="uppercase">Besoin d'en savoir plus?</h3>
                         <div class="c-line-left"></div>
                         <p class="c-font-lowercase">
-                            Visitez notre Foire Aux Questions pour obtenir d'avantages d'informations.</p>
+                            Visitez cette page pour obtenir d'avantages d'informations.</p>
                         <button class="btn grey-cararra font-dark">Plus d'infos</button>
                     </div>
                 </div>
                 <div class="c-container bg-grey-steel">
                     <div class="c-content-title-1">
-                        <h3 class="uppercase">Vous avez une question?</h3>
+                        <h3 class="uppercase">Plus près de chez vous?</h3>
                         <div class="c-line-left bg-dark"></div>
-                        <form action="#">
-                            <div class="input-group input-group-lg c-square">
-                                <input type="text" class="form-control c-square" placeholder="Poser une question" />
-                                <span class="input-group-btn">
-                                                                        <button class="btn uppercase" type="button">Ok!</button>
-                                                                    </span>
-                            </div>
-                        </form>
-                        <p>Posez vos questions et laissez la communauté Simplon vous aider
-                            et complèter la FAQ !</p>
+
+                        <p class="c-font-lowercase">Avec un essaimage favorisé par l’initiative La France S’Engage et la démarche « Grande Ecole du numérique », il y a certainement une formation Simplon.co près de chez vous !</p>
+                        <a href="http://simplon.co/ecosysteme/essaimage-simplon-co/" target="_blank">
+                        <button class="btn grey-cararra font-dark">Consulter</button>
+                        </a>
                     </div>
                 </div>
             </div>
