@@ -46,10 +46,9 @@ class TasksListener implements EventListenerInterface
 
     public function edittask($event , $entity)
     {
-        $original_task = $entity->extractOriginalChanged($entity->visibleProperties());
+        $original_task = $entity->extractOriginal($entity->visibleProperties());
         $task = $event->data['event'];
-     debug($task['name']);
-        die();
+
 //     ON VERIFIE SI DE NOUVEAUX USER SONT AJOUTE A LA TACHE
         $list_original_users = array();
         $list_actual_users = array();
@@ -66,10 +65,11 @@ class TasksListener implements EventListenerInterface
 //        creation des variables
         $new_task_content  = null;
         $list_result = null;
-
+//        debug($original_task['state_id']);
+//        die;
 //        ECRITURE DE LA NOTE
         //si SEULEMENT l'état de la tache à été edité
-        if (isset($original_task['state_id']))  {
+        if ($task['state_id'] !==$original_task['state_id']) {
             $statesTable = TableRegistry::get('States');
 
             $original_task_state = $statesTable->find()
@@ -82,28 +82,30 @@ class TasksListener implements EventListenerInterface
                 ->where([
                     'id' => $task['state_id'],
                 ]);
-            $new_task_content .='La tache: ' . $task['name'];
+            $new_task_content .='Changement d\'état de la tache: ' . $task['name'];
             $new_task_content .= '\nSon statut passe de '. $original_task_state->first()->name . ' à  ' . $task_state->first()->name;
         }
+        //ou alors si nom, description ou utilisateur de la tache à été edité
         else{
-            //si le nom de tache à été edité
-        if (isset($task['name'])){
-            $new_task_content .= 'La tache ' . $original_task['name'] . ' deviens: '. $task['name'];
-        }
-        else{
+
             $new_task_content .='La tache: ' . $original_task['name'];
+            //si le nom de tache à été edité
+        if (isset($task['name']) && ($task['name'] !== $original_task['name']) ){
+            $new_task_content = 'La tache ' . $original_task['name'] . ' deviens: '. $task['name'];
         }
-//si un nouvelle user est assigné à une tache
-        if (!empty($result)){
-            foreach($result as $valeur) {
-                $list_result.=$valeur.' ';
-            }
-            $new_task_content .= 'Nouveau(x) utilisateur(s) assigné: '.$list_result;
-        }
+
 //si la description de la tache à été edité
-        if (isset($task['description'])){
-            $new_task_content .= '\nLa description '.$original_task['description']  . ' deviens: '.$task['description'];
-        }
+            if (isset($task['description']) && $task['description'] !== $original_task['description'] ){
+                $new_task_content .= '\La description '.$original_task['description']  . ' deviens: '.$task['description'];
+            }
+
+            //si un nouvelle user est assigné à une tache
+          if (!empty($result)){
+                foreach($result as $valeur) {
+                    $list_result.=$valeur.' ';
+                }
+                $new_task_content .= '\Nouveau(x) utilisateur(s) assigné: '.$list_result;
+           }
         }
 
         $diariesTable = TableRegistry::get('Diaries');
