@@ -8,7 +8,9 @@ use Cake\ORM\Entity;
  *
  * @property int $id
  * @property string $message
+ * @property int $report
  * @property int $user_id
+ * @property int $room_id
  * @property \Cake\I18n\Time $date
  *
  * @property \App\Model\Entity\User $user
