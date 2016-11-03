@@ -1,8 +1,10 @@
-.btn-default{
+#connexion{
     background-color: #ed1450;
     color: white;
     font-weight: bold;
     font-size: 14px;
+    margin-right: 5%;
+    margin-top: 5px;
 }
 #menu li:hover{
     background-color: #f28c89;
@@ -31,4 +33,9 @@
 }
 #menu .navbar-nav>.active>a {
     background-color: #f28c89;
+}
+
+.page-logo{
+    margin-left: 5%;
+    margin-top: 5px;
 }
