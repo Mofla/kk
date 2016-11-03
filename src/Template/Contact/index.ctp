@@ -39,7 +39,7 @@
                         <p class="c-font-lowercase">Nous sommes à votre disposition pour recevoir toute demande d'information.
                      N'hésitez pas à nous envoyer un courriel à partir du formulaire ci-dessous et nous vous répondrons dès que possible.</p>
                     </div>
-                    <?= $this->Form->create(null) ?>
+                    <?= $this->Form->create(null, ['type' => 'post']) ?>
                         <div class="form-group">
                             <input name="name" type="text" placeholder="Votre nom" class="form-control input-md"> </div>
                         <div class="form-group">
@@ -66,7 +66,7 @@
                         <h3>Simplon Epinal</h3>
                     </div>
                     <div class="c-section">
-                        <div class="c-content-label uppercase bg-blue">Addresse</div>
+                        <div class="c-content-label uppercase bg-blue">Adresse</div>
                         <p>10 Rue Claude Gellée
                             <br/>88000 Épinal, France</p>
                     </div>
@@ -86,7 +86,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="https://www.facebook.com/people/Epinal-Simplon/100012209389342" target="_blank">
                                     <i class="fa fa-facebook"></i>
                                 </a>
                             </li>
@@ -95,7 +95,9 @@
                 </div>
             </div>
         </div>
-        <div id="gmapbg" class="c-content-contact-1-gmap" style="height: 615px;"></div>
+        <div id="gmapbg" class="c-content-contact-1-gmap" style="height: 615px;">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10642.91808932715!2d6.451002!3d48.173294!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xc0633ec5e0ae57e4!2sCCI+-+Chambre+de+commerce+et+d&#39;industrie+des+Vosges!5e0!3m2!1sfr!2sfr!4v1478165972824" width="100%" height="550" frameborder="0" style="border:0" allowfullscreen></iframe>
+        </div>
     </div>
 
 
