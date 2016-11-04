@@ -1,3 +1,6 @@
+<?php $this->layout = 'front'; ?>
+
+
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
 <style>
@@ -9,9 +12,9 @@
         list-style: none;
     }
     .lang{
-        background-color: #444d58;
+        background-color: #ed1450;
         color: white;
-        width: 100px;
+        width: 110px;
         border: 1px solid white;
     }
     .info{
@@ -27,11 +30,6 @@
         <div class="page-content-inner">
             <div class="profile">
                 <div class="tabbable-line tabbable-full-width">
-                    <ul class="nav nav-tabs">
-                        <li class="active">
-                            <a href="#tab_1_1" data-toggle="tab"> Profil </a>
-                        </li>
-                    </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="tab_1_1">
                             <div class="row">
@@ -45,7 +43,7 @@
                                 <div class="col-md-9">
                                     <div class="row">
                                         <div class="col-md-6 profile-info">
-                                            <h1 class="font-green sbold uppercase"><?= $user->firstname ?> <?= $user->lastname ?></h1>
+                                            <h1 class="text-center" style="font-weight: 900; color: #327ad5"><?= $user->firstname ?> <?= $user->lastname ?></h1>
                                             <div class="list-inline">
                                                 <?php foreach ($promotions as $promotion): ?>
                                                     <?php
@@ -58,7 +56,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6 info text-center">
-                                            <h1 class="font-green sbold uppercase text-center">infos et réseaux sociaux</h1>
+                                            <h1 class="text-center" style="font-weight: 900; color: #327ad5">Infos et Réseaux Sociaux</h1>
                                             <i class="fa fa-map-marker "></i> <?= $user->city ?><br>
                                             <i class="fa fa-birthday-cake "></i> <?= $user->birthday ?><br>
                                             <i class="fa fa-at "></i> <?= $user->email ?><br>
@@ -125,7 +123,7 @@
                             <div class="row">
                                 <div class="col-md-3 text-center">
                                     <?php foreach ($promotions as $promotion): ?>
-                                        <h1 class="font-green sbold uppercase">languages maitrisés</h1>
+                                        <h1 style="font-weight: 900; color: #327ad5">Languages Maitrisés</h1>
 
                                         <div>
                                             <?php if ($promotion->language_html) { ?>
@@ -156,7 +154,7 @@
                                     <?php endforeach; ?>
                                 </div>
                                 <div class="col-md-9">
-                                    <h1 class="font-green sbold uppercase text-center">projets</h1>
+                                    <h1 class="text-center" style="font-weight: 900; color: #327ad5">Projets</h1>
                                     <?php foreach ($user->projects as $projects): ?>
                                         <div class="col-md-4 well text-center"
                                              style="background-color: white;min-height: 350px;border: 1px solid #444d58">
