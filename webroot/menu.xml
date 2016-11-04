@@ -3,7 +3,7 @@
     <menuItem titre="Dashboard" prefix='Dashboard' controller="Projects" action="index"></menuItem>
     <menuItem titre="Gestion du site" prefix="Admin" controller="Users" action="index">
         <menuItem titre="Gérer utilisateur" prefix="Admin" controller="Users" action="index"></menuItem>
-        <menuItem titre="Gérer permission" prefix="Admin" controller="Permissions" action="index"></menuItem>
+        <menuItem titre="Gérer permission" prefix="connecteursmanager" controller="Permissions" action="index"></menuItem>
         <menuItem titre="Gérer forum" prefix="Admin" controller="Forums" action="listcategory"></menuItem>
         <menuItem titre="Gérer tchat" prefix="Tchat" controller="Rooms" action="index"></menuItem>
         <menuItem titre="Portfolios" prefix="Admin" controller="Portfolios" action="index"></menuItem>
