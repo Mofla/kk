@@ -148,7 +148,5 @@ class EntriesController extends AppController
         } else {
             $this->Flash->error(__('The entry could not be deleted. Please, try again.'));
         }
-
-        return $this->redirect(['action' => 'index']);
     }
 }

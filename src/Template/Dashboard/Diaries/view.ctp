@@ -32,10 +32,16 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="col-md-2 col-md-offset-7 col-xs-2 col-xs-offset-7">
+                                            <a class="btn btn-default btn-sm delete-project" href=<?= $this->Url->build( ['controller'=>'entries','action' => 'delete', $entries->id],
+                                                ['confirm' => __('Are you sure you want to delete ?', $entries->id)]); ?>><i class="glyphicon glyphicon-trash"></i></a>
+                                        </div>
                                     </div>
+                                    </div>
+                                    <div class="row">
+
                                     <hr>
                                 <?php endforeach; ?>
-
                             </div>
                             <!--end enties list -->
                         </div>
@@ -124,7 +130,6 @@
             })
             ;
             $('#list').load(list);
-
         });
 
         $('.cut').click(function () {
