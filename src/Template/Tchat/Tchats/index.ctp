@@ -5,9 +5,9 @@
             <div class="<?= $i ?> pad" id="<?= $tchats->user_id ?>" date="<?= $tchats->date->toUnixString(); ?>">
                 <p class="message"><?= $tchats->message ?></p>
                 <p class="users">
-                    <?= $tchats->has('user') ? $this->Html->link($tchats->user->username, ['controller' => 'Users', 'action' => 'view', $tchats->user->id, 'prefix'=> false], ['value' => $tchats->user->id, 'class' => 'hh']) : '' ?>
+                    <?= $tchats->has('user') ? $this->Html->link($tchats->user->username, ['controller' => 'Users', 'action' => 'view', $tchats->user->id, 'prefix'=> false], ['value' => $tchats->user->id, 'class' => 'user']) : '' ?>
                     <?= $tchats->date->format('Y/m/d H:i') ?>
-                    <?= $this->Form->postLink(__(''), ['action' => 'report', $tchats->id], ['confirm' => __('Etes-vous sûr de vouloir Signaler ce message ?'),'class'=>'fa fa-flag']) ?>
+                    <?= $this->Form->postLink(__(''), ['action' => 'report', $tchats->id], ['confirm' => __('Etes-vous sûr de vouloir Signaler ce message ?'),'class'=>'fa fa-flag report']) ?>
                 </p>
             </div>
             <script>
@@ -28,8 +28,27 @@
         <?php endforeach; ?>
     </div>
     <style>
+        .users{
+            width: 130px;
+            display: inline-block;
+        }
         .error-message {
             display: none;
+        }
+        .report {
+            color: red;
+            margin-top: 0;
+            margin-right: 0;
+            width: 9px;
+            height: 9px;
+        }
+        .report:hover {
+            color: #4f0a0f;
+            text-decoration: none;
+        }
+        .report:focus {
+            color: #4f0a0f;
+            text-decoration: none;
         }
 
         .in {
@@ -55,54 +74,6 @@
             box-shadow: 10px 15px 15px 0px rgba(0, 0, 0, 0.30);
         }
 
-        .lui {
-            margin-top: 1%;
-            left: 10px;
-            position: relative;
-            max-width: 300px;
-            height: auto;
-            padding: 0px;
-            background: #0c5eff;
-            border-radius: 7% !important;
-        }
-
-        .lui:after {
-            content: '';
-            position: absolute;
-            border-style: solid;
-            border-width: 15px 15px 15px 0;
-            border-color: transparent #0c5eff;
-            display: block;
-            width: 0;
-            z-index: 1;
-            left: -12px;
-            top: 25px;
-        }
-
-        .moi {
-            margin-top: 1%;
-            left: 83%;
-            position: relative;
-            max-width: 300px;
-            height: auto;
-            padding: 0px;
-            background: #00A000;
-            border-radius: 7% !important;
-        }
-
-        .moi:after {
-            content: '';
-            position: absolute;
-            border-style: solid;
-            border-width: 15px 0 15px 15px;
-            border-color: transparent #00A000;
-            display: block;
-            width: 0;
-            z-index: 1;
-            right: 0px;
-            top: 25px;
-        }
-
         p a {
             color: white;
             text-decoration: none;
@@ -122,7 +93,7 @@
         }
 
         .message {
-            font-size: 18px;
+            font-size: 12px;
             margin: 0 0;
         }
     </style>
