@@ -63,9 +63,9 @@ class ConnectorsController extends AppController
             $connectors = $this->Connectors->patchEntities($connectors,$data);
             if($this->Connectors->saveMany($connectors))
             {
-                $this->Flash->success('Braval');
-                return $this->redirect(['controller' => 'Permissions','action' => 'index']);
+                $this->Flash->success('Les permissions sont bien sauvegardées.');
             }
+            return $this->redirect(['controller' => 'Permissions','action' => 'index']);
         }
 
         $this->set(compact(['connectors','actions','compare','permissions']));
