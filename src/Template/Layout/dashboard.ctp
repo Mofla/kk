@@ -56,7 +56,12 @@ $cakeDescription = 'Simplon Epinal';
     <!-- END THEME LAYOUT STYLES -->
     <?= $this->Html->css('forum-styles.css') ?>
     <?= $this->html->script('../assets/global/plugins/jquery.min.js') ?>
-    <link rel="shortcut icon" href="favicon.ico" />
+    <?= $this->Html->meta(
+        'favicon.ico',
+        '/favicon.ico',
+        ['type' => 'icon']
+    );
+    ?>
 </head>
 
 
