@@ -18,7 +18,12 @@
     <?= $this->Html->css('front.css') ?>
 
     <!--favicon-->
-    <link rel="shortcut icon" href="favicon.ico"/>
+    <?= $this->Html->meta(
+        'favicon.ico',
+        '/favicon.ico',
+        ['type' => 'icon']
+    );
+    ?>
 
 </head>
 <header>
