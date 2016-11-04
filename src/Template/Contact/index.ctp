@@ -68,8 +68,11 @@
 
     <div class="c-content-contact-1 c-opt-1">
         <div class="row" data-auto-height=".c-height">
+
             <div class="col-lg-8 col-md-6 c-desktop"></div>
+
             <div class="col-lg-4 col-md-6">
+
                 <div class="c-body">
                     <div class="c-section">
                         <h3>Simplon Epinal</h3>
@@ -101,12 +104,15 @@
                             </li>
                         </ul>
                     </div>
+
                 </div>
+
+            </div>
+            <div id="gmapbg" class="c-content-contact-1-gmap" style="height: 550px;">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10642.91808932715!2d6.451002!3d48.173294!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xc0633ec5e0ae57e4!2sCCI+-+Chambre+de+commerce+et+d&#39;industrie+des+Vosges!5e0!3m2!1sfr!2sfr!4v1478165972824" width="100%" height="100%" frameborder="0" style="border:0" allowfullscreen></iframe>
             </div>
         </div>
-        <div id="gmapbg" class="c-content-contact-1-gmap" style="height: 615px;">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10642.91808932715!2d6.451002!3d48.173294!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xc0633ec5e0ae57e4!2sCCI+-+Chambre+de+commerce+et+d&#39;industrie+des+Vosges!5e0!3m2!1sfr!2sfr!4v1478165972824" width="100%" height="550" frameborder="0" style="border:0" allowfullscreen></iframe>
-        </div>
+
     </div>
 
 

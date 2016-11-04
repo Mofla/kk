@@ -1,15 +1,7 @@
-<!--<nav class="large-3 medium-4 columns" id="actions-sidebar">-->
-    <!--<ul class="side-nav">-->
-        <!--<li class="heading"><?= __('Actions') ?></li>-->
-        <!--<li><?= $this->Html->link(__('New Forum'), ['action' => 'add']) ?></li>-->
-        <!--<li><?= $this->Html->link(__('List Threads'), ['controller' => 'Threads', 'action' => 'index']) ?></li>-->
-        <!--<li><?= $this->Html->link(__('New Thread'), ['controller' => 'Threads', 'action' => 'add']) ?></li>-->
-    <!--</ul>-->
-<!--</nav>-->
 
     <?= $this->element('Forum/search-forum') ?>
 
-<div class="col-md-12 voffset3">
+<div class="col-md-12 col-sm-12 col-xs-12 voffset3">
 
 
             <?php foreach ($cat as $forum): ?>
@@ -17,7 +9,7 @@
     <table class="table tblrad">
         <thead class="category">
         <tr>
-            <th colspan="2" scope="col"><span class="h4"><?= $forum->name ?></span></th>
+            <th colspan="2"><span class="h4"><?= $forum->name ?></span></th>
             <th class="hidden-xs"></th>
             <th class="hidden-xs"></th>
             <th class="hidden-xs"></th>
