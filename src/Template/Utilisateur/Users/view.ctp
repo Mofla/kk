@@ -157,7 +157,7 @@
                                     <h1 class="text-center" style="font-weight: 900; color: #327ad5">Projets</h1>
                                     <?php foreach ($user->projects as $projects): ?>
                                         <div class="col-md-4 well text-center"
-                                             style="background-color: white;min-height: 350px;border: 1px solid #444d58">
+                                             style="background-color: white;min-height: 350px;border: 1px solid lightblue">
                                             <div style="min-height: 300px">
                                                 <?= $this->Html->image('../uploads/portfolios/' . $projects->picture_url, ['class' => 'img-responsive']) ?>
                                                 <h3 style="font-weight: 900"><?= $projects->name ?></h3>
@@ -165,7 +165,7 @@
 
                                             <div>
                                                 <a href="<?= $this->Url->build(['controller' => 'Portfolios', 'action' => 'view', $projects->id, 'prefix' => 'portfolios']) ?>"
-                                                   class="cbp-l-caption-buttonRight btn green uppercase "" >Détails</a>
+                                                   class="btn btn-info" >Détails</a>
                                             </div>
                                         </div>
                                     <?php endforeach; ?>
