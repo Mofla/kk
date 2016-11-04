@@ -47,12 +47,15 @@
               </ul>
             <div class="hor-menu ">
               <ul class="nav navbar-nav">
+                  <li class="menu-dropdown classic-menu-dropdown ">
+                      <?= $this->Html->link('Accueil', ['controller' => 'Pages', 'action' => 'display', 'prefix' => false]); ?>
+                  </li>
                 <!-- si l'utilisateur est connecté on affiche ce menu -->
                 <?php foreach ($xmlObject as $xml) : ?>
                   <?php foreach ($role as $r) : ?>
                     <?php if ($r->role_id !=1): ?>
                       <?php if (Xml::xml_attribute($xml,'prefix') == 'Admin'): continue;
-                      else:          ?>
+                      else: ?>
                         <li class="menu-dropdown classic-menu-dropdown ">
                           <a href="<?= $this->Url->build(['controller' =>  Xml::xml_attribute($xml, 'controller'), 'action' => Xml::xml_attribute($xml, 'action'), 'prefix' =>  strtolower(Xml::xml_attribute($xml, 'prefix'))]) ?>">
                             <?php echo Xml::xml_attribute($xml, 'titre') ?>
