@@ -49,7 +49,7 @@ class PagesController extends AppController
             'limit' => 3
         ]);
 
-        $this->set(compact('articles','portfolios'));
+        $this->set(compact('articles', 'portfolios'));
 
 
         $path = func_get_args();
@@ -76,5 +76,9 @@ class PagesController extends AppController
             }
             throw new NotFoundException();
         }
+    }
+        public function infos()
+    {
+
     }
 }

@@ -55,8 +55,9 @@ Router::scope('/', function (RouteBuilder $routes) {
      * ...and connect the rest of 'Pages' controller's URLs.
      */
     $routes->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
+    $routes->connect('/infos', ['controller' => 'Pages', 'action' => 'infos']);
     $routes->connect('/nous-contacter', ['controller' => 'Contact', 'action' => 'index']);
-
+    $routes->connect('/blog', ['controller' => 'BlogArticles', 'action' => 'index']);
     /**
      * Connect catchall routes for all controllers.
      *
@@ -151,3 +152,4 @@ Router::prefix('connecteursmanager', function($routes) {
     $routes->connect('/', ['controller' => 'Permissions','action' => 'index'], ['routeClass' => 'InflectedRoute']);
     $routes->fallbacks(DashedRoute::class);
 });
+
