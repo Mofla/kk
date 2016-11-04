@@ -1,3 +1,6 @@
+<?php $this->layout = 'front' ?>
+<?= $this->Html->script('../assets/global/plugins/jquery.min.js') ?>
+
 <?= $this->Html->css('multi-select.css') ?>
 <?= $this->Html->css('../assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css') ?>
 <?= $this->Html->script('../assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js') ?>

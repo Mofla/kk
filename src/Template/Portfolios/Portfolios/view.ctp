@@ -1,6 +1,7 @@
-<?= $this->Html->link('Accueil',['controller' => 'Pages','action' => '/','prefix' => false]) ?> /
-<?= $this->Html->link($this->request->params['controller'],['action' => 'index','prefix' => false]) ?> /
-<?= $portfolio->name ?>
+<?php $this->layout = 'front' ?>
+<?= $this->Html->script('../assets/global/plugins/jquery.min.js') ?>
+
+
 <div class="row">
     <h1 class="h1 bold text-center"><?= $portfolio->name ?></h1>
     <hr style="border-color:transparent;">
@@ -17,7 +18,7 @@
         foreach ($portfolio->users as $user)
         {
             $users[$user->id] = $this->Html->link($user->firstname . ' ' . $user->lastname,
-                ['controller' => 'Users', 'action' => 'view',$user->id,'prefix' => false]);
+                ['controller' => 'Users', 'action' => 'view','prefix' => 'utilisateur',$user->id]);
         }
         echo implode(', ',$users);
         ?>
