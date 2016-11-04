@@ -51,6 +51,11 @@ function custom_echo($x, $length)
                         class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
                 </button>
             </li>
+            <li>
+                <button title="Mes journaux de bord" class="btn blue btn-lg" href="#tab_3" data-toggle="tab" id="btn_3"><span
+                        class="glyphicon glyphicon-book" aria-hidden="true"></span>
+                </button>
+            </li>
         </ul>
     </div>
     <div class="col-md-11 col-sm-11 col-xs-11">
@@ -133,6 +138,9 @@ function custom_echo($x, $length)
                     </div>
                 </div>
             </div>
+            <div class="tab-pane" id="tab_3">
+
+            </div>
         </div>
     </div>
 </div>
@@ -143,6 +151,17 @@ function custom_echo($x, $length)
 <?= $this->Html->script('../assets/vis/vis.js') ?>
 
 <script type="text/javascript">
+
+    //diaries button
+    $('#btn_3').on('click', function () {
+        var url = '<?= $this->Url->build(['controller' => 'Diaries', 'action' => 'index']); ?>';
+
+        $('#tab_3').load(url)
+    });
+
+
+
+    //timeline stuff
     // DOM element where the Timeline will be attached
     var container = document.getElementById('visualization');
 
@@ -173,7 +192,7 @@ function custom_echo($x, $length)
 
 
     //active links
-    var buttonsNav = $('#btn_1,#btn_2');
+    var buttonsNav = $('#btn_1,#btn_2,#btn_3');
 
     buttonsNav.on('click', function () {
         buttonsNav.removeClass('active');
