@@ -11,6 +11,25 @@ use App\Controller\AppController;
 class FromToTasksController extends AppController
 {
 
+    public function add()
+    {
+        $this->autoRender = false;
+        $fromToTask = $this->FromToTasks->newEntity();
+        if ($this->request->is('post')) {
+            $fromToTask = $this->FromToTasks->patchEntity($fromToTask, $this->request->data);
+            if ($this->FromToTasks->save($fromToTask)) {
+                $this->Flash->success(__('The from to task has been saved.'));
+
+                return $this->redirect($this->referer());
+            } else {
+                $this->Flash->error(__('The from to task could not be saved. Please, try again.'));
+            }
+        }
+
+        $this->set(compact('fromToTask', 'projects', 'froms', 'tos'));
+        $this->set('_serialize', ['fromToTask']);
+    }
+
 
     public function deleteajax()
     {
