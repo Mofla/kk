@@ -78,14 +78,13 @@
                 <p>03 29 33 88 88 </p>
             </div>
             <div class="col-md-6">
-                <h4>@Suivez-nous sur les réseaux sociaux!</h4><br>
+                <h4>#Suivez-nous sur les réseaux sociaux!</h4>
                 <a href="https://www.facebook.com/people/Epinal-Simplon/100012209389342" target="_blank">
                     <i class="fa fa-facebook" style="font-size: 30px;" aria-hidden="true"></i>
                 </a>
             </div>
         </div>
     </div>
-
 </footer>
 
 <!--JS libraries-->
