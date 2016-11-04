@@ -2,6 +2,7 @@
 namespace App\Controller\Portfolios;
 
 use App\Controller\AppController;
+use Cake\Event\Event;
 
 /**
  * Portfolios Controller
@@ -123,16 +124,11 @@ class PortfoliosController extends AppController
         $this->set('_serialize', ['portfolio']);
     }
 
-    public function test()
+    public function beforeFilter(Event $event)
     {
-        $test = $this->Common->scanEverything();
-        $modules = $this->Common->getModules();
-        $controllers = $this->Common->getControllers('Admin');
-        $actions = $this->Common->getActions('Admin','Users');
-        $this->set('test',$test);
-        $this->set('modules',$modules);
-        $this->set('controllers',$controllers);
-        $this->set('actions',$actions);
+        parent::beforeFilter($event);
+        $actions = $this->Common->guestActions($this->params['prefix'],$this->params['controller']);
+        $this->Auth->allow($actions);
     }
 
 }

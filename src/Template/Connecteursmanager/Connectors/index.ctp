@@ -1,15 +1,15 @@
 <?= $this->Html->css('permissions.css') ?>
 
 <div class="breadcrum">
-    <?= $this->Html->link($this->request->params['prefix'],'/'.$this->request->params['prefix']) ?> /
-    <?= $this->Html->link($this->request->params['controller'],['controller' => $this->request->params['controller'], 'action' => '/']) ?> /
-    <?= $this->Html->link($this->request->params['action'],['controller' => $this->request->params['controller'],'action' => $this->request->params['action']]) ?>
+    <?= $this->Html->link(ucfirst($this->request->params['prefix']),'/'.$this->request->params['prefix']) ?> /
+    <?= $this->Html->link(ucfirst($this->request->params['controller']),['controller' => $this->request->params['controller'], 'action' => '/']) ?> /
+    <?= ucfirst($this->request->params['action']) ?>
 </div>
 <div class="row">
     <?= $this->Form->create() ?>
 
         <?php foreach ($actions as $module => $controllers): ?>
-    <div class="col-xs-12 col-md-6" id="cols">
+    <div class="col-xs-12 col-md-6 col-md-offset-3" id="cols">
             <table class="table table-striped">
                 <thead class="modules">
                 <tr>
@@ -78,7 +78,4 @@
         });
     })
 
-    $('thead').on('click',function(){
-     $(this).closest('.col-md-6').toggleClass('col-md-12');
-    });
 </script>
