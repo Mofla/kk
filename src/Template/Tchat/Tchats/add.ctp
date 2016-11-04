@@ -45,6 +45,7 @@
     </div>
 </div>
 <style>
+
     .wrapper {
         position: relative;
         top: 50%;
@@ -232,16 +233,6 @@
         margin-left: 45%;
     }
 
-    fieldset {
-        -webkit-box-shadow: 10px 15px 15px 0px rgba(0, 0, 0, 0.30);
-        -moz-box-shadow: 10px 15px 15px 0px rgba(0, 0, 0, 0.30);
-        box-shadow: 10px 15px 15px 0px rgba(0, 0, 0, 0.30);
-    }
-
-    .error-message {
-        display: none;
-    }
-
     .in {
         display: inline-block;
         height: 35px;
@@ -301,7 +292,7 @@
         top: 25px;
     }
 
-    p a {
+    p .user {
         color: white;
         text-decoration: none;
         text-transform: capitalize;
@@ -310,6 +301,9 @@
     .pad {
         padding: 10px;
     }
+    .pad p:last-child{
+      display: none;
+    }
 
     hr, p {
         font-size: 11px;
@@ -317,11 +311,6 @@
         margin-bottom: 0;
         word-wrap: break-word;
 
-    }
-
-    .message {
-        font-size: 18px;
-        margin: 0 0;
     }
 </style>
 <?= $this->Html->script('markitup/jquery.markitup.js') ?>
@@ -335,16 +324,16 @@
             {name:'Italic', key:'I', openWith:'<em>', closeWith:'</em>'},
             {name:'Underline', key:'U', openWith:'<del>', closeWith:'</del>'},
             {separator:'---------------' },
-            {name:'Link', key:'L', openWith:'<a href=[![Url]!]>', closeWith:'</a>', placeHolder:'Your text to link here...'},
+            {name:'Link', key:'L', openWith:'<a href=[![Url]!]>', closeWith:'</a>'},
             {separator:'---------------' },
             {name:'Colors', openWith:'<t style=color:[![Color]!]>', closeWith:'</t>'},
             {name:'Size', key:'S', dropMenu :[
-                {name:'h1', key:'1', openWith:'<h1(!( class="[![Class]!]")!)>', closeWith:'</h1>', placeHolder:'Your title here...' },
-                {name:'h2', key:'2', openWith:'<h2(!( class="[![Class]!]")!)>', closeWith:'</h2>', placeHolder:'Your title here...' },
-                {name:'h3', key:'3', openWith:'<h3(!( class="[![Class]!]")!)>', closeWith:'</h3>', placeHolder:'Your title here...' },
-                {name:'h4', key:'4', openWith:'<h4(!( class="[![Class]!]")!)>', closeWith:'</h4>', placeHolder:'Your title here...' },
-                {name:'h5', key:'5', openWith:'<h5(!( class="[![Class]!]")!)>', closeWith:'</h5>', placeHolder:'Your title here...' },
-                {name:'h6', key:'6', openWith:'<h6(!( class="[![Class]!]")!)>', closeWith:'</h6>', placeHolder:'Your title here...' }
+                {name:'h1', key:'1', openWith:'<h1(!( class="[![Class]!]")!)>', closeWith:'</h1>'},
+                {name:'h2', key:'2', openWith:'<h2(!( class="[![Class]!]")!)>', closeWith:'</h2>'},
+                {name:'h3', key:'3', openWith:'<h3(!( class="[![Class]!]")!)>', closeWith:'</h3>'},
+                {name:'h4', key:'4', openWith:'<h4(!( class="[![Class]!]")!)>', closeWith:'</h4>'},
+                {name:'h5', key:'5', openWith:'<h5(!( class="[![Class]!]")!)>', closeWith:'</h5>'},
+                {name:'h6', key:'6', openWith:'<h6(!( class="[![Class]!]")!)>', closeWith:'</h6>'}
             ]}
         ]
     };
