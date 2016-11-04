@@ -1,16 +1,20 @@
 #connexion{
-    background-color: #ed1450;
+    background-color: #2d0065;
     color: white;
     font-weight: bold;
     font-size: 14px;
     margin-right: 5%;
     margin-top: 5px;
 }
+#connexion:hover{
+    background-color: #9671e2;
+}
+
 #menu li:hover{
-    background-color: #f28c89;
+    background-color: #9671e2;
 }
 #menu .navbar{
-    background-color: #ed1450;
+    background-color: #2d0065;
 
 }
 #menu ul{
@@ -29,10 +33,10 @@
 }
 
 #menu .navbar-brand:hover, .navbar-brand.active{
-    background-color: #f28c89;
+    background-color: #9671e2;
 }
 #menu .navbar-nav>.active>a {
-    background-color: #f28c89;
+    background-color: #9671e2;
 }
 
 .page-logo{
@@ -41,6 +45,6 @@
 }
 
 footer{
-    background-color: #ed1450;
+    background-color: #2d0065;
     color: white;
 }
