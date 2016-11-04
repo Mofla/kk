@@ -49,13 +49,11 @@
                 </div>
                 <div class="collapse navbar-collapse ribbon" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li <?php if ($this->request->here == '/blog-articles'): ?> class="active" <?php endif; ?>><?= $this->Html->link('News', ['controller' => 'BlogArticles', 'action' => 'index']); ?></li>
-                        <li <?php if ($this->request->here == '/promotions'): ?> class="active" <?php endif; ?>><?= $this->Html->link('Promotion', ['controller' => 'Promotions', 'action' => 'index']); ?></li>
-                        <li <?php if ($this->request->here == '/portfolios'): ?> class="active" <?php endif; ?>><?= $this->Html->link('Projets', ['controller' => 'Portfolios', 'action' => 'index']); ?></li>
-                        <li <?php if ($this->request->here == '/pages/infos'): ?> class="active" <?php endif; ?>><a
-                                href="pages/infos">Informations</a></li>
-                        <li <?php if ($this->request->here == '/nous-contacter'): ?> class="active" <?php endif; ?>><a
-                                href="/nous-contacter">Nous contacter</a></li>
+                        <li <?php if ($this->request->here == '/blog'): ?> class="active" <?php endif; ?>><?= $this->Html->link('News', ['controller' => 'BlogArticles', 'action' => 'index', 'prefix' => false]); ?></li>
+                        <li <?php if ($this->request->here == '/promotions'): ?> class="active" <?php endif; ?>><?= $this->Html->link('Promotion', ['controller' => 'Promotions', 'action' => 'index', 'prefix'=>false]); ?></li>
+                        <li <?php if ($this->request->here == '/portfolios'): ?> class="active" <?php endif; ?>><?= $this->Html->link('Projets', ['controller' => 'Portfolios', 'action' => 'index', 'prefix' => false]); ?></li>
+                        <li <?php if ($this->request->here == '/infos'): ?> class="active" <?php endif; ?>><?= $this->Html->link('Informations', ['controller' => 'Pages', 'action' => 'infos', 'prefix' => false]); ?></li>
+                        <li <?php if ($this->request->here == '/nous-contacter'): ?> class="active" <?php endif; ?>><?= $this->Html->link('Nous contacter', ['controller' => 'Contact', 'action' => 'index', 'prefix' => false]); ?></li>
                     </ul>
                 </div>
             </div>
