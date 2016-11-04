@@ -31,7 +31,12 @@
         <a href="/">
             <?= $this->Html->image('../img/Simplon.png', ['class' => 'logo-default', 'width' => 150, 'height' => 50, 'img-responsive']) ?>
         </a>
+        <?php $Ses = $this->request->session()->read('Auth');
+        if (isset($Ses)): ?>
+           <a class="btn btn-default pull-right" id="connexion" href="<?= $this->Url->build(['controller' => 'users', 'action' => 'view', $this->request->session()->read('Auth')['User']['id'], 'prefix' => 'admin']) ?>">Mon compte</a>
+        <?php else: ?>
         <a class="btn btn-default pull-right" id="connexion" href="./utilisateur/connexion">Connexion</a>
+        <?php endif;?>
     </div>
     <nav id="menu">
         <div class="navbar navbar-default">
