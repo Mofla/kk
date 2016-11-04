@@ -13,7 +13,7 @@
     }
 
     .lang {
-        background-color: #ed1450;
+        background-color: #2d0065;
         color: white;
         width: 110px;
         border: 1px solid white;
