@@ -95,7 +95,7 @@
         height: 100%;
     }
     #b1 {
-        background-color: #8861A4;
+        background-color: #1956ff;
     }
     #b2 {
         background-color: #2495C1;
@@ -107,7 +107,7 @@
         background-color: #F1C500;
     }
     #b5 {
-        background-color: #F35957;
+        background-color: #f31911;
     }
     .anim1, .anim2 {
         -webkit-animation-duration: 2s;
