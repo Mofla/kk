@@ -12,6 +12,13 @@ use App\Controller\AppController;
  */
 class UsersController extends AppController
 {
+    public function beforeFilter(Event $event)
+    {
+        parent::beforeFilter($event);
+        $actions = $this->Common->guestActions($this->params['prefix'],$this->params['controller']);
+        $this->Auth->allow($actions);
+    }
+
     /**
      * Index method
      *
