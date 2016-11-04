@@ -18,7 +18,6 @@ class UsersController extends AppController
         $actions = $this->Common->guestActions($this->params['prefix'],$this->params['controller']);
         $this->Auth->allow($actions);
     }
-
     /**
      * Index method
      *
@@ -34,8 +33,6 @@ class UsersController extends AppController
 
         $this->set(compact('users'));
         $this->set('_serialize', ['users']);
-
-
     }
 
     /**
@@ -160,12 +157,6 @@ class UsersController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
-    public function beforeFilter(Event $event)
-    {
-        parent::beforeFilter($event);
-        //$this->Auth->allow(['add', 'logout']);
-        $this->Auth->allow(['logout']);
-    }
 
     public function login()
     {
