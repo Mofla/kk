@@ -61,7 +61,24 @@ class TchatsController extends AppController
         $time->i18nFormat('Y-m-d h:m:s');
         $mess = $this->request->data('message');
 
-        $trans = array( "<<"=>":",">>"=>":","<script><script>" => ":Script:","</script></script>" => ":Script:","<script>" => ":Script:","<script type='javascript'>" => ":Script:", "</script>" => ":endScript:", "<?php" => ":php:", "?>" => ":endphp:", "<?=" => "echo", "<style>" => ":Style:", "</style>" => ":style:","<style type= text/css>"=>":Style:");
+        $array_balise = ['<abbr>','<acronym>','<address>','<applet>','<area>','<article>','<aside>','<audio>','<b>'
+            ,'<base>','<basefont>','<bdo>','<bdi>','<big>','<blockquote>','<body>','<br>','<button>','<canvas>','<caption>','<center>','<cite>','<code>','<col>','<colgroup>','<command>','<datalist>','<dd>'
+            ,'<details>','<dfn>','<dir>','<div>','<dl>','<dt>','<embed>','<fieldset>','<figcaption>','<figure>','<font>','<footer>','<form>','<frame>','<frameset>','<head>','<header>','<hgroup>'
+            ,'<hr>','<html>','<i>','<iframe>','<img>','<input>','<ins>','<keygen>','<kbd>','<label>','<legend>','<li>','<link>','<main>'
+            ,'<map>','<mark>','<menu>','<meta>','<meter>','<nav>','<noframes>','<noscript>','<object>','<ol>','<optgroup>','<option>','<output>','<p>','<param>','<pre>','<progress>','<q>','<r>','<rp>','<rt>','<ruby>'
+            ,'<s>','<samp>','<script>','<section>','<select>','<small>','<source>','<span>','<strike>','<style>','<sub>','<summary>','<sup>','<table>','<tbody>','<td>','<textarea>','<tfoot>','<th>'
+            ,'<thead>','<time>','<title>','<tr>','<track>','<tt>','<u>','<ul>','<var>','<video>','<wbr>','<xmp>','<?php','?>','<?='];
+
+
+
+        if(in_array($mess, $array_balise) === false)
+        {
+            $trans = array(
+                "<<"=>":",">>"=>":","<script><script>" => ":Script:","</script></script>" => ":Script:","<script>" => ":Script:"
+            ,"<script type='javascript'>" => ":Script:", "</script>" => ":endScript:", "<?php" => ":php:", "?>" => ":endphp:", "<?=" => "echo", "<style>" => ":Style:"
+            , "</style>" => ":style:","<style type= text/css>"=>":Style:","<div style="=>":Div:","<p style="=>":P:","<span style="=>":Span:","<table style="=>":Table:","<li style="=>":Li:","<ul style="=>":Ul:","</div>"=>":EndDiv:","</p>"=>":EndP:","</code>"=>":EndCode:"
+            ,"<code>"=>":Code:","//"=>":Com:","<--"=>":Com:","<!--"=>":Com:"
+            );
         $replace = strtr($mess, $trans);
 
             Log::config('log', function () {
@@ -85,6 +102,7 @@ class TchatsController extends AppController
             $tchat->date = $time;
 
              $this->Tchats->save($tchat);
+        }
         }
         $name_rooms = $this->Rooms->find('all')->contain('Users')->where(['id'=>$id_rooms]);
         $count_message = $this->Tchats->find('all')->where(['room_id'=>$id_rooms])->count();

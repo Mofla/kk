@@ -153,10 +153,17 @@ function custom_echo($x, $length)
 <script type="text/javascript">
 
     //diaries button
+    //allowes to load diaries view in same tab
     $('#btn_3').on('click', function () {
+        var tab = $('#tab_3');
         var url = '<?= $this->Url->build(['controller' => 'Diaries', 'action' => 'index']); ?>';
-
-        $('#tab_3').load(url)
+        tab.load(url, function () {
+            $('.view-diary').on('click', function (event) {
+                event.preventDefault();
+                var viewurl = $(this).attr('href');
+                tab.load(viewurl)
+            })
+        });
     });
 
 
