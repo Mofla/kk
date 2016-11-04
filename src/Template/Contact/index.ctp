@@ -50,13 +50,13 @@
                     </div>
                     <?= $this->Form->create(null, ['type' => 'post']) ?>
                         <div class="form-group">
-                            <input name="name" type="text" placeholder="Votre nom" class="form-control input-md"> </div>
+                            <input name="name" type="text" placeholder="Votre nom" class="form-control input-md" required> </div>
                         <div class="form-group">
-                            <input name="email" type="text" placeholder="Votre Email" class="form-control input-md"> </div>
+                            <input name="email" type="text" placeholder="Votre Email" class="form-control input-md" required> </div>
                         <div class="form-group">
-                            <input name="phone" type="text" placeholder="Numéro de téléphone" class="form-control input-md"> </div>
+                            <input name="phone" type="text" placeholder="Numéro de téléphone" class="form-control input-md" > </div>
                         <div class="form-group">
-                            <textarea rows="8" name="message" placeholder="Votre message ici ..." class="form-control input-md"></textarea>
+                            <textarea rows="8" name="message" placeholder="Votre message ici ..." class="form-control input-md" required></textarea>
                         </div>
                         <button type="submit" class="btn grey">Envoyer</button>
                     <?= $this->Form->end() ?>
