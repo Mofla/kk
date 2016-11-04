@@ -31,8 +31,8 @@
         </tr>
         <tr class="ssthead">
             <td class="ssthead">Sujets / Auteurs</td>
-            <td class="ssthead">Réponses</td>
-            <td class="ssthead">Vues</td>
+            <td class="ssthead hidden-xs">Réponses</td>
+            <td class="ssthead hidden-xs">Vues</td>
             <td class="ssthead">Derniers messages</td>
             <?php if ($role !== 2 || empty($role)) : ?>
             <td></td>
@@ -44,8 +44,8 @@
             <br> par
                 <?= $this->Html->link($threads->user->username, 'utilisateur/profil/'.$threads->user->id.'') ?>
             </td>
-            <td width="10%"><?= $threads->countpost ?></td>
-            <td width="10%" ><?= $threads->countview ?></td>
+            <td width="10%" class="hidden-xs"><?= $threads->countpost ?></td>
+            <td width="10%" class="hidden-xs"><?= $threads->countview ?></td>
             <td width="25%">
 
             <?php if ($threads->lastpost) : ?>
