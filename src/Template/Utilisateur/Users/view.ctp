@@ -36,11 +36,7 @@
                         <div class="tab-pane active" id="tab_1_1">
                             <div class="row">
                                 <div class="col-md-3">
-                                    <ul class="list-unstyled profile-nav">
-                                        <li>
                                             <?= $this->Html->image('../uploads/user/' . $user->picture_url, ['class' => 'img-responsive pic-bordered']) ?>
-                                        </li>
-                                    </ul>
                                 </div>
                                 <div class="col-md-9">
                                     <div class="row">
