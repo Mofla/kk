@@ -36,16 +36,6 @@
                                   <a href="<?= $this->Url->build(['controller' => 'users', 'action' => 'view', $i, 'prefix' => 'admin']) ?>">
                                       <i class="icon-user"></i>Mon Profil </a>
                               </li>
-                              <!--                        <li>
-                                                        <a href="app_calendar.html">
-                                                          <i class="icon-calendar"></i> My Calendar </a>
-                                                      </li>
-                                                      <li>
-                                                        <a href="app_inbox.html">
-                                                          <i class="icon-envelope-open"></i> My Inbox
-                                                          <span class="badge badge-danger"> 0</span>
-                                                        </a>
-                                                      </li>-->
                               <li class="divider"></li>
                               <li>
                                   <a href="<?php echo $this->Url->build(['controller' => 'users', 'action' => 'logout', 'prefix' => 'utilisateur']); ?>">
