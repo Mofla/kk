@@ -19,27 +19,31 @@
                             <!--start enties list -->
                             <div class="todo-tasklist">
                                 <?php foreach ($diary->entries as $entries): ?>
-                                    <div class="row">
-                                        <div class="col-12">
+
                                             <div class="todo-tasklist-item todo-tasklist-item-border ">
-                                                <div id="<?= $entries->id ?>"
-                                                     class="todo-tasklist-item-text cut"><?= $entries->content ?>
+                                                <div class="row">
+                                                    <div class="col-md-11 offset-1">
+                                                    <div id="<?= $entries->id ?>" class="todo-tasklist-item-text cut"><?= str_replace("\n",'<br />', $entries->content); ?>
+                                                    </div>
                                                 </div>
                                                 <br>
-                                                <div class="todo-tasklist-controls pull-left">
+                                                    <div class="row" style="margin-top: 20px;">
+                                                        <div class="col-md-3 col-md-offset-1 col-xs-3 col-xs-offset-1">
+                                                             <div class="todo-tasklist-controls pull-left">
                                                                                     <span class="todo-tasklist-date">
                                                                                         <i class="fa fa-calendar"></i><?= $entries->date ?></span>
+                                                             </div>
+                                                        </div>
+
+                                                        <div class="col-md-2 col-md-offset-5 col-xs-2 col-xs-offset-5">
+                                                            <a class="btn btn-default btn-sm delete-project" href=<?= $this->Url->build( ['controller'=>'entries','action' => 'delete', $entries->id],
+                                                                ['confirm' => __('Are you sure you want to delete ?', $entries->id)]); ?>><i class="glyphicon glyphicon-trash"></i></a>
+                                                        </div>
+                                                    </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-2 col-md-offset-7 col-xs-2 col-xs-offset-7">
-                                            <a class="btn btn-default btn-sm delete-project" href=<?= $this->Url->build( ['controller'=>'entries','action' => 'delete', $entries->id],
-                                                ['confirm' => __('Are you sure you want to delete ?', $entries->id)]); ?>><i class="glyphicon glyphicon-trash"></i></a>
-                                        </div>
-                                    </div>
-                                    </div>
                                     <div class="row">
-
                                     <hr>
                                 <?php endforeach; ?>
                             </div>
@@ -56,6 +60,7 @@
                                         'id' => 'sort',
                                         'url' => ['controller' => 'Entries', 'action' => 'edit', $entries->id]
                                     ]) ?>
+                                <?= $this->Form->hidden($entries->id, ['id'=>'id']); ?>
                                 <div class="form-group">
                                     <div class="col-md-8 col-sm-8">
                                         <div class="todo-taskbody-user">
@@ -112,33 +117,30 @@
     </div>
 
     <script>
+
+        $('.cut').click(function () {
+
+//            var id = $(this).attr('id');
+            var paste = $(this).text();
+//            $('#id').attr('name', id);
+            $('#content').val(paste);
+        });
+
         $("#sort").submit(function (e) {
             e.preventDefault();
 
             var data = $('.todo-taskbody-taskdesc').text();
-            var id = $('.cut').attr('id');
             var form = new FormData();
             form.append('content', data);
+            var id_url =  $('#id').attr('name');
+            var edit = $(this).attr('action');
 
-            var edit = '/kk/dashboard/entries/edit/'+id;
-            var list = '/kk/dashboard/projects/gestion/'<?= $diary->id?>;
-
+            var edit = <?= $this->Url->build(['controller'=>'Entries','action'=>'edit'])?>'/'+id_url;
             $.ajax({
                 url:  edit,
                 type: 'post',
                 data: data
-            })
-            ;
-            $('#list').load(list);
+            });
         });
 
-        $('.cut').click(function () {
-            var id = $(this).attr('id');
-            var paste = $(this).text();
-            $('#sort').attr("action", '/kk/dashboard/entries/edit/' + id);
-            $('#content').val(paste);
-        });
-        $('.cut').ready(function() {
-            $(this).str.replace('\n' , "<br>");
-        });
     </script>
