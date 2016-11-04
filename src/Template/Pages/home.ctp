@@ -65,12 +65,7 @@
                 <div class="panel-body">
                     <div id="myCarousel" class="carousel slide" data-ride="carousel">
                         <!-- Indicators -->
-                        <ol class="carousel-indicators">
-                            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                            <li data-target="#myCarousel" data-slide-to="1"></li>
-                            <li data-target="#myCarousel" data-slide-to="2"></li>
-                            <li data-target="#myCarousel" data-slide-to="3"></li>
-                        </ol>
+
 
                         <!-- Wrapper for slides -->
 
@@ -80,7 +75,12 @@
                             </div>
                             <?php foreach ($portfolios as $portfolio) { ?>
                                 <div class="item">
-                                    <img style="wheight: 350px" class="img-responsive" src="../../uploads/portfolios/<?= $portfolio->picture_url ?>">
+                                    <img class="img-responsive" src="../../uploads/portfolios/<?= $portfolio->picture_url ?>">
+                                    <div class="carousel-caption" style="background-color: rgba(245,245,245,0.52);border-radius: 45%">
+                                        <h2><?= $portfolio->name?></h2>
+                                        <a href="<?= $this->Url->Build(['controller' => 'Portfolios', 'action' => 'view', $portfolio->id]) ?>"
+                                           class="btn btn-primary">Voir le Projet</a>
+                                    </div>
                                 </div>
                             <?php } ?>
                         </div>
