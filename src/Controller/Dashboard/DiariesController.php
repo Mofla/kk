@@ -19,13 +19,31 @@ class DiariesController extends AppController
     public function index()
     {
 
-        $diaries = $this->Diaries->find()->contain([
-            'Entries',
-            'Users',
-            'Projects',
-            'Users.Tasks',
-            'Users.Tasks.States',
-       ]);
+        $uid = $this->Auth->user('id');
+
+        $user = $this->Diaries->Users->get($uid, [
+            'contain' => 'Roles'
+        ]);
+
+        if ($user->role->name == 'Administrateur' || $user->role->name == 'Formateur') {
+            $diaries = $this->Diaries->find()->contain([
+                'Entries',
+                'Users',
+                'Projects',
+                'Users.Tasks',
+                'Users.Tasks.States',
+            ]);
+        } else {
+            $diaries = $this->Diaries->find()->contain([
+                'Entries',
+                'Users',
+                'Projects',
+                'Users.Tasks',
+                'Users.Tasks.States',
+            ])->where(['user_id' => $uid]);
+        }
+
+
 
         $this->set(compact('diaries'));
         $this->set('_serialize', ['diaries']);
