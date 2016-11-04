@@ -18,7 +18,6 @@ function custom_echo($x, $length)
         echo $y;
     }
 }
-
 ?>
 
 <div class="row margin-vert-30">
