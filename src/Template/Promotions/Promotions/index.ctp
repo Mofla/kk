@@ -8,7 +8,7 @@
 
 <div class="promotions index large-9 medium-8 columns content">
     <div class="row">
-        <h1 class="text-center" style="font-weight: 900; color: blue"><?= __('Promotion') ?></h1>
+        <h1 class="text-center" style="font-weight: 900; color: #327ad5"><?= __('Promotion') ?></h1>
         <?php foreach ($promotions as $promotion): ?>
             <div class="col-md-3 text-center well" style="background-color: white;border: 1px solid lightblue; min-height: 520px">
                 <img class="img-circle img-responsive" style="width: 70%; margin: auto;border: 1px solid #ed1450" src=" ../../uploads/user/<?= $promotion->user->picture_url ?>">
