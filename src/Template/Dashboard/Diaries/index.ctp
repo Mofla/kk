@@ -23,7 +23,7 @@
                             <div class="actions">
                                 <div class="btn-group">
                                     <a
-                                        class="btn btn-default btn-sm"
+                                        class="btn btn-default btn-sm view-diary"
                                         style="background-color: #f4d03f;" href=<?= $this->Url->build(['controller' => 'Diaries', 'action' => 'view', $diary->id]);?> ><i class="glyphicon glyphicon-eye-open"></i></a>
                                 </div>
                             </div>
