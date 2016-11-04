@@ -71,7 +71,7 @@
 
                         <div class="carousel-inner" role="listbox">
                             <div class="item active">
-                                <img class="img-responsive" src="../../uploads/imgs/simplon.JPG">
+                                <img class="img-responsive" src="../../uploads/imgs/logo_simplonco.png">
                             </div>
                             <?php foreach ($portfolios as $portfolio) { ?>
                                 <div class="item">
