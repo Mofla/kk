@@ -4,6 +4,7 @@ namespace App\Controller;
 use App\Controller\AppController;
 use Cake\Mailer\Email;
 use Cake\ORM\TableRegistry;
+use Cake\Event\Event;
 
 class ContactController extends AppController
 {
@@ -27,6 +28,12 @@ foreach ($recipients as $recipient){
                 ->send($this->request->data['message']);
 }
 }
+    }
+
+    public function beforeFilter(Event $event)
+    {
+        parent::beforeFilter($event);
+        $this->Auth->allow('index');
     }
 
 

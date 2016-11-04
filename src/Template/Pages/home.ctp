@@ -78,7 +78,7 @@
                                     <img class="img-responsive" src="../../uploads/portfolios/<?= $portfolio->picture_url ?>">
                                     <div class="carousel-caption" style="background-color: rgba(245,245,245,0.52);border-radius: 45%">
                                         <h2><?= $portfolio->name?></h2>
-                                        <a href="<?= $this->Url->Build(['controller' => 'Portfolios', 'action' => 'view', $portfolio->id]) ?>"
+                                        <a href="<?= $this->Url->Build(['controller' => 'Portfolios', 'action' => 'view','prefix' => 'portfolios', $portfolio->id]) ?>"
                                            class="btn btn-primary">Voir le Projet</a>
                                     </div>
                                 </div>

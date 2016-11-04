@@ -95,7 +95,7 @@
         height: 100%;
     }
     #b1 {
-        background-color: #8861A4;
+        background-color: #8861A6;
     }
     #b2 {
         background-color: #2495C1;

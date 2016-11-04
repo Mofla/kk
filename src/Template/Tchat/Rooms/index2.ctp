@@ -46,7 +46,6 @@
             width: 32.35%;
         }
         .default:hover{
-            margin: 7px;
             background-color: #e1e5ec;
         }
         .btn{
