@@ -9,8 +9,8 @@
 <?= $this->Html->css('../assets/css/responsive.css') ?>
 <?= $this->Html->css('../assets/css/custom.css') ?>
 
-<div class="row margin-vert-30" style="border: 2px solid rgba(228, 228, 228, 0.42) ">
-    <div class="col-md-9">
+<div class="row margin-vert-30" >
+    <div class="col-md-9" style="border: 2px solid rgba(228, 228, 228, 0.42) ">
             <div class="blog-post">
                 <div class="blog-item-header">
                     <div class="blog-post-date pull-left"><span class="day"><?= h($blogArticle->modified->day) ?></span>
